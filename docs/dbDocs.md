@@ -49,7 +49,7 @@ LingoMq - it is application, which represents opportunity to learns any language
 | Finances.UserFinances | UserFinances.UserId -> Users.Id | FK_UserFinances_UserId -> Users.Id |
 | Topics.TopicStatistics | Topics.UserId -> Users.Id | FK_TopicStatistics_UserId -> Users.Id |
 
-## UserInfos
+### UserInfos
 > Суть таблицы - основные видимые данные пользователя, имя, описание, картинка профиля и прочее
 #### UserInfos:Структура
 | Key | Name | DataType | Description | Constrains |
@@ -69,3 +69,16 @@ LingoMq - it is application, which represents opportunity to learns any language
 | Identity.Roles | Roles.Id -> UserInfos.RoleId | FK_Identity_UserInfos_RoleId -> Roles.Id |
 | Identity.Users | Users.Id -> UserInfos.UserId | FK_Identity_UserInfos_UserId -> Users.Id |
 | Identity.UserLinks | UserLinks.Id -> UserInfos.UserLinkId | FK_Identity_UserInfos_UserLinkId -> UserLinks.Id |
+
+### UserRoles
+> Суть таблицы - хранить в себе допустимые роли пользователей
+#### UserRoles:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID  | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+|  | Name | varchar(20) | Это поле является названием роли | NOT NULL, UNIQUE, CHECK (0 > n <= 20) |
+#### UserRoles:Используется в...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Identity.UserInfos | UserInfos.RoleId -> UserRoles.Id | FK_Identity_UserInfos_RoleId -> UserRoles.Id |
+
