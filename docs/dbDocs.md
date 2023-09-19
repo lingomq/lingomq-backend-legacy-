@@ -6,6 +6,12 @@
 
 LingoMq - it is application, which represents opportunity to learns any language by himself with help recording words and repeating them
 
+## Содержание
+
+1. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#%D0%BE%D0%B1%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5-%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5">Обобщенное описание</a>
+2. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#%D0%BB%D0%B8%D1%87%D0%BD%D0%BE%D1%81%D1%82%D0%B8">Личности</a>
+- <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#users">Users</a>
+
 ## Обобщенное описание
 
 <img src="https://sun9-10.userapi.com/impg/_LdEybbTJqAnLlreDZbYT1IgKgtNaYh3mRBqxQ/8bjgdNMF_9Q.jpg?size=1708x843&quality=95&sign=c1e97f22be7e7c20cc9414572e028719&type=album" alt="Logo of the project" align="center">
@@ -34,7 +40,7 @@ LingoMq - it is application, which represents opportunity to learns any language
 |  | PasswordHash | varchar(MAX) | Это поле хранит хеш пароля | NOT NULL |
 |  | PasswordSalt | varchar(MAX) | Это поле хранит "соль" пароля | NOT NULL |
 
-#### Users:Ссылается на
+#### Users:Используется в...
 | Зона.Таблица | Ключи | Названия |
 |---|---|---|
 | Words.UserWords | UserWords.UserId -> Users.Id | FK_UserWords_UserId -> Users.Id |
