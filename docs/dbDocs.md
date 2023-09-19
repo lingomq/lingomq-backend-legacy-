@@ -32,3 +32,14 @@ LingoMq - it is application, which represents opportunity to learns any language
 |  | Phone | varchar(15) | Это поле сохраняет в себе телефон пользователя по его обоюдному согласию. Не является обязательным к заполнению | UNIQUE,  CHECKS(0>N<=15) |
 |  | PasswordHash | varchar(MAX) | Это поле хранит хеш пароля | NOT NULL |
 |  | PasswordSalt | varchar(MAX) | Это поле хранит "соль" пароля | NOT NULL |
+
+#### Users:Ссылается на
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Words.UserWords | UserWords.UserId -> Users.Id | FK_UserWords_UserId -> Users.Id |
+| Notifications.UserNotifications | UserNotifications.UserId -> Users.Id | FK_UserNotifications_UserId -> Users.Id |
+| Achievements.UserAchievements | UserAchievements.UserId -> Users.Id | FK_UserAchievements_UserId -> Users.Id |
+| Finances.UserFinances | UserFinances.UserId -> Users.Id | FK_UserFinances_UserId -> Users.Id |
+| Topics.TopicStatistics | Topics.UserId -> Users.Id | FK_TopicStatistics_UserId -> Users.Id |
+
+
