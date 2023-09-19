@@ -12,10 +12,11 @@ LingoMq - it is application, which represents opportunity to learns any language
 2. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#%D0%BB%D0%B8%D1%87%D0%BD%D0%BE%D1%81%D1%82%D0%B8">Личности</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#users">Users</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userinfos">UserInfos</a>
-    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userinfos">UserRoles</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userroles">UserRoles</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userlinks"></a>
 ## Обобщенное описание
 
-<img src="https://sun9-10.userapi.com/impg/_LdEybbTJqAnLlreDZbYT1IgKgtNaYh3mRBqxQ/8bjgdNMF_9Q.jpg?size=1708x843&quality=95&sign=c1e97f22be7e7c20cc9414572e028719&type=album" alt="Logo of the project" align="center">
+<img src="https://sun9-61.userapi.com/impg/jGuweCL1XYfHU_FaTfSt3h8Hbxk1XJsGV6Cm5Q/0liu_WtGsVk.jpg?size=1912x1108&quality=95&sign=28bb57a7376e7de01259a1d466ab1ab5&type=album" alt="Logo of the project" align="center">
 
 > Структура таблиц
 
@@ -23,7 +24,7 @@ LingoMq - it is application, which represents opportunity to learns any language
 
 ## Личности
 
-<img src="https://sun9-21.userapi.com/impg/E5mQkKjyXvw8XscpQWbfsifyQWEWaopohLVUwQ/TnPMp6mjVHE.jpg?size=1707x323&quality=95&sign=213ca7a952a5ab84d8ecbfe135f34369&type=album" alt="Logo of the project" align="center">
+<img src="https://sun9-56.userapi.com/impg/8AnXwulfPDB9OG_YD9MKeepABRGWI-O6ACEQBA/8IYeurAt38Q.jpg?size=1459x287&quality=95&sign=660f67d753344465e4885a5c837f7238&type=album" alt="Logo of the project" align="center">
 
 > Структура зоны личностей 
 
@@ -70,7 +71,10 @@ LingoMq - it is application, which represents opportunity to learns any language
 | Identity.Roles | Roles.Id -> UserInfos.RoleId | FK_Identity_UserInfos_RoleId -> Roles.Id |
 | Identity.Users | Users.Id -> UserInfos.UserId | FK_Identity_UserInfos_UserId -> Users.Id |
 | Identity.UserLinks | UserLinks.Id -> UserInfos.UserLinkId | FK_Identity_UserInfos_UserLinkId -> UserLinks.Id |
-
+#### UserInfos:Используется в...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Identity.UserLinks | UserLinks.UserInfoId -> UserInfos.Id | FK_Identity_UserLinks_UserInfoId -> UserInfos.Id |
 ### UserRoles
 > Суть таблицы - хранить в себе допустимые роли пользователей
 #### UserRoles:Структура
@@ -82,4 +86,21 @@ LingoMq - it is application, which represents opportunity to learns any language
 | Зона.Таблица | Ключи | Названия |
 |---|---|---|
 | Identity.UserInfos | UserInfos.RoleId -> UserRoles.Id | FK_Identity_UserInfos_RoleId -> UserRoles.Id |
-
+### UserLinks
+> Суть таблицы - хранить в себе ссылки на социальные сети пользователя
+#### UserLinks:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+| FK | UserInfoId | GUID | Это поле представляет собой ссылку на пользовательскую информацию | NOT NULL |
+| FK | LinkId | GUID | Это поле представляет собой ссылку на тип социальной сети | NOT NULL |
+|  | Href | varchar(256) | Это поле представляет собой сокращенную ссылку на соц.сеть | NOT NULL |
+#### UserLinks:Используется в...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Identity.UserInfos | UserInfos.UserLinkId -> UserLinks.Id | FK_Identity_UserInfos_UserLinkId -> UserLinks.Id |
+#### UserLinks:Ссылается на...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Identity.UserInfos | UserLinks.UserInfoId -> UserInfos.Id  | FK_Identity_UserLinks_UserInfoId -> UserInfos.Id |
+| Identity.LinkTypes | UserLinks.LinkId -> LinkTypes.Id | FK_Identity_UserLinks_LinkId -> LinkTypes.Id |
