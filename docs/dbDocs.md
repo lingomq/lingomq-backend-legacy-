@@ -13,7 +13,8 @@ LingoMq - it is application, which represents opportunity to learns any language
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#users">Users</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userinfos">UserInfos</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userroles">UserRoles</a>
-    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userlinks"></a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userlinks">UserLinks</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#linktypes">LinkTypes</a>
 ## Обобщенное описание
 
 <img src="https://sun9-61.userapi.com/impg/jGuweCL1XYfHU_FaTfSt3h8Hbxk1XJsGV6Cm5Q/0liu_WtGsVk.jpg?size=1912x1108&quality=95&sign=28bb57a7376e7de01259a1d466ab1ab5&type=album" alt="Logo of the project" align="center">
@@ -104,3 +105,15 @@ LingoMq - it is application, which represents opportunity to learns any language
 |---|---|---|
 | Identity.UserInfos | UserLinks.UserInfoId -> UserInfos.Id  | FK_Identity_UserLinks_UserInfoId -> UserInfos.Id |
 | Identity.LinkTypes | UserLinks.LinkId -> LinkTypes.Id | FK_Identity_UserLinks_LinkId -> LinkTypes.Id |
+### LinkTypes
+> Суть таблицы - хранить в себе допустимые ссылки на соц.сети
+#### LinkTypes:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+|  | Name | varchar(256) | Это поле - наименование социальной сети | NOT NULL, CHECK(0 > n <= 256) |
+|  | ShortLink | varchar(256) | Это поле - ссылка на профиль в социальной сети без идентификатора | NOT NULL, CHECK(0 > n <= 256) |
+#### LinkTypes:Используется в...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Identity.UserLinks | UserLinks.LinkId -> LinkTypes.Id  | FK_Identity_UserLinks_LinkId -> LinkTypes.Id |
