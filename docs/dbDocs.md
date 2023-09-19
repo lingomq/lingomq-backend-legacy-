@@ -19,6 +19,9 @@ LingoMq - it is application, which represents opportunity to learns any language
 3. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#%D1%81%D0%BB%D0%BE%D0%B2%D0%B0">Слова</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userwords">UserWords</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#languages">Languages</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#wordtypes">WordTypes</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userwordtypes">UserWordTypes</a>
+
 ## Обобщенное описание
 
 <img src="https://sun9-64.userapi.com/impg/zBYVev2QSd3vnrw8sHXO3IL2WebXGONU7xU2IA/yzXxFqRsJLU.jpg?size=1731x842&quality=95&sign=890ad13c0f705417acfaa68c4eb2891b&type=album" alt="Logo of the project" align="center">
@@ -166,7 +169,7 @@ LingoMq - it is application, which represents opportunity to learns any language
 #### UserWords:Используется в...
 | Зона.Таблица | Ключи | Названия |
 |---|---|---|
-| Words.UserWordTypes | UserWordsTypes.UserWordId -> UserWords.Id | FK_Words_UserWordsTypes_UserWordId  -> UserWords.Id |
+| Words.UserWordTypes | UserWordTypes.UserWordId -> UserWords.Id | FK_Words_UserWordTypes_UserWordId  -> UserWords.Id |
 ### Languages
 > Суть таблицы -> хранить в себе допустимые языки
 #### Languages:Структура
@@ -178,4 +181,31 @@ LingoMq - it is application, which represents opportunity to learns any language
 | Зона.Таблица | Ключи | Названия |
 |---|---|---|
 | Words.UserWords | UserWords.LanguageId -> Languages.Id | FK_Words_UserWords_LanguageId  -> Languages.Id |
-
+### WordTypes
+> Суть таблицы -> хранить в себе допустимые типы слов
+#### WordTypes:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+|  | Name | varchar(15) | Это поле - конкретный тип | NOT NULL CHECK(0 > n <= 15) |
+#### WordTypes:Используется в...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Words.UserWords | UserWords.WordTypeId -> WordTypes.Id | FK_Words_UserWords_WordTypeId  -> WordTypes.Id |
+### UserWordTypes
+> Суть таблицы - связать между собой множество слов и множество типов слов
+#### UserWordTypes:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+| FK | UserWordId | GUID | Это поле - ссылка на добавленное слово | NOT NULL |
+| FK | WordTypeId | GUID | Это поле - ссылка на тип слова | NOT NULL |
+#### UserWordTypes:Используется в...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Words.UserWords | UserWords.UserWordTypeId -> UserWordTypes.Id | FK_Words_UserWords_UserWordTypeId  -> UserWordType.Id |
+#### UserWordTypes:Ссылается на...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Words.UserWordTypes | UserWordTypes.UserWordId -> UserWords.Id | FK_Words_UserWordTypes_UserWordsId  -> UserWords.Id |
+| Words.WordTypes | UserWordsType.WordTypeId -> WordTypes.Id | FK_Words_UserWordTypes_WordTypesId  -> WordTypes.Id |
