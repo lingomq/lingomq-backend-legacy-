@@ -2,7 +2,7 @@
 
 # LingoMq &middot; Database documentation
 
-> Подробнее
+> Документация базы данных
 
 LingoMq - it is application, which represents opportunity to learns any language by himself with help recording words and repeating them
 
@@ -22,4 +22,13 @@ LingoMq - it is application, which represents opportunity to learns any language
 
 Данная зона представляет собой таблицы, работающие с пользовательскими данными, роли, статистика, подробная информация
 
+### Таблицы
+#### Users
 
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+|  | Email | varchar(256) | Это поле сохраняет в себе Email пользователя  для проверки пользователя.  Является обязательным к заполнению | UNIQUE, NOT NULL CHECKS(0>N<=256) |
+|  | Phone | varchar(15) | Это поле сохраняет в себе телефон пользователя по его обоюдному согласию. Не является обязательным к заполнению | UNIQUE,  CHECKS(0>N<=15) |
+|  | PasswordHash | varchar(MAX) | Это поле хранит хеш пароля | NOT NULL |
+|  | PasswordSalt | varchar(MAX) | Это поле хранит "соль" пароля | NOT NULL |
