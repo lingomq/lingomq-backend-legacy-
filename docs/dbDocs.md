@@ -21,7 +21,11 @@ LingoMq - it is application, which represents opportunity to learns any language
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#languages">Languages</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#wordtypes">WordTypes</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userwordtypes">UserWordTypes</a>
-
+4. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#%D1%82%D0%BE%D0%BF%D0%B8%D0%BA%D0%B8">Топики</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#topics">Topics</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#topicstatistics">TopicStatistics</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#topicstatistictypes">TopicStatisticTypes</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#topiclevels">TopicLevels</a>
 ## Обобщенное описание
 
 <img src="https://sun9-64.userapi.com/impg/zBYVev2QSd3vnrw8sHXO3IL2WebXGONU7xU2IA/yzXxFqRsJLU.jpg?size=1731x842&quality=95&sign=890ad13c0f705417acfaa68c4eb2891b&type=album" alt="Logo of the project" align="center">
@@ -209,3 +213,74 @@ LingoMq - it is application, which represents opportunity to learns any language
 |---|---|---|
 | Words.UserWordTypes | UserWordTypes.UserWordId -> UserWords.Id | FK_Words_UserWordTypes_UserWordsId  -> UserWords.Id |
 | Words.WordTypes | UserWordsType.WordTypeId -> WordTypes.Id | FK_Words_UserWordTypes_WordTypesId  -> WordTypes.Id |
+## Топики
+<img src="https://sun9-15.userapi.com/impg/kP-V8xDaEdKfiluZGPzYvCdLfagjyP71M6Mx-A/hcULUbPxHG0.jpg?size=620x466&quality=95&sign=957cc44916a9cd4be6469a05693456f4&type=album"/>
+
+> Структура зоны топиков
+
+Данная зона представляет собой таблицы, работающие с топиками, их управлением, статистикой
+
+## Таблицы
+### Topics
+> Суть таблицы - хранить конкретную информацию о топике
+#### Topics:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+|  | Title | varchar(50) | Это поле - название топика | NOT NULL CHECK(0 > n <= 50) |
+|  | Content | varchar(MAX) | Это поле - контент топика | NOT NULL |
+|  | Icon | varchar(MAX) | Это поле является путем для картинки топика |  |
+|  | CreationDate | DateTime | Это поле является датой создания топика | NOT NULL |
+| FK | LanguageId | GUID | Это поле - ссылка на конкретный язык |  |
+| FK | TopicLevelId | GUID | Это поле - ссылка на уровень топика |  |
+#### Topics:Ссылается на...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Topics.Topics | Topics.TopicLevelId -> TopicLevels.Id | FK_Topics_Topics_TopicLevelId  -> TopicLevels.Id |
+| Topics.Topics | Topics.LanguageId -> Words.Languages.Id | FK_Topics_Topics_LanguageId ->  Words.Languages.Id |
+#### Topics:Используется в...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Topics.TopicStatistics | TopicStatistics.TopicId -> Topics.Id | FK_Topics_TopicStatistics_TopicId  -> Topics.Id |
+### TopicStatistics
+> Суть таблицы - сбор статистики конкретного топика
+#### TopicStatistics:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+| FK | TopicId | GUID | Это поле - ссылка на топик | NOT NULL |
+| FK | UserId | GUID | Это поле - ссылка на конкретного пользователя | NOT NULL |
+| FK | StatisticsTypeId | GUID | Это поле - ссылка на тип статистики | NOT NULL |
+|  | StatisticsDate | DateTime | Это поле - дата обновления статистики |  |
+#### TopicStatistics:Ссылается на...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Topics.TopicStatistics | TopicStatistics.TopicId -> Topics.Id | FK_Topics_TopicStatistics_TopicId  -> Topics.Id |
+| Topics.TopicStatistics | TopicStatistics.UserId -> Identity.Users.Id | FK_Topics_TopicStatistics_UserId ->  Identity.Users.Id |
+| Topics.TopicStatistics | TopicStatistics.StatisticsTypeId ->  TopicStatisticTypes.Id | FK_Topics_TopicStatistics_StatisticsId  -> TopicStatisticTypes.Id |
+### TopicStatisticTypes
+> Суть таблицы - хранить в себе типы статистики (лайк, дизлайк, просмотр)
+#### TopicStatisticTypes:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+| FK | Name | varchar(50) | Это поле - название типа | NOT NULL CHECK (0 > n <= 50) |
+#### TopicStatisticTypes:Используется в..
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Topics.TopicStatistics | TopicStatistics.StatisticTypeId -> TopicStatisticTypes.Id | FK_Topics_TopicStatistics_StatisticTypeId  -> TopicStatisticTypes.Id |
+### TopicLevels
+> Суть таблицы - хранить в себе уровни сложности топика
+#### TopicLevels:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+| FK | Name | varchar(20) | Это поле - название сложности | NOT NULL CHECK (0 > n <= 50) |
+#### TopicLevels:Используется в..
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Topics.TopicStatistics | TopicStatistics.TopicLevelId -> TopicLevels.Id | FK_Topics_TopicStatistics_LevelId  -> TopicLevels.Id |
+
+
+
+
