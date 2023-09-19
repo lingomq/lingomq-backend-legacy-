@@ -8,7 +8,7 @@ LingoMq - it is application, which represents opportunity to learns any language
 
 ## Обобщенное описание
 
-<img src="https://sun9-49.userapi.com/impg/CG_zsQNso2vjhwazy1SKXiIsZwdwqtt_vV0TSQ/K8WDgBh5j44.jpg?size=1872x902&quality=95&sign=38341e41548305d15382efa36421452c&c_uniq_tag=ccAYhEtC52eSOBh-Mjbn3M70cbrN1_2oN_oQ2a9nAyw&type=album" alt="Logo of the project" align="center">
+<img src="https://sun9-10.userapi.com/impg/_LdEybbTJqAnLlreDZbYT1IgKgtNaYh3mRBqxQ/8bjgdNMF_9Q.jpg?size=1708x843&quality=95&sign=c1e97f22be7e7c20cc9414572e028719&type=album" alt="Logo of the project" align="center">
 
 > Структура таблиц
 
@@ -16,15 +16,16 @@ LingoMq - it is application, which represents opportunity to learns any language
 
 ## Личности
 
-<img src="https://sun9-76.userapi.com/impg/V8Zx2IuSp4RN1epGTkiXkWrTyxO6Pi8kuXC1yg/WfHjEJFDxJs.jpg?size=1567x298&quality=95&sign=647e3fb5e146f145bf4ad6ed223544ab&type=album" alt="Logo of the project" align="center">
+<img src="https://sun9-21.userapi.com/impg/E5mQkKjyXvw8XscpQWbfsifyQWEWaopohLVUwQ/TnPMp6mjVHE.jpg?size=1707x323&quality=95&sign=213ca7a952a5ab84d8ecbfe135f34369&type=album" alt="Logo of the project" align="center">
 
 > Структура зоны личностей 
 
 Данная зона представляет собой таблицы, работающие с пользовательскими данными, роли, статистика, подробная информация
 
-### Таблицы
-#### Users
+## Таблицы
+### Users
 
+#### Users:Структура
 | Key | Name | DataType | Description | Constrains |
 |---|---|---|---|---|
 | PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
