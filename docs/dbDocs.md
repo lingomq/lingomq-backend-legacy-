@@ -10,7 +10,7 @@ LingoMq - it is application, which represents opportunity to learns any language
 
 1. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#%D0%BE%D0%B1%D0%BE%D0%B1%D1%89%D0%B5%D0%BD%D0%BD%D0%BE%D0%B5-%D0%BE%D0%BF%D0%B8%D1%81%D0%B0%D0%BD%D0%B8%D0%B5">Обобщенное описание</a>
 2. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#%D0%BB%D0%B8%D1%87%D0%BD%D0%BE%D1%81%D1%82%D0%B8">Личности</a>
-- <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#users">Users</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#users">Users</a>
 
 ## Обобщенное описание
 
