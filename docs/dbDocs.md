@@ -16,9 +16,11 @@ LingoMq - it is application, which represents opportunity to learns any language
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userlinks">UserLinks</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#linktypes">LinkTypes</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userstatistics">UserStatistics</a>
+3. <a href="">Слова</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userwords">UserWords</a>
 ## Обобщенное описание
 
-<img src="https://sun9-61.userapi.com/impg/jGuweCL1XYfHU_FaTfSt3h8Hbxk1XJsGV6Cm5Q/0liu_WtGsVk.jpg?size=1912x1108&quality=95&sign=28bb57a7376e7de01259a1d466ab1ab5&type=album" alt="Logo of the project" align="center">
+<img src="https://sun9-64.userapi.com/impg/zBYVev2QSd3vnrw8sHXO3IL2WebXGONU7xU2IA/yzXxFqRsJLU.jpg?size=1731x842&quality=95&sign=890ad13c0f705417acfaa68c4eb2891b&type=album" alt="Logo of the project" align="center">
 
 > Структура таблиц
 
@@ -133,3 +135,32 @@ LingoMq - it is application, which represents opportunity to learns any language
 | Зона.Таблица | Ключи | Названия |
 |---|---|---|
 | Identity.Users | UserStatistics.UserId -> Users.Id  | FK_Identity_UserStatistics_UserId -> Users.Id |
+## Слова
+<img src="https://sun9-31.userapi.com/impg/5MwCVO5fX5zs8Q35GMx57pI_c8lWk07P6HCehw/1r4HEYrRsp0.jpg?size=947x311&quality=95&sign=a1f5d2d80e33310ffc277bb66214971c&type=album"/>
+
+> Структура зоны слов
+
+## Таблицы
+### UserWords
+> Суть таблицы -> хранить данные о добавленном слове и связывать их с конкретным пользователем
+#### UserWords:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+|  | Word | varchar(256) | Это поле - конкретное слово | NOT NULL CHECK(0 > n <= 256) |
+|  | Translated | varchar(256) | Это поле - перевод слова | CHECK(0 > n <= 256) |
+| FK | LanguageId | GUID | Это поле - ссылка на язык слова | NOT NULL |
+| FK | UserWordTypeId | GUID | Это поле - ссылка на тип слова |  |
+|  | Repeats | INT | Это поле - количество повторений конкретного слова | DEFAULT 0 |
+| FK | UserId | GUID | Это поле представляет собой ссылку на пользователя | NOT NULL |
+|  | CreatedAt | DateTime | Это поле - дата добавления слова |  |
+#### UserWords:Ссылается на...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Words.UserWordTypes | UserWords.UserWordTypeId -> UserWordTypes.Id | FK_Words_UserWords_UserWordTypeId  -> UserWordTypes.Id |
+| Words.Languages | UserWords.LanguageId -> Languages.Id | FK_Words_UserWords_LanguageId   -> Languages.Id |
+| Identity.Users | UserWords.UserId -> Users.Id | FK_Words_UserWords_UserId ->  Users.Id |
+#### UserWords:Используется в...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Words.UserWordTypes | UserWordsTypes.UserWordId -> UserWords.Id | FK_Words_UserWordsTypes_UserWordId  -> UserWords.Id |
