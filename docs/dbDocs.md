@@ -15,6 +15,7 @@ LingoMq - it is application, which represents opportunity to learns any language
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userroles">UserRoles</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userlinks">UserLinks</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#linktypes">LinkTypes</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userstatistics">UserStatistics</a>
 ## Обобщенное описание
 
 <img src="https://sun9-61.userapi.com/impg/jGuweCL1XYfHU_FaTfSt3h8Hbxk1XJsGV6Cm5Q/0liu_WtGsVk.jpg?size=1912x1108&quality=95&sign=28bb57a7376e7de01259a1d466ab1ab5&type=album" alt="Logo of the project" align="center">
@@ -117,3 +118,18 @@ LingoMq - it is application, which represents opportunity to learns any language
 | Зона.Таблица | Ключи | Названия |
 |---|---|---|
 | Identity.UserLinks | UserLinks.LinkId -> LinkTypes.Id  | FK_Identity_UserLinks_LinkId -> LinkTypes.Id |
+### UserStatistics
+> Суть таблицы - собирать общую информацию об использовании приложения пользователем (сколько часов, добавленных слов, посещенных дней подряд)
+#### UserStatistics:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+|  | TotalWords | INT | Это поле - общее количество слов пользователя | NOT NULL DEFAULT 0 |
+|  | TotalHours | FLOAT | Это поле - общее количество часов, потраченных в приложении | NOT NULL DEFAULT 0 |
+|  | VisitStreak | INT | Это поле - максимальное количество посещений подряд (дни) | NOT NULL DEFAULT 0 |
+|  | AvgWords | INT | Это поле - среднее арифметическое от общего количества слов | NOT NULL DEFAULT 0 |
+| FK | UserId | GUID | Это поле представляет собой ссылку на пользователя | NOT NULL |
+#### UserStatistics:Ссылается на
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Identity.Users | UserStatistics.UserId -> Users.Id  | FK_Identity_UserStatistics_UserId -> Users.Id |
