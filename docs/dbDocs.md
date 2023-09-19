@@ -16,8 +16,9 @@ LingoMq - it is application, which represents opportunity to learns any language
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userlinks">UserLinks</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#linktypes">LinkTypes</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userstatistics">UserStatistics</a>
-3. <a href="">Слова</a>
+3. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#%D1%81%D0%BB%D0%BE%D0%B2%D0%B0">Слова</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userwords">UserWords</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#languages">Languages</a>
 ## Обобщенное описание
 
 <img src="https://sun9-64.userapi.com/impg/zBYVev2QSd3vnrw8sHXO3IL2WebXGONU7xU2IA/yzXxFqRsJLU.jpg?size=1731x842&quality=95&sign=890ad13c0f705417acfaa68c4eb2891b&type=album" alt="Logo of the project" align="center">
@@ -140,6 +141,8 @@ LingoMq - it is application, which represents opportunity to learns any language
 
 > Структура зоны слов
 
+Данная зона представляет собой таблицы, работающие с добавленными пользователем словами, языками, разделениями их на категориями и управлением
+
 ## Таблицы
 ### UserWords
 > Суть таблицы -> хранить данные о добавленном слове и связывать их с конкретным пользователем
@@ -164,3 +167,15 @@ LingoMq - it is application, which represents opportunity to learns any language
 | Зона.Таблица | Ключи | Названия |
 |---|---|---|
 | Words.UserWordTypes | UserWordsTypes.UserWordId -> UserWords.Id | FK_Words_UserWordsTypes_UserWordId  -> UserWords.Id |
+### Languages
+> Суть таблицы -> хранить в себе допустимые языки
+#### Languages:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+|  | Name | varchar(15) | Это поле - конкретный язык | NOT NULL CHECK(0 > n <= 15) |
+#### Languages:Используется в...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Words.UserWords | UserWords.LanguageId -> Languages.Id | FK_Words_UserWords_LanguageId  -> Languages.Id |
+
