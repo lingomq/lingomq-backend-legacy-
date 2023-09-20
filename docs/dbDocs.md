@@ -35,7 +35,7 @@ LingoMq - it is application, which represents opportunity to learns any language
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userachievements">UserAchievements</a>
 ## Обобщенное описание
 
-<img src="https://sun9-79.userapi.com/impg/j_DHx7UVpSaM6zR3L7x57sfm_R77R8B9XB8asA/Fnvoy7Kl9MI.jpg?size=1280x632&quality=95&sign=6b6a37a1e3734ecedf40c045357c0cca&type=album" alt="Logo of the project" align="center">
+<img src="https://sun9-80.userapi.com/impg/IxSqmq9YC99_jhO5ZQkFcu1U6f3c-CGR8I93Xw/9KkAKLDEqx4.jpg?size=1280x634&quality=95&sign=4b1853361694dfb31d9d8fdb92e1c3d0&type=album" alt="Logo of the project" align="center">
 
 > Структура таблиц
 
