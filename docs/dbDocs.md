@@ -36,6 +36,8 @@ LingoMq - it is application, which represents opportunity to learns any language
 7. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#оплата">Оплата</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userfinances">UserFinances</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#finances">Finances</a>
+8. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#статистика">Статистика</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#appstatistics">AppStatistics</a>
 ## Обобщенное описание
 
 <img src="https://sun9-79.userapi.com/impg/LHCIoU90WS3JF0FAh0aHZU8Y4p179toN3tMehQ/pkpyC8k8G9Y.jpg?size=1280x754&quality=95&sign=a0866bf7b2392c9bb16127c17271de05&type=album" alt="Logo of the project" align="center">
@@ -414,3 +416,22 @@ LingoMq - it is application, which represents opportunity to learns any language
 | Зона.Таблица | Ключи | Названия |
 |---|---|---|
 | Finances.UserFinances | UserFinances.FinancetId ->  Finances.Id | FK_Finances_UserFinances_FinanceId -> Finances.Id |
+
+## Статистика приложения
+<img src="https://sun9-71.userapi.com/impg/Mi5vIexhbFGy17lpBVFlOHsY3Sw-HpiqRSkkKg/DA9yHXUzxaY.jpg?size=759x325&quality=95&sign=11b4e2ed5fdb9655ea2833407e39d3a1&type=album"/>
+
+> Структура зоны статистики
+
+Данная зона представляет собой сбор информации о нашем приложении, скачиваний всего и т.д и т.п
+
+## Таблицы
+### AppStatistics
+> Суть таблицы - хранить в себе статистику приложения на конкретный момент времени (наподобии снапшотов)
+#### AppStatistics:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+|  | TotalUsers | INT | Это поле - общее количество пользователей |  |
+|  | AvgTime | FLOAT | Это поле - среднее количество проведенных часов в приложении |  |
+|  | TotalWords | INT | Это поле - количество всех добавленных слов |  |
+|  | Downloads | INT | Это поле - количество скачиваний |  |
