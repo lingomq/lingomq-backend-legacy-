@@ -22,7 +22,7 @@ public class StatusCode
     public static IActionResult RequestTimeoutResult() =>
         ResponseResult.ClientErrorResult(8, "Request timeout. Check your connection");
 
-    public static IActionResult ConflictResult(T error, string message = "Conflict") =>
+    public static IActionResult ConflictResult<T>(T error, string message = "Conflict") =>
         ResponseResult.ClientErrorResult(9, message, error);
 
     public static IActionResult InternalServerError(string message = "Internal server error") =>
