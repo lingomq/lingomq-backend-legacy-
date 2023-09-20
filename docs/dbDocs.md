@@ -417,7 +417,7 @@ LingoMq - it is application, which represents opportunity to learns any language
 |---|---|---|
 | Finances.UserFinances | UserFinances.FinancetId ->  Finances.Id | FK_Finances_UserFinances_FinanceId -> Finances.Id |
 
-## Статистика приложения
+## Статистика
 <img src="https://sun9-71.userapi.com/impg/Mi5vIexhbFGy17lpBVFlOHsY3Sw-HpiqRSkkKg/DA9yHXUzxaY.jpg?size=759x325&quality=95&sign=11b4e2ed5fdb9655ea2833407e39d3a1&type=album"/>
 
 > Структура зоны статистики
