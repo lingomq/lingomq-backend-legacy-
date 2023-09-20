@@ -30,6 +30,9 @@ LingoMq - it is application, which represents opportunity to learns any language
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#notifications">Notifications</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#usernotifications">UserNotifications</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#notificationtypes">NotificationTypes</a>
+6. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#достижения">Достижения</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#achievements">Achievements</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userachievements">UserAchievements</a>
 ## Обобщенное описание
 
 <img src="https://sun9-79.userapi.com/impg/j_DHx7UVpSaM6zR3L7x57sfm_R77R8B9XB8asA/Fnvoy7Kl9MI.jpg?size=1280x632&quality=95&sign=6b6a37a1e3734ecedf40c045357c0cca&type=album" alt="Logo of the project" align="center">
@@ -337,3 +340,38 @@ LingoMq - it is application, which represents opportunity to learns any language
 |---|---|---|
 | Notifications.Notifications | NotificationTypes.NotificationTypeId  -> NotificationTypes.Id | FK_Notifications_NotificationTypes_NotificationTypeId -> NotificationTypes.Id |
 
+## Достижения
+<img src="https://sun9-4.userapi.com/impg/BB_iplVbgZ3k_z6a0oZrbtDUtpBXPiNSkD_irA/G45WN1pHxgA.jpg?size=475x478&quality=95&sign=32fe67df735f302bb61808c58500be51&type=album"/>
+
+> Структура зоны достижений
+
+Данная зона представляет собой таблицы, работающие с достижениями
+
+## Таблицы
+### Achievements
+> Суть таблицы - хранить в себе конкретное достижение
+#### Achievements:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+|  | Name | varchar(50) | Это поле - название достижения | NOT NULL  CHECK (0 > n <= 50) |
+|  | Content | varchar(100) | Это поле - описание достижения | NOT NULL CHECK (0 > n <= 100) |
+|  | ImageUri | varchar(max) | Это поле - иконка достижения |  |
+#### Achievements:Используется в...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Achievements.UserAchievements | UserAchievements.AchievementId ->  Achievement.Id | FK_Achievements_UserAchievements_AchievementId ->  Achievement.Id |
+### UserAchievements
+> Суть таблицы - хранить в себе все достижения пользователя
+#### UserAchievements:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+| FK | UserId | GUID | Это поле - ссылка на пользователя | NOT NULL |
+| FK | AchievementId | GUID | Это поле - ссылка на достижение | NOT NULL |
+|  | DateOfReceipt | DateTime | Это поле - дата получения достижения |  |
+#### UserAchievements:Ссылается на...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Achievements.UserAchievements | UserAchievements.AchievementId ->  Achievement.Id | FK_Achievements_UserAchievements_AchievementId ->  Achievement.Id |
+| Achievements.UserAchievements | UserAchievements.UserId ->  Identity.Users.Id | FK_Achievements_UserAchievements_UserId ->  Identity.Users.Id |
