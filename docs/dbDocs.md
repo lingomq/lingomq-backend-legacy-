@@ -28,6 +28,8 @@ LingoMq - it is application, which represents opportunity to learns any language
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#topiclevels">TopicLevels</a>
 5. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#уведомления">Уведомления</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#notifications">Notifications</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#usernotifications">UserNotifications</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#notificationtypes">NotificationTypes</a>
 ## Обобщенное описание
 
 <img src="https://sun9-79.userapi.com/impg/j_DHx7UVpSaM6zR3L7x57sfm_R77R8B9XB8asA/Fnvoy7Kl9MI.jpg?size=1280x632&quality=95&sign=6b6a37a1e3734ecedf40c045357c0cca&type=album" alt="Logo of the project" align="center">
