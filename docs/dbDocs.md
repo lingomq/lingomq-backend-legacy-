@@ -26,9 +26,11 @@ LingoMq - it is application, which represents opportunity to learns any language
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#topicstatistics">TopicStatistics</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#topicstatistictypes">TopicStatisticTypes</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#topiclevels">TopicLevels</a>
+5. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#уведомления">Уведомления</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#notifications">Notifications</a>
 ## Обобщенное описание
 
-<img src="https://sun9-9.userapi.com/impg/W31_bigCBXAsjSnqlC9Hori2tw1He-gM388QQA/IJmAng9nDF0.jpg?size=1862x908&quality=95&sign=8cb5f09952724a9f862df77ff3f2f0b3&type=album" alt="Logo of the project" align="center">
+<img src="https://sun9-79.userapi.com/impg/j_DHx7UVpSaM6zR3L7x57sfm_R77R8B9XB8asA/Fnvoy7Kl9MI.jpg?size=1280x632&quality=95&sign=6b6a37a1e3734ecedf40c045357c0cca&type=album" alt="Logo of the project" align="center">
 
 > Структура таблиц
 
@@ -275,12 +277,61 @@ LingoMq - it is application, which represents opportunity to learns any language
 | Key | Name | DataType | Description | Constrains |
 |---|---|---|---|---|
 | PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
-| FK | Name | varchar(20) | Это поле - название сложности | NOT NULL CHECK (0 > n <= 50) |
+| FK | Name | varchar(20) | Это поле - название сложности | NOT NULL CHECK (0 > n <= 20) |
 #### TopicLevels:Используется в..
 | Зона.Таблица | Ключи | Названия |
 |---|---|---|
 | Topics.TopicStatistics | TopicStatistics.TopicLevelId -> TopicLevels.Id | FK_Topics_TopicStatistics_LevelId  -> TopicLevels.Id |
 
+## Уведомления
+<img src="https://sun9-17.userapi.com/impg/Ii9lR5bZM5bxvGQkWxzjlCM7AKkNFrnHpdkMXQ/HgJFpqc3VtA.jpg?size=503x809&quality=95&sign=2b3bec60f5ca5f777b61b7bc64eff059&type=album"/>
 
+> Структура зоны уведомлений
 
+Данная зона представляет собой таблицы, работающие с уведомлениями для пользователей
+
+## Таблицы
+### Notifications
+> Суть таблицы - хранить в себе конкретное уведомление
+#### Notifications:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+|  | Title | varchar(50) | Это поле - наименование уведомления | NOT NULL,  CHECK (0 > n <= 50) |
+|  | Content | varchar(255) | Это поле - описание уведомления | CHECK (0 > n < 255) |
+| FK | NotificationTypeId | GUID | Это поле - ссылка на тип уведомления | NOT NULL |
+#### Notifications:Используется в...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Notifications.UserNotifications | UserNotifications.NotificationId  -> Notifications.Id | FK_Notifications_UserNotifications_NotificationId -> Notifications.Id |
+#### Notifications:Ссылается на...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Notifications.Notifications | NotificationTypes.NotificationTypeId  -> NotificationTypes.Id | FK_Notifications_NotificationTypes_NotificationTypeId -> NotificationTypes.Id |
+### UserNotifications
+> Суть таблицы - хранить в себе уведомления пользователей
+#### UserNofifications:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+| FK | UserId | GUID | Это поле - ссылка на пользователя | NOT NULL |
+| FK | NotificationId | GUID | Это поле - ссылка на уведомление | NOT NULL |
+|  | DateOfReceipt | DateTime | Это поле - дата прихода уведомления | NOT NULL |
+|  | IsReaded | BOOLEAN | Это поле определяет, прочитано ли уведомление |  |
+#### UserNotifications:Ссылается на...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Notifications.UserNotifications | Notifications.NotificationId  -> Notifications.Id | FK_Notifications_Notifications_NotificationsId -> Notifications.Id |
+| Notifications.UserNotifications | Notifications.UserId -> Identity.Users.Id | FK_Notifications_UserNotifications_UserId ->  Identity.Users.Id |
+### NotificationTypes
+> Суть таблицы - хранить в себе типы уведомлений
+#### TopicLevels:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+| FK | Name | varchar(15) | Это поле - название типа | NOT NULL CHECK (0 > n <= 15) |
+#### TopicLevels:Используется в..
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Notifications.Notifications | NotificationTypes.NotificationTypeId  -> NotificationTypes.Id | FK_Notifications_NotificationTypes_NotificationTypeId -> NotificationTypes.Id |
 
