@@ -33,6 +33,9 @@ LingoMq - it is application, which represents opportunity to learns any language
 6. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#достижения">Достижения</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#achievements">Achievements</a>
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userachievements">UserAchievements</a>
+7. <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#оплата">Оплата</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#userfinances">UserFinances</a>
+    - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#finances">Finances</a>
 ## Обобщенное описание
 
 <img src="https://sun9-79.userapi.com/impg/LHCIoU90WS3JF0FAh0aHZU8Y4p179toN3tMehQ/pkpyC8k8G9Y.jpg?size=1280x754&quality=95&sign=a0866bf7b2392c9bb16127c17271de05&type=album" alt="Logo of the project" align="center">
@@ -375,3 +378,39 @@ LingoMq - it is application, which represents opportunity to learns any language
 |---|---|---|
 | Achievements.UserAchievements | UserAchievements.AchievementId ->  Achievement.Id | FK_Achievements_UserAchievements_AchievementId ->  Achievement.Id |
 | Achievements.UserAchievements | UserAchievements.UserId ->  Identity.Users.Id | FK_Achievements_UserAchievements_UserId ->  Identity.Users.Id |
+
+## Оплата
+<img src="https://sun9-61.userapi.com/impg/0iuAnee_DYulsykUv8ygMdewZotBexML3V_mGA/wLp1FwniQzc.jpg?size=749x728&quality=95&sign=7484225a354735f1925e6d91bc7d0c6d&type=album"/>
+
+> Структура зоны оплаты
+
+Данная зона представляет собой таблицы, сохраняющими историю об оплате, конкретную оплату
+
+## Таблицы
+### UserFinances
+> Суть таблицы - хранить в себе историю о платежах
+#### UserFinances:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+| FK | UserId | GUID | Это поле - ссылка на конкретного пользователя | NOT NULL  |
+| FK | FinanceId | GUID | Это поле - ссылка на конкретную платную услугу | NOT NULL |
+|  | CreationDate | DateTime | Это поле - дата оплаты |  |
+#### UserFinances:Ссылается на...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Finances.UserFinances | UserFinances.FinancetId ->  Finances.Id | FK_Finances_UserFinances_FinanceId -> Finances.Id |
+| Finances.UserFinances | UserFinances.UserId ->  Identity.Users.Id | FK_Finances_UserFinances_UserId ->  Identity.Users.Id |
+### Finances
+> Суть таблицы - хранить в себе конкретную платную услугу
+#### Finances:Структура
+| Key | Name | DataType | Description | Constrains |
+|---|---|---|---|---|
+| PK | Id | GUID | Это поле представляет собой уникальный ключ | UNIQUE, NOT NULL |
+|  | Name | varchar(50) | Это поле - название услуги | NOT NULL CHECK (0 > n <= 50) |
+|  | Description | varchar(256) | Это поле - описание услуги | NOT NULL CHECK (0 > n <= 256) |
+|  | Amount | FLOAT | Это поле - стоимость услуги |  |
+#### Finances:Используется в...
+| Зона.Таблица | Ключи | Названия |
+|---|---|---|
+| Finances.UserFinances | UserFinances.FinancetId ->  Finances.Id | FK_Finances_UserFinances_FinanceId -> Finances.Id |
