@@ -28,7 +28,7 @@ LingoMq - it is application, which represents opportunity to learns any language
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#topiclevels">TopicLevels</a>
 ## Обобщенное описание
 
-<img src="https://sun9-64.userapi.com/impg/zBYVev2QSd3vnrw8sHXO3IL2WebXGONU7xU2IA/yzXxFqRsJLU.jpg?size=1731x842&quality=95&sign=890ad13c0f705417acfaa68c4eb2891b&type=album" alt="Logo of the project" align="center">
+<img src="https://sun9-9.userapi.com/impg/W31_bigCBXAsjSnqlC9Hori2tw1He-gM388QQA/IJmAng9nDF0.jpg?size=1862x908&quality=95&sign=8cb5f09952724a9f862df77ff3f2f0b3&type=album" alt="Logo of the project" align="center">
 
 > Структура таблиц
 
