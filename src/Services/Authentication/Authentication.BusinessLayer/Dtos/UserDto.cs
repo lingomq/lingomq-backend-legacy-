@@ -1,5 +1,8 @@
-﻿namespace Authentication.BusinessLayer.Dtos
+﻿using Authentication.BusinessLayer.Validations;
+
+namespace Authentication.BusinessLayer.Dtos
 {
+    [UserValidation]
     public class UserDto
     {
         public string? Nickname { get; set; }
