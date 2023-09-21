@@ -2,5 +2,5 @@
 
 namespace Authentication.BusinessLayer.Contracts
 {
-    public interface IUserRepository : IGenericRepository<User> { }
+    public interface IUserRepository : IGenericRepository<User, User> { }
 }

@@ -1,6 +1,7 @@
-﻿using Authentication.DomainLayer.Entities;
+﻿using Authentication.BusinessLayer.Dtos;
+using Authentication.DomainLayer.Entities;
 
 namespace Authentication.BusinessLayer.Contracts
 {
-    public interface IUserInfoRepository : IGenericRepository<UserInfo> { }
+    public interface IUserInfoRepository : IGenericRepository<UserInfoDto, UserInfo> { }
 }
