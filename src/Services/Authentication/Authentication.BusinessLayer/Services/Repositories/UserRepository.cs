@@ -23,15 +23,8 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             using var transactionScope = new TransactionScope();
 
-            try
-            {
-                int result = await _connection.ExecuteAsync(sql, entity);
-                transactionScope.Complete();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            int result = await _connection.ExecuteAsync(sql, entity);
+            transactionScope.Complete();
 
             return entity;
         }
@@ -44,29 +37,22 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             using var transactionScope = new TransactionScope();
 
-            try
-            {
-                int result = await _connection.ExecuteAsync(sql, new { Id = id});
-
-                transactionScope.Complete();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            int result = await _connection.ExecuteAsync(sql, new { Id = id });
+            transactionScope.Complete();
 
             return true;
         }
 
-        public async Task<List<User>?> GetAsync(int count = 0)
+        public async Task<List<User>> GetAsync(int count = 0)
         {
             IEnumerable<User> users;
             if (count > 0)
-                users = await _connection.QueryAsync<User>("SELECT * FROM users TAKE @Count;", new { Count = count });
+                users = await _connection.QueryAsync<User>("SELECT * FROM users TAKE @Count;",
+                    new { Count = count });
             else
                 users = await _connection.QueryAsync<User>("SELECT * FROM users;");
 
-            return users.Count() > 0? users.ToList() : null;
+            return users.ToList();
         }
 
         public async Task<User?> GetByGuidAsync(Guid guid)
@@ -90,15 +76,8 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             using var transactionScope = new TransactionScope();
 
-            try
-            {
-                int result = await _connection.ExecuteAsync(sql, entity);
-                transactionScope.Complete();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            int result = await _connection.ExecuteAsync(sql, entity);
+            transactionScope.Complete();
 
             return entity;
         }

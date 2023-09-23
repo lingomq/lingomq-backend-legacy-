@@ -27,15 +27,8 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             using var transactionScope = new TransactionScope();
 
-            try
-            {
-                int result = await _connection.ExecuteAsync(sql, entity);
-                transactionScope.Complete();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            int result = await _connection.ExecuteAsync(sql, entity);
+            transactionScope.Complete();
 
             UserInfoDto infoDto = _mapper.Map<UserInfo, UserInfoDto>(entity);
 
@@ -50,21 +43,13 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             using var transactionScope = new TransactionScope();
 
-            try
-            {
-                int result = await _connection.ExecuteAsync(sql, new { Id = id });
-
-                transactionScope.Complete();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            int result = await _connection.ExecuteAsync(sql, new { Id = id });
+            transactionScope.Complete();
 
             return true;
         }
 
-        public async Task<List<UserInfoDto>?> GetAsync(int count = 0)
+        public async Task<List<UserInfoDto>> GetAsync(int count = 0)
         {
             IEnumerable<UserInfo> users;
             if (count > 0)
@@ -87,7 +72,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
             List<UserInfoDto> userViews =
                 _mapper.Map<List<UserInfo>, List<UserInfoDto>>(users.ToList());
 
-            return userViews.Count > 0 ? userViews : null;
+            return userViews;
         }
 
         public async Task<UserInfoDto?> GetByGuidAsync(Guid guid)
@@ -128,15 +113,8 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             using var transactionScope = new TransactionScope();
 
-            try
-            {
-                int result = await _connection.ExecuteAsync(sql, entity);
-                transactionScope.Complete();
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            int result = await _connection.ExecuteAsync(sql, entity);
+            transactionScope.Complete();
 
             UserInfoDto infoDto = _mapper.Map<UserInfo, UserInfoDto>(entity);
 
