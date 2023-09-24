@@ -1,7 +1,7 @@
 ﻿using Authentication.BusinessLayer.Contracts;
 using Authentication.BusinessLayer.Dtos;
 using Authentication.BusinessLayer.Exceptions;
-using Authentication.BusinessLayer.Extensions;
+using LingoMq.Responses;
 using Authentication.BusinessLayer.Models;
 using Authentication.BusinessLayer.Services;
 using Authentication.DomainLayer.Entities;
@@ -38,7 +38,7 @@ namespace Authentication.Api.Controllers
 
             TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto);
 
-            return Responses.StatusCode.OkResult(tokenModel);
+            return LingoMq.Responses.StatusCode.OkResult(tokenModel);
         }
 
         [HttpPost("sign-up")]
@@ -61,7 +61,7 @@ namespace Authentication.Api.Controllers
             string emailToken = _jwtService.CreateToken(claims, expiration).ToString(); 
 
             // TODO: Send mail
-            return Responses.StatusCode.AcceptedResult();
+            return LingoMq.Responses.StatusCode.AcceptedResult();
         }
 
         [HttpGet("refresh-token")]
@@ -80,7 +80,7 @@ namespace Authentication.Api.Controllers
             
             TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto!);
             
-            return Responses.StatusCode.OkResult(tokenModel);
+            return LingoMq.Responses.StatusCode.OkResult(tokenModel);
         }
     }
 }

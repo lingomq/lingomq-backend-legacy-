@@ -13,20 +13,20 @@ namespace Authentication.BusinessLayer.Validations
                 if (user.Nickname is null)
                 {
                     ErrorMessage = "Имя пользователя является обязательным к заполнению";
-                    return false;
+                    throw new Exceptions.InvalidDataException(ErrorMessage);
                 }
 
                 if (!Regex.Match(user.Nickname, @"^[^\%/\\&\?\,\'\;:!-+!@#\$\^*)(]{1,100}$").Success)
                 {
                     ErrorMessage = "Имя пользователя не должно быть более 1 и менее 100 символов" +
                         ", а также не должна содержать спецсимволы";
-                    return false;
+                    throw new Exceptions.InvalidDataException(ErrorMessage);
                 }
 
                 if (user.Email is null)
                 {
                     ErrorMessage = "Электронная почта является обязательной к заполнению";
-                    return false;
+                    throw new Exceptions.InvalidDataException(ErrorMessage);
                 }
 
                 if (!Regex.Match(
@@ -34,7 +34,7 @@ namespace Authentication.BusinessLayer.Validations
                     .Success)
                 {
                     ErrorMessage = "Невалидный email";
-                    return false;
+                    throw new Exceptions.InvalidDataException(ErrorMessage);
                 }
 
                 if (user.Phone is not null)
@@ -44,7 +44,7 @@ namespace Authentication.BusinessLayer.Validations
                     .Success)
                     {
                         ErrorMessage = "Невалидный формат номера телефона";
-                        return false;
+                        throw new Exceptions.InvalidDataException(ErrorMessage);
                     }
                 }
 

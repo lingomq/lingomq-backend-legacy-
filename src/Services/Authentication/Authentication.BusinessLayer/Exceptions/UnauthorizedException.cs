@@ -1,4 +1,4 @@
-﻿using Responses;
+﻿using LingoMq.Responses;
 
 namespace Authentication.BusinessLayer.Exceptions
 {

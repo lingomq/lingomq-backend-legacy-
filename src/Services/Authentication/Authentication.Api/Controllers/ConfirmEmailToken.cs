@@ -62,7 +62,7 @@ namespace Authentication.Api.Controllers
             
             TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto);
             // return result
-            return Responses.StatusCode.OkResult(tokenModel);
+            return LingoMq.Responses.StatusCode.OkResult(tokenModel);
         }
     }
 }

@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Responses.StatusCodes;
 
-namespace Responses;
+namespace LingoMq.Responses;
 
 public class StatusCode
 {

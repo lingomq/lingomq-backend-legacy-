@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace Responses;
+namespace LingoMq.Response;
 
 public class ResponseResult : ControllerBase
 {
