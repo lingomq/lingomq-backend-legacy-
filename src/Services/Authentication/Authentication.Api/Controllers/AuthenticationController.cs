@@ -72,12 +72,13 @@ namespace Authentication.Api.Controllers
         {        
             ClaimsPrincipal principal = _jwtService.GetClaimsPrincipal(token);
             if (principal is null)
-                throw new BusinessLayer.Exceptions.InvalidTokenException();
-        
+                throw new InvalidTokenException<User>();
+
             UserInfoDto? infoDto = await _unitOfWork.UserInfos
-                .GetByNicknameAsync(principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name));
+                .GetByNicknameAsync(
+                principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)!.Value);
             
-            TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto);
+            TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto!);
             
             return Responses.StatusCode.OkResult(tokenModel);
         }

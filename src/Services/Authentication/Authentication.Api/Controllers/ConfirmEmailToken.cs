@@ -3,6 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Authentication.DomainLayer.Entities;
 using System.Security.Claims;
+using Cryptography;
+using Cryptography.Entities;
+using Cryptography.Cryptors;
+using Authentication.BusinessLayer.Exceptions;
+using Authentication.BusinessLayer.Dtos;
+using Authentication.BusinessLayer.Models;
 
 namespace Authentication.Api.Controllers
 {
@@ -20,27 +26,29 @@ namespace Authentication.Api.Controllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmailToken(string token)
+        public async Task<IActionResult> ConfirmEmail(string token)
         {
             ClaimsPrincipal principal = _jwtService.GetClaimsPrincipal(token);
            
             Cryptor cryptor = new Cryptor(new Sha256Alghoritm());
-            BaseKeyPair keyPair = cryptor.Crypt(principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Authentication)); 
+            BaseKeyPair keyPair = cryptor
+                .Crypt(principal.Claims
+                .FirstOrDefault(c => c.Type == ClaimTypes.Authentication)!.Value); 
 
             User user = new User()
             {
-                Email = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email),
-                Phone = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.MobilePhone),
+                Email = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)!.Value,
+                Phone = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.MobilePhone)!.Value,
                 PasswordHash = keyPair.Hash,
                 PasswordSalt = keyPair.Salt
             };
 
-            List<UserRole> userRoles = await _unitOfWork.GetAsync();
-            UserRole userRole = userRoles.FirstOrDefault(x => x.Name == "user");
+            List<UserRole> userRoles = await _unitOfWork.UserRoles.GetAsync();
+            UserRole userRole = userRoles.FirstOrDefault(x => x.Name == "user")!;
 
             UserInfo userInfo = new UserInfo()
             {
-                Nickname = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name),
+                Nickname = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)!.Value,
                 RoleId = userRole.Id,
                 Role = userRole
             };
