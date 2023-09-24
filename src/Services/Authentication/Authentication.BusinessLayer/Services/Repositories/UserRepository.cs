@@ -1,6 +1,7 @@
 ﻿using Authentication.BusinessLayer.Contracts;
 using Authentication.DomainLayer.Entities;
 using Dapper;
+using System;
 using System.Data;
 using System.Transactions;
 using static Dapper.SqlMapper;
@@ -55,6 +56,15 @@ namespace Authentication.BusinessLayer.Services.Repositories
             return users.ToList();
         }
 
+        public async Task<User?> GetByEmail(string email)
+        {
+            IEnumerable<User> users = await _connection.QueryAsync<User>(
+                "SELECT * FROM users " +
+                "WHERE email = @Email", new { Email = email });
+
+            return users.Count() > 0 ? users.First() : null;
+        }
+
         public async Task<User?> GetByGuidAsync(Guid guid)
         {
             IEnumerable<User> users = await _connection.QueryAsync<User>(
@@ -62,6 +72,16 @@ namespace Authentication.BusinessLayer.Services.Repositories
                 "WHERE id = @Id", new { Id = guid });
 
             return users.Count() > 0? users.First() : null;
+        }
+
+        public async Task<User?> GetByNickname(string nickname)
+        {
+            IEnumerable<User> users = await _connection.QueryAsync<User>(
+                "SELECT u.id u.phone, u.email, u.password_hash, u.password_salt FROM users as u" +
+                "INNER JOIN user_infos as i " +
+                "WHERE i.nickname = @Nickname", new { Nickname = nickname });
+
+            return users.Count() > 0 ? users.First() : null;
         }
 
         public async Task<User> UpdateAsync(User entity)
