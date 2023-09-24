@@ -11,5 +11,5 @@ public class Cryptor
     public BaseKeyPair Crypt(string word) =>
         _cryptAlghoritm.Crypt(word);
     public bool Validate(string word, BaseKeyPair validKeys) =>
-        _cryptAlghoritm.Validate();
+        _cryptAlghoritm.Validate(word, validKeys);
 }
