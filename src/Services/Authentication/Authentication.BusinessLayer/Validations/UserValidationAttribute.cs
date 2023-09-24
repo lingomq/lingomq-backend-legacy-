@@ -1,4 +1,5 @@
 ﻿using Authentication.BusinessLayer.Models;
+using Authentication.DomainLayer.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
@@ -13,20 +14,20 @@ namespace Authentication.BusinessLayer.Validations
                 if (user.Nickname is null)
                 {
                     ErrorMessage = "Имя пользователя является обязательным к заполнению";
-                    throw new Exceptions.InvalidDataException(ErrorMessage);
+                    throw new Exceptions.InvalidDataException<User>(ErrorMessage);
                 }
 
                 if (!Regex.Match(user.Nickname, @"^[^\%/\\&\?\,\'\;:!-+!@#\$\^*)(]{1,100}$").Success)
                 {
                     ErrorMessage = "Имя пользователя не должно быть более 1 и менее 100 символов" +
                         ", а также не должна содержать спецсимволы";
-                    throw new Exceptions.InvalidDataException(ErrorMessage);
+                    throw new Exceptions.InvalidDataException<User>(ErrorMessage);
                 }
 
                 if (user.Email is null)
                 {
                     ErrorMessage = "Электронная почта является обязательной к заполнению";
-                    throw new Exceptions.InvalidDataException(ErrorMessage);
+                    throw new Exceptions.InvalidDataException<User>(ErrorMessage);
                 }
 
                 if (!Regex.Match(
@@ -34,7 +35,7 @@ namespace Authentication.BusinessLayer.Validations
                     .Success)
                 {
                     ErrorMessage = "Невалидный email";
-                    throw new Exceptions.InvalidDataException(ErrorMessage);
+                    throw new Exceptions.InvalidDataException<User>(ErrorMessage);
                 }
 
                 if (user.Phone is not null)
@@ -44,7 +45,7 @@ namespace Authentication.BusinessLayer.Validations
                     .Success)
                     {
                         ErrorMessage = "Невалидный формат номера телефона";
-                        throw new Exceptions.InvalidDataException(ErrorMessage);
+                        throw new Exceptions.InvalidDataException<User>(new User() { Email = "xyu"},ErrorMessage);
                     }
                 }
 

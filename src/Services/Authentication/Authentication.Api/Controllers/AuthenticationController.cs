@@ -1,13 +1,14 @@
 ﻿using Authentication.BusinessLayer.Contracts;
 using Authentication.BusinessLayer.Dtos;
 using Authentication.BusinessLayer.Exceptions;
-using LingoMq.Responses;
 using Authentication.BusinessLayer.Models;
 using Authentication.BusinessLayer.Services;
 using Authentication.DomainLayer.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Authentication.BusinessLayer.MassTransit;
+using Authentication.DomainLayer.Shared.Producers;
 
 namespace Authentication.Api.Controllers
 {
@@ -17,10 +18,12 @@ namespace Authentication.Api.Controllers
     {
         private IJwtService _jwtService;
         private IUnitOfWork _unitOfWork;
-        public AuthenticationController(IJwtService jwtService, IUnitOfWork unitOfWork)
+        private Publisher _publisher;
+        public AuthenticationController(IJwtService jwtService, IUnitOfWork unitOfWork, Publisher publisher)
         {
             _jwtService = jwtService;
             _unitOfWork = unitOfWork;
+            _publisher = publisher;
         }
 
         [HttpPost("sign-in")]
@@ -31,10 +34,10 @@ namespace Authentication.Api.Controllers
             User? user = await _unitOfWork.Users.GetByEmailAsync(model.Email!);
 
             if (infoDto is null || user is null)
-                throw new NotFoundException();
+                throw new NotFoundException<User>();
 
             if (!ValidationService.IsValidPassword(ref user, model.Password!))
-                throw new BusinessLayer.Exceptions.InvalidDataException();
+                throw new InvalidDataException<User>();
 
             TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto);
 
@@ -58,9 +61,10 @@ namespace Authentication.Api.Controllers
                 new Claim(ClaimTypes.MobilePhone, model.Phone!)
             };
             DateTime expiration = DateTime.Now.AddMinutes(600);
-            string emailToken = _jwtService.CreateToken(claims, expiration).ToString(); 
+            string emailToken = _jwtService.CreateToken(claims, expiration).ToString();
 
-            // TODO: Send mail
+            await _publisher.Send(new Confirmation() { Token = emailToken });
+
             return LingoMq.Responses.StatusCode.AcceptedResult();
         }
 

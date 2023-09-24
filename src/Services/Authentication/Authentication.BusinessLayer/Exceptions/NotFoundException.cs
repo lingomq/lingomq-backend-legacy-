@@ -1,12 +1,14 @@
 ﻿using LingoMq.Responses;
+using Responses.StatusCodes;
 
 namespace Authentication.BusinessLayer.Exceptions
 {
-    public class NotFoundException : Exception
+    public class NotFoundException<T> : ClientExceptionBase
     {
-        public NotFoundException() : base() => 
-            StatusCode.NotFoundResult("Object not found. See error for additional info");
-        public NotFoundException(string message = "Not found. ") : base(message) =>
-            StatusCode.NotFoundResult(message);
+        public NotFoundException() : base((int)ClientErrorCodes.NotFound, "Not found") { }
+        public NotFoundException(string message)
+            : base((int)ClientErrorCodes.NotFound, message) { }
+        public NotFoundException(T data, string message = "Not found") :
+            base(StatusCode.NotFoundResult(data, message)) { }
     }
 }

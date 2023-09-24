@@ -1,7 +1,10 @@
+using Authentication.Api.Middlewares;
 using Authentication.BusinessLayer.Contracts;
+using Authentication.BusinessLayer.MassTransit;
 using Authentication.BusinessLayer.Services;
 using Authentication.BusinessLayer.Services.Repositories;
 using FluentMigrator.Runner;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Npgsql;
@@ -27,6 +30,7 @@ builder.Services.AddTransient<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddTransient<IUserInfoRepository, UserInfoRepository>();
 builder.Services.AddTransient<IJwtService, JwtService>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<Publisher>();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(o =>
     {
@@ -42,6 +46,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]!)),
         };
     });
+
+builder.Services.AddMassTransit(x =>
+{
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.Host("localhost", "/", h =>
+        {
+            h.Username(builder.Configuration["RabbitMq:UserName"]);
+            h.Password(builder.Configuration["RabbitMq:Password"]);
+        });
+
+        cfg.ConfigureEndpoints(context);
+    });
+});
 
 builder.Services.AddFluentMigratorCore()
         .ConfigureRunner(cr => cr
@@ -63,6 +81,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionsCathingMiddleware>();
 
 using (var serviceScope = app.Services.CreateScope())
 {
