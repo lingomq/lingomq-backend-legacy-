@@ -56,7 +56,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
             return users.ToList();
         }
 
-        public async Task<User?> GetByEmail(string email)
+        public async Task<User?> GetByEmailAsync(string email)
         {
             IEnumerable<User> users = await _connection.QueryAsync<User>(
                 "SELECT * FROM users " +
@@ -74,7 +74,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
             return users.Count() > 0? users.First() : null;
         }
 
-        public async Task<User?> GetByNickname(string nickname)
+        public async Task<User?> GetByNicknameAsync(string nickname)
         {
             IEnumerable<User> users = await _connection.QueryAsync<User>(
                 "SELECT u.id u.phone, u.email, u.password_hash, u.password_salt FROM users as u" +

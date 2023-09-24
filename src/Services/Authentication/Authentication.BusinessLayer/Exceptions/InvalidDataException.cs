@@ -1,8 +1,10 @@
-﻿namespace Authentication.BusinessLayer.Exceptions
+﻿using Responses;
+
+namespace Authentication.BusinessLayer.Exceptions
 {
     public class InvalidDataException : Exception
     {
-        public InvalidDataException() : base() { }
+        public InvalidDataException() : base() => StatusCode.BadRequestResult("Invalid data");
         public InvalidDataException(string message = "Invalid data") : base(message) { }
     }
 }

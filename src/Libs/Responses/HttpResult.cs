@@ -9,7 +9,10 @@ public class ResponseResult : ControllerBase
     
     public static IActionResult SuccessResult<T>(int code, string message, T data) =>
         new OkObjectResult(new { code, message, data });
-    
+
+    public static IActionResult SuccessResult(int code, string message) =>
+        new OkObjectResult(new { code, message });
+
     public static IActionResult ClientErrorResult<T>(int code, string message, T errors) =>
         new BadRequestObjectResult(new { code, message, errors});
 

@@ -3,6 +3,7 @@ using Authentication.BusinessLayer.Dtos;
 using Authentication.DomainLayer.Entities;
 using AutoMapper;
 using Dapper;
+using System;
 using System.Data;
 using System.Transactions;
 using static Dapper.SqlMapper;
@@ -73,6 +74,30 @@ namespace Authentication.BusinessLayer.Services.Repositories
                 _mapper.Map<List<UserInfo>, List<UserInfoDto>>(users.ToList());
 
             return userViews;
+        }
+
+        public async Task<UserInfoDto?> GetByNicknameAsync(string nickname)
+        {
+            IEnumerable<UserInfo> userInfos = await _connection
+                .QueryAsync<UserInfo, User, UserRole, UserInfo>(
+                    "SELECT id, nickname, image_uri, additional, creational_date, i.role_id, i.user_id, is_removed " +
+                    "FROM user_infos i " +
+                    "INNER JOIN users u ON i.user_id = u.id " +
+                    "INNER JOIN user_roles r ON i.role_id = r.id " +
+                    "WHERE nickname = @Nickname;", (userInfo, user, role) =>
+                    {
+                        userInfo.Role = role;
+                        userInfo.User = user;
+                        return userInfo;
+                    },
+                    new { Nickname = nickname });
+
+            if (userInfos.Count() < 0)
+                return null;
+
+            UserInfoDto infoDto = _mapper.Map<UserInfo, UserInfoDto>(userInfos.First());
+
+            return infoDto;
         }
 
         public async Task<UserInfoDto?> GetByGuidAsync(Guid guid)

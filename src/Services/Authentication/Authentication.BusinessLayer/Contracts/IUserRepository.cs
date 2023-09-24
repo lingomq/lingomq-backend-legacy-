@@ -4,7 +4,7 @@ namespace Authentication.BusinessLayer.Contracts
 {
     public interface IUserRepository : IGenericRepository<User, User> 
     {
-        Task<User?> GetByNickname(string nickname);
-        Task<User?> GetByEmail(string email);
+        Task<User?> GetByNicknameAsync(string nickname);
+        Task<User?> GetByEmailAsync(string email);
     }
 }

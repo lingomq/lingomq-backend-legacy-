@@ -1,4 +1,4 @@
-﻿using Authentication.BusinessLayer.Dtos;
+﻿using Authentication.BusinessLayer.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
@@ -8,7 +8,7 @@ namespace Authentication.BusinessLayer.Validations
     {
         public override bool IsValid(object? value)
         {
-            if (value is UserDto user)
+            if (value is SignInUpResponseModel user)
             {
                 if (user.Nickname is null)
                 {
