@@ -37,14 +37,14 @@ namespace Authentication.Api.Middlewares
                 HttpContext = context
             });
         }
-        private async Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private async Task HandleExceptionAsync(HttpContext context, ClientExceptionBase exception)
         {
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
 
             ErrorModel model = new ErrorModel()
             {
-                StatusCode = context.Response.StatusCode,
+                Code = exception.Code,
                 Message = exception.Message
             };
 
