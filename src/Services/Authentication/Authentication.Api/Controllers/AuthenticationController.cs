@@ -23,7 +23,7 @@ namespace Authentication.Api.Controllers
             _unitOfWork = unitOfWork;
         }
 
-        [HttpPost]
+        [HttpPost("sign-in")]
         [AllowAnonymous]
         public async Task<IActionResult> SignIn(SignInUpResponseModel model)
         {
@@ -41,7 +41,7 @@ namespace Authentication.Api.Controllers
             return Responses.StatusCode.OkResult(tokenModel);
         }
 
-        [HttpPost]
+        [HttpPost("sign-up")]
         [AllowAnonymous]
         public async Task<IActionResult> SignUp(SignInUpResponseModel model)
         {
@@ -60,20 +60,26 @@ namespace Authentication.Api.Controllers
             DateTime expiration = DateTime.Now.AddMinutes(600);
             string emailToken = _jwtService.CreateToken(claims, expiration).ToString(); 
 
-            // Send mail
-            // Return result
+            // TODO: Send mail
             return Responses.StatusCode.AcceptedResult();
         }
 
-        [HttpGet]
+        [HttpGet("refresh-token")]
         [Authorize("user")]
         [Authorize("admin")]
         [Authorize("moderator")]
         public async Task<IActionResult> RefreshToken(string token)
-        {
-            // Check validity token
-            // append time
-            // return token
+        {        
+            ClaimsPrincipal principal = _jwtService.GetClaimsPrincipal(token);
+            if (principal is null)
+                throw new BusinessLayer.Exceptions.InvalidTokenException();
+        
+            UserInfoDto? infoDto = await _unitOfWork.UserInfos
+                .GetByNicknameAsync(principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name));
+            
+            TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto);
+            
+            return Responses.StatusCode.OkResult(tokenModel);
         }
     }
 }
