@@ -3,7 +3,7 @@
 namespace Authentication.BusinessLayer.Models
 {
     [UserValidation]
-    public class SignInResponseModel
+    public class SignInUpResponseModel
     {
         public string? Nickname { get; set; }
         public string? Email { get; set; }
