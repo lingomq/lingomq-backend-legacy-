@@ -1,10 +1,11 @@
-﻿namespace Authentication.BusinessLayer.Exceptions
+﻿using Responses;
+
+namespace Authentication.BusinessLayer.Exceptions
 {
-    public class InvalidTokenException : Exception
+    public class InvalidTokenException<T> : Exception
     {
-        public InvalidTokenException() { }
-        public InvalidTokenException(string message = "Invalid token.") : base(message) { }
-        public InvalidTokenException(Exception innerException, string message = "Invalid token.") 
-            : base(message, innerException) { }
+        public InvalidTokenException() : base() => StatusCode.ForbiddenResult("Invalid token");
+        public InvalidTokenException(T data) : base() => 
+            StatusCode.ForbiddenResult(data, "Received data was conflicted");
     }
 }

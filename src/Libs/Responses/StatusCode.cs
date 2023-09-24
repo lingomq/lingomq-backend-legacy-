@@ -6,16 +6,28 @@ namespace Responses;
 public class StatusCode
 {
     public static IActionResult OkResult<T>(T data, string message = "Success") =>
-        ResponseResult.SuccessResult<T>((int)SuccessCodes.Success, message, data);
+        ResponseResult.SuccessResult((int)SuccessCodes.Success, message, data);
 
     public static IActionResult AcceptedResult<T>(T data, string message = "Accepted") =>
-        ResponseResult.SuccessResult<T>((int)SuccessCodes.Accepted, message, data);
+        ResponseResult.SuccessResult((int)SuccessCodes.Accepted, message, data);
 
     public static IActionResult NoContentResult<T>(T data, string message = "No Content") =>
-        ResponseResult.SuccessResult<T>((int)SuccessCodes.NoContent, message, data);
+        ResponseResult.SuccessResult((int)SuccessCodes.NoContent, message, data);
 
     public static IActionResult BadRequestResult<T>(T error, string message = "An error occurred") =>
-        ResponseResult.ClientErrorResult<T>((int)ClientErrorCodes.BadRequest, message, error);
+        ResponseResult.ClientErrorResult((int)ClientErrorCodes.BadRequest, message, error);
+
+    public static IActionResult ForbiddenResult<T>(T error, string message = "Forbidden") =>
+        ResponseResult.ClientErrorResult((int)ClientErrorCodes.Forbidden, message, error);
+
+    public static IActionResult NotFoundResult(string message = "Object not found. See error for additional info") =>
+        ResponseResult.ClientErrorResult((int)ClientErrorCodes.NotFound, message);
+
+    public static IActionResult UnauthorizedResult(string message = "Unauthorized") =>
+        ResponseResult.ClientErrorResult((int)ClientErrorCodes.NotFound, message);
+
+    public static IActionResult UnauthorizedResult<T>(T error, string message = "Unauthorized") =>
+        ResponseResult.ClientErrorResult((int)ClientErrorCodes.NotFound, message, error);
 
     public static IActionResult NotFoundResult<T>(T error, string message = "Object not found. See error for additional info") =>
         ResponseResult.ClientErrorResult((int)ClientErrorCodes.NotFound, message, error);

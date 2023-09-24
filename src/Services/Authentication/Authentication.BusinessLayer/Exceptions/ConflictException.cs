@@ -1,8 +1,11 @@
-﻿namespace Authentication.BusinessLayer.Exceptions
+﻿using Responses;
+
+namespace Authentication.BusinessLayer.Exceptions
 {
-    public class ConflictException : Exception
+    public class ConflictException<T> : Exception
     {
-        public ConflictException() : base() { }
-        public ConflictException(string message = "Received data was conflicted") : base(message) { }
+        public ConflictException() : base() => StatusCode.ConflictResult("Received data was conflicted");
+        public ConflictException(T data) : base() => 
+            StatusCode.ConflictResult(data, "Received data was conflicted");
     }
 }

@@ -17,6 +17,6 @@ public class ResponseResult : ControllerBase
         new BadRequestObjectResult(new { code, message});
 
     public static IActionResult ServerErrorResult(int code, string message) =>
-        new ObjectResult(new { code }) { StatusCode = 500}; 
+        new ObjectResult(new { code, message }) { StatusCode = 500}; 
 }
 
