@@ -45,7 +45,7 @@ namespace Authentication.BusinessLayer.Validations
                     .Success)
                     {
                         ErrorMessage = "Невалидный формат номера телефона";
-                        throw new Exceptions.InvalidDataException<User>(new User() { Email = "xyu"},ErrorMessage);
+                        throw new Exceptions.InvalidDataException<User>(ErrorMessage);
                     }
                 }
 
