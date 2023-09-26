@@ -72,16 +72,16 @@ namespace Authentication.BusinessLayer.Services.Repositories
         public async Task<List<UserInfoDto>> GetAsync(int count = int.MaxValue)
         {
             IEnumerable<UserInfo> users;
-            users = await _connection.QueryAsync<UserInfo, User, UserRole, UserInfo>(GetRange,
-                (userInfo, user, role) =>
+            users = await _connection.QueryAsync<UserInfo, UserRole, User, UserInfo>(GetRange,
+                (userInfo, role, user) =>
                 {
-                    userInfo.RoleId = role.Id;
                     userInfo.Role = role;
+                    userInfo.RoleId = role.Id;
                     userInfo.User = user;
                     userInfo.UserId = user.Id;
                     return userInfo;
                 },
-                new { Count = count }, commandType: CommandType.Text, splitOn: "id,id");
+                new { Count = count }, splitOn: "id");
 
             List<UserInfoDto> userViews =
                 _mapper.Map<List<UserInfoDto>>(users.ToList());
