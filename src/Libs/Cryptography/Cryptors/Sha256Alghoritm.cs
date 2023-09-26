@@ -1,4 +1,5 @@
 using Cryptography.Entities;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -8,14 +9,13 @@ public class Sha256Alghoritm : ICryptAlghoritm
 {
     public BaseKeyPair Crypt(string word)
     {
-        byte[] salt = new byte[16];
-        var hashed = new Rfc2898DeriveBytes(
-            word, 
-            salt,
-            10000,
-            HashAlgorithmName.SHA256);
-
-        byte[] hash = hashed.GetBytes(32);
+        byte[] salt = CreateSalt(128 / 8);
+        var hash = KeyDerivation.Pbkdf2(
+            password: word, 
+            salt: salt,
+            prf: KeyDerivationPrf.HMACSHA256,
+            iterationCount: 100000,
+            numBytesRequested: 256 / 8);
 
         return new Sha256KeyPair() {
             Hash = Convert.ToBase64String(hash),
@@ -24,14 +24,20 @@ public class Sha256Alghoritm : ICryptAlghoritm
     }
     public bool Validate(string word, BaseKeyPair validKeys)
     {
-        var hashed = new Rfc2898DeriveBytes(
-            word,
-            Encoding.UTF8.GetBytes(validKeys.Salt!),
-            10000,
-            HashAlgorithmName.SHA256);
+        var hash = KeyDerivation.Pbkdf2(
+            password: word,
+            salt: Convert.FromBase64String(validKeys.Salt!),
+            prf: KeyDerivationPrf.HMACSHA256,
+            iterationCount: 100000,
+            numBytesRequested: 256 / 8);
 
-        byte[] hash = hashed.GetBytes(32);
-
-        return Convert.ToBase64String(hash).Equals(validKeys.Hash);
+        return string.Equals(Convert.ToBase64String(hash),
+            validKeys.Hash,
+            StringComparison.OrdinalIgnoreCase);
+    }
+    private byte[] CreateSalt(int size)
+    {
+        byte[] buffer = RandomNumberGenerator.GetBytes(size);
+        return buffer;
     }
 }

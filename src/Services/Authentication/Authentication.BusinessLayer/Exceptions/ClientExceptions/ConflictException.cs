@@ -1,10 +1,9 @@
 ﻿using LingoMq.Responses;
-using Microsoft.AspNetCore.Mvc;
 using Responses.StatusCodes;
 
 namespace Authentication.BusinessLayer.Exceptions
 {
-    public class ConflictException<T> : ClientExceptionBase
+    public class ConflictException<T> : ExceptionBase
     {
         public ConflictException() : base((int)ClientErrorCodes.Conflict, "Received data was conflicted") { }
         public ConflictException(string message) 

@@ -5,111 +5,108 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", "{B4D2EBBE-6428-42C0-9F70-70F96C241DB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OcelotApiGateway", "ApiGateway\OcelotApiGateway\OcelotApiGateway.csproj", "{7A314675-C4C1-4A6F-8750-12C2A34116B3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OcelotApiGateway", "ApiGateway\OcelotApiGateway\OcelotApiGateway.csproj", "{7A314675-C4C1-4A6F-8750-12C2A34116B3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{EFBD5049-E4DF-420E-A693-5FDBA3D4E215}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentication", "{819C6141-C7DE-457A-AF00-1473AFE505E2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Api", "Services\Authentication\Authentication.Api\Authentication.Api.csproj", "{5B65818E-395F-4588-AC18-E45C5ACB23C4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.Api", "Services\Authentication\Authentication.Api\Authentication.Api.csproj", "{5B65818E-395F-4588-AC18-E45C5ACB23C4}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Email", "Email", "{8C83F393-EFE2-45B3-A55F-27F65FBA74D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email.Api", "Services\Email\Email.Api\Email.Api.csproj", "{91B1D767-D5AA-4313-AEDC-8D5FE4A9009F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Email.Api", "Services\Email\Email.Api\Email.Api.csproj", "{91B1D767-D5AA-4313-AEDC-8D5FE4A9009F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.DomainLayer", "Services\Authentication\Authentication.DomainLayer\Authentication.DomainLayer.csproj", "{E60A9504-3497-4B12-8092-79361AF4BA15}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.DomainLayer", "Services\Authentication\Authentication.DomainLayer\Authentication.DomainLayer.csproj", "{E60A9504-3497-4B12-8092-79361AF4BA15}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.BusinessLayer", "Services\Authentication\Authentication.BusinessLayer\Authentication.BusinessLayer.csproj", "{28AC87D5-FF93-4B2E-9A2F-5C420546E9B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.BusinessLayer", "Services\Authentication\Authentication.BusinessLayer\Authentication.BusinessLayer.csproj", "{28AC87D5-FF93-4B2E-9A2F-5C420546E9B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Tests", "Services\Authentication\Authentication.Tests\Authentication.Tests.csproj", "{94C706E1-9BDC-4014-A02F-17DCCF82DA7E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Email.BusinessLayer", "Services\Email\Email.BusinessLayer\Email.BusinessLayer.csproj", "{9EFF7B1E-EAE6-4388-A727-616C36809DDD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email.BusinessLayer", "Services\Email\Email.BusinessLayer\Email.BusinessLayer.csproj", "{9EFF7B1E-EAE6-4388-A727-616C36809DDD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Email.Tests", "Services\Email\Email.Tests\Email.Tests.csproj", "{F7BAB053-2333-42BA-A9E7-23EED40456EA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Email.Tests", "Services\Email\Email.Tests\Email.Tests.csproj", "{F7BAB053-2333-42BA-A9E7-23EED40456EA}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{564C56C5-B4BC-4076-AB7D-03711EDF2A1D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Api", "Services\Identity\Identity.Api\Identity.Api.csproj", "{1E0591EF-E988-483C-9217-694E2DFFBDE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Api", "Services\Identity\Identity.Api\Identity.Api.csproj", "{1E0591EF-E988-483C-9217-694E2DFFBDE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.BusinessLayer", "Services\Identity\Identity.BusinessLayer\Identity.BusinessLayer.csproj", "{9081FBBA-C688-4B99-9A2E-379D7E7BAC90}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.BusinessLayer", "Services\Identity\Identity.BusinessLayer\Identity.BusinessLayer.csproj", "{9081FBBA-C688-4B99-9A2E-379D7E7BAC90}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.DomainLayer", "Services\Identity\Identity.DomainLayer\Identity.DomainLayer.csproj", "{782EC715-2370-495C-8507-619004DEF92D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.DomainLayer", "Services\Identity\Identity.DomainLayer\Identity.DomainLayer.csproj", "{782EC715-2370-495C-8507-619004DEF92D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identity.Tests", "Services\Identity\Identity.Tests\Identity.Tests.csproj", "{2FEB88E7-5C2D-4640-8576-F91BB63AA251}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Identity.Tests", "Services\Identity\Identity.Tests\Identity.Tests.csproj", "{2FEB88E7-5C2D-4640-8576-F91BB63AA251}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Words", "Words", "{ACE3B5CB-701A-4330-917A-18D0CEE726A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Words.Api", "Services\Words\Words.Api\Words.Api.csproj", "{68FF7571-CDB2-45BB-B17C-8886F5C8D978}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Words.Api", "Services\Words\Words.Api\Words.Api.csproj", "{68FF7571-CDB2-45BB-B17C-8886F5C8D978}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Words.BusinessLayer", "Services\Words\Words.BusinessLayer\Words.BusinessLayer.csproj", "{E969D81A-208F-4869-9356-0AA90E890DFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Words.BusinessLayer", "Services\Words\Words.BusinessLayer\Words.BusinessLayer.csproj", "{E969D81A-208F-4869-9356-0AA90E890DFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Words.DomainLayer", "Services\Words\Words.DomainLayer\Words.DomainLayer.csproj", "{FC158048-32CB-4CA3-B2AC-0B2CBBBC2A2F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Words.DomainLayer", "Services\Words\Words.DomainLayer\Words.DomainLayer.csproj", "{FC158048-32CB-4CA3-B2AC-0B2CBBBC2A2F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Words.Tests", "Services\Words\Words.Tests\Words.Tests.csproj", "{0A17F987-DB48-4022-B68F-7C8EF3144D4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Words.Tests", "Services\Words\Words.Tests\Words.Tests.csproj", "{0A17F987-DB48-4022-B68F-7C8EF3144D4C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Finances", "Finances", "{1A3C6BC2-26DD-4969-A111-EFE9722D2793}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finances.Api", "Services\Finances\Finances.Api\Finances.Api.csproj", "{84132211-98EC-45FD-956B-BBFFDDC48074}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finances.Api", "Services\Finances\Finances.Api\Finances.Api.csproj", "{84132211-98EC-45FD-956B-BBFFDDC48074}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finances.BusinessLayer", "Services\Finances\Finances.BusinessLayer\Finances.BusinessLayer.csproj", "{8F940A8C-5861-4DD0-BD3B-33CEEA5CC8A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finances.BusinessLayer", "Services\Finances\Finances.BusinessLayer\Finances.BusinessLayer.csproj", "{8F940A8C-5861-4DD0-BD3B-33CEEA5CC8A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finances.DomainLayer", "Services\Finances\Finances.DomainLayer\Finances.DomainLayer.csproj", "{39890F78-FAAD-419E-ACBF-2BC7D2B014A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finances.DomainLayer", "Services\Finances\Finances.DomainLayer\Finances.DomainLayer.csproj", "{39890F78-FAAD-419E-ACBF-2BC7D2B014A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finances.Tests", "Services\Finances\Finances.Tests\Finances.Tests.csproj", "{329C7ABE-D519-4E2B-8F19-EEC2308524F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finances.Tests", "Services\Finances\Finances.Tests\Finances.Tests.csproj", "{329C7ABE-D519-4E2B-8F19-EEC2308524F5}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{AC5C0041-5671-4533-B6A7-74BB1127A3F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.Api", "Services\Notifications\Notifications.Api\Notifications.Api.csproj", "{D42B92C3-FC80-42D5-ADAB-5625AEECEED4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications.Api", "Services\Notifications\Notifications.Api\Notifications.Api.csproj", "{D42B92C3-FC80-42D5-ADAB-5625AEECEED4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.BusinessLayer", "Services\Notifications\Notifications.BusinessLayer\Notifications.BusinessLayer.csproj", "{7DCE0A77-877E-49A4-9A08-B0F9F551E532}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications.BusinessLayer", "Services\Notifications\Notifications.BusinessLayer\Notifications.BusinessLayer.csproj", "{7DCE0A77-877E-49A4-9A08-B0F9F551E532}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.DomainLayer", "Services\Notifications\Notifications.DomainLayer\Notifications.DomainLayer.csproj", "{858CD29A-B584-4536-AB8A-A7C6D59BADE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications.DomainLayer", "Services\Notifications\Notifications.DomainLayer\Notifications.DomainLayer.csproj", "{858CD29A-B584-4536-AB8A-A7C6D59BADE2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.Tests", "Services\Notifications\Notifications.Tests\Notifications.Tests.csproj", "{B0E6BE91-0750-4A5F-AF21-919595AE2FE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications.Tests", "Services\Notifications\Notifications.Tests\Notifications.Tests.csproj", "{B0E6BE91-0750-4A5F-AF21-919595AE2FE9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Achievements", "Achievements", "{F488E10A-94B3-4BA2-96A0-0BE98FDAC4A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Achievements.Api", "Services\Achievements\Achievements.Api\Achievements.Api.csproj", "{4B793165-D4F5-46BA-9EC3-6D58C45EF77A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Achievements.Api", "Services\Achievements\Achievements.Api\Achievements.Api.csproj", "{4B793165-D4F5-46BA-9EC3-6D58C45EF77A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Achievements.BusinessLayer", "Services\Achievements\Achievements.BusinessLayer\Achievements.BusinessLayer.csproj", "{C80BF937-D9E1-4153-8D64-4BBC58A45411}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Achievements.BusinessLayer", "Services\Achievements\Achievements.BusinessLayer\Achievements.BusinessLayer.csproj", "{C80BF937-D9E1-4153-8D64-4BBC58A45411}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Achievements.DomainLayer", "Services\Achievements\Achievements.DomainLayer\Achievements.DomainLayer.csproj", "{4F662DA6-FE2A-4F06-921E-6DD91247E3B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Achievements.DomainLayer", "Services\Achievements\Achievements.DomainLayer\Achievements.DomainLayer.csproj", "{4F662DA6-FE2A-4F06-921E-6DD91247E3B8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Achievements.Tests", "Services\Achievements\Achievements.Tests\Achievements.Tests.csproj", "{86AEC83E-03CB-4418-BE38-ED501FA3325E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Achievements.Tests", "Services\Achievements\Achievements.Tests\Achievements.Tests.csproj", "{86AEC83E-03CB-4418-BE38-ED501FA3325E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Topics", "Topics", "{8F1AFB24-2636-45D5-AED2-B40E7C6CC02E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topics.Api", "Services\Topics\Topics.Api\Topics.Api.csproj", "{78A62A89-ABFE-4ED5-ABCE-A0C2451FBCB8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topics.Api", "Services\Topics\Topics.Api\Topics.Api.csproj", "{78A62A89-ABFE-4ED5-ABCE-A0C2451FBCB8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topics.BusinessLayer", "Services\Topics\Topics.BusinessLayer\Topics.BusinessLayer.csproj", "{C18B86E0-3458-4390-8944-56C1DD2CA66F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topics.BusinessLayer", "Services\Topics\Topics.BusinessLayer\Topics.BusinessLayer.csproj", "{C18B86E0-3458-4390-8944-56C1DD2CA66F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topics.DomainLayer", "Services\Topics\Topics.DomainLayer\Topics.DomainLayer.csproj", "{871CD5FA-5DCF-4DAE-BE5E-2F8A86FFEE9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topics.DomainLayer", "Services\Topics\Topics.DomainLayer\Topics.DomainLayer.csproj", "{871CD5FA-5DCF-4DAE-BE5E-2F8A86FFEE9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Topics.Tests", "Services\Topics\Topics.Tests\Topics.Tests.csproj", "{C66910B7-9808-42F4-ACB0-93CEA86B151E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Topics.Tests", "Services\Topics\Topics.Tests\Topics.Tests.csproj", "{C66910B7-9808-42F4-ACB0-93CEA86B151E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppStatistics", "AppStatistics", "{66D24938-EF5A-4F0F-A041-492653D06668}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppStatistics.Api", "Services\AppStatistics\AppStatistics.Api\AppStatistics.Api.csproj", "{C8425872-AE91-4B9E-80BE-55DA6EFD372F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppStatistics.Api", "Services\AppStatistics\AppStatistics.Api\AppStatistics.Api.csproj", "{C8425872-AE91-4B9E-80BE-55DA6EFD372F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppStatistics.BusinessLayer", "Services\AppStatistics\AppStatistics.BusinessLayer\AppStatistics.BusinessLayer.csproj", "{73F223E8-5A4E-48BA-9F71-70C3E2E62B35}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppStatistics.BusinessLayer", "Services\AppStatistics\AppStatistics.BusinessLayer\AppStatistics.BusinessLayer.csproj", "{73F223E8-5A4E-48BA-9F71-70C3E2E62B35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppStatistics.DomainLayer", "Services\AppStatistics\AppStatistics.DomainLayer\AppStatistics.DomainLayer.csproj", "{3AF12B69-CD81-4B39-B301-043D999955A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppStatistics.DomainLayer", "Services\AppStatistics\AppStatistics.DomainLayer\AppStatistics.DomainLayer.csproj", "{3AF12B69-CD81-4B39-B301-043D999955A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppStatistics.Tests", "Services\AppStatistics\AppStatistics.Tests\AppStatistics.Tests.csproj", "{B84C2069-E7C4-4A98-87DD-D355A3BCE0BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppStatistics.Tests", "Services\AppStatistics\AppStatistics.Tests\AppStatistics.Tests.csproj", "{B84C2069-E7C4-4A98-87DD-D355A3BCE0BF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{8FE8892C-07F2-432A-82EE-43651A93C869}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Responses", "Libs\Responses\Responses.csproj", "{67F3DC2F-C8F2-4007-88CE-30BEA0561AAB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Responses", "Libs\Responses\Responses.csproj", "{67F3DC2F-C8F2-4007-88CE-30BEA0561AAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cryptography", "Libs\Cryptography\Cryptography.csproj", "{946A2F51-7663-4209-B879-7E474B7D3525}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cryptography", "Libs\Cryptography\Cryptography.csproj", "{946A2F51-7663-4209-B879-7E474B7D3525}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.UnitTest", "Services\Authentication\Authentication.Tests\Authentication.UnitTest\Authentication.UnitTest.csproj", "{021B69DF-1ABC-42B4-AAD5-CFD426039481}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
-	EndGlobalSection
-	GlobalSection(SolutionProperties) = preSolution
-		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{7A314675-C4C1-4A6F-8750-12C2A34116B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -132,10 +129,6 @@ Global
 		{28AC87D5-FF93-4B2E-9A2F-5C420546E9B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28AC87D5-FF93-4B2E-9A2F-5C420546E9B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28AC87D5-FF93-4B2E-9A2F-5C420546E9B9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{94C706E1-9BDC-4014-A02F-17DCCF82DA7E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{94C706E1-9BDC-4014-A02F-17DCCF82DA7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{94C706E1-9BDC-4014-A02F-17DCCF82DA7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{94C706E1-9BDC-4014-A02F-17DCCF82DA7E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9EFF7B1E-EAE6-4388-A727-616C36809DDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9EFF7B1E-EAE6-4388-A727-616C36809DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EFF7B1E-EAE6-4388-A727-616C36809DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -264,6 +257,13 @@ Global
 		{946A2F51-7663-4209-B879-7E474B7D3525}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{946A2F51-7663-4209-B879-7E474B7D3525}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{946A2F51-7663-4209-B879-7E474B7D3525}.Release|Any CPU.Build.0 = Release|Any CPU
+		{021B69DF-1ABC-42B4-AAD5-CFD426039481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{021B69DF-1ABC-42B4-AAD5-CFD426039481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{021B69DF-1ABC-42B4-AAD5-CFD426039481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{021B69DF-1ABC-42B4-AAD5-CFD426039481}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{7A314675-C4C1-4A6F-8750-12C2A34116B3} = {B4D2EBBE-6428-42C0-9F70-70F96C241DB4}
@@ -273,7 +273,6 @@ Global
 		{91B1D767-D5AA-4313-AEDC-8D5FE4A9009F} = {8C83F393-EFE2-45B3-A55F-27F65FBA74D8}
 		{E60A9504-3497-4B12-8092-79361AF4BA15} = {819C6141-C7DE-457A-AF00-1473AFE505E2}
 		{28AC87D5-FF93-4B2E-9A2F-5C420546E9B9} = {819C6141-C7DE-457A-AF00-1473AFE505E2}
-		{94C706E1-9BDC-4014-A02F-17DCCF82DA7E} = {819C6141-C7DE-457A-AF00-1473AFE505E2}
 		{9EFF7B1E-EAE6-4388-A727-616C36809DDD} = {8C83F393-EFE2-45B3-A55F-27F65FBA74D8}
 		{F7BAB053-2333-42BA-A9E7-23EED40456EA} = {8C83F393-EFE2-45B3-A55F-27F65FBA74D8}
 		{564C56C5-B4BC-4076-AB7D-03711EDF2A1D} = {EFBD5049-E4DF-420E-A693-5FDBA3D4E215}
@@ -313,5 +312,9 @@ Global
 		{B84C2069-E7C4-4A98-87DD-D355A3BCE0BF} = {66D24938-EF5A-4F0F-A041-492653D06668}
 		{67F3DC2F-C8F2-4007-88CE-30BEA0561AAB} = {8FE8892C-07F2-432A-82EE-43651A93C869}
 		{946A2F51-7663-4209-B879-7E474B7D3525} = {8FE8892C-07F2-432A-82EE-43651A93C869}
+		{021B69DF-1ABC-42B4-AAD5-CFD426039481} = {819C6141-C7DE-457A-AF00-1473AFE505E2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2746943F-0DF5-4BB2-A360-520130DFE182}
 	EndGlobalSection
 EndGlobal

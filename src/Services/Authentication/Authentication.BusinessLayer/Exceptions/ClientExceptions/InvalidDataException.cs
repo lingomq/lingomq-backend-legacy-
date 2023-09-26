@@ -3,7 +3,7 @@ using Responses.StatusCodes;
 
 namespace Authentication.BusinessLayer.Exceptions
 {
-    public class InvalidDataException<T> : ClientExceptionBase
+    public class InvalidDataException<T> : ExceptionBase
     {
         public InvalidDataException() : base((int)ClientErrorCodes.BadRequest, "Invalid data") { }
         public InvalidDataException(string message)

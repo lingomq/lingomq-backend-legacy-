@@ -1,4 +1,6 @@
-﻿namespace Authentication.DomainLayer.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace Authentication.DomainLayer.Entities
 {
     public class UserInfo : BaseEntity
     {
@@ -7,9 +9,9 @@
         public string? Additional { get; set; }
         public DateTime? CreationalDate { get; set; }
         public Guid RoleId { get; set; }
+        public Guid UserId { get; set; }
+        public bool IsRemoved { get; set; }
         public UserRole? Role { get; set; }
         public User? User { get; set; }
-        public Guid UserId { get; set; }
-        public bool IsRemoved { get; set;  }
     }
 }

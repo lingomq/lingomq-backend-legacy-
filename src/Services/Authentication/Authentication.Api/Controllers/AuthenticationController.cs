@@ -48,7 +48,7 @@ namespace Authentication.Api.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> SignUp(SignInUpResponseModel model)
         {
-            if (await _unitOfWork.Users.GetByEmailAsync(model.Nickname!) is not null ||
+            if (await _unitOfWork.Users.GetByEmailAsync(model.Email!) is not null ||
                 await _unitOfWork.UserInfos.GetByNicknameAsync(model.Nickname!) is not null)
                 throw new ConflictException<User>();
 
@@ -85,6 +85,12 @@ namespace Authentication.Api.Controllers
             TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto!);
             
             return LingoMq.Responses.StatusCode.OkResult(tokenModel);
+        }
+
+        [HttpGet]
+        public IActionResult HelloWorld()
+        {
+            return LingoMq.Responses.StatusCode.OkResult("hello world");
         }
     }
 }

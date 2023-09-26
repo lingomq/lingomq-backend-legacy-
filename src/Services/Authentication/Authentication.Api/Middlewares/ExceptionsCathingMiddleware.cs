@@ -2,6 +2,7 @@
 using Authentication.BusinessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using System;
 using System.Net;
 
 namespace Authentication.Api.Middlewares
@@ -19,34 +20,46 @@ namespace Authentication.Api.Middlewares
             {
                 await _next(context);
             }
-            catch (ClientExceptionBase ex)
+            catch (ExceptionBase ex)
             {
                 if (ex.Result is not null)
                     await HandleCustomExceptionAsync(context, ex);
                 else
-                    await HandleExceptionAsync(context, ex);
+                {
+                    ErrorModel model = new ErrorModel()
+                    {
+                        Code = ex.Code,
+                        Message = ex.Message
+                    };
+                    await HandleAsync(context, (int)ex.ExceptionStatusCode, model);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                ErrorModel model = new ErrorModel()
+                {
+                    Code = context.Response.StatusCode,
+                    Message = ex.Message
+                };
+
+                await HandleAsync(context, context.Response.StatusCode, model);
             }
         }
-        private async Task HandleCustomExceptionAsync(HttpContext context, ClientExceptionBase exceptionBase)
+        private async Task HandleCustomExceptionAsync(HttpContext context, ExceptionBase exceptionBase)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
+            context.Response.StatusCode = (int)exceptionBase.ExceptionStatusCode;
 
             await exceptionBase.Result!.ExecuteResultAsync(new ActionContext
             {
                 HttpContext = context
             });
         }
-        private async Task HandleExceptionAsync(HttpContext context, ClientExceptionBase exception)
+        private async Task HandleAsync(HttpContext context, int code, ErrorModel model)
         {
             context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-
-            ErrorModel model = new ErrorModel()
-            {
-                Code = exception.Code,
-                Message = exception.Message
-            };
+            context.Response.StatusCode = code;
 
             var result = JsonConvert.SerializeObject(model);
 

@@ -3,7 +3,7 @@ using Responses.StatusCodes;
 
 namespace Authentication.BusinessLayer.Exceptions
 {
-    public class NotFoundException<T> : ClientExceptionBase
+    public class NotFoundException<T> : ExceptionBase
     {
         public NotFoundException() : base((int)ClientErrorCodes.NotFound, "Not found") { }
         public NotFoundException(string message)

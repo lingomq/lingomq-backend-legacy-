@@ -3,130 +3,37 @@ using Authentication.BusinessLayer.Dtos;
 using Authentication.DomainLayer.Entities;
 using AutoMapper;
 using Dapper;
-using System;
+using System.ComponentModel;
 using System.Data;
+using System.Reflection;
 using System.Transactions;
-using static Dapper.SqlMapper;
 
 namespace Authentication.BusinessLayer.Services.Repositories
 {
     public class UserInfoRepository : IUserInfoRepository
     {
-        private readonly IDbConnection _connection;
-        private readonly IMapper _mapper;
-        public UserInfoRepository(IDbConnection configuration, IMapper mapper)
-        {
-            DefaultTypeMap.MatchNamesWithUnderscores = true;
-            _connection = configuration;
-            _mapper = mapper;
-        }
-        public async Task<UserInfoDto> AddAsync(UserInfo entity)
-        {
-            string sql =
-               "INSERT INTO user_infos (id, nickname, image_uri, additional, role_id, user_id, is_removed) " +
-               "VALUES (@Id, @Nickname, @ImageUri, @Additional, @RoleId, @UserId, @IsRemoved);";
-
-            using var transactionScope = new TransactionScope();
-
-            int result = await _connection.ExecuteAsync(sql, entity);
-            transactionScope.Complete();
-
-            UserInfoDto infoDto = _mapper.Map<UserInfo, UserInfoDto>(entity);
-
-            return infoDto;
-        }
-
-        public async Task<bool> DeleteAsync(Guid id)
-        {
-            string sql =
-                "DELETE FROM user_infos " +
-                "WHERE id = @Id";
-
-            using var transactionScope = new TransactionScope();
-
-            int result = await _connection.ExecuteAsync(sql, new { Id = id });
-            transactionScope.Complete();
-
-            return true;
-        }
-
-        public async Task<List<UserInfoDto>> GetAsync(int count = 0)
-        {
-            IEnumerable<UserInfo> users;
-            if (count > 0)
-                users = await _connection
-                    .QueryAsync<UserInfo, User, UserRole, UserInfo>(
-                    "SELECT id, nickname, image_uri, additional, creational_date, i.role_id, i.user_id, is_removed " +
-                    "FROM user_infos i " +
-                    "INNER JOIN users u ON i.user_id = u.id " +
-                    "INNER JOIN user_roles r ON i.role_id = r.id " +
-                    "TAKE @Count;", (userInfo, user, role) =>
-                    {
-                        userInfo.Role = role;
-                        userInfo.User = user;
-                        return userInfo;
-                    },
-                    new { Count = count });
-            else
-                users = await _connection.QueryAsync<UserInfo>("SELECT * FROM user_infos;");
-
-            List<UserInfoDto> userViews =
-                _mapper.Map<List<UserInfo>, List<UserInfoDto>>(users.ToList());
-
-            return userViews;
-        }
-
-        public async Task<UserInfoDto?> GetByNicknameAsync(string nickname)
-        {
-            IEnumerable<UserInfo> userInfos = await _connection
-                .QueryAsync<UserInfo, User, UserRole, UserInfo>(
-                    "SELECT id, nickname, image_uri, additional, creational_date, i.role_id, i.user_id, is_removed " +
-                    "FROM user_infos i " +
-                    "INNER JOIN users u ON i.user_id = u.id " +
-                    "INNER JOIN user_roles r ON i.role_id = r.id " +
-                    "WHERE nickname = @Nickname;", (userInfo, user, role) =>
-                    {
-                        userInfo.Role = role;
-                        userInfo.User = user;
-                        return userInfo;
-                    },
-                    new { Nickname = nickname });
-
-            if (userInfos.Count() < 0)
-                return null;
-
-            UserInfoDto infoDto = _mapper.Map<UserInfo, UserInfoDto>(userInfos.First());
-
-            return infoDto;
-        }
-
-        public async Task<UserInfoDto?> GetByGuidAsync(Guid guid)
-        {
-            IEnumerable<UserInfo> userInfos = await _connection
-                .QueryAsync<UserInfo, User, UserRole, UserInfo>(
-                    "SELECT id, nickname, image_uri, additional, creational_date, i.role_id, i.user_id, is_removed " +
-                    "FROM user_infos i " +
-                    "INNER JOIN users u ON i.user_id = u.id " +
-                    "INNER JOIN user_roles r ON i.role_id = r.id " +
-                    "WHERE id = @Id;", (userInfo, user, role) =>
-                    {
-                        userInfo.Role = role;
-                        userInfo.User = user;
-                        return userInfo;
-                    },
-                    new { Id = guid });
-
-            if (userInfos.Count() < 0)
-                return null;
-
-            UserInfoDto infoDto = _mapper.Map<UserInfo, UserInfoDto>(userInfos.First());
-
-            return infoDto;
-        }
-
-        public async Task<UserInfoDto> UpdateAsync(UserInfo entity)
-        {
-            string sql = 
+        private readonly static string Get =
+            "SELECT user_infos.id, " +
+            "user_infos.nickname AS \"Nickname\", " +
+            "user_infos.image_uri AS \"ImageUri\", " +
+            "user_infos.additional AS \"Additional\", " +
+            "user_infos.creational_date AS \"CreationalDate\", " +
+            "user_infos.is_removed AS \"IsRemoved\", " +
+            "user_roles.id, " +
+            "user_roles.name AS \"Name\", " +
+            "users.id, " +
+            "users.email AS \"Email\", " +
+            "users.phone AS \"Phone\" " +
+            "FROM user_infos " +
+            "LEFT JOIN user_roles ON user_infos.role_id = user_roles.id " +
+            "LEFT JOIN users ON user_infos.user_id = users.id ";
+        private readonly static string GetRange = Get +
+            " TAKE @Count";
+        private readonly static string GetByNickname = Get +
+            " WHERE user_infos.nickname = @Nickname;";
+        private readonly static string GetById = Get +
+            " WHERE user_infos.id = @Id";
+        private readonly static string Update =
                 "UPDATE user_infos" +
                 "SET nickname = @Nickname," +
                 "image_uri = @Phone," +
@@ -135,15 +42,105 @@ namespace Authentication.BusinessLayer.Services.Repositories
                 "user_id = @UserId " +
                 "is_removed = @IsRemoved " +
                 "WHERE id = @Id";
+        private readonly static string Delete =
+                "DELETE FROM user_infos " +
+                "WHERE id = @Id";
+        private readonly static string Create =
+               "INSERT INTO user_infos (id, nickname, image_uri, additional, role_id, user_id, is_removed) " +
+               "VALUES (@Id, @Nickname, @ImageUri, @Additional, @RoleId, @UserId, @IsRemoved);";
 
-            using var transactionScope = new TransactionScope();
+        private readonly IDbConnection _connection;
+        private readonly IMapper _mapper;
+        public UserInfoRepository(IDbConnection configuration, IMapper mapper)
+        {
+            DefaultTypeMap.MatchNamesWithUnderscores = true;
+            _connection = configuration;
+            _mapper = mapper;
 
-            int result = await _connection.ExecuteAsync(sql, entity);
-            transactionScope.Complete();
+        }
+        public async Task<UserInfoDto> AddAsync(UserInfo entity)
+        {
+            return await ExecuteByTemplate(entity, Create);
+        }
 
-            UserInfoDto infoDto = _mapper.Map<UserInfo, UserInfoDto>(entity);
+        public async Task<bool> DeleteAsync(Guid id)
+        {
+            await ExecuteByTemplate(new { Id = id }, Delete);
+            return true;
+        }
+
+        public async Task<List<UserInfoDto>> GetAsync(int count = int.MaxValue)
+        {
+            IEnumerable<UserInfo> users;
+            users = await _connection.QueryAsync<UserInfo, User, UserRole, UserInfo>(GetRange,
+                (userInfo, user, role) =>
+                {
+                    userInfo.RoleId = role.Id;
+                    userInfo.Role = role;
+                    userInfo.User = user;
+                    userInfo.UserId = user.Id;
+                    return userInfo;
+                },
+                new { Count = count }, commandType: CommandType.Text, splitOn: "id,id");
+
+            List<UserInfoDto> userViews =
+                _mapper.Map<List<UserInfoDto>>(users.ToList());
+
+            return userViews;
+        }
+
+        public async Task<UserInfoDto?> GetByNicknameAsync(string nickname)
+        {
+            return await GetByTemplate(new { Nickname = nickname }, GetByNickname);
+        }
+
+        public async Task<UserInfoDto?> GetByGuidAsync(Guid guid)
+        {
+            return await GetByTemplate(new { Id = guid }, GetById);
+        }
+
+        public async Task<UserInfoDto> UpdateAsync(UserInfo entity)
+        {
+            return await ExecuteByTemplate(entity, Update);
+        }
+        private async Task<UserInfoDto?> GetByTemplate<T>(T template, string sql) where T : class
+        {
+            IEnumerable<UserInfo> userInfos = await _connection
+                .QueryAsync<UserInfo, UserRole, User, UserInfo>(sql,
+                (userInfo, role, user) =>
+                {
+                    userInfo.Role = role;
+                    userInfo.RoleId = role.Id;
+                    userInfo.User = user;
+                    userInfo.UserId = user.Id;
+                    return userInfo;
+                },
+                template, splitOn: "id");
+
+            if (userInfos.Count() < 1)
+                return null;
+
+            UserInfoDto infoDto = _mapper.Map<UserInfoDto>(userInfos.First());
 
             return infoDto;
+        }
+        private async Task<UserInfoDto> ExecuteByTemplate<T>(T template, string sql) where T : class 
+        {
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+
+            int result = await _connection.ExecuteAsync(sql, template);
+            transactionScope.Complete();
+
+            UserInfoDto infoDto = _mapper.Map<UserInfoDto>(template);
+
+            return infoDto;
+        }
+        private string GetDescriptionFromAttribute(MemberInfo member)
+        {
+            if (member == null) return null;
+
+            var attrib = (DescriptionAttribute)Attribute.GetCustomAttribute(member, typeof(DescriptionAttribute), false);
+            return (attrib?.Description ?? member.Name).ToLower();
         }
     }
 }

@@ -4,7 +4,7 @@ using Responses.StatusCodes;
 
 namespace Authentication.BusinessLayer.Exceptions
 {
-    public class InvalidTokenException<T> : ClientExceptionBase
+    public class InvalidTokenException<T> : ExceptionBase
     {
         public InvalidTokenException() : base((int) ClientErrorCodes.Forbidden, 
             "Invalid token") { }

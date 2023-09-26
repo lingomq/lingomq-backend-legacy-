@@ -8,7 +8,7 @@ namespace Authentication.BusinessLayer.Services
     {
         public AppMappingProfile() 
         {
-            CreateMap<UserInfoDto, UserInfo>();
+            CreateMap<UserInfoDto, UserInfo>().ReverseMap();
         }
     }
 }

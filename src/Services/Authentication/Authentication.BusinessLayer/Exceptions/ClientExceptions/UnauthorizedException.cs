@@ -4,7 +4,7 @@ using Responses.StatusCodes;
 
 namespace Authentication.BusinessLayer.Exceptions
 {
-    public class UnauthorizedException<T> : ClientExceptionBase
+    public class UnauthorizedException<T> : ExceptionBase
     {
         public UnauthorizedException() : base((int)ClientErrorCodes.Unauthorized,
             "You aren't authorize") { }

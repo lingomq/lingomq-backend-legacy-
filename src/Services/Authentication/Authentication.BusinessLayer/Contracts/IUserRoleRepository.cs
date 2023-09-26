@@ -2,5 +2,8 @@
 
 namespace Authentication.BusinessLayer.Contracts
 {
-    public interface IUserRoleRepository : IGenericRepository<UserRole, UserRole> { }
+    public interface IUserRoleRepository : IGenericRepository<UserRole, UserRole> 
+    {
+        Task<UserRole?> GetByNameAsync(string name);
+    }
 }
