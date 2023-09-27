@@ -1,6 +1,7 @@
 using Authentication.Api.Middlewares;
 using Authentication.BusinessLayer.Contracts;
 using Authentication.BusinessLayer.MassTransit;
+using Authentication.BusinessLayer.MassTransit.Consumers;
 using Authentication.BusinessLayer.Services;
 using Authentication.BusinessLayer.Services.Repositories;
 using FluentMigrator.Runner;
@@ -49,6 +50,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 builder.Services.AddMassTransit(x =>
 {
+    x.SetKebabCaseEndpointNameFormatter();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host("localhost", "/", h =>

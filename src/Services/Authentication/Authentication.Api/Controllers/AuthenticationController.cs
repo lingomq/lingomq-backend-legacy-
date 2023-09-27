@@ -10,6 +10,7 @@ using System.Security.Claims;
 using Authentication.BusinessLayer.MassTransit;
 using Authentication.DomainLayer.Shared.Producers;
 using System.IdentityModel.Tokens.Jwt;
+using Authentication.DomainLayer.Shared.Events;
 
 namespace Authentication.Api.Controllers
 {
@@ -66,7 +67,8 @@ namespace Authentication.Api.Controllers
             JwtSecurityToken jwtEmailToken = _jwtService.CreateToken(claims, expiration);
             string emailToken = _jwtService.WriteToken(jwtEmailToken);
 
-            await _publisher.Send(new Confirmation() { Token = emailToken });
+            await _publisher.Send(new EmailModel() { Email = model.Email!, Nickname = model.Nickname!,
+                Token = emailToken, Subject = "Подтверждение аккаунта"});
 
             return LingoMq.Responses.StatusCode.AcceptedResult();
         }
