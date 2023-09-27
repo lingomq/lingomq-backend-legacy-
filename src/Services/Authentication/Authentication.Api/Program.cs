@@ -4,6 +4,7 @@ using Authentication.BusinessLayer.MassTransit;
 using Authentication.BusinessLayer.MassTransit.Consumers;
 using Authentication.BusinessLayer.Services;
 using Authentication.BusinessLayer.Services.Repositories;
+using EventBus.Entities.Email;
 using FluentMigrator.Runner;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -25,7 +26,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddTransient<IDbConnection>(
-    (sp) => new NpgsqlConnection(builder.Configuration["dev-connection"]));
+    (sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev"]));
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddTransient<IUserInfoRepository, UserInfoRepository>();
@@ -51,6 +52,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
+    x.AddDelayedMessageScheduler();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host("localhost", "/", h =>
@@ -59,6 +61,9 @@ builder.Services.AddMassTransit(x =>
             h.Password(builder.Configuration["RabbitMq:Password"]);
         });
 
+        cfg.ClearSerialization();
+        cfg.Publish<Publisher>();
+        cfg.UseRawJsonSerializer();
         cfg.ConfigureEndpoints(context);
     });
 });
@@ -66,7 +71,7 @@ builder.Services.AddMassTransit(x =>
 builder.Services.AddFluentMigratorCore()
         .ConfigureRunner(cr => cr
         .AddPostgres()
-        .WithGlobalConnectionString(builder.Configuration["DevConnection"])
+        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev"])
         .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
 
 var app = builder.Build();

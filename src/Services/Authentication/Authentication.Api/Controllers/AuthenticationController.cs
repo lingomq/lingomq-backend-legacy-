@@ -8,9 +8,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Authentication.BusinessLayer.MassTransit;
-using Authentication.DomainLayer.Shared.Producers;
 using System.IdentityModel.Tokens.Jwt;
-using Authentication.DomainLayer.Shared.Events;
+using EventBus.Entities.Email;
 
 namespace Authentication.Api.Controllers
 {

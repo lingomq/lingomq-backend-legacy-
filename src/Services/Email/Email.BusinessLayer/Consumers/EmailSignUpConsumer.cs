@@ -1,6 +1,6 @@
 ﻿using Email.BusinessLayer.Contracts;
-using Email.BusinessLayer.Models;
 using Email.BusinessLayer.Services;
+using EventBus.Entities.Email;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 

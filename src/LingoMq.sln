@@ -103,6 +103,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cryptography", "Libs\Crypto
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Authentication.UnitTest", "Services\Authentication\Authentication.Tests\Authentication.UnitTest\Authentication.UnitTest.csproj", "{021B69DF-1ABC-42B4-AAD5-CFD426039481}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EventBus", "Services\EventBus\EventBus.csproj", "{9BB70842-0883-405C-B762-264888219F6D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -261,6 +263,10 @@ Global
 		{021B69DF-1ABC-42B4-AAD5-CFD426039481}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{021B69DF-1ABC-42B4-AAD5-CFD426039481}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{021B69DF-1ABC-42B4-AAD5-CFD426039481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BB70842-0883-405C-B762-264888219F6D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BB70842-0883-405C-B762-264888219F6D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BB70842-0883-405C-B762-264888219F6D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BB70842-0883-405C-B762-264888219F6D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -313,6 +319,7 @@ Global
 		{67F3DC2F-C8F2-4007-88CE-30BEA0561AAB} = {8FE8892C-07F2-432A-82EE-43651A93C869}
 		{946A2F51-7663-4209-B879-7E474B7D3525} = {8FE8892C-07F2-432A-82EE-43651A93C869}
 		{021B69DF-1ABC-42B4-AAD5-CFD426039481} = {819C6141-C7DE-457A-AF00-1473AFE505E2}
+		{9BB70842-0883-405C-B762-264888219F6D} = {EFBD5049-E4DF-420E-A693-5FDBA3D4E215}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2746943F-0DF5-4BB2-A360-520130DFE182}

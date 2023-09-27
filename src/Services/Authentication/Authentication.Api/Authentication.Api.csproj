@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Libs\Responses\Responses.csproj" />
+    <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\Authentication.BusinessLayer\Authentication.BusinessLayer.csproj" />
     <ProjectReference Include="..\Authentication.DomainLayer\Authentication.DomainLayer.csproj" />
   </ItemGroup>

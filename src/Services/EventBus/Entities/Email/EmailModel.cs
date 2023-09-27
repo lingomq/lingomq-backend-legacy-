@@ -1,4 +1,4 @@
-﻿namespace Email.BusinessLayer.Models
+﻿namespace EventBus.Entities.Email
 {
     public class EmailModel
     {

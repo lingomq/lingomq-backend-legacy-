@@ -3,6 +3,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Libs\Cryptography\Cryptography.csproj" />
     <ProjectReference Include="..\..\..\Libs\Responses\Responses.csproj" />
+    <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\Authentication.DomainLayer\Authentication.DomainLayer.csproj" />
   </ItemGroup>
 

@@ -1,5 +1,5 @@
 ﻿using Email.BusinessLayer.Contracts;
-using Email.BusinessLayer.Models;
+using EventBus.Entities.Email;
 using Microsoft.Extensions.Configuration;
 using System.Net;
 using System.Net.Mail;
@@ -21,9 +21,10 @@ namespace Email.BusinessLayer.Services
             message.Subject = model.Subject;
             message.Body = mail;
             message.IsBodyHtml = true;
-            SmtpClient smtpClient = new SmtpClient();
-            smtpClient.Credentials = new NetworkCredential(_configuration["Mail:Smtp:Client"],
-                _configuration["Mail:Smtp:Password"]);
+            SmtpClient smtpClient = new SmtpClient(_configuration["Mail:Smtp:Client"],
+                int.Parse(_configuration["Mail:Smtp:Port"]!));
+            smtpClient.Credentials = new NetworkCredential(_configuration["Mail:Credentials:Client"],
+                _configuration["Mail:Credentials:Password"]);
             smtpClient.EnableSsl = true;
 
             smtpClient.Send(message);

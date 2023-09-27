@@ -1,13 +1,18 @@
 using Email.BusinessLayer.Consumers;
+using Email.BusinessLayer.Contracts;
+using Email.BusinessLayer.Services;
+using EventBus.Entities.Email;
 using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+builder.Services.AddTransient<IEmailSender, EmailSender>();
 builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
+    x.AddDelayedMessageScheduler();
     x.AddConsumer<EmailSignUpConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -17,6 +22,12 @@ builder.Services.AddMassTransit(x =>
             h.Password(builder.Configuration["RabbitMq:Password"]);
         });
 
+        cfg.ReceiveEndpoint(typeof(EmailModel).Name.ToLower(), endpoint =>
+        {
+            endpoint.ConfigureConsumer<EmailSignUpConsumer>(context);
+        });
+        cfg.ClearSerialization();
+        cfg.UseRawJsonSerializer();
         cfg.ConfigureEndpoints(context);
     });
 });

@@ -1,4 +1,4 @@
-﻿using Email.BusinessLayer.Models;
+﻿using EventBus.Entities.Email;
 
 namespace Email.BusinessLayer.Contracts
 {

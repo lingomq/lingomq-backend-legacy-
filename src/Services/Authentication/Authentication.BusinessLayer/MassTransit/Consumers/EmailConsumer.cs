@@ -1,5 +1,5 @@
-﻿using MassTransit;
-using Authentication.DomainLayer.Shared.Events;
+﻿using EventBus.Entities.Email;
+using MassTransit;
 using Microsoft.Extensions.Logging;
 
 namespace Authentication.BusinessLayer.MassTransit.Consumers
