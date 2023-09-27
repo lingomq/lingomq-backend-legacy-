@@ -29,11 +29,11 @@ namespace Authentication.Api.Controllers
         public async Task<IActionResult> ConfirmEmail(string token)
         {
             ClaimsPrincipal principal = _jwtService.GetClaimsPrincipal(token);
-           
+
             Cryptor cryptor = new Cryptor(new Sha256Alghoritm());
             BaseKeyPair keyPair = cryptor
-                .Crypt(principal.Claims
-                .FirstOrDefault(c => c.Type == ClaimTypes.Authentication)!.Value); 
+            .Crypt(principal.Claims
+            .FirstOrDefault(c => c.Type == ClaimTypes.Authentication)!.Value);
 
             User user = new User()
             {
@@ -57,12 +57,12 @@ namespace Authentication.Api.Controllers
             };
 
             if (await _unitOfWork.Users.GetByEmailAsync(user.Email) is not null ||
-                await _unitOfWork.UserInfos.GetByNicknameAsync(userInfo.Nickname) is not null)
+            await _unitOfWork.UserInfos.GetByNicknameAsync(userInfo.Nickname) is not null)
                 throw new ConflictException<User>();
 
             await _unitOfWork.Users.AddAsync(user);
-            UserInfoDto infoDto = await _unitOfWork.UserInfos.AddAsync(userInfo); 
-            
+            UserInfoDto infoDto = await _unitOfWork.UserInfos.AddAsync(userInfo);
+
             TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto);
             // return result
             return LingoMq.Responses.StatusCode.OkResult(tokenModel);

@@ -28,8 +28,8 @@ namespace Authentication.UnitTest.Tests
         public ConfirmEmailTokenTest()
         {
             _configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
-                .Build();
+            .AddJsonFile("appsettings.json")
+            .Build();
 
             var provider = ServiceProviderFactory.Create(_configuration);
             Migrator.Migrate(provider);
@@ -58,13 +58,13 @@ namespace Authentication.UnitTest.Tests
             };
 
             List<Claim> claims = new List<Claim>()
-            {
-                new Claim(ClaimTypes.Email, model.Email!),
-                new Claim(ClaimTypes.Name, model.Nickname!),
-                new Claim(ClaimTypes.Authentication, model.Password!),
-                new Claim(ClaimTypes.MobilePhone, model.Phone!),
-                new Claim(ClaimTypes.Version, "email")
-            };
+{
+new Claim(ClaimTypes.Email, model.Email!),
+new Claim(ClaimTypes.Name, model.Nickname!),
+new Claim(ClaimTypes.Authentication, model.Password!),
+new Claim(ClaimTypes.MobilePhone, model.Phone!),
+new Claim(ClaimTypes.Version, "email")
+};
             DateTime expiration = DateTime.Now.AddMinutes(600);
             JwtSecurityToken jwtEmailToken = _jwtService.CreateToken(claims, expiration);
             string emailToken = _jwtService.WriteToken(jwtEmailToken);
@@ -88,7 +88,7 @@ namespace Authentication.UnitTest.Tests
 
             // Assert
             await Assert.ThrowsAsync<InvalidTokenException<User>>(async () =>
-                await _controller.ConfirmEmail(token));
+            await _controller.ConfirmEmail(token));
         }
     }
 
