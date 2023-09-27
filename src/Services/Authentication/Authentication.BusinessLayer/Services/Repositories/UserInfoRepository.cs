@@ -135,12 +135,5 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             return infoDto;
         }
-        private string GetDescriptionFromAttribute(MemberInfo member)
-        {
-            if (member == null) return null;
-
-            var attrib = (DescriptionAttribute)Attribute.GetCustomAttribute(member, typeof(DescriptionAttribute), false);
-            return (attrib?.Description ?? member.Name).ToLower();
-        }
     }
 }
