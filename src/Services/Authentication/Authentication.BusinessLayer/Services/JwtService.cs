@@ -60,6 +60,9 @@ namespace Authentication.BusinessLayer.Services
 
             return claims;
         }
+        public string WriteToken(JwtSecurityToken token) =>
+            new JwtSecurityTokenHandler().WriteToken(token);
+
         public JwtSecurityToken CreateToken(List<Claim> claims, DateTime expires)
         {
             var tokenKey = Encoding.UTF8.GetBytes(_configuration["JWT:Key"]!);
@@ -75,29 +78,36 @@ namespace Authentication.BusinessLayer.Services
         public ClaimsPrincipal GetClaimsPrincipal(string token)
         {
             if (token.IsNullOrEmpty())
-                throw new InvalidTokenException<User>();
+                throw new InvalidTokenException<User>("Токен неверный");
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             byte[] key = Encoding.UTF8.GetBytes(_configuration["JWT:Key"]!);
 
-            ClaimsPrincipal principal = tokenHandler.ValidateToken(token, new TokenValidationParameters
+            try
             {
-                ValidateIssuerSigningKey = true,
-                IssuerSigningKey = new SymmetricSecurityKey(key),
-                ValidateIssuer = false,
-                ValidateAudience = false,
-                ClockSkew = TimeSpan.Zero
-            }, out SecurityToken securityToken);
+                ClaimsPrincipal principal = tokenHandler.ValidateToken(token, new TokenValidationParameters
+                {
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(key),
+                    ValidateIssuer = false,
+                    ValidateAudience = false,
+                    ClockSkew = TimeSpan.Zero
+                }, out SecurityToken securityToken);
 
-            JwtSecurityToken jwtToken = (JwtSecurityToken) securityToken;
+                JwtSecurityToken jwtToken = (JwtSecurityToken)securityToken;
 
-            if (securityToken is null ||
-                !jwtToken.Header.Alg.Equals(
-                    SecurityAlgorithms.HmacSha256,
-                    StringComparison.InvariantCultureIgnoreCase))
-                throw new SecurityTokenException("Токен неверный");
+                if (securityToken is null ||
+                    !jwtToken.Header.Alg.Equals(
+                        SecurityAlgorithms.HmacSha256,
+                        StringComparison.InvariantCultureIgnoreCase))
+                    throw new SecurityTokenException("Токен неверный");
 
-            return principal;
+                return principal;
+            }
+            catch
+            {
+                throw new InvalidTokenException<User>("Токен неверный");
+            }
         }
     }
 }

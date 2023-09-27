@@ -16,7 +16,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
         private static readonly string GetByName = Get +
             " WHERE name = @Name";
         private static readonly string GetRange = Get +
-            " TAKE @Count";
+            " LIMIT @Count";
         private static readonly string Create =
             "INSERT INTO user_roles " +
             "(id, name) " +

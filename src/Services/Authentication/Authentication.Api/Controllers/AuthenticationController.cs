@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Authentication.BusinessLayer.MassTransit;
 using Authentication.DomainLayer.Shared.Producers;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Authentication.Api.Controllers
 {
@@ -62,7 +63,8 @@ namespace Authentication.Api.Controllers
                 new Claim(ClaimTypes.Version, "email")
             };
             DateTime expiration = DateTime.Now.AddMinutes(600);
-            string emailToken = _jwtService.CreateToken(claims, expiration).ToString();
+            JwtSecurityToken jwtEmailToken = _jwtService.CreateToken(claims, expiration);
+            string emailToken = _jwtService.WriteToken(jwtEmailToken);
 
             await _publisher.Send(new Confirmation() { Token = emailToken });
 

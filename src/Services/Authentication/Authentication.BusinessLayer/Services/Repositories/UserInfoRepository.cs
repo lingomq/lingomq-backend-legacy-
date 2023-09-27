@@ -28,7 +28,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
             "LEFT JOIN user_roles ON user_infos.role_id = user_roles.id " +
             "LEFT JOIN users ON user_infos.user_id = users.id ";
         private readonly static string GetRange = Get +
-            " TAKE @Count";
+            " LIMIT @Count";
         private readonly static string GetByNickname = Get +
             " WHERE user_infos.nickname = @Nickname";
         private readonly static string GetById = Get +

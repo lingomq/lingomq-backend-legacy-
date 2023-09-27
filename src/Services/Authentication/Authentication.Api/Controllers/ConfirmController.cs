@@ -14,11 +14,11 @@ namespace Authentication.Api.Controllers
 {
     [Route("api/v0/confirm")]
     [ApiController]
-    public class ConfirmEmailToken : ControllerBase
+    public class ConfirmController : ControllerBase
     {
         private IJwtService _jwtService;
         private IUnitOfWork _unitOfWork;
-        public ConfirmEmailToken(IJwtService jwtService, IUnitOfWork unitOfWork)
+        public ConfirmController(IJwtService jwtService, IUnitOfWork unitOfWork)
         {
             _jwtService = jwtService;
             _unitOfWork = unitOfWork;
@@ -37,20 +37,23 @@ namespace Authentication.Api.Controllers
 
             User user = new User()
             {
+                Id = Guid.NewGuid(),
                 Email = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)!.Value,
                 Phone = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.MobilePhone)!.Value,
                 PasswordHash = keyPair.Hash,
                 PasswordSalt = keyPair.Salt
             };
 
-            List<UserRole> userRoles = await _unitOfWork.UserRoles.GetAsync();
-            UserRole userRole = userRoles.FirstOrDefault(x => x.Name == "user")!;
+            UserRole? userRole = await _unitOfWork.UserRoles.GetByNameAsync("user");
 
             UserInfo userInfo = new UserInfo()
             {
+                Id = Guid.NewGuid(),
                 Nickname = principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)!.Value,
-                RoleId = userRole.Id,
-                Role = userRole
+                RoleId = userRole!.Id,
+                Role = userRole,
+                UserId = user.Id,
+                User = user
             };
 
             if (await _unitOfWork.Users.GetByEmailAsync(user.Email) is not null ||

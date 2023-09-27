@@ -28,13 +28,13 @@ namespace Authentication.UnitTest.Common.Migrations
             Create.Table("user_infos")
                 .WithColumn("id").AsGuid().PrimaryKey().Unique().NotNullable().Identity()
                 .WithColumn("nickname").AsCustom("varchar(100)").Unique().NotNullable()
-                .WithColumn("image_uri").AsCustom("text")
+                .WithColumn("image_uri").AsCustom("text").Nullable()
                 .WithDefaultValue("static/images/default.png")
-                .WithColumn("additional").AsCustom("varchar(256)")
+                .WithColumn("additional").AsCustom("varchar(256)").Nullable()
                 .WithColumn("role_id").AsGuid().NotNullable()
                 .WithColumn("user_id").AsGuid().NotNullable()
                 .WithColumn("creational_date").AsDateTime().WithDefaultValue(DateTime.Now.ToString())
-                .WithColumn("is_removed").AsBoolean().WithDefaultValue(false);
+                .WithColumn("is_removed").AsBoolean().Nullable().WithDefaultValue(false);
 
             Create.ForeignKey("FK_Identity_UserInfos_RoleId")
                 .FromTable("user_infos").ForeignColumn("role_id")

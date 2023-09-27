@@ -12,5 +12,6 @@ namespace Authentication.BusinessLayer.Contracts
         public List<Claim> GenerateAccessTokenClaims(UserInfoDto userInfo);
         public JwtSecurityToken CreateToken(List<Claim> claims, DateTime expires);
         public ClaimsPrincipal GetClaimsPrincipal(string token);
+        public string WriteToken(JwtSecurityToken token);
     }
 }

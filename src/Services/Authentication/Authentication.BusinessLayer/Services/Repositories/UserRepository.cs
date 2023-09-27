@@ -14,7 +14,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
             "password_hash as \"PasswordHash\", password_salt as \"PasswordSalt\"" +
             "FROM users";
         private readonly static string GetRange = Get +
-            " TAKE @Count";
+            " LIMIT @Count";
         private readonly static string GetById = Get +
             " WHERE id = @Id";
         private readonly static string GetByEmail = Get +
