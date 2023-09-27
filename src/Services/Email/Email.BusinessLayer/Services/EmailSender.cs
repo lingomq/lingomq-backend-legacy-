@@ -11,7 +11,7 @@ namespace Email.BusinessLayer.Services
         private readonly IConfiguration _configuration;
         public EmailSender(IConfiguration configuration) =>
             _configuration = configuration;
-        public void Send(EmailBuilder builder, EmailModel model)
+        public void Send(EmailBuilder builder, EmailModelSignUp model)
         {
             string mail = new EmailCreator().CreateMail(model.Nickname, builder, model.Token);
             MailAddress from = new MailAddress(_configuration["Mail:From"]!, _configuration["Mail:Corp"]);
@@ -23,6 +23,7 @@ namespace Email.BusinessLayer.Services
             message.IsBodyHtml = true;
             SmtpClient smtpClient = new SmtpClient(_configuration["Mail:Smtp:Client"],
                 int.Parse(_configuration["Mail:Smtp:Port"]!));
+            smtpClient.UseDefaultCredentials = false;
             smtpClient.Credentials = new NetworkCredential(_configuration["Mail:Credentials:Client"],
                 _configuration["Mail:Credentials:Password"]);
             smtpClient.EnableSsl = true;

@@ -14,6 +14,7 @@ builder.Services.AddMassTransit(x =>
     x.SetKebabCaseEndpointNameFormatter();
     x.AddDelayedMessageScheduler();
     x.AddConsumer<EmailSignUpConsumer>();
+    x.AddConsumer<EmailSignInConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host("localhost", "/", h =>
@@ -22,9 +23,10 @@ builder.Services.AddMassTransit(x =>
             h.Password(builder.Configuration["RabbitMq:Password"]);
         });
 
-        cfg.ReceiveEndpoint(typeof(EmailModel).Name.ToLower(), endpoint =>
+        cfg.ReceiveEndpoint(typeof(EmailModelSignUp).Name.ToLower(), endpoint =>
         {
             endpoint.ConfigureConsumer<EmailSignUpConsumer>(context);
+            endpoint.ConfigureConsumer<EmailSignInConsumer>(context);
         });
         cfg.ClearSerialization();
         cfg.UseRawJsonSerializer();
@@ -32,24 +34,8 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
 app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
 
 app.Run();

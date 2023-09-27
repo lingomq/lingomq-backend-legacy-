@@ -8,5 +8,6 @@ namespace Email.BusinessLayer.Contracts
         public void CreateMessage() => EmailTemplate = new EmailTemplate();
         public abstract void SetHeader();
         public abstract void SetText();
+        public virtual void SetButton() { }
     }
 }

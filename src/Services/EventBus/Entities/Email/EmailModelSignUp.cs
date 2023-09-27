@@ -1,6 +1,6 @@
 ﻿namespace EventBus.Entities.Email
 {
-    public class EmailModel
+    public class EmailModelSignUp
     {
         public string Subject { get; set; } = "Subject";
         public string Nickname { get; set; } = string.Empty;

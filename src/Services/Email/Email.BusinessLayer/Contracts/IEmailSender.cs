@@ -4,6 +4,6 @@ namespace Email.BusinessLayer.Contracts
 {
     public interface IEmailSender
     {
-        public void Send(EmailBuilder builder, EmailModel model);
+        public void Send(EmailBuilder builder, EmailModelSignUp model);
     }
 }

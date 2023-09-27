@@ -39,11 +39,11 @@ namespace Authentication.Api.Middlewares
 
                 ErrorModel model = new ErrorModel()
                 {
-                    Code = context.Response.StatusCode,
+                    Code = 0,
                     Message = ex.Message
                 };
 
-                await HandleAsync(context, context.Response.StatusCode, model);
+                await HandleAsync(context, (int) HttpStatusCode.InternalServerError, model);
             }
         }
         private async Task HandleCustomExceptionAsync(HttpContext context, ExceptionBase exceptionBase)

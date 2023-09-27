@@ -1,5 +1,6 @@
 ﻿using Authentication.BusinessLayer.Models;
 using Authentication.DomainLayer.Entities;
+using Microsoft.IdentityModel.Tokens;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
@@ -38,10 +39,10 @@ namespace Authentication.BusinessLayer.Validations
                     throw new Exceptions.InvalidDataException<User>(ErrorMessage);
                 }
 
-                if (user.Phone is not null)
+                if (!user.Phone.IsNullOrEmpty())
                 {
                     if (!Regex.Match(
-                    user.Phone, @"^\+?\d{0,2}\-?\d{4,5}\-?\d{5,6}")
+                    user.Phone!, @"^\+?\d{0,2}\-?\d{4,5}\-?\d{5,6}")
                     .Success)
                     {
                         ErrorMessage = "Невалидный формат номера телефона";

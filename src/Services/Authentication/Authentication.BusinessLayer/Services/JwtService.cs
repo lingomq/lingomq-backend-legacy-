@@ -40,7 +40,7 @@ namespace Authentication.BusinessLayer.Services
             List<Claim> claims = new List<Claim>() 
             {
                 new Claim(ClaimTypes.NameIdentifier, userInfo.UserId!.ToString()),
-                new Claim(ClaimTypes.Role, userInfo.Role!.Name!),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, userInfo.Role!.Name!),
                 new Claim(ClaimTypes.Email, userInfo.User!.Email!),
                 new Claim(ClaimTypes.Name, userInfo.Nickname!),
                 new Claim(ClaimTypes.Version, "refresh")
@@ -54,7 +54,7 @@ namespace Authentication.BusinessLayer.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, new Guid(userInfo.UserId!.ToString()).ToString()),
                 new Claim(ClaimTypes.Name, userInfo.Nickname!),
-                new Claim(ClaimTypes.Role, userInfo.Role!.Name!),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, userInfo.Role!.Name!),
                 new Claim(ClaimTypes.Version, "access")
             };
 

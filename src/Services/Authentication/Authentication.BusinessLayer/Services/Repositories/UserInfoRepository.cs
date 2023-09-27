@@ -23,7 +23,9 @@ namespace Authentication.BusinessLayer.Services.Repositories
             "user_roles.name AS \"Name\", " +
             "users.id, " +
             "users.email AS \"Email\", " +
-            "users.phone AS \"Phone\" " +
+            "users.phone AS \"Phone\", " +
+            "users.password_hash AS \"PasswordHash\", " +
+            "users.password_salt AS \"PasswordSalt\" " +
             "FROM user_infos " +
             "LEFT JOIN user_roles ON user_infos.role_id = user_roles.id " +
             "LEFT JOIN users ON user_infos.user_id = users.id ";

@@ -42,6 +42,13 @@ namespace Authentication.Api.Controllers
 
             TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto);
 
+            await _publisher.Send(new EmailModelSignIn()
+            {
+                Email = model.Email!,
+                Nickname = model.Nickname!,
+                Subject = "Вход в аккаунт"
+            });
+
             return LingoMq.Responses.StatusCode.OkResult(tokenModel);
         }
 
@@ -66,16 +73,14 @@ namespace Authentication.Api.Controllers
             JwtSecurityToken jwtEmailToken = _jwtService.CreateToken(claims, expiration);
             string emailToken = _jwtService.WriteToken(jwtEmailToken);
 
-            await _publisher.Send(new EmailModel() { Email = model.Email!, Nickname = model.Nickname!,
+            await _publisher.Send(new EmailModelSignUp() { Email = model.Email!, Nickname = model.Nickname!,
                 Token = emailToken, Subject = "Подтверждение аккаунта"});
 
             return LingoMq.Responses.StatusCode.AcceptedResult();
         }
 
         [HttpGet("refresh-token")]
-        [Authorize("user")]
-        [Authorize("admin")]
-        [Authorize("moderator")]
+        [Authorize(Roles = "user,admin,moderator")]
         public async Task<IActionResult> RefreshToken(string token)
         {        
             ClaimsPrincipal principal = _jwtService.GetClaimsPrincipal(token);
@@ -89,12 +94,6 @@ namespace Authentication.Api.Controllers
             TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto!);
             
             return LingoMq.Responses.StatusCode.OkResult(tokenModel);
-        }
-
-        [HttpGet]
-        public IActionResult HelloWorld()
-        {
-            return LingoMq.Responses.StatusCode.OkResult("hello world");
         }
     }
 }

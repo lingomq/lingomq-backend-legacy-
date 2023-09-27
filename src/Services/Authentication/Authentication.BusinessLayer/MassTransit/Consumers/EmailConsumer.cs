@@ -4,12 +4,12 @@ using Microsoft.Extensions.Logging;
 
 namespace Authentication.BusinessLayer.MassTransit.Consumers
 {
-    public class EmailConsumer : IConsumer<EmailModel>
+    public class EmailConsumer : IConsumer<EmailModelSignUp>
     {
         private readonly ILogger<EmailConsumer> _logger;
         public EmailConsumer(ILogger<EmailConsumer> logger) =>
             _logger = logger;
-        public Task Consume(ConsumeContext<EmailModel> context)
+        public Task Consume(ConsumeContext<EmailModelSignUp> context)
         {
             _logger.LogInformation($"[+] Email succesfully sended to {context.Message.Email} " +
                 $"(Nickname: {context.Message.Nickname})");
