@@ -58,7 +58,8 @@ namespace Authentication.Api.Controllers
                 new Claim(ClaimTypes.Email, model.Email!),
                 new Claim(ClaimTypes.Name, model.Nickname!),
                 new Claim(ClaimTypes.Authentication, model.Password!),
-                new Claim(ClaimTypes.MobilePhone, model.Phone!)
+                new Claim(ClaimTypes.MobilePhone, model.Phone!),
+                new Claim(ClaimTypes.Version, "email")
             };
             DateTime expiration = DateTime.Now.AddMinutes(600);
             string emailToken = _jwtService.CreateToken(claims, expiration).ToString();

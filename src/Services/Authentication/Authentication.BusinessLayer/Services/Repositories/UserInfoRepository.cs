@@ -30,7 +30,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
         private readonly static string GetRange = Get +
             " TAKE @Count";
         private readonly static string GetByNickname = Get +
-            " WHERE user_infos.nickname = @Nickname;";
+            " WHERE user_infos.nickname = @Nickname";
         private readonly static string GetById = Get +
             " WHERE user_infos.id = @Id";
         private readonly static string Update =

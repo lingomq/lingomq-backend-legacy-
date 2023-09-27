@@ -33,7 +33,6 @@ namespace Authentication.BusinessLayer.Services.Repositories
         private IDbConnection _connection;
         public UserRoleRepository(IDbConnection connection)
         {
-            SqlMapper.AddTypeHandler(new GuidTypeHandler());
             _connection = connection;
         }
 

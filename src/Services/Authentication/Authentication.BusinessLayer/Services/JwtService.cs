@@ -6,6 +6,8 @@ using Authentication.BusinessLayer.Models;
 using Authentication.BusinessLayer.Dtos;
 using Microsoft.Extensions.Configuration;
 using System.Text;
+using Authentication.BusinessLayer.Exceptions;
+using Authentication.DomainLayer.Entities;
 
 namespace Authentication.BusinessLayer.Services
 {
@@ -39,7 +41,9 @@ namespace Authentication.BusinessLayer.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, userInfo.UserId!.ToString()),
                 new Claim(ClaimTypes.Role, userInfo.Role!.Name!),
-                new Claim(ClaimTypes.Email, userInfo.User!.Email!)
+                new Claim(ClaimTypes.Email, userInfo.User!.Email!),
+                new Claim(ClaimTypes.Name, userInfo.Nickname!),
+                new Claim(ClaimTypes.Version, "refresh")
             };
 
             return claims;
@@ -50,7 +54,8 @@ namespace Authentication.BusinessLayer.Services
             {
                 new Claim(ClaimTypes.NameIdentifier, new Guid(userInfo.UserId!.ToString()).ToString()),
                 new Claim(ClaimTypes.Name, userInfo.Nickname!),
-                new Claim(ClaimTypes.Role, userInfo.Role!.Name!)
+                new Claim(ClaimTypes.Role, userInfo.Role!.Name!),
+                new Claim(ClaimTypes.Version, "access")
             };
 
             return claims;
@@ -69,6 +74,9 @@ namespace Authentication.BusinessLayer.Services
         }
         public ClaimsPrincipal GetClaimsPrincipal(string token)
         {
+            if (token.IsNullOrEmpty())
+                throw new InvalidTokenException<User>();
+
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             byte[] key = Encoding.UTF8.GetBytes(_configuration["JWT:Key"]!);
 
@@ -84,7 +92,7 @@ namespace Authentication.BusinessLayer.Services
             JwtSecurityToken jwtToken = (JwtSecurityToken) securityToken;
 
             if (securityToken is null ||
-                jwtToken.Header.Alg.Equals(
+                !jwtToken.Header.Alg.Equals(
                     SecurityAlgorithms.HmacSha256,
                     StringComparison.InvariantCultureIgnoreCase))
                 throw new SecurityTokenException("Токен неверный");

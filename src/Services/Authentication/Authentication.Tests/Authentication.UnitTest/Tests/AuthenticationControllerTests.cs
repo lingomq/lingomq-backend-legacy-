@@ -1,7 +1,6 @@
 ﻿using Authentication.BusinessLayer.Contracts;
 using Authentication.BusinessLayer.MassTransit;
 using Authentication.Api.Controllers;
-using Moq;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.Extensions.Configuration;
@@ -16,6 +15,8 @@ using Cryptography.Entities;
 using System.Data;
 using Dapper;
 using Authentication.BusinessLayer.Exceptions;
+using Authentication.BusinessLayer.Dtos;
+using static MassTransit.ValidationResultExtensions;
 
 namespace Authentication.UnitTest.Tests
 {
@@ -23,10 +24,9 @@ namespace Authentication.UnitTest.Tests
     {
         protected readonly IConfiguration _configuration;
         private readonly AuthenticationController _controller;
-        private readonly AuthenticationController _controllerMoq;
-        private readonly Mock<IUnitOfWork> _moqUnitOfWork;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDbConnection _connection;
+        private readonly IJwtService _jwtService;
 
         public AuthenticationControllerTests()
         {
@@ -40,14 +40,11 @@ namespace Authentication.UnitTest.Tests
             var publisher = provider.GetRequiredService<Publisher>();
             _connection = provider.GetRequiredService<IDbConnection>();
 
-            IJwtService jwtService = new JwtService(_configuration);
+            _jwtService = new JwtService(_configuration);
 
             _unitOfWork = UnitOfWorkFactory.Create(provider);
 
-            _controller = new AuthenticationController(jwtService, _unitOfWork, publisher);
-
-            _moqUnitOfWork = new Mock<IUnitOfWork>();
-            _controllerMoq = new AuthenticationController(jwtService, _moqUnitOfWork.Object, publisher);
+            _controller = new AuthenticationController(_jwtService, _unitOfWork, publisher);
         }
         [Fact]
         public async Task POST_SignUp_ShouldBeOk()
@@ -241,6 +238,44 @@ namespace Authentication.UnitTest.Tests
             
             //Assert
             await Assert.ThrowsAsync<NotFoundException<User>>(async () => await _controller.SignIn(model));
+        }
+        [Fact]
+        public async Task GET_RefreshToken_ShouldBeOk()
+        {
+            // Arrange
+            await RemoveData();
+            await AddRoles();
+
+            SignInUpResponseModel model = new SignInUpResponseModel()
+            {
+                Nickname = "AuthControllerTest",
+                Email = "sampleEmail@mail.ru",
+                Phone = "+79871234567",
+                Password = "superpassword"
+            };
+
+            await SetUserDependency(model);
+            UserInfoDto? infoDto = await _unitOfWork.UserInfos.GetByNicknameAsync(model.Nickname!);
+            TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto!);
+
+            // Act
+            var result = await _controller.RefreshToken(tokenModel.RefreshToken!);
+
+            // Assert
+            Assert.Equal((int)HttpStatusCode.OK, ((IStatusCodeActionResult)result).StatusCode);
+        }
+        [Fact]
+        public async Task GET_RefreshToken_EmptyOrInvalidToken_ShouldBeInvalidTokenException()
+        {
+            // Arrange
+            await RemoveData();
+            await AddRoles();
+
+            // Act
+
+            // Assert
+            await Assert.ThrowsAsync<InvalidTokenException<User>>(async () => 
+                await _controller.RefreshToken(""));
         }
         private async Task AddRoles()
         {

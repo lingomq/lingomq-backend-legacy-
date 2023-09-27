@@ -1,5 +1,4 @@
 ﻿using LingoMq.Responses;
-using Microsoft.AspNetCore.Mvc;
 using Responses.StatusCodes;
 
 namespace Authentication.BusinessLayer.Exceptions

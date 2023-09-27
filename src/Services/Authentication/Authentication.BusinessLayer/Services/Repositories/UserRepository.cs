@@ -38,7 +38,6 @@ namespace Authentication.BusinessLayer.Services.Repositories
         public UserRepository(IDbConnection configuration)
         {
             DefaultTypeMap.MatchNamesWithUnderscores = true;
-            SqlMapper.AddTypeHandler(new GuidTypeHandler());
             _connection = configuration;
         }
         public async Task<User> AddAsync(User entity)
