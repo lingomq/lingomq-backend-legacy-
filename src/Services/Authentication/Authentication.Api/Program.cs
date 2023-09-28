@@ -11,7 +11,6 @@ using Microsoft.OpenApi.Models;
 using Npgsql;
 using System.Data;
 using System.Reflection;
-using System.Security.Claims;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
