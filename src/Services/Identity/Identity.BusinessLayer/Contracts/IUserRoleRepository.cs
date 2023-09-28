@@ -1,9 +1,9 @@
-﻿using Authentication.DomainLayer.Entities;
+﻿using Identity.DomainLayer.Entities;
 
 namespace Identity.BusinessLayer.Contracts
 {
     public interface IUserRoleRepository : IGenericRepository<UserRole, UserRole>
     {
-        Task<UserRole?> GetByName(string name);
+        Task<UserRole?> GetByNameAsync(string name);
     }
 }

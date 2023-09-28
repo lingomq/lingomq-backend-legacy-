@@ -1,4 +1,4 @@
-﻿using Authentication.DomainLayer.Entities;
+﻿using Identity.DomainLayer.Entities;
 
 namespace Identity.BusinessLayer.Contracts
 {

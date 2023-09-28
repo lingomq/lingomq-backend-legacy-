@@ -4,7 +4,7 @@
     {
         Task<List<D>> GetAsync(int count);
         Task<D?> GetByIdAsync(Guid id);
-        Task<D> DeleteAsync(Guid id);
+        Task<bool> DeleteAsync(Guid id);
         Task<D> AddAsync(T entity);
         Task<D> UpdateAsync(T entity);
     }

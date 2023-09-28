@@ -3,7 +3,7 @@ using Responses.StatusCodes;
 
 namespace Identity.BusinessLayer.Exceptions.ClientExceptions
 {
-    public class InvalidTokeException<T> : ExceptionBase
+    public class InvalidTokenException<T> : ExceptionBase
     {
         public InvalidTokenException() : base((int)ClientErrorCodes.Forbidden,
             "Invalid token")
