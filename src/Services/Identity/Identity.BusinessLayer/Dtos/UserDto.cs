@@ -1,4 +1,4 @@
-﻿using Authentication.DomainLayer.Entities;
+﻿using Identity.DomainLayer.Entities;
 using System.ComponentModel.DataAnnotations;
 
 namespace Identity.BusinessLayer.Dtos
