@@ -33,21 +33,17 @@ namespace Identity.BusinessLayer.Services.Repositories
             " LIMIT @Count";
         private readonly static string GetById = Get +
             " WHERE id = @Id";
-        private readonly static string GetByEmail = Get +
-            " WHERE email = @Email";
         private readonly static string Create =
             "INSERT INTO user_links (id, user_info_id, link_id) " +
-            "VALUES (@Id, @Email, @Phone, @PasswordHash, @PasswordSalt)";
+            "VALUES (@Id, @UserInfoId, @LinkId)";
         private readonly static string Delete =
-            "DELETE FROM users " +
+            "DELETE FROM user_links " +
             "WHERE id = @Id";
         private readonly static string Update =
-            "UPDATE users" +
+            "UPDATE user_links" +
             "SET " +
-            "email = @Email," +
-            "phone = @Phone," +
-            "password_hash = @PasswordHash," +
-            "password_salt = @PasswordSalt " +
+            "user_info_id = @UserInfoId," +
+            "link_id = @LinkId" +
             "WHERE id = @Id";
         private readonly IDbConnection _connection;
         public UserLinkRepository(IDbConnection connection) =>
