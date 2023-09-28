@@ -10,6 +10,8 @@ namespace Identity.DomainLayer.Entities
         public Guid LinkId { get; set; }
         [Required(ErrorMessage = "Поле href является обязательным полем")]
         [MaxLength(256, ErrorMessage = "Поле href не может содержать более 256 символов")]
+        public UserInfo? UserInfo { get; set; }
+        public UserLink? Link { get; set; }
         public string? Href { get; set; }
     }
 }

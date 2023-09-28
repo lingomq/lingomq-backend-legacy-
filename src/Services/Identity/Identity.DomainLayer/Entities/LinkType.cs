@@ -6,7 +6,7 @@ namespace Identity.DomainLayer.Entities
     {
         [Required(ErrorMessage = "Поле name является обязательным полем")]
         [MaxLength(256, ErrorMessage = "Поле name не может содержать более 256 символов")]
-        public string? Name { get; set; }
+        public string? LinkName { get; set; }
 
         [Required(ErrorMessage = "Поле short_link является обязательным полем")]
         [MaxLength(256, ErrorMessage = "Поле short_link не может содержать более 256 символов")]
