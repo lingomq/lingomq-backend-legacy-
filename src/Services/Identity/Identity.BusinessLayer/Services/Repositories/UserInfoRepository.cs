@@ -71,7 +71,7 @@ namespace Identity.BusinessLayer.Services.Repositories
             return true;
         }
 
-        public async Task<List<UserInfo>> GetAsync(int count)
+        public async Task<List<UserInfo>> GetAsync(int count = int.MaxValue)
         {
             List<UserInfo> infos = await GetByTemplate(new { Count = count }, GetRange);
 

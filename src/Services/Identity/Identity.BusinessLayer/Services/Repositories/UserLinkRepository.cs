@@ -66,7 +66,7 @@ namespace Identity.BusinessLayer.Services.Repositories
             return true;
         }
 
-        public async Task<List<UserLink>> GetAsync(int count)
+        public async Task<List<UserLink>> GetAsync(int count = int.MaxValue)
         {
             IEnumerable<UserLink> links;
 

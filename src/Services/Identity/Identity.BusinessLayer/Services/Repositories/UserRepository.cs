@@ -63,7 +63,7 @@ namespace Identity.BusinessLayer.Services.Repositories
             return true;
         }
 
-        public async Task<List<UserDto>> GetAsync(int count)
+        public async Task<List<UserDto>> GetAsync(int count = int.MaxValue)
         {
             IEnumerable<User> user;
 
