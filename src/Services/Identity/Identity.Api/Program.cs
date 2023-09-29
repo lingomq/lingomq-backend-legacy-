@@ -1,15 +1,29 @@
-var builder = WebApplication.CreateBuilder(args);
+using Identity.BusinessLayer.Contracts;
+using Identity.BusinessLayer.Services;
+using Identity.BusinessLayer.Services.Repositories;
+using Npgsql;
+using System.Data;
 
-// Add services to the container.
+var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddJsonFile("appsettings.json");
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+builder.Services.AddTransient<IDbConnection>(
+    (sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev"]));
+builder.Services.AddTransient<ILinkTypeRepository, LinkTypeRepository>();
+builder.Services.AddTransient<IUserInfoRepository, UserInfoRepository>();
+builder.Services.AddTransient<IUserLinkRepository, UserLinkRepository>();
+builder.Services.AddTransient<IUserRepository, UserRepository>();
+builder.Services.AddTransient<IUserRoleRepository, UserRoleRepository>();
+builder.Services.AddTransient<IUserStatisticsRepository, UserStatisticsRepository>();
+builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
