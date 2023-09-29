@@ -1,6 +1,7 @@
 ﻿using Authentication.Api.Controllers;
 using Authentication.BusinessLayer.Contracts;
 using Authentication.BusinessLayer.Exceptions;
+using Authentication.BusinessLayer.MassTransit;
 using Authentication.BusinessLayer.Models;
 using Authentication.BusinessLayer.Services;
 using Authentication.DomainLayer.Entities;
@@ -34,13 +35,14 @@ namespace Authentication.UnitTest.Tests
             var provider = ServiceProviderFactory.Create(_configuration);
             Migrator.Migrate(provider);
 
+            var publisher = provider.GetRequiredService<Publisher>();
             _connection = provider.GetRequiredService<IDbConnection>();
 
             _jwtService = new JwtService(_configuration);
 
             _unitOfWork = UnitOfWorkFactory.Create(provider);
 
-            _controller = new ConfirmController(_jwtService, _unitOfWork);
+            _controller = new ConfirmController(_jwtService, _unitOfWork, publisher);
         }
         [Fact]
         public async Task GET_ConfirmEmail_ShouldBeOk()

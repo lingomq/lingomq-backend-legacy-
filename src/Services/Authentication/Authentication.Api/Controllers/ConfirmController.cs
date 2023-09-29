@@ -9,6 +9,8 @@ using Cryptography.Cryptors;
 using Authentication.BusinessLayer.Exceptions;
 using Authentication.BusinessLayer.Dtos;
 using Authentication.BusinessLayer.Models;
+using Authentication.BusinessLayer.MassTransit;
+using EventBus.Entities.Identity;
 
 namespace Authentication.Api.Controllers
 {
@@ -18,10 +20,12 @@ namespace Authentication.Api.Controllers
     {
         private IJwtService _jwtService;
         private IUnitOfWork _unitOfWork;
-        public ConfirmController(IJwtService jwtService, IUnitOfWork unitOfWork)
+        private Publisher _publisher;
+        public ConfirmController(IJwtService jwtService, IUnitOfWork unitOfWork, Publisher publisher)
         {
             _jwtService = jwtService;
             _unitOfWork = unitOfWork;
+            _publisher = publisher;
         }
 
         [HttpGet]
@@ -64,6 +68,15 @@ namespace Authentication.Api.Controllers
             UserInfoDto infoDto = await _unitOfWork.UserInfos.AddAsync(userInfo);
 
             TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto);
+            await _publisher.Send(new IdentityModelCreateUser()
+            {
+                Nickname = userInfo.Nickname,
+                Email = user.Email,
+                Phone = user.Phone,
+                PasswordHash = user.PasswordHash,
+                PasswordSalt = user.PasswordSalt,
+                RoleId = userRole.Id
+            });
             // return result
             return LingoMq.Responses.StatusCode.OkResult(tokenModel);
         }
