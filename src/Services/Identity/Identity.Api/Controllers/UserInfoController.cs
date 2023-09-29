@@ -1,4 +1,4 @@
-﻿using EventBus.Entities.Identity;
+﻿using EventBus.Entities.Identity.UserInfo;
 using Identity.Api.Common;
 using Identity.BusinessLayer.Contracts;
 using Identity.BusinessLayer.Dtos;
@@ -39,6 +39,14 @@ namespace Identity.Api.Controllers
                 throw new NotFoundException<UserInfo>("Данные не найдены");
 
             return LingoMq.Responses.StatusCode.OkResult(info);
+        }
+        [HttpGet("all/{range}")]
+        [Authorize(Roles = AccessRoles.All)]
+        public async Task<IActionResult> GetRange(int range = int.MaxValue)
+        {
+            List<UserInfo> infos = await _unitOfWork.UserInfos.GetAsync(range);
+
+            return LingoMq.Responses.StatusCode.OkResult(infos);
         }
         [HttpGet("{nickname}")]
         [Authorize(Roles = AccessRoles.All)]

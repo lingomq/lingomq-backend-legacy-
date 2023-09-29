@@ -1,7 +1,7 @@
 ﻿using Cryptography;
 using Cryptography.Cryptors;
 using Cryptography.Entities;
-using EventBus.Entities.Identity;
+using EventBus.Entities.Identity.User;
 using Identity.Api.Common;
 using Identity.BusinessLayer.Contracts;
 using Identity.BusinessLayer.Dtos;

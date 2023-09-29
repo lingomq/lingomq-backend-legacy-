@@ -1,4 +1,4 @@
-﻿namespace EventBus.Entities.Identity
+﻿namespace EventBus.Entities.Identity.User
 {
     public class IdentityModelDeleteUser
     {

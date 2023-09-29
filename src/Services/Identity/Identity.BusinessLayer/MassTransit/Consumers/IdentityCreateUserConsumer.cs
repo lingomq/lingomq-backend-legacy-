@@ -1,4 +1,4 @@
-﻿using EventBus.Entities.Identity;
+﻿using EventBus.Entities.Identity.User;
 using Identity.BusinessLayer.Contracts;
 using Identity.DomainLayer.Entities;
 using MassTransit;
