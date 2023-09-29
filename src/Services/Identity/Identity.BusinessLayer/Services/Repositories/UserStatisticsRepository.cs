@@ -3,7 +3,6 @@ using Identity.BusinessLayer.Contracts;
 using Identity.DomainLayer.Entities;
 using System.Data;
 using System.Transactions;
-using static Dapper.SqlMapper;
 
 namespace Identity.BusinessLayer.Services.Repositories
 {
