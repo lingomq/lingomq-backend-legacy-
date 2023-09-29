@@ -24,6 +24,7 @@ namespace Email.BusinessLayer.Services
             SmtpClient smtpClient = new SmtpClient(_configuration["Mail:Smtp:Client"],
                 int.Parse(_configuration["Mail:Smtp:Port"]!));
             smtpClient.UseDefaultCredentials = false;
+            smtpClient.DeliveryMethod = SmtpDeliveryMethod.Network;
             smtpClient.Credentials = new NetworkCredential(_configuration["Mail:Credentials:Client"],
                 _configuration["Mail:Credentials:Password"]);
             smtpClient.EnableSsl = true;
