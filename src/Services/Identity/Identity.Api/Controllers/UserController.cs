@@ -123,7 +123,7 @@ namespace Identity.Api.Controllers
 
             return LingoMq.Responses.StatusCode.OkResult("user has been successfully removed");
         }
-        [HttpDelete("userId")]
+        [HttpDelete("{userId}")]
         [Authorize(Roles = AccessRoles.Admin)]
         public async Task<IActionResult> Delete(Guid userId)
         {

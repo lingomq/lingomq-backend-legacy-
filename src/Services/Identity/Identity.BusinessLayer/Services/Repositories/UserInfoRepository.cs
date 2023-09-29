@@ -34,7 +34,9 @@ namespace Identity.BusinessLayer.Services.Repositories
         private readonly static string GetByNickname = Get +
             " WHERE user_infos.nickname = @Nickname";
         private readonly static string GetById = Get +
-            " WHERE user_infos.id = @Id";
+            " WHERE user_infos.id = @Id"; 
+        private readonly static string GetByUserId = Get +
+            " WHERE user_infos.user_id = @UserId";
         private readonly static string Update =
                 "UPDATE user_infos" +
                 "SET nickname = @Nickname," +
@@ -81,6 +83,13 @@ namespace Identity.BusinessLayer.Services.Repositories
         public async Task<UserInfo?> GetByIdAsync(Guid id)
         {
             List<UserInfo> infos = await GetByTemplate(new { Id = id }, GetById);
+
+            return infos.First() is null ? null : infos.First();
+        }
+        
+        public async Task<UserInfo?> GetByUserIdAsync(Guid id)
+        {
+            List<UserInfo> infos = await GetByTemplate(new { UserId = id }, GetByUserId);
 
             return infos.First() is null ? null : infos.First();
         }
