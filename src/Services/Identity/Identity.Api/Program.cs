@@ -1,4 +1,5 @@
 using EventBus.Entities.Email;
+using FluentMigrator.Runner;
 using Identity.BusinessLayer.Contracts;
 using Identity.BusinessLayer.MassTransit.Consumers;
 using Identity.BusinessLayer.Services;
@@ -6,6 +7,7 @@ using Identity.BusinessLayer.Services.Repositories;
 using MassTransit;
 using Npgsql;
 using System.Data;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
@@ -48,6 +50,12 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
+builder.Services.AddFluentMigratorCore()
+        .ConfigureRunner(cr => cr
+        .AddPostgres()
+        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev"])
+        .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
+
 var app = builder.Build();
 
 if (app.Environment.IsDevelopment())
@@ -61,5 +69,14 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+
+    var runner = services.GetRequiredService<IMigrationRunner>();
+
+    runner.MigrateUp();
+}
 
 app.Run();
