@@ -30,9 +30,13 @@ namespace Identity.BusinessLayer.Services.Repositories
             "UPDATE users" +
             "SET " +
             "email = @Email," +
-            "phone = @Phone," +
+            "phone = @Phone" +
+            "WHERE id = @Id";
+        private readonly static string UpdateCredentials =
+            "UPDATE users" +
+            "SET " +
             "password_hash = @PasswordHash," +
-            "password_salt = @PasswordSalt " +
+            "password_salt = @PasswordSalt" +
             "WHERE id = @Id";
         private readonly IDbConnection _connection;
         private readonly IMapper _mapper;
@@ -97,6 +101,16 @@ namespace Identity.BusinessLayer.Services.Repositories
             using var transactionScope = new TransactionScope();
 
             await _connection.ExecuteAsync(Update, entity);
+            transactionScope.Complete();
+
+            UserDto userDto = _mapper.Map<UserDto>(entity);
+            return userDto;
+        }
+        public async Task<UserDto> UpdateCredentialsAsync(User entity)
+        {
+            using var transactionScope = new TransactionScope();
+
+            await _connection.ExecuteAsync(UpdateCredentials, entity);
             transactionScope.Complete();
 
             UserDto userDto = _mapper.Map<UserDto>(entity);

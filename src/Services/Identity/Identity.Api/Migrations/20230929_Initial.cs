@@ -59,19 +59,24 @@ namespace Identity.Api.Migrations
 
             Create.ForeignKey("FK_Identity_UserInfos_RoleId")
                 .FromTable("user_infos").ForeignColumn("role_id")
-                .ToTable("user_roles").PrimaryColumn("id");
+                .ToTable("user_roles").PrimaryColumn("id")
+                .OnDeleteOrUpdate(System.Data.Rule.Cascade);
             Create.ForeignKey("FK_Identity_UserInfos_UserId")
                 .FromTable("user_infos").ForeignColumn("user_id")
-                .ToTable("users").InSchema("public").PrimaryColumn("id");
+                .ToTable("users").InSchema("public").PrimaryColumn("id")
+                .OnDeleteOrUpdate(System.Data.Rule.Cascade);
             Create.ForeignKey("FK_Identity_UserLinks_UserInfoId")
                 .FromTable("user_links").ForeignColumn("user_info_id")
-                .ToTable("user_infos").PrimaryColumn("id");
+                .ToTable("user_infos").PrimaryColumn("id")
+                .OnDeleteOrUpdate(System.Data.Rule.Cascade);
             Create.ForeignKey("FK_Identity_UserLinks_LinkId")
                 .FromTable("user_links").ForeignColumn("link_id")
-                .ToTable("link_types").PrimaryColumn("id");
+                .ToTable("link_types").PrimaryColumn("id")
+                .OnDeleteOrUpdate(System.Data.Rule.Cascade);
             Create.ForeignKey("FK_Identity_UserStatistics_UserId")
                 .FromTable("user_statistics").ForeignColumn("user_id")
-                .ToTable("users").PrimaryColumn("id");
+                .ToTable("users").PrimaryColumn("id")
+                .OnDeleteOrUpdate(System.Data.Rule.Cascade);
 
         }
         public override void Down()

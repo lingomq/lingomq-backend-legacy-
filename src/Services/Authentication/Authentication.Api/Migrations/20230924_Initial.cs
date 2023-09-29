@@ -38,10 +38,12 @@ namespace Authentication.Api.Migrations
 
             Create.ForeignKey("FK_Identity_UserInfos_RoleId")
                 .FromTable("user_infos").ForeignColumn("role_id")
-                .ToTable("user_roles").PrimaryColumn("id");
+                .ToTable("user_roles").PrimaryColumn("id")
+                .OnDeleteOrUpdate(System.Data.Rule.Cascade);
             Create.ForeignKey("FK_Identity_UserInfos_UserId")
                 .FromTable("user_infos").ForeignColumn("user_id")
-                .ToTable("users").InSchema("public").PrimaryColumn("id");
+                .ToTable("users").InSchema("public").PrimaryColumn("id")
+                .OnDeleteOrUpdate(System.Data.Rule.Cascade);
         }
         public override void Down()
         {

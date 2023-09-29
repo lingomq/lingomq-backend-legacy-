@@ -12,5 +12,13 @@ namespace Identity.BusinessLayer.Extensions
                 Email = user.Email,
                 Phone = user.Phone
             };
+        public static User ToUserModel(this UserDto userDto) =>
+            new User()
+            {
+                Id = userDto.Id,
+                Email = userDto.Email,
+                Phone = userDto.Phone
+            };
+
     }
 }
