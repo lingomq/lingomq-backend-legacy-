@@ -9,7 +9,7 @@ namespace Identity.BusinessLayer.Services.Repositories
     public class LinkTypeRepository : ILinkTypeRepository
     {
         private static readonly string Get =
-            "SELECT link_name as \"LinkName\", short_link as \"ShortLink\" " +
+            "SELECT id as \"Id\", link_name as \"LinkName\", short_link as \"ShortLink\" " +
             "FROM link_types ";
         private static readonly string GetRange = Get +
             "LIMIT @Count";
