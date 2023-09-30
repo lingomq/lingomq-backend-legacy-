@@ -29,6 +29,18 @@ namespace Identity.BusinessLayer.MassTransit.Consumers
 
             await _unitOfWork.Users.AddAsync(user);
 
+            UserStatistics statistics = new UserStatistics()
+            {
+                Id = Guid.NewGuid(),
+                TotalHours = 0,
+                TotalWords = 0,
+                AvgWords = 0,
+                UserId = user.Id,
+                VisitStreak = 0
+            };
+
+            await _unitOfWork.UserStatistics.AddAsync(statistics);
+
             UserInfo userInfo = new UserInfo()
             {
                 Id = Guid.NewGuid(),
