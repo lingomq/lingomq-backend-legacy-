@@ -4,6 +4,6 @@ namespace Identity.BusinessLayer.Contracts
 {
     public interface ILinkTypeRepository : IGenericRepository<LinkType, LinkType>
     {
-        Task<LinkType?> GetByName(string name);
+        Task<LinkType?> GetByNameAsync(string name);
     }
 }

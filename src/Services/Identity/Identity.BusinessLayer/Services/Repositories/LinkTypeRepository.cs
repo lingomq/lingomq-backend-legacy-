@@ -68,7 +68,7 @@ namespace Identity.BusinessLayer.Services.Repositories
             return types.FirstOrDefault() is null ? null : types.FirstOrDefault();
         }
 
-        public async Task<LinkType?> GetByName(string name)
+        public async Task<LinkType?> GetByNameAsync(string name)
         {
             IEnumerable<LinkType> types;
 
