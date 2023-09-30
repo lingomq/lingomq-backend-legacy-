@@ -21,6 +21,9 @@ obj/
 !.vscode/extensions.json
 !.vscode/*.code-snippets
 
+# Rider
+.idea/*
+
 # Local History for Visual Studio Code
 .history/
 
