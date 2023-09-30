@@ -19,10 +19,16 @@ namespace Identity.BusinessLayer.Services.Repositories
             "users.phone as \"Phone\" " +
             "FROM user_statistics " +
             "INNER JOIN users ON user_statistics.user_id = users.id ";
+        private static readonly string GetCount =
+            "SELECT COUNT(*) FROM user_statistics ";
+        private static readonly string GetCountByUserId = GetCount +
+            "WHERE user_id = @Id";
         private static readonly string GetRange = Get +
             "LIMIT @Count";
         private static readonly string GetById = Get +
             "WHERE user_statistics.id = @Id";
+        private static readonly string GetByUserId = Get +
+            "WHERE user_statistics.user_id = @Id";
         private static readonly string Create =
             "INSERT INTO user_statistics " +
             "(id, total_words, total_hours, visit_streak, avg_words, user_id)" +
@@ -86,6 +92,28 @@ namespace Identity.BusinessLayer.Services.Repositories
                 }, new { Id = id }, splitOn: "id");
 
             return statistics.FirstOrDefault() is null ? null : statistics.First();
+        }
+
+        public async Task<UserStatistics?> GetByUserIdAsync(Guid id)
+        {
+            IEnumerable<UserStatistics> statistics;
+
+            statistics = await _connection.QueryAsync<UserStatistics, User, UserStatistics>(GetByUserId,
+                (statistics, user) =>
+                {
+                    statistics.User = user;
+                    statistics.UserId = user.Id;
+                    return statistics;
+                }, new { Id = id }, splitOn: "id");
+
+            return statistics.FirstOrDefault() is null ? null : statistics.First();
+        }
+
+        public async Task<int> GetCountOfDaysByUserIdAsync(Guid id)
+        {
+            var result = await _connection.QueryAsync<int>(GetCountByUserId, new { Id = id });
+
+            return result.First();
         }
 
         public async Task<UserStatistics> UpdateAsync(UserStatistics entity)
