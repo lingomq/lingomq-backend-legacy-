@@ -24,7 +24,7 @@ namespace Identity.BusinessLayer.Services.Repositories
             "users.password_salt AS \"PasswordSalt\", " +
             "user_links.id, " +
             "user_links.user_info_id AS \"UserInfoId\", " +
-            "user_links.link_id AS \"UserInfoId\", " +
+            "user_links.link_id AS \"LinkId\", " +
             "FROM user_infos " +
             "LEFT JOIN user_roles ON user_infos.role_id = user_roles.id " +
             "LEFT JOIN users ON user_infos.user_id = users.id " +
@@ -96,7 +96,7 @@ namespace Identity.BusinessLayer.Services.Repositories
 
         public async Task<UserInfo?> GetByNicknameAsync(string nickname)
         {
-            List<UserInfo> infos = await GetByTemplate(new { Nickname = nickname }, GetById);
+            List<UserInfo> infos = await GetByTemplate(new { Nickname = nickname }, GetByNickname);
 
             return infos.First() is null ? null : infos.First();
         }

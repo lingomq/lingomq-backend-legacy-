@@ -38,7 +38,7 @@ namespace Identity.Api.Migrations
                 .WithColumn("is_removed").AsBoolean().Nullable().WithDefaultValue(false);
 
             Create.Table("user_links")
-                .WithColumn("id").AsGuid().PrimaryKey().Unique().NotNullable()
+                .WithColumn("id").AsGuid().PrimaryKey().NotNullable()
                 .WithColumn("user_info_id").AsGuid().NotNullable()
                 .WithColumn("link_id").AsGuid().NotNullable()
                 .WithColumn("href").AsCustom("varchar(256)").NotNullable();

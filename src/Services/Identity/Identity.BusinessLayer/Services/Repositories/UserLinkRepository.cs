@@ -33,6 +33,8 @@ namespace Identity.BusinessLayer.Services.Repositories
             " LIMIT @Count";
         private readonly static string GetById = Get +
             " WHERE id = @Id";
+        private readonly static string GetByUserInfoId = Get +
+            " WHERE user_infos.id = @Id";
         private readonly static string Create =
             "INSERT INTO user_links (id, user_info_id, link_id) " +
             "VALUES (@Id, @UserInfoId, @LinkId)";
@@ -45,6 +47,7 @@ namespace Identity.BusinessLayer.Services.Repositories
             "user_info_id = @UserInfoId," +
             "link_id = @LinkId" +
             "WHERE id = @Id";
+
         private readonly IDbConnection _connection;
         public UserLinkRepository(IDbConnection connection) =>
             _connection = connection;
@@ -84,6 +87,15 @@ namespace Identity.BusinessLayer.Services.Repositories
             return links.FirstOrDefault() is null ? null : links.FirstOrDefault();
         }
 
+        public async Task<List<UserLink>> GetByUserInfoIdAsync(Guid id)
+        {
+            IEnumerable<UserLink> links;
+
+            links = await _connection.QueryAsync<UserLink>(GetByUserInfoId, new { Id = id });
+
+            return links.ToList();
+        }
+
         public async Task<UserLink> UpdateAsync(UserLink entity)
         {
             using var transactionScope = new TransactionScope();
@@ -91,6 +103,15 @@ namespace Identity.BusinessLayer.Services.Repositories
             await _connection.ExecuteAsync(Update, entity);
 
             return entity;
+        }
+
+        public async Task<List<UserLink>> GetAllByIdAsync(Guid id)
+        {
+            IEnumerable<UserLink> links;
+
+            links = await _connection.QueryAsync<UserLink>(GetById, new { Id = id });
+
+            return links.ToList();
         }
     }
 }
