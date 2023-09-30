@@ -10,7 +10,7 @@ using Authentication.BusinessLayer.Exceptions;
 using Authentication.BusinessLayer.Dtos;
 using Authentication.BusinessLayer.Models;
 using Authentication.BusinessLayer.MassTransit;
-using EventBus.Entities.Identity;
+using EventBus.Entities.Identity.User;
 
 namespace Authentication.Api.Controllers
 {

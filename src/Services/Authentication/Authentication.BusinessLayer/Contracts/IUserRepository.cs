@@ -5,5 +5,6 @@ namespace Authentication.BusinessLayer.Contracts
     public interface IUserRepository : IGenericRepository<User, User> 
     {
         Task<User?> GetByEmailAsync(string email);
+        Task<User?> UpdateCredentials(User user);
     }
 }

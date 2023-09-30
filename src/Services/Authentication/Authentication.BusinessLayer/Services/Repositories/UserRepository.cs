@@ -26,14 +26,18 @@ namespace Authentication.BusinessLayer.Services.Repositories
             "DELETE FROM users " +
             "WHERE id = @Id";
         private readonly static string Update =
-            "UPDATE users" +
+            "UPDATE users " +
             "SET " +
             "email = @Email," +
-            "phone = @Phone," +
-            "password_hash = @PasswordHash," +
-            "password_salt = @PasswordSalt " +
+            "phone = @Phone " +
             "WHERE id = @Id";
 
+        private readonly static string UpdateCredential =
+            "UPDATE users " +
+            "SET " +
+            "password_hash = @PasswordHash, " +
+            "password_salt = @PasswordSalt " +
+            "WHERE id = @Id";
         private readonly IDbConnection _connection;
         public UserRepository(IDbConnection configuration)
         {
@@ -79,6 +83,16 @@ namespace Authentication.BusinessLayer.Services.Repositories
                 new { Email = email });
 
             return users.Count() > 0 ? users.First() : null;
+        }
+
+        public async Task<User?> UpdateCredentials(User user)
+        {
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+
+            int result = await _connection.ExecuteAsync(UpdateCredential, user);
+            transactionScope.Complete();
+
+            return user;
         }
 
         public async Task<User?> GetByGuidAsync(Guid guid)

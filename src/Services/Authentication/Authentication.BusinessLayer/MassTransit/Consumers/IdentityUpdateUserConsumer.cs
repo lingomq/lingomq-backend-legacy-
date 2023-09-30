@@ -1,4 +1,8 @@
-using EventBus.Identity.User;
+using Authentication.BusinessLayer.Contracts;
+using Authentication.DomainLayer.Entities;
+using EventBus.Entities.Identity.User;
+using MassTransit;
+using Microsoft.Extensions.Logging;
 
 namespace Authentication.BusinessLayer.MassTransit.Consumers
 {

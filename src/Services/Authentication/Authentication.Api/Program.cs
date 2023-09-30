@@ -12,6 +12,8 @@ using Npgsql;
 using System.Data;
 using System.Reflection;
 using System.Text;
+using Authentication.BusinessLayer.MassTransit.Consumers;
+using EventBus.Entities.Identity.User;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
@@ -89,6 +91,9 @@ builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
     x.AddDelayedMessageScheduler();
+    x.AddConsumer<IdentityDeleteUserConsumer>();
+    x.AddConsumer<IdentityUpdateUserCredentialsConsumer>();
+    x.AddConsumer<IdentityUpdateUserConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host("localhost", "/", h =>
@@ -96,7 +101,22 @@ builder.Services.AddMassTransit(x =>
             h.Username(builder.Configuration["RabbitMq:UserName"]);
             h.Password(builder.Configuration["RabbitMq:Password"]);
         });
+        
+        cfg.ReceiveEndpoint(typeof(IdentityModelDeleteUser).Name.ToLower(), endpoint =>
+        {
+            endpoint.ConfigureConsumer<IdentityDeleteUserConsumer>(context);
+        });
 
+        cfg.ReceiveEndpoint(typeof(IdentityModelUpdateUserCredentials).Name.ToLower(), endpoint =>
+        {
+            endpoint.ConfigureConsumer<IdentityUpdateUserCredentialsConsumer>(context);
+        });
+        
+        cfg.ReceiveEndpoint(typeof(IdentityModelUpdateUser).Name.ToLower(), endpoint =>
+        {
+            endpoint.ConfigureConsumer<IdentityUpdateUserConsumer>(context);
+        });
+        
         cfg.ClearSerialization();
         cfg.Publish<Publisher>();
         cfg.UseRawJsonSerializer();
