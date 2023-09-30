@@ -21,7 +21,6 @@ namespace Authentication.UnitTest.Tests
 {
     public class AuthenticationControllerTests
     {
-        protected readonly IConfiguration _configuration;
         private readonly AuthenticationController _controller;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IDbConnection _connection;
@@ -29,17 +28,17 @@ namespace Authentication.UnitTest.Tests
 
         public AuthenticationControllerTests()
         {
-            _configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json")
+            IConfiguration configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.Development.json")
                 .Build();
 
-            var provider = ServiceProviderFactory.Create(_configuration);
+            var provider = ServiceProviderFactory.Create(configuration);
             Migrator.Migrate(provider);
 
             var publisher = provider.GetRequiredService<Publisher>();
             _connection = provider.GetRequiredService<IDbConnection>();
 
-            _jwtService = new JwtService(_configuration);
+            _jwtService = new JwtService(configuration);
 
             _unitOfWork = UnitOfWorkFactory.Create(provider);
 
