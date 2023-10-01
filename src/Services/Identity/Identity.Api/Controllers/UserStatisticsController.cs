@@ -5,6 +5,7 @@ using Identity.BusinessLayer.Exceptions.ClientExceptions;
 using Identity.DomainLayer.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Identity.Api.Controllers
 {
@@ -15,6 +16,8 @@ namespace Identity.Api.Controllers
         private readonly IUnitOfWork _unitOfWork;
         public UserStatisticsController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
+        private Guid UserId => new Guid(User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier)
+            .FirstOrDefault()?.Value!);
 
         [HttpGet("{userId}")]
         [Authorize(Roles = AccessRoles.All)]
@@ -32,11 +35,11 @@ namespace Identity.Api.Controllers
 
             return LingoMq.Responses.StatusCode.OkResult(statistics);
         }
-        [HttpPut("hour/add/{userId}")]
+        [HttpPut("hour/add")]
         [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> AddHour(Guid userId)
+        public async Task<IActionResult> AddHour()
         {
-            UserStatistics? statistics = await _unitOfWork.UserStatistics.GetByUserIdAsync(userId);
+            UserStatistics? statistics = await _unitOfWork.UserStatistics.GetByUserIdAsync(UserId);
 
             if (statistics is null)
                 throw new NotFoundException<UserStatistics>("The statistics was not found");
@@ -47,12 +50,12 @@ namespace Identity.Api.Controllers
 
             return LingoMq.Responses.StatusCode.OkResult(statistics);
         }
-        [HttpPut("word/add/{userId}")]
+        [HttpPut("word/add")]
         [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> AddWord(Guid userId)
+        public async Task<IActionResult> AddWord()
         {
-            UserStatistics? statistics = await _unitOfWork.UserStatistics.GetByUserIdAsync(userId);
-            UserInfo? userInfo = await _unitOfWork.UserInfos.GetByUserIdAsync(userId);
+            UserStatistics? statistics = await _unitOfWork.UserStatistics.GetByUserIdAsync(UserId);
+            UserInfo? userInfo = await _unitOfWork.UserInfos.GetByUserIdAsync(UserId);
 
             if (statistics is null)
                 throw new NotFoundException<UserStatistics>("The statistics was not found");
