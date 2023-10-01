@@ -9,7 +9,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
     public class UserRoleRepository : IUserRoleRepository
     {
         private static readonly string Get =
-            "SELECT id as \"Id\", name as \"Name\"" +
+            "SELECT id as \"Id\", name as \"Name\" " +
             "FROM user_roles";
         private static readonly string GetById = Get +
             " WHERE id = @Id";

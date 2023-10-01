@@ -38,12 +38,12 @@ namespace Identity.BusinessLayer.Services.Repositories
         private readonly static string GetByUserId = Get +
             " WHERE user_infos.user_id = @UserId";
         private readonly static string Update =
-                "UPDATE user_infos" +
+                "UPDATE user_infos " +
                 "SET nickname = @Nickname," +
                 "image_uri = @Phone," +
-                "additional = @PasswordHash," +
-                "role_id = @PasswordSalt " +
-                "user_id = @UserId " +
+                "additional = @Additional," +
+                "role_id = @RoleId, " +
+                "user_id = @UserId, " +
                 "is_removed = @IsRemoved " +
                 "WHERE id = @Id";
         private readonly static string Delete =

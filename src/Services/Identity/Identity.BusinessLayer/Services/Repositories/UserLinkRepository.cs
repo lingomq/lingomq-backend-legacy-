@@ -42,7 +42,7 @@ namespace Identity.BusinessLayer.Services.Repositories
             "DELETE FROM user_links " +
             "WHERE id = @Id";
         private readonly static string Update =
-            "UPDATE user_links" +
+            "UPDATE user_links " +
             "SET " +
             "user_info_id = @UserInfoId," +
             "link_id = @LinkId" +

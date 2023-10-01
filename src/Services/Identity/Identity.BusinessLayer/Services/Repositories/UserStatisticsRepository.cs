@@ -31,12 +31,12 @@ namespace Identity.BusinessLayer.Services.Repositories
             "WHERE user_statistics.user_id = @Id";
         private static readonly string Create =
             "INSERT INTO user_statistics " +
-            "(id, total_words, total_hours, visit_streak, avg_words, user_id)" +
+            "(id, total_words, total_hours, visit_streak, avg_words, user_id) " +
             "VALUES " +
             "(@Id, @TotalWords, @TotalHours, @VisitStreak, @AvgWords, @UserId)";
         private static readonly string Update =
             "UPDATE user_statistics " +
-            "SET" +
+            "SET " +
             "total_words = @TotalWords, total_hours = @TotalHours, " +
             "visit_streak = @VisitStreak, avg_words = @AvgWords, user_id = @UserId " +
             "WHERE id = @Id";

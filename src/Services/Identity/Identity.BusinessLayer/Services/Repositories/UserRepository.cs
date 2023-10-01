@@ -27,13 +27,13 @@ namespace Identity.BusinessLayer.Services.Repositories
             "DELETE FROM users " +
             "WHERE id = @Id";
         private readonly static string Update =
-            "UPDATE users" +
+            "UPDATE users " +
             "SET " +
             "email = @Email," +
             "phone = @Phone" +
             "WHERE id = @Id";
         private readonly static string UpdateCredentials =
-            "UPDATE users" +
+            "UPDATE users " +
             "SET " +
             "password_hash = @PasswordHash," +
             "password_salt = @PasswordSalt" +
@@ -51,6 +51,7 @@ namespace Identity.BusinessLayer.Services.Repositories
 
             await _connection.ExecuteAsync(Create, entity);
             transactionScope.Complete();
+            transactionScope.Dispose();
 
             UserDto userDto = _mapper.Map<UserDto>(entity);
             return userDto;
@@ -62,6 +63,7 @@ namespace Identity.BusinessLayer.Services.Repositories
 
             await _connection.ExecuteAsync(Delete, new { Id = id });
             transactionScope.Complete();
+            transactionScope.Dispose();
 
             return true;
         }
@@ -102,6 +104,7 @@ namespace Identity.BusinessLayer.Services.Repositories
 
             await _connection.ExecuteAsync(Update, entity);
             transactionScope.Complete();
+            transactionScope.Dispose();
 
             UserDto userDto = _mapper.Map<UserDto>(entity);
             return userDto;
@@ -112,6 +115,7 @@ namespace Identity.BusinessLayer.Services.Repositories
 
             await _connection.ExecuteAsync(UpdateCredentials, entity);
             transactionScope.Complete();
+            transactionScope.Dispose();
 
             UserDto userDto = _mapper.Map<UserDto>(entity);
             return userDto;

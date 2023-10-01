@@ -36,7 +36,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
         private readonly static string GetById = Get +
             " WHERE user_infos.id = @Id";
         private readonly static string Update =
-                "UPDATE user_infos" +
+                "UPDATE user_infos " +
                 "SET nickname = @Nickname," +
                 "image_uri = @Phone," +
                 "additional = @PasswordHash," +

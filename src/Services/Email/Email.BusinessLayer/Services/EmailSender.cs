@@ -3,6 +3,7 @@ using EventBus.Entities.Email;
 using Microsoft.Extensions.Configuration;
 using System.Net;
 using System.Net.Mail;
+using System.Text;
 
 namespace Email.BusinessLayer.Services
 {
@@ -19,6 +20,8 @@ namespace Email.BusinessLayer.Services
             MailMessage message = new MailMessage(from, to);
 
             message.Subject = model.Subject;
+            message.ReplyToList.Add(new MailAddress(_configuration["Mail:From"]!));
+            message.BodyEncoding = Encoding.UTF8;
             message.Body = mail;
             message.IsBodyHtml = true;
             SmtpClient smtpClient = new SmtpClient(_configuration["Mail:Smtp:Client"],

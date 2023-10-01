@@ -9,7 +9,7 @@ namespace Identity.BusinessLayer.Services.Repositories
     public class UserRoleRepository : IUserRoleRepository
     {
         private static readonly string Get =
-            "SELECT id as \"Id\", name as \"Name\"" +
+            "SELECT id as \"Id\", name as \"Name\" " +
             "FROM user_roles";
         private static readonly string GetById = Get +
             " WHERE id = @Id";
@@ -27,7 +27,7 @@ namespace Identity.BusinessLayer.Services.Repositories
             "WHERE id = @Id";
         private static readonly string Update =
             "UPDATE user_roles " +
-            "SET name = @Name" +
+            "SET name = @Name " +
             "WHERE id = @Id";
 
         private readonly IDbConnection _connection;

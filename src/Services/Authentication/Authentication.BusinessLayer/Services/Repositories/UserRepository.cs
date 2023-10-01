@@ -11,7 +11,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
     {
         private readonly static string Get =
             "SELECT id as \"Id\", email as \"Email\", phone as \"Phone\", " +
-            "password_hash as \"PasswordHash\", password_salt as \"PasswordSalt\"" +
+            "password_hash as \"PasswordHash\", password_salt as \"PasswordSalt\" " +
             "FROM users";
         private readonly static string GetRange = Get +
             " LIMIT @Count";
