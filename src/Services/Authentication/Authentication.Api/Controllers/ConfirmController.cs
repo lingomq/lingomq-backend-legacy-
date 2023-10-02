@@ -75,7 +75,7 @@ namespace Authentication.Api.Controllers
                 Phone = user.Phone,
                 PasswordHash = user.PasswordHash,
                 PasswordSalt = user.PasswordSalt,
-                RoleId = userRole.Id
+                RoleName = userRole.Name
             });
             // return result
             return LingoMq.Responses.StatusCode.OkResult(tokenModel);

@@ -69,6 +69,7 @@ namespace Identity.BusinessLayer.Services.Repositories
 
             int result = await _connection.ExecuteAsync(Delete, new { Id = id});
             transactionScope.Complete();
+            transactionScope.Dispose();
 
             return true;
         }
@@ -135,6 +136,7 @@ namespace Identity.BusinessLayer.Services.Repositories
 
             int result = await _connection.ExecuteAsync(sql, template);
             transactionScope.Complete();
+            transactionScope.Dispose();
 
             return template;
         }

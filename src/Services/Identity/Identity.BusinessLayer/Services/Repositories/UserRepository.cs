@@ -47,7 +47,7 @@ namespace Identity.BusinessLayer.Services.Repositories
         }
         public async Task<UserDto> AddAsync(User entity)
         {
-            using var transactionScope = new TransactionScope();
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             await _connection.ExecuteAsync(Create, entity);
             transactionScope.Complete();
@@ -59,7 +59,7 @@ namespace Identity.BusinessLayer.Services.Repositories
 
         public async Task<bool> DeleteAsync(Guid id)
         {
-            using var transactionScope = new TransactionScope();
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             await _connection.ExecuteAsync(Delete, new { Id = id });
             transactionScope.Complete();
@@ -100,7 +100,7 @@ namespace Identity.BusinessLayer.Services.Repositories
 
         public async Task<UserDto> UpdateAsync(User entity)
         {
-            using var transactionScope = new TransactionScope();
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             await _connection.ExecuteAsync(Update, entity);
             transactionScope.Complete();
@@ -111,7 +111,7 @@ namespace Identity.BusinessLayer.Services.Repositories
         }
         public async Task<UserDto> UpdateCredentialsAsync(User entity)
         {
-            using var transactionScope = new TransactionScope();
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             await _connection.ExecuteAsync(UpdateCredentials, entity);
             transactionScope.Complete();

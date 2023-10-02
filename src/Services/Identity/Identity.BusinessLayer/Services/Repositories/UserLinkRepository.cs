@@ -53,18 +53,22 @@ namespace Identity.BusinessLayer.Services.Repositories
             _connection = connection;
         public async Task<UserLink> AddAsync(UserLink entity)
         {
-            using var transactionScope = new TransactionScope();
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             await _connection.ExecuteAsync(Create, entity);
+            transactionScope.Complete();
+            transactionScope.Dispose();
 
             return entity;
         }
 
         public async Task<bool> DeleteAsync(Guid id)
         {
-            using var transactionScope = new TransactionScope();
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             await _connection.ExecuteAsync(Delete, new { Id = id });
+            transactionScope.Complete();
+            transactionScope.Dispose();
 
             return true;
         }
@@ -98,9 +102,11 @@ namespace Identity.BusinessLayer.Services.Repositories
 
         public async Task<UserLink> UpdateAsync(UserLink entity)
         {
-            using var transactionScope = new TransactionScope();
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             await _connection.ExecuteAsync(Update, entity);
+            transactionScope.Complete();
+            transactionScope.Dispose();
 
             return entity;
         }

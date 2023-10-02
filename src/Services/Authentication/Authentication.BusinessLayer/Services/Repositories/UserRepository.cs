@@ -50,7 +50,8 @@ namespace Authentication.BusinessLayer.Services.Repositories
             
             int result = await _connection.ExecuteAsync(Create, entity).ConfigureAwait(false);
             transactionScope.Complete();
-            
+            transactionScope.Dispose();
+
             return entity;
         }
 
@@ -60,6 +61,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             int result = await _connection.ExecuteAsync(Delete, new { Id = id });
             transactionScope.Complete();
+            transactionScope.Dispose();
 
             return true;
         }
@@ -91,6 +93,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             int result = await _connection.ExecuteAsync(UpdateCredential, user);
             transactionScope.Complete();
+            transactionScope.Dispose();
 
             return user;
         }
@@ -110,6 +113,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             int result = await _connection.ExecuteAsync(Update, entity);
             transactionScope.Complete();
+            transactionScope.Dispose();
 
             return entity;
         }

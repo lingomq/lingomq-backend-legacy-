@@ -132,6 +132,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             int result = await _connection.ExecuteAsync(sql, template);
             transactionScope.Complete();
+            transactionScope.Dispose();
 
             UserInfoDto infoDto = _mapper.Map<UserInfoDto>(template);
 

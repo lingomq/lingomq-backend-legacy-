@@ -7,6 +7,6 @@
         public string? Phone { get; set; } = "";
         public string? PasswordHash { get; set; }
         public string? PasswordSalt { get; set; }
-        public Guid RoleId { get; set; }
+        public string? RoleName { get; set; }
     }
 }

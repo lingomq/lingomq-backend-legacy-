@@ -32,9 +32,9 @@ namespace Identity.BusinessLayer.Services.Repositories
             "WHERE user_statistics.user_id = @Id";
         private static readonly string Create =
             "INSERT INTO user_statistics " +
-            "(id, total_words, total_hours, visit_streak, avg_words, user_id) " +
+            "(id, total_words, total_hours, visit_streak, avg_words, user_id, last_update_at) " +
             "VALUES " +
-            "(@Id, @TotalWords, @TotalHours, @VisitStreak, @AvgWords, @UserId)";
+            "(@Id, @TotalWords, @TotalHours, @VisitStreak, @AvgWords, @UserId, @LastUpdateAt)";
         private static readonly string Update =
             "UPDATE user_statistics " +
             "SET " +
@@ -49,16 +49,18 @@ namespace Identity.BusinessLayer.Services.Repositories
             _connection = connection;
         public async Task<UserStatistics> AddAsync(UserStatistics entity)
         {
-            using var transactionScope = new TransactionScope();
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             await _connection.ExecuteAsync(Create, entity);
+            transactionScope.Complete();
+            transactionScope.Dispose();
 
             return entity;
         }
 
         public async Task<bool> DeleteAsync(Guid id)
         {
-            using var transactionScope = new TransactionScope();
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             await _connection.ExecuteAsync(Delete, new { Id = id });
 
@@ -119,9 +121,11 @@ namespace Identity.BusinessLayer.Services.Repositories
 
         public async Task<UserStatistics> UpdateAsync(UserStatistics entity)
         {
-            using var transactionScope = new TransactionScope();
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             await _connection.ExecuteAsync(Update, entity);
+            transactionScope.Complete();
+            transactionScope.Dispose();
 
             return entity;
         }

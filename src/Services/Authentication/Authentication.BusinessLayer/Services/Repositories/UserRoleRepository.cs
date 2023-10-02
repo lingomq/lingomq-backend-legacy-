@@ -52,6 +52,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             await _connection.ExecuteAsync(Delete, new { Id = id });
             transactionScope.Complete();
+            transactionScope.Dispose();
 
             return true;
         }
@@ -87,6 +88,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             await _connection.ExecuteAsync(Update, entity);
             transactionScope.Complete();
+            transactionScope.Dispose();
 
             return entity;
         }

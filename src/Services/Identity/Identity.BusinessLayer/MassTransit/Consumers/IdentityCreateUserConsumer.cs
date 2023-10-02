@@ -40,12 +40,13 @@ namespace Identity.BusinessLayer.MassTransit.Consumers
             };
 
             await _unitOfWork.UserStatistics.AddAsync(statistics);
+            UserRole? role = await _unitOfWork.UserRoles.GetByNameAsync(context.Message.RoleName!);
 
             UserInfo userInfo = new UserInfo()
             {
                 Id = Guid.NewGuid(),
                 Nickname = context.Message.Nickname,
-                RoleId = context.Message.RoleId,
+                RoleId = role!.Id,
                 Additional = "",
                 IsRemoved = false,
                 CreationalDate = DateTime.Now,
