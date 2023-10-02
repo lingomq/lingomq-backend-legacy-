@@ -36,7 +36,8 @@ namespace Identity.BusinessLayer.MassTransit.Consumers
                 TotalWords = 0,
                 AvgWords = 0,
                 UserId = user.Id,
-                VisitStreak = 0
+                VisitStreak = 0,
+                LastUpdateAt = DateTime.Now.ToUniversalTime()
             };
 
             await _unitOfWork.UserStatistics.AddAsync(statistics);
@@ -49,7 +50,7 @@ namespace Identity.BusinessLayer.MassTransit.Consumers
                 RoleId = role!.Id,
                 Additional = "",
                 IsRemoved = false,
-                CreationalDate = DateTime.Now,
+                CreationalDate = DateTime.Now.ToUniversalTime(),
                 UserId = user.Id
             };
 

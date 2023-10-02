@@ -1,4 +1,5 @@
 using FluentMigrator.Runner;
+using Identity.Api.Middlewares;
 using Identity.BusinessLayer.Contracts;
 using Identity.BusinessLayer.MassTransit;
 using Identity.BusinessLayer.MassTransit.Consumers;
@@ -125,6 +126,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 using (var serviceScope = app.Services.CreateScope())
 {

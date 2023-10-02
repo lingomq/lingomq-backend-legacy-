@@ -22,7 +22,7 @@ namespace Identity.Api.Controllers
             _publisher = publisher;
         }
 
-        [HttpGet("{range}")]
+        [HttpGet("all/{range}")]
         [Authorize(Roles = AccessRoles.Staff)]
         public async Task<IActionResult> Get(int range = int.MaxValue)
         {
@@ -42,7 +42,7 @@ namespace Identity.Api.Controllers
             return LingoMq.Responses.StatusCode.OkResult(role);
         }
 
-        [HttpGet("{name}")]
+        [HttpGet("name/{name}")]
         [Authorize(Roles = AccessRoles.Staff)]
         public async Task<IActionResult> GetByName(string name)
         {

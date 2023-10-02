@@ -15,7 +15,7 @@ namespace Identity.Api.Controllers
         public LinkTypeController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
 
-        [HttpGet("{range}")]
+        [HttpGet("all/{range}")]
         [Authorize(Roles = AccessRoles.Staff)]
         public async Task<IActionResult> Get(int range = int.MaxValue)
         {
@@ -34,7 +34,7 @@ namespace Identity.Api.Controllers
 
             return LingoMq.Responses.StatusCode.OkResult(type);
         }
-        [HttpGet("{name}")]
+        [HttpGet("name/{name}")]
         [Authorize(Roles = AccessRoles.Staff)]
         public async Task<IActionResult> Get(string name)
         {

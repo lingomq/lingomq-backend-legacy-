@@ -2,7 +2,7 @@
 
 namespace Identity.BusinessLayer.Models
 {
-    internal class ErrorModel
+    public class ErrorModel
     {
         [JsonProperty("code")]
         public int Code { get; set; }

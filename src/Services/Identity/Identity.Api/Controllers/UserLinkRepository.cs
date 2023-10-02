@@ -15,25 +15,25 @@ namespace Identity.Api.Controllers
         public UserLinkRepository(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
 
-        [HttpGet("{userInfoId}")]
+        [HttpGet("info-id/{userInfoId}")]
         [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> GetByUserInfoId(Guid id)
+        public async Task<IActionResult> GetByUserInfoId(Guid userInfoId)
         {
-            UserInfo? info = await _unitOfWork.UserInfos.GetByUserIdAsync(id);
+            UserInfo? info = await _unitOfWork.UserInfos.GetByUserIdAsync(userInfoId);
 
             if (info is null)
                 throw new NotFoundException<UserInfo>("The user info not found");
 
-            List<UserLink> links = await _unitOfWork.UserLinks.GetByUserInfoIdAsync(id);
+            List<UserLink> links = await _unitOfWork.UserLinks.GetByUserInfoIdAsync(userInfoId);
 
             return LingoMq.Responses.StatusCode.OkResult(links);
         }
 
         [HttpGet("{linkId}")]
         [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Get(Guid id)
+        public async Task<IActionResult> Get(Guid linkId)
         {
-            List<UserLink> links = await _unitOfWork.UserLinks.GetAllByIdAsync(id);
+            List<UserLink> links = await _unitOfWork.UserLinks.GetAllByIdAsync(linkId);
 
             return LingoMq.Responses.StatusCode.OkResult(links);
         }
