@@ -40,7 +40,7 @@ LingoMq - it is application, which represents opportunity to learns any language
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#appstatistics">AppStatistics</a>
 ## Обобщенное описание
 
-<img src="https://sun9-79.userapi.com/impg/LHCIoU90WS3JF0FAh0aHZU8Y4p179toN3tMehQ/pkpyC8k8G9Y.jpg?size=1280x754&quality=95&sign=a0866bf7b2392c9bb16127c17271de05&type=album" alt="Logo of the project" align="center">
+<img src="https://sun9-20.userapi.com/impg/gzvDs5NMX5TlrjYtf4U_vDfcDtMArkEIhQWT2g/T1lfMx_bJjA.jpg?size=1796x929&quality=96&sign=0ed3b1db05ef781c8c684aa37a97bb47&type=album" alt="Logo of the project" align="center">
 
 > Структура таблиц
 
@@ -48,7 +48,7 @@ LingoMq - it is application, which represents opportunity to learns any language
 
 ## Личности
 
-<img src="https://sun9-56.userapi.com/impg/8AnXwulfPDB9OG_YD9MKeepABRGWI-O6ACEQBA/8IYeurAt38Q.jpg?size=1459x287&quality=95&sign=660f67d753344465e4885a5c837f7238&type=album" alt="Logo of the project" align="center">
+<img src="https://sun9-56.userapi.com/impg/FqsD-RdKiuvblU9jiVmYWfsrXGcLW0bapPGyeA/UxgV9BUCi2E.jpg?size=1340x257&quality=96&sign=ddfb3e2c1bdeaf170c1ccb1883899088&type=album" alt="Logo of the project" align="center">
 
 > Структура зоны личностей 
 
