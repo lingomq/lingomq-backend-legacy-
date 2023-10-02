@@ -150,6 +150,7 @@ LingoMq - it is application, which represents opportunity to learns any language
 |  | TotalHours | FLOAT | Это поле - общее количество часов, потраченных в приложении | NOT NULL DEFAULT 0 |
 |  | VisitStreak | INT | Это поле - максимальное количество посещений подряд (дни) | NOT NULL DEFAULT 0 |
 |  | AvgWords | INT | Это поле - среднее арифметическое от общего количества слов | NOT NULL DEFAULT 0 |
+|  | LastUpdateAt | DateTime | Это поле представляет собой дату последнего изменения поля | NOT NULL |
 | FK | UserId | GUID | Это поле представляет собой ссылку на пользователя | NOT NULL |
 #### UserStatistics:Ссылается на
 | Зона.Таблица | Ключи | Названия |
