@@ -14,6 +14,7 @@ namespace Identity.BusinessLayer.Services.Repositories
             "total_hours as \"TotalHours\", " +
             "visit_streak as \"VisitStreak\", " +
             "avg_words as \"AvgWords\", " +
+            "last_update_at as \"LastUpdateAt\", " +
             "users.id, " +
             "users.email as \"Email\", " +
             "users.phone as \"Phone\" " +

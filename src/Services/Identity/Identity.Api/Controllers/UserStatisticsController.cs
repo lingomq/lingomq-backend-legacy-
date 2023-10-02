@@ -69,5 +69,27 @@ namespace Identity.Api.Controllers
 
             return LingoMq.Responses.StatusCode.OkResult(statistics);
         }
+        [HttpPut("visit")]
+        [Authorize(Roles = AccessRoles.All)]
+        public async Task<IActionResult> UpdateVisitStreak()
+        {
+            if (await _unitOfWork.Users.GetByIdAsync(UserId) is null)
+                throw new NotFoundException<User>();
+
+            UserStatistics? statistics = await _unitOfWork.UserStatistics.GetByUserIdAsync(UserId);
+            if (statistics is null)
+                throw new NotFoundException<UserStatistics>();
+
+            int hourSubstraction = (DateTime.Now - statistics.LastUpdateAt).Hours;
+
+            if (24 > hourSubstraction && hourSubstraction <= 48)
+                statistics.VisitStreak += 1;
+            else if (hourSubstraction > 48)
+                statistics.VisitStreak = 0;
+
+            await _unitOfWork.UserStatistics.UpdateAsync(statistics);
+
+            return LingoMq.Responses.StatusCode.OkResult(statistics);
+        }
     }
 }

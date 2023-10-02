@@ -54,6 +54,7 @@ namespace Identity.Api.Migrations
                 .WithColumn("total_hours").AsFloat().NotNullable().WithDefaultValue(0)
                 .WithColumn("visit_streak").AsInt32().NotNullable().WithDefaultValue(0)
                 .WithColumn("avg_words").AsInt32().NotNullable().WithDefaultValue(0)
+                .WithColumn("last_update_at").AsDateTime().NotNullable()
                 .WithColumn("user_id").AsGuid().NotNullable();
 
 
