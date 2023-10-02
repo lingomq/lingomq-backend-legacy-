@@ -19,16 +19,10 @@ namespace Identity.BusinessLayer.Services.Repositories
             "user_roles.name AS \"Name\", " +
             "users.id, " +
             "users.email AS \"Email\", " +
-            "users.phone AS \"Phone\", " +
-            "users.password_hash AS \"PasswordHash\", " +
-            "users.password_salt AS \"PasswordSalt\", " +
-            "user_links.id, " +
-            "user_links.user_info_id AS \"UserInfoId\", " +
-            "user_links.link_id AS \"LinkId\", " +
+            "users.phone AS \"Phone\" " +
             "FROM user_infos " +
             "LEFT JOIN user_roles ON user_infos.role_id = user_roles.id " +
-            "LEFT JOIN users ON user_infos.user_id = users.id " +
-            "LEFT JOIN user_links ON user_infos.user_link_id = user_links.id ";
+            "LEFT JOIN users ON user_infos.user_id = users.id ";
         private readonly static string GetRange = Get +
             " LIMIT @Count";
         private readonly static string GetByNickname = Get +
@@ -112,19 +106,13 @@ namespace Identity.BusinessLayer.Services.Repositories
         {
             IEnumerable<UserInfo> infos;
 
-            infos = await _connection.QueryAsync<UserInfo, UserRole, User, UserLink, UserInfo>(sql,
-                (info, role, user, link) =>
+            infos = await _connection.QueryAsync<UserInfo, UserRole, User, UserInfo>(sql,
+                (info, role, user) =>
                 {
                     info.Role = role;
                     info.RoleId = role.Id;
                     info.User = user;
                     info.UserId = user.Id;
-                    if (info.UserLink is null)
-                        info.UserLink = new List<UserLink>() { link };
-                    else
-                        info.UserLink.Add(link);
-
-                    info.UserLinkId = link.Id;
                     return info;
                 }, template, splitOn: "id");
 

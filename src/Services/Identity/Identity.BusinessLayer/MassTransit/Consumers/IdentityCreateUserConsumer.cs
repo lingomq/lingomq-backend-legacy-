@@ -20,7 +20,7 @@ namespace Identity.BusinessLayer.MassTransit.Consumers
         {
             User user = new User()
             {
-                Id = Guid.NewGuid(),
+                Id = context.Message.UserId,
                 Email = context.Message.Email,
                 Phone = context.Message.Phone,
                 PasswordHash = context.Message.PasswordHash,
@@ -44,7 +44,7 @@ namespace Identity.BusinessLayer.MassTransit.Consumers
 
             UserInfo userInfo = new UserInfo()
             {
-                Id = Guid.NewGuid(),
+                Id = context.Message.InfoId,
                 Nickname = context.Message.Nickname,
                 RoleId = role!.Id,
                 Additional = "",

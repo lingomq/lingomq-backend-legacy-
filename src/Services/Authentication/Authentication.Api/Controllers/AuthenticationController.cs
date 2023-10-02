@@ -80,7 +80,7 @@ namespace Authentication.Api.Controllers
         }
 
         [HttpGet("refresh-token")]
-        [Authorize(Roles = "user,admin,moderator")]
+        [AllowAnonymous]
         public async Task<IActionResult> RefreshToken(string token)
         {        
             ClaimsPrincipal principal = _jwtService.GetClaimsPrincipal(token);

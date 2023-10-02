@@ -70,6 +70,8 @@ namespace Authentication.Api.Controllers
             TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto);
             await _publisher.Send(new IdentityModelCreateUser()
             {
+                UserId = user.Id,
+                InfoId = userInfo.Id,
                 Nickname = userInfo.Nickname,
                 Email = user.Email,
                 Phone = user.Phone,

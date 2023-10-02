@@ -10,12 +10,10 @@ namespace Identity.DomainLayer.Entities
         public string? ImageUri { get; set; }
         [MaxLength(256, ErrorMessage = "Поле additional не может содержать более 256 символов")]
         public string? Additional { get; set; }
-        public Guid UserLinkId { get; set; }
         [Required]
         public Guid RoleId { get; set; }
         [Required]
         public Guid UserId { get; set; }
-        public List<UserLink>? UserLink { get; set; }
         public UserRole? Role { get; set; }
         public User? User { get; set; }
         public DateTime CreationalDate { get; set; }

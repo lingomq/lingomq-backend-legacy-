@@ -1,5 +1,6 @@
 using FluentMigrator.Runner;
 using Identity.BusinessLayer.Contracts;
+using Identity.BusinessLayer.MassTransit;
 using Identity.BusinessLayer.MassTransit.Consumers;
 using Identity.BusinessLayer.Services;
 using Identity.BusinessLayer.Services.Repositories;
@@ -61,6 +62,7 @@ builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddTransient<IUserStatisticsRepository, UserStatisticsRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<PublisherBase>();
 
 builder.Services.AddAuthentication(x => {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;

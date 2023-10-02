@@ -76,7 +76,6 @@ namespace Identity.Api.Controllers
                 ImageUri = info.ImageUri,
                 RoleId = info.RoleId,
                 UserId = info.UserId,
-                UserLinkId = info.UserLinkId,
                 CreationalDate = info.CreationalDate,
                 IsRemoved = info.IsRemoved
             });
@@ -103,7 +102,6 @@ namespace Identity.Api.Controllers
                 ImageUri = info.ImageUri,
                 RoleId = info.RoleId,
                 UserId = info.UserId,
-                UserLinkId = info.UserLinkId,
                 CreationalDate = info.CreationalDate,
                 IsRemoved = info.IsRemoved
             });
