@@ -4,6 +4,6 @@ namespace Words.BusinessLayer.Contracts
 {
     public interface ILanguageRepository : IGenericRepository<Language>
     {
-        Task<Language?> GetByName(string name);
+        Task<Language?> GetByNameAsync(string name);
     }
 }

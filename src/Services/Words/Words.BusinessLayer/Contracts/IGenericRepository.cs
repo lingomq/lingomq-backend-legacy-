@@ -4,8 +4,8 @@
     {
         Task<T> AddAsync(T entity);
         Task<List<T>> GetAsync(int range = int.MaxValue);
-        Task<T> GetByIdAsync(Guid id);
-        Task<T> DeleteAsync(Guid id);
-        Task<T> UpdateAsync(T Entity);
+        Task<T?> GetByIdAsync(Guid id);
+        Task<bool> DeleteAsync(Guid id);
+        Task<T> UpdateAsync(T entity);
     }
 }
