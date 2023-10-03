@@ -5,6 +5,7 @@ using Identity.BusinessLayer.Dtos;
 using Identity.DomainLayer.Entities;
 using System.Data;
 using System.Transactions;
+using static MassTransit.Util.ChartTable;
 
 namespace Identity.BusinessLayer.Services.Repositories
 {
@@ -30,13 +31,13 @@ namespace Identity.BusinessLayer.Services.Repositories
             "UPDATE users " +
             "SET " +
             "email = @Email," +
-            "phone = @Phone" +
+            "phone = @Phone " +
             "WHERE id = @Id";
         private readonly static string UpdateCredentials =
             "UPDATE users " +
             "SET " +
             "password_hash = @PasswordHash," +
-            "password_salt = @PasswordSalt" +
+            "password_salt = @PasswordSalt " +
             "WHERE id = @Id";
         private readonly IDbConnection _connection;
         private readonly IMapper _mapper;
@@ -75,7 +76,7 @@ namespace Identity.BusinessLayer.Services.Repositories
             user = await _connection.QueryAsync<User>(GetRange, new { Count = count });
 
             List<UserDto> userDtos = _mapper.Map<List<UserDto>>(user);
-            return userDtos;
+            return userDtos is null ? new List<UserDto>() : userDtos;
         }
 
         public async Task<UserDto?> GetByEmailAsync(string email)

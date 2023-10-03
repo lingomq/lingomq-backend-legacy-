@@ -25,9 +25,9 @@ namespace Identity.Api.Controllers
 
         [HttpGet("{linkId}")]
         [Authorize(Roles = AccessRoles.Staff)]
-        public async Task<IActionResult> Get(Guid id)
+        public async Task<IActionResult> Get(Guid linkId)
         {
-            LinkType? type = await _unitOfWork.LinkTypes.GetByIdAsync(id);
+            LinkType? type = await _unitOfWork.LinkTypes.GetByIdAsync(linkId);
 
             if (type is null)
                 throw new NotFoundException<LinkType>();

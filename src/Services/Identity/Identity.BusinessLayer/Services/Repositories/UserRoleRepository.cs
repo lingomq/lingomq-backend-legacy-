@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Identity.BusinessLayer.Contracts;
+using Identity.BusinessLayer.Dtos;
 using Identity.DomainLayer.Entities;
 using System.Data;
 using System.Transactions;
@@ -61,8 +62,7 @@ namespace Identity.BusinessLayer.Services.Repositories
             IEnumerable<UserRole> roles;
 
             roles = await _connection.QueryAsync<UserRole>(GetRange, new { Count = count });
-
-            return roles.ToList();
+            return roles.ToList() is null ? new List<UserRole>() : roles.ToList();
         }
 
         public async Task<UserRole?> GetByIdAsync(Guid id)

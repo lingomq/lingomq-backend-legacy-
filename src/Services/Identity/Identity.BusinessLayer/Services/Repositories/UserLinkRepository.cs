@@ -25,7 +25,7 @@ namespace Identity.BusinessLayer.Services.Repositories
             "user_roles.id, " +
             "user_roles.name as \"Name\" " +
             "FROM user_links " +
-            "INNER JOIN user_infos ON user_infos.id = user_links.user_infos_id " +
+            "INNER JOIN user_infos ON user_infos.id = user_links.user_info_id " +
             "INNER JOIN users ON users.id = user_infos.user_id " +
             "INNER JOIN link_types ON link_types.id = user_links.link_id " +
             "INNER JOIN user_roles ON user_roles.id = user_infos.role_id ";
@@ -79,7 +79,7 @@ namespace Identity.BusinessLayer.Services.Repositories
 
             links = await _connection.QueryAsync<UserLink>(GetRange, new { Count = count });
 
-            return links.ToList();
+            return links.ToList() is null ? new List<UserLink>() : links.ToList();
         }
 
         public async Task<UserLink?> GetByIdAsync(Guid id)
@@ -117,7 +117,7 @@ namespace Identity.BusinessLayer.Services.Repositories
 
             links = await _connection.QueryAsync<UserLink>(GetById, new { Id = id });
 
-            return links.ToList();
+            return links.ToList() is null ? new List<UserLink>() : links.ToList();
         }
     }
 }

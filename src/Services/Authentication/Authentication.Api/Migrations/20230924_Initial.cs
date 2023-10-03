@@ -11,7 +11,7 @@ namespace Authentication.Api.Migrations
             Create.Table("users")
                 .WithColumn("id").AsGuid().PrimaryKey().Unique().NotNullable()
                 .WithColumn("email").AsCustom("varchar(256)").Unique().NotNullable()
-                .WithColumn("phone").AsCustom("varchar(15)").Unique()
+                .WithColumn("phone").AsCustom("varchar(15)")
                 .WithColumn("password_hash").AsCustom("text").NotNullable()
                 .WithColumn("password_salt").AsCustom("text").NotNullable();
 

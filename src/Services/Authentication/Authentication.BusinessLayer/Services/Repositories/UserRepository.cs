@@ -75,7 +75,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
             else
                 users = await _connection.QueryAsync<User>(Get);
 
-            return users.ToList();
+            return users.ToList() is null ? new List<User>() : users.ToList();
         }
 
         public async Task<User?> GetByEmailAsync(string email)

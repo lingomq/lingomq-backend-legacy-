@@ -79,7 +79,7 @@ namespace Identity.BusinessLayer.Services.Repositories
                     return statistics;
                 }, new { Count = count }, splitOn: "id");
 
-            return statistics.ToList();
+            return statistics.ToList() is null ? new List<UserStatistics>() : statistics.ToList();
         }
 
         public async Task<UserStatistics?> GetByIdAsync(Guid id)

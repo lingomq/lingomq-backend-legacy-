@@ -88,7 +88,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
             List<UserInfoDto> userViews =
                 _mapper.Map<List<UserInfoDto>>(users.ToList());
 
-            return userViews;
+            return userViews is null ? new List<UserInfoDto>() : userViews;
         }
 
         public async Task<UserInfoDto?> GetByNicknameAsync(string nickname)

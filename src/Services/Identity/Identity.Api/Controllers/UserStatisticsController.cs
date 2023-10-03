@@ -44,13 +44,7 @@ namespace Identity.Api.Controllers
             if (statistics is null)
                 throw new NotFoundException<UserStatistics>("The statistics was not found");
 
-            int hourSubstraction = (DateTime.Now - statistics.LastUpdateAt).Hours;
-
-            if (hourSubstraction > 1)
-            {
-                statistics.TotalHours += 1;
-                statistics.LastUpdateAt = DateTime.Now.ToUniversalTime();
-            }
+            statistics.TotalHours += 1;
 
             await _unitOfWork.UserStatistics.UpdateAsync(statistics);
 
@@ -88,7 +82,7 @@ namespace Identity.Api.Controllers
 
             int hourSubstraction = (DateTime.Now - statistics.LastUpdateAt).Hours;
 
-            if (hourSubstraction > 24 && hourSubstraction <= 48)
+            if ((hourSubstraction > 24 && hourSubstraction <= 48) || statistics.VisitStreak == 0)
             {
                 statistics.VisitStreak += 1;
                 statistics.LastUpdateAt = DateTime.Now.ToUniversalTime();

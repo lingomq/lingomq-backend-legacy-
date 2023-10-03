@@ -116,7 +116,7 @@ namespace Identity.BusinessLayer.Services.Repositories
                     return info;
                 }, template, splitOn: "id");
 
-            return infos.ToList();
+            return infos.ToList() is null ? new List<UserInfo>() : infos.ToList();
         }
         private async Task<UserInfo> ExecuteAsync<UserInfo>(UserInfo template, string sql)
         {

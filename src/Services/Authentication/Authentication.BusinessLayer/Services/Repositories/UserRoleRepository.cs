@@ -63,7 +63,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
 
             userRoles = await _connection.QueryAsync<UserRole>(GetRange, new { Count = count });
 
-            return userRoles.ToList();
+            return userRoles.ToList() is null ? new List<UserRole>() : userRoles.ToList();
         }
 
         public async Task<UserRole?> GetByGuidAsync(Guid guid)

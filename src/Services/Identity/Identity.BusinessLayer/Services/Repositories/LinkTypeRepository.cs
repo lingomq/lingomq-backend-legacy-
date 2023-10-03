@@ -16,14 +16,14 @@ namespace Identity.BusinessLayer.Services.Repositories
         private static readonly string GetById = Get +
             "WHERE id = @Id";
         private static readonly string GetByLinkName = Get +
-            "WHERE link_name = @LinkName";
+            "WHERE name = @LinkName";
         private static readonly string Create =
             "INSERT INTO link_types " +
-            "(id, link_name, short_name) " +
+            "(id, name, short_name) " +
             "VALUES (@Id, @LinkName, @ShortName)";
         private static readonly string Update =
             "UPDATE link_types " +
-            "SET link_name = @LinkName, short_link = @ShortLink " +
+            "SET name = @LinkName, short_link = @ShortLink " +
             "WHERE id = @Id";
         private static readonly string Delete =
             "DELETE FROM link_types " +
@@ -60,7 +60,7 @@ namespace Identity.BusinessLayer.Services.Repositories
 
             types = await _connection.QueryAsync<LinkType>(GetRange, new { Count = count });
 
-            return types.ToList();
+            return types.ToList() is null ? new List<LinkType>() : types.ToList();
         }
 
         public async Task<LinkType?> GetByIdAsync(Guid id)
