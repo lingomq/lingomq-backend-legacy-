@@ -45,7 +45,7 @@ namespace Identity.BusinessLayer.Services.Repositories
             "UPDATE user_links " +
             "SET " +
             "user_info_id = @UserInfoId," +
-            "link_id = @LinkId" +
+            "link_id = @LinkId " +
             "WHERE id = @Id";
 
         private readonly IDbConnection _connection;

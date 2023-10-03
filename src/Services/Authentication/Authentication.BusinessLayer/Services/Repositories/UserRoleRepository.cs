@@ -27,7 +27,7 @@ namespace Authentication.BusinessLayer.Services.Repositories
             "WHERE id = @Id";
         private static readonly string Update =
             "UPDATE user_roles " +
-            "SET name = @Name" +
+            "SET name = @Name " +
             "WHERE id = @Id";
 
         private IDbConnection _connection;
