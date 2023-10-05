@@ -7,6 +7,7 @@ using Npgsql;
 using System.Data;
 using System.Reflection;
 using System.Text;
+using Words.Api.Middlewares;
 using Words.BusinessLayer.Contracts;
 using Words.BusinessLayer.MassTransit.Consumers;
 using Words.BusinessLayer.Services;
@@ -135,6 +136,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionsCatchingMiddleware>();
 
 // Auto migrations
 
