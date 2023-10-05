@@ -3,6 +3,6 @@
     public interface IWordChecker
     {
         bool? IsCorrectTranslate(string word, string translated);
-        string SpellChecker(string word);
+        Task<string> SpellCorrector(string word);
     }
 }
