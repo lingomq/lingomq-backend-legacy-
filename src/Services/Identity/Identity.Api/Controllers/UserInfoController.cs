@@ -38,7 +38,7 @@ namespace Identity.Api.Controllers
             if (info is null)
                 throw new NotFoundException<UserInfo>("Данные не найдены");
 
-            return LingoMq.Responses.StatusCode.OkResult(info);
+            return LingoMq.Responses.LingoMqResponse.OkResult(info);
         }
         [HttpGet("all/{range}")]
         [Authorize(Roles = AccessRoles.All)]
@@ -46,7 +46,7 @@ namespace Identity.Api.Controllers
         {
             List<UserInfo> infos = await _unitOfWork.UserInfos.GetAsync(range);
 
-            return LingoMq.Responses.StatusCode.OkResult(infos);
+            return LingoMq.Responses.LingoMqResponse.OkResult(infos);
         }
         [HttpGet("{nickname}")]
         [Authorize(Roles = AccessRoles.All)]
@@ -57,7 +57,7 @@ namespace Identity.Api.Controllers
             if (info is null)
                 throw new NotFoundException<UserInfo>("Данные не найдены");
 
-            return LingoMq.Responses.StatusCode.OkResult(info);
+            return LingoMq.Responses.LingoMqResponse.OkResult(info);
         }
         [HttpPut]
         [Authorize(Roles = AccessRoles.All)]
@@ -80,7 +80,7 @@ namespace Identity.Api.Controllers
                 IsRemoved = info.IsRemoved
             });
 
-            return LingoMq.Responses.StatusCode.OkResult(info, "succesfully updated");
+            return LingoMq.Responses.LingoMqResponse.OkResult(info, "succesfully updated");
         }
         [HttpPut("admin")]
         [Authorize(Roles = AccessRoles.Admin)]
@@ -106,7 +106,7 @@ namespace Identity.Api.Controllers
                 IsRemoved = info.IsRemoved
             });
 
-            return LingoMq.Responses.StatusCode.OkResult(info, "succesfully updated");
+            return LingoMq.Responses.LingoMqResponse.OkResult(info, "succesfully updated");
         }
     }
 }

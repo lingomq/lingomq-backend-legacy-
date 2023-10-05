@@ -10,6 +10,6 @@ namespace Authentication.BusinessLayer.Exceptions
         public InvalidTokenException(string message)
             : base((int)ClientErrorCodes.Forbidden, message) { }
         public InvalidTokenException(T data, string message = "Invalid token") :
-            base(StatusCode.ForbiddenResult(data, message)) { }
+            base(LingoMqResponse.ForbiddenResult(data, message)) { }
     }
 }

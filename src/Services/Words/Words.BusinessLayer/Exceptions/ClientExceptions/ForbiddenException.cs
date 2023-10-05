@@ -11,7 +11,7 @@ namespace Words.BusinessLayer.Exceptions.ClientExceptions
         public ForbiddenException(string message)
             : base((int)ClientErrorCodes.Unauthorized, message) { }
         public ForbiddenException(T data, string message = "access denied") :
-            base(StatusCode.ForbiddenResult(data, message))
+            base(LingoMqResponse.ForbiddenResult(data, message))
         { }
     }
 }

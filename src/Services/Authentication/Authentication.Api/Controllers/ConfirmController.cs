@@ -80,7 +80,7 @@ namespace Authentication.Api.Controllers
                 RoleName = userRole.Name
             });
             // return result
-            return LingoMq.Responses.StatusCode.OkResult(tokenModel);
+            return LingoMq.Responses.LingoMqResponse.OkResult(tokenModel);
         }
     }
 }

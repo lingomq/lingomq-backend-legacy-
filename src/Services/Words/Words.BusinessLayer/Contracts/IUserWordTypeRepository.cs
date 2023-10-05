@@ -4,6 +4,7 @@ namespace Words.BusinessLayer.Contracts
 {
     public interface IUserWordTypeRepository : IGenericRepository<UserWordType>
     {
-        Task<UserWordType?> GetByUserIdAsync(Guid id);
+        Task<List<UserWordType>> GetByUserIdAsync(Guid id);
+        Task<List<UserWordType>> GetByTypeIdAsync(Guid id);
     }
 }

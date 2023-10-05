@@ -8,7 +8,7 @@ namespace Words.BusinessLayer.Exceptions.ServerException
             "Something wrong!")
         { }
         public InternalServerException(string message = "Something wrong") :
-            base(StatusCode.InternalServerError(message))
+            base(LingoMqResponse.InternalServerError(message))
         { }
     }
 }

@@ -9,6 +9,6 @@ namespace Authentication.BusinessLayer.Exceptions
         public InvalidDataException(string message)
             : base((int)ClientErrorCodes.BadRequest, message) { }
         public InvalidDataException(T data, string message = "Invalid data") :
-            base(StatusCode.BadRequestResult(data, message)) { }
+            base(LingoMqResponse.BadRequestResult(data, message)) { }
     }
 }

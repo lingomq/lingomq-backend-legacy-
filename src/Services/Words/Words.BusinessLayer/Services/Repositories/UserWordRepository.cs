@@ -28,6 +28,8 @@ namespace Words.BusinessLayer.Services.Repositories
             "WHERE id = @Id";
         private readonly static string GetByWord = Get +
             "WHERE word = @Word";
+        private readonly static string GetByUserId = Get +
+            "WHERE user_id = @Id";
         private readonly static string GetCountPerDay =
             "SELECT COUNT(*) FROM user_words " +
             "WHERE id = @Id, created_at = @CreatedAt";
@@ -79,6 +81,11 @@ namespace Words.BusinessLayer.Services.Repositories
             List<UserWord> words = await TemplateGet(GetById, new { Id = id });
 
             return words.FirstOrDefault() is null ? null : words.FirstOrDefault();
+        }
+
+        public async Task<List<UserWord>> GetByUserIdAsync(Guid id)
+        {
+            return await TemplateGet(GetByUserId, new { Id = id });
         }
 
         public async Task<UserWord?> GetByWordAsync(string word)

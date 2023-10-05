@@ -3,11 +3,13 @@ using Responses.StatusCodes;
 
 namespace LingoMq.Responses;
 
-public class StatusCode
+public class LingoMqResponse
 {
     public static IActionResult OkResult<T>(T data, string message = "Success") =>
         ResponseResult.SuccessResult((int)SuccessCodes.Success, message, data);
 
+    public static IActionResult AcceptedResult<T>(T data, string message = "Accepted") =>
+        ResponseResult.SuccessResult((int)SuccessCodes.Accepted, message, data);
     public static IActionResult AcceptedResult(string message = "Accepted") =>
         ResponseResult.SuccessResult((int)SuccessCodes.Accepted, message);
 

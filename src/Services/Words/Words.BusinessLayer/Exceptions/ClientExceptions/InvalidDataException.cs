@@ -9,7 +9,14 @@ namespace Words.BusinessLayer.Exceptions.ClientExceptions
         public InvalidDataException(string message)
             : base((int)ClientErrorCodes.BadRequest, message) { }
         public InvalidDataException(T data, string message = "Invalid data") :
-            base(StatusCode.BadRequestResult(data, message))
+            base(LingoMqResponse.BadRequestResult(data, message))
+        { }
+        public InvalidDataException(T data, string[] parameters) :
+            base(LingoMqResponse.BadRequestResult(data, "Some parameters is incorrect: " + string.Join(";", parameters)))
+        { }
+
+        public InvalidDataException(string[] parameters) :
+            base(LingoMqResponse.BadRequestResult("Some parameters is incorrect: " + string.Join(";", parameters)))
         { }
     }
 }

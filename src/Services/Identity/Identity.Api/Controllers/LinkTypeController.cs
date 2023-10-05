@@ -20,7 +20,7 @@ namespace Identity.Api.Controllers
         public async Task<IActionResult> Get(int range = int.MaxValue)
         {
             List<LinkType> types = await _unitOfWork.LinkTypes.GetAsync(range);
-            return LingoMq.Responses.StatusCode.OkResult(types);
+            return LingoMq.Responses.LingoMqResponse.OkResult(types);
         }
 
         [HttpGet("{linkId}")]
@@ -32,7 +32,7 @@ namespace Identity.Api.Controllers
             if (type is null)
                 throw new NotFoundException<LinkType>();
 
-            return LingoMq.Responses.StatusCode.OkResult(type);
+            return LingoMq.Responses.LingoMqResponse.OkResult(type);
         }
         [HttpGet("name/{name}")]
         [Authorize(Roles = AccessRoles.Staff)]
@@ -43,7 +43,7 @@ namespace Identity.Api.Controllers
             if (type is null)
                 throw new NotFoundException<LinkType>();
 
-            return LingoMq.Responses.StatusCode.OkResult(type);
+            return LingoMq.Responses.LingoMqResponse.OkResult(type);
         }
         [HttpPost]
         [Authorize(Roles = AccessRoles.Staff)]
@@ -51,7 +51,7 @@ namespace Identity.Api.Controllers
         {
             await _unitOfWork.LinkTypes.AddAsync(linkType);
 
-            return LingoMq.Responses.StatusCode.OkResult(linkType);
+            return LingoMq.Responses.LingoMqResponse.OkResult(linkType);
         }
         [HttpPut]
         [Authorize(Roles = AccessRoles.Staff)]
@@ -59,7 +59,7 @@ namespace Identity.Api.Controllers
         {
             await _unitOfWork.LinkTypes.UpdateAsync(linkType);
 
-            return LingoMq.Responses.StatusCode.OkResult(linkType);
+            return LingoMq.Responses.LingoMqResponse.OkResult(linkType);
         }
         [HttpDelete("{id}")]
         [Authorize(Roles = AccessRoles.Staff)]
@@ -72,7 +72,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.LinkTypes.DeleteAsync(id);
 
-            return LingoMq.Responses.StatusCode.OkResult(type);
+            return LingoMq.Responses.LingoMqResponse.OkResult(type);
         }
     }
 }

@@ -33,7 +33,7 @@ namespace Identity.Api.Controllers
             if (statistics is null)
                 throw new NotFoundException<UserStatistics>("The statistics was not found");
 
-            return LingoMq.Responses.StatusCode.OkResult(statistics);
+            return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
         }
         [HttpPut("hour/add")]
         [Authorize(Roles = AccessRoles.All)]
@@ -48,7 +48,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.UserStatistics.UpdateAsync(statistics);
 
-            return LingoMq.Responses.StatusCode.OkResult(statistics);
+            return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
         }
         [HttpPut("word/add")]
         [Authorize(Roles = AccessRoles.All)]
@@ -67,7 +67,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.UserStatistics.UpdateAsync(statistics);
 
-            return LingoMq.Responses.StatusCode.OkResult(statistics);
+            return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
         }
         [HttpPut("visit")]
         [Authorize(Roles = AccessRoles.All)]
@@ -93,7 +93,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.UserStatistics.UpdateAsync(statistics);
 
-            return LingoMq.Responses.StatusCode.OkResult(statistics);
+            return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
         }
     }
 }

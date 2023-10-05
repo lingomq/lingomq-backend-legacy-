@@ -26,7 +26,7 @@ namespace Identity.Api.Controllers
 
             List<UserLink> links = await _unitOfWork.UserLinks.GetByUserInfoIdAsync(userInfoId);
 
-            return LingoMq.Responses.StatusCode.OkResult(links);
+            return LingoMq.Responses.LingoMqResponse.OkResult(links);
         }
 
         [HttpGet("{linkId}")]
@@ -35,7 +35,7 @@ namespace Identity.Api.Controllers
         {
             List<UserLink> links = await _unitOfWork.UserLinks.GetAllByIdAsync(linkId);
 
-            return LingoMq.Responses.StatusCode.OkResult(links);
+            return LingoMq.Responses.LingoMqResponse.OkResult(links);
         }
         [HttpPost]
         [Authorize(Roles = AccessRoles.All)]
@@ -53,7 +53,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.UserLinks.AddAsync(link);
 
-            return LingoMq.Responses.StatusCode.OkResult(link);
+            return LingoMq.Responses.LingoMqResponse.OkResult(link);
         }
         [HttpPut]
         [Authorize(Roles = AccessRoles.All)]
@@ -71,7 +71,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.UserLinks.UpdateAsync(link);
 
-            return LingoMq.Responses.StatusCode.OkResult(link);
+            return LingoMq.Responses.LingoMqResponse.OkResult(link);
         }
         [HttpDelete("{id}")]
         [Authorize(Roles = AccessRoles.All)]
@@ -84,7 +84,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.UserLinks.DeleteAsync(id);
 
-            return LingoMq.Responses.StatusCode.OkResult(link);
+            return LingoMq.Responses.LingoMqResponse.OkResult(link);
         }
     }
 }

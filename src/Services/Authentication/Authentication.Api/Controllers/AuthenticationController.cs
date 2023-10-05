@@ -49,7 +49,7 @@ namespace Authentication.Api.Controllers
                 Subject = "Вход в аккаунт"
             });
 
-            return LingoMq.Responses.StatusCode.OkResult(tokenModel);
+            return LingoMq.Responses.LingoMqResponse.OkResult(tokenModel);
         }
 
         [HttpPost("sign-up")]
@@ -76,7 +76,7 @@ namespace Authentication.Api.Controllers
             await _publisher.Send(new EmailModelSignUp() { Email = model.Email!, Nickname = model.Nickname!,
                 Token = emailToken, Subject = "Подтверждение аккаунта"});
 
-            return LingoMq.Responses.StatusCode.AcceptedResult();
+            return LingoMq.Responses.LingoMqResponse.AcceptedResult();
         }
 
         [HttpGet("refresh-token")]
@@ -93,7 +93,7 @@ namespace Authentication.Api.Controllers
             
             TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto!);
             
-            return LingoMq.Responses.StatusCode.OkResult(tokenModel);
+            return LingoMq.Responses.LingoMqResponse.OkResult(tokenModel);
         }
     }
 }

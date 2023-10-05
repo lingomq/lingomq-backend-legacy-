@@ -27,7 +27,7 @@ namespace Identity.Api.Controllers
         public async Task<IActionResult> Get(int range = int.MaxValue)
         {
             List<UserRole> roles = await _unitOfWork.UserRoles.GetAsync(range);
-            return LingoMq.Responses.StatusCode.OkResult(roles);
+            return LingoMq.Responses.LingoMqResponse.OkResult(roles);
         }
 
         [HttpGet("{id}")]
@@ -39,7 +39,7 @@ namespace Identity.Api.Controllers
             if (role is null)
                 throw new NotFoundException<UserRole>();
 
-            return LingoMq.Responses.StatusCode.OkResult(role);
+            return LingoMq.Responses.LingoMqResponse.OkResult(role);
         }
 
         [HttpGet("name/{name}")]
@@ -51,7 +51,7 @@ namespace Identity.Api.Controllers
             if (role is null)
                 throw new NotFoundException<UserRole>();
 
-            return LingoMq.Responses.StatusCode.OkResult(role);
+            return LingoMq.Responses.LingoMqResponse.OkResult(role);
         }
         [HttpPost]
         [Authorize(Roles = AccessRoles.Admin)]
@@ -65,7 +65,7 @@ namespace Identity.Api.Controllers
                 Name = role.Name
             });
 
-            return LingoMq.Responses.StatusCode.OkResult(role, "role has been succesfully appended");
+            return LingoMq.Responses.LingoMqResponse.OkResult(role, "role has been succesfully appended");
         }
         [HttpPut]
         [Authorize(Roles = AccessRoles.Admin)]
@@ -79,7 +79,7 @@ namespace Identity.Api.Controllers
                 Name = role.Name
             });
 
-            return LingoMq.Responses.StatusCode.OkResult(role, "role has been succesfully updated");
+            return LingoMq.Responses.LingoMqResponse.OkResult(role, "role has been succesfully updated");
         }
         [HttpDelete("{id}")]
         [Authorize(Roles = AccessRoles.Admin)]
@@ -99,7 +99,7 @@ namespace Identity.Api.Controllers
                 Id = role.Id
             });
 
-            return LingoMq.Responses.StatusCode.OkResult(role, "role has been succesfully removed");
+            return LingoMq.Responses.LingoMqResponse.OkResult(role, "role has been succesfully removed");
         }
     }
 }

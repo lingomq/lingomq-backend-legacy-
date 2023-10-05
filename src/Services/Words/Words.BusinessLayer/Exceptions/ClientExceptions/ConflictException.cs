@@ -9,7 +9,7 @@ namespace Words.BusinessLayer.Exceptions.ClientExceptions
         public ConflictException(string message)
             : base((int)ClientErrorCodes.Conflict, message) { }
         public ConflictException(T data, string message = "Received data was conflicted") :
-            base(StatusCode.ConflictResult(data, message))
+            base(LingoMqResponse.ConflictResult(data, message))
         { }
     }
 }

@@ -12,12 +12,8 @@ namespace Words.BusinessLayer.Services
         private readonly static string _uri = "https://api.textgears.com/spelling?" + _params;
         private readonly IConfiguration _configuration;
         public WordChecker(IConfiguration configuration) => _configuration = configuration;
-        public bool? IsCorrectTranslate(string word, string translated)
-        {
-            return false;
-        }
 
-        public async Task<string> SpellCorrector(string word)
+        public async Task<string> SpellCorrector(string word, string language = "english")
         {
             string correct = "";
             HttpClient client = new HttpClient();

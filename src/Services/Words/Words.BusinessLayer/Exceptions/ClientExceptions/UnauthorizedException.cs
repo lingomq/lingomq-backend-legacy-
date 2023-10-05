@@ -11,7 +11,7 @@ namespace Words.BusinessLayer.Exceptions.ClientExceptions
         public UnauthorizedException(string message)
             : base((int)ClientErrorCodes.Unauthorized, message) { }
         public UnauthorizedException(T data, string message = "You aren't authorize") :
-            base(StatusCode.UnauthorizedResult(data, message))
+            base(LingoMqResponse.UnauthorizedResult(data, message))
         { }
     }
 }

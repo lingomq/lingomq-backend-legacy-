@@ -1,6 +1,7 @@
 using FluentMigrator.Runner;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using Npgsql;
 using System.Data;
 using System.Reflection;
@@ -19,6 +20,9 @@ builder.Services.AddTransient<IUserWordRepository, UserWordRepository>();
 builder.Services.AddTransient<IUserWordTypeRepository, UserWordTypeRepository>();
 builder.Services.AddTransient<IWordTypeRepository, WordTypeRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+
+// Other services
+builder.Services.AddTransient<IWordChecker, WordChecker>();
 
 // Authentication (current: JWT)
 builder.Services.AddAuthentication(x =>
@@ -47,6 +51,41 @@ builder.Services.AddFluentMigratorCore()
         .AddPostgres()
         .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev"])
         .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
+
+// Swagger Auth interface
+builder.Services.AddSwaggerGen(c =>
+{
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+    {
+        Description = @"JWT Authorization header using the Bearer scheme. \r\n\r\n 
+                      Enter 'Bearer' [space] and then your token in the text input below.
+                      \r\n\r\nExample: 'Bearer 12345abcdef'",
+        Name = "Authorization",
+        In = ParameterLocation.Header,
+        Type = SecuritySchemeType.ApiKey,
+        Scheme = "Bearer",
+        BearerFormat = "JWT",
+    });
+
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement()
+      {
+        {
+          new OpenApiSecurityScheme
+          {
+            Reference = new OpenApiReference
+              {
+                Type = ReferenceType.SecurityScheme,
+                Id = "Bearer"
+              },
+              Scheme = "Jwt",
+              Name = "Bearer",
+              In = ParameterLocation.Header,
+
+            },
+             new string[] {}
+          }
+        });
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

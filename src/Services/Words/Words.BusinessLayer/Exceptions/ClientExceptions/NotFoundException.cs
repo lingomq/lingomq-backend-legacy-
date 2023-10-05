@@ -9,7 +9,7 @@ namespace Words.BusinessLayer.Exceptions.ClientExceptions
         public NotFoundException(string message)
             : base((int)ClientErrorCodes.NotFound, message) { }
         public NotFoundException(T data, string message = "Not found") :
-            base(StatusCode.NotFoundResult(data, message))
+            base(LingoMqResponse.NotFoundResult(data, message))
         { }
     }
 }

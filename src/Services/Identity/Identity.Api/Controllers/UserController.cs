@@ -40,7 +40,7 @@ namespace Identity.Api.Controllers
             if (user is null)
                 throw new NotFoundException<User>("Пользователь не найден");
 
-            return LingoMq.Responses.StatusCode.OkResult(user);
+            return LingoMq.Responses.LingoMqResponse.OkResult(user);
         }
 
         [HttpGet("{userId}")]
@@ -51,7 +51,7 @@ namespace Identity.Api.Controllers
             if (user is null)
                 throw new NotFoundException<User>("Пользователь не найден");
 
-            return LingoMq.Responses.StatusCode.OkResult(user);
+            return LingoMq.Responses.LingoMqResponse.OkResult(user);
         }
 
         [HttpPut]
@@ -72,7 +72,7 @@ namespace Identity.Api.Controllers
                 Phone = user.Phone
             });
 
-            return LingoMq.Responses.StatusCode.OkResult(user, "succesfully update");
+            return LingoMq.Responses.LingoMqResponse.OkResult(user, "succesfully update");
         }
 
         [HttpPut("credentials")]
@@ -102,7 +102,7 @@ namespace Identity.Api.Controllers
                 PasswordSalt = user.PasswordSalt
             });
 
-            return LingoMq.Responses.StatusCode.OkResult(user, "password succesfully update");
+            return LingoMq.Responses.LingoMqResponse.OkResult(user, "password succesfully update");
         }
         [HttpDelete]
         [Authorize(Roles = AccessRoles.All)]
@@ -121,7 +121,7 @@ namespace Identity.Api.Controllers
                 Id = UserId,
             });
 
-            return LingoMq.Responses.StatusCode.OkResult("user has been successfully removed");
+            return LingoMq.Responses.LingoMqResponse.OkResult("user has been successfully removed");
         }
         [HttpDelete("{userId}")]
         [Authorize(Roles = AccessRoles.Admin)]
@@ -142,7 +142,7 @@ namespace Identity.Api.Controllers
                 Id = userId,
             });
 
-            return LingoMq.Responses.StatusCode.OkResult("user has been successfully removed");
+            return LingoMq.Responses.LingoMqResponse.OkResult("user has been successfully removed");
         }
     }
 }

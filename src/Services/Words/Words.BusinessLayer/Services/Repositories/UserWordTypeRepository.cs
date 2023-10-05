@@ -35,6 +35,8 @@ namespace Words.BusinessLayer.Services.Repositories
             "WHERE user_word_types.id = @Id";
         private readonly static string GetByUserId = Get +
             "WHERE users.id = @Id";
+        private readonly static string GetByTypeId = Get +
+            "WHER word_types.id = @Id";
         private readonly static string Create =
             "INSERT INTO user_word_types (id, user_word_id, word_type_id) " +
             "VALUES (@Id, @UserWordId, @WordTypeId)";
@@ -82,11 +84,14 @@ namespace Words.BusinessLayer.Services.Repositories
             return types.FirstOrDefault() is null ? null : types.FirstOrDefault();
         }
 
-        public async Task<UserWordType?> GetByUserIdAsync(Guid id)
+        public async Task<List<UserWordType>> GetByTypeIdAsync(Guid id)
         {
-            List<UserWordType> types = await TemplateGet(GetByUserId, new { Id = id });
+            return await TemplateGet(GetByTypeId, new { Id = id });
+        }
 
-            return types.FirstOrDefault() is null ? null : types.FirstOrDefault();
+        public async Task<List<UserWordType>> GetByUserIdAsync(Guid id)
+        {
+            return await TemplateGet(GetByUserId, new { Id = id });
         }
 
         public async Task<UserWordType> UpdateAsync(UserWordType entity)

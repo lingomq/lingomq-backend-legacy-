@@ -7,7 +7,7 @@ namespace Authentication.BusinessLayer.Exceptions.ServerExceptions
         public InternalServerException() : base (0,
             "Something wrong!") { }
         public InternalServerException(string message = "Something wrong") :
-            base(StatusCode.InternalServerError(message))
+            base(LingoMqResponse.InternalServerError(message))
         { }
     }
 }
