@@ -64,11 +64,9 @@ namespace Words.Api.Migrations
         public override void Down()
         {
             Delete.Table("users");
-            Delete.Table("user_roles");
-            Delete.Table("user_infos");
-            Delete.Table("user_links");
-            Delete.Table("link_types");
-            Delete.Table("user_statistics");
+            Delete.Table("user_words");
+            Delete.Table("user_word_types");
+            Delete.Table("languages");
         }
     }
 }
