@@ -1,10 +1,8 @@
 ﻿using Achievements.BusinessLayer.Contracts;
 using Achievements.DomainLayer.Entities;
 using Dapper;
-using System;
 using System.Data;
 using System.Transactions;
-using static Dapper.SqlMapper;
 
 namespace Achievements.BusinessLayer.Services.Repositories
 {
