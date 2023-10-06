@@ -1,3 +1,4 @@
+using Achievements.Api.Middlewares;
 using Achievements.BusinessLayer.Contracts;
 using Achievements.BusinessLayer.MassTransit.Consumers;
 using Achievements.BusinessLayer.Services;
@@ -130,6 +131,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 // Auto migrations
 
