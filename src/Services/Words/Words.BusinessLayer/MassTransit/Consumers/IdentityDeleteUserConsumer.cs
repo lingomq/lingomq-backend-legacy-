@@ -21,12 +21,12 @@ namespace Words.BusinessLayer.MassTransit.Consumers
             UserDto? user = await _unitOfWork.Users.GetByIdAsync(id);
 
             if (user is null)
-                _logger.LogError("[-] [Authentication UserDelete Consumer] " +
+                _logger.LogError("[-] [Words UserDelete Consumer] " +
                                  "Failed: User not found");
 
             await _unitOfWork.Users.DeleteAsync(id);
 
-            _logger.LogInformation("[+] [Authentication UserDelete Consumer] " +
+            _logger.LogInformation("[+] [Words UserDelete Consumer] " +
                                    "Success: User has been deleted");
         }
     }

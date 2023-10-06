@@ -28,7 +28,7 @@ namespace Words.BusinessLayer.MassTransit.Consumers
 
             await _unitOfWork.Users.UpdateAsync(user);
 
-            _logger.LogInformation("[+] [Authentication Consumer] Succesfully updated");
+            _logger.LogInformation("[+] [Words Consumer] Succesfully updated");
         }
     }
 }
