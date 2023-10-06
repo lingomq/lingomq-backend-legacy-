@@ -29,6 +29,5 @@ namespace Achievements.BusinessLayer.MassTransit.Consumers
             _logger.LogInformation("[+] [Achievements UserDelete Consumer] " +
                                    "Success: User has been deleted");
         }
-    {
     }
 }
