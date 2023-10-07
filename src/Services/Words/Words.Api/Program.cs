@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using Words.Api.Middlewares;
 using Words.BusinessLayer.Contracts;
+using Words.BusinessLayer.MassTransit;
 using Words.BusinessLayer.MassTransit.Consumers;
 using Words.BusinessLayer.Services;
 using Words.BusinessLayer.Services.Repositories;
@@ -24,6 +25,7 @@ builder.Services.AddTransient<IUserWordRepository, UserWordRepository>();
 builder.Services.AddTransient<IUserWordTypeRepository, UserWordTypeRepository>();
 builder.Services.AddTransient<IWordTypeRepository, WordTypeRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<PublisherBase>();
 
 // Other services
 builder.Services.AddTransient<IWordChecker, WordChecker>();
@@ -85,6 +87,7 @@ builder.Services.AddMassTransit(x =>
             endpoint.ConfigureConsumer<IdentityCreateUserConsumer>(context);
         });
         cfg.ClearSerialization();
+        cfg.Publish<PublisherBase>();
         cfg.UseRawJsonSerializer();
         cfg.ConfigureEndpoints(context);
     });

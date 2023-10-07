@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using EventBus.Entities.Words;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Words.Api.Common;
 using Words.BusinessLayer.Contracts;
 using Words.BusinessLayer.Exceptions.ClientExceptions;
+using Words.BusinessLayer.MassTransit;
 using Words.DomainLayer.Entities;
 
 namespace Words.Api.Controllers
@@ -12,8 +14,12 @@ namespace Words.Api.Controllers
     public class LanguageController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
-        public LanguageController(IUnitOfWork unitOfWork) =>
+        private readonly PublisherBase _publisher;
+        public LanguageController(IUnitOfWork unitOfWork, PublisherBase publisher)
+        {
             _unitOfWork = unitOfWork;
+            _publisher = publisher;
+        }
 
         [HttpGet("all/{range}")]
         [Authorize(Roles = AccessRoles.All)]
@@ -47,6 +53,12 @@ namespace Words.Api.Controllers
         public async Task<IActionResult> Create(Language language)
         {
             await _unitOfWork.Languages.AddAsync(language);
+
+            await _publisher.Send(new WordsLanguageCreate()
+            {
+                Id = language.Id,
+                Name = language.Name
+            });
             return LingoMq.Responses.LingoMqResponse.AcceptedResult(language);
         }
         [HttpPut]
@@ -57,6 +69,11 @@ namespace Words.Api.Controllers
                 throw new NotFoundException<Language>();
 
             await _unitOfWork.Languages.UpdateAsync(language);
+            await _publisher.Send(new WordsLanguageUpdate()
+            {
+                Id = language.Id,
+                Name = language.Name
+            });
             return LingoMq.Responses.LingoMqResponse.AcceptedResult(language);
         }
         [HttpDelete("{id}")]
@@ -66,6 +83,10 @@ namespace Words.Api.Controllers
             if (await _unitOfWork.Languages.GetByIdAsync(id) is null)
                 throw new NotFoundException<Language>();
 
+            await _publisher.Send(new WordsLanguageDelete()
+            {
+                Id = id,
+            });
             await _unitOfWork.Languages.DeleteAsync(id);
             return LingoMq.Responses.LingoMqResponse.AcceptedResult("Language has been removed");
         }
