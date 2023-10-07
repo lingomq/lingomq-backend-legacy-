@@ -62,6 +62,7 @@ builder.Services.AddMassTransit(x =>
     x.AddDelayedMessageScheduler();
     x.AddConsumer<IdentityDeleteUserConsumer>();
     x.AddConsumer<IdentityUpdateUserConsumer>();
+    x.AddConsumer<IdentityCreateUserConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host("localhost", "/", h =>
@@ -77,6 +78,10 @@ builder.Services.AddMassTransit(x =>
         cfg.ReceiveEndpoint(typeof(IdentityUpdateUserConsumer).Name.ToLower(), endpoint =>
         {
             endpoint.ConfigureConsumer<IdentityUpdateUserConsumer>(context);
+        });
+        cfg.ReceiveEndpoint(typeof(IdentityCreateUserConsumer).Name.ToLower(), endpoint =>
+        {
+            endpoint.ConfigureConsumer<IdentityCreateUserConsumer>(context);
         });
         cfg.ClearSerialization();
         cfg.UseRawJsonSerializer();

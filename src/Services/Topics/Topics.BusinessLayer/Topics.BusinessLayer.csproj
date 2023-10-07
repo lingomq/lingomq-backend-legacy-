@@ -8,12 +8,19 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Libs\Responses\Responses.csproj" />
+    <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\Topics.DomainLayer\Topics.DomainLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="2.1.4" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="MassTransit.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\.nuget\packages\masstransit.abstractions\8.1.0\lib\net7.0\MassTransit.Abstractions.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
