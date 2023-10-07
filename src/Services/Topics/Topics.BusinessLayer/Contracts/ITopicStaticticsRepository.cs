@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using Topics.DomainLayer.Entities;
 
 namespace Topics.BusinessLayer.Contracts
 {
-    internal interface ITopicStaticticsRepository
+    public interface ITopicStaticticsRepository : IGenericRepository<TopicStatistics>
     {
     }
 }
