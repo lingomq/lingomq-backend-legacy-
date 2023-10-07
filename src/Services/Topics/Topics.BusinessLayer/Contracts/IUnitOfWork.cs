@@ -5,7 +5,7 @@
         ILanguageRepository Languages { get; }
         ITopicLevelRepository TopicLevels { get; }
         ITopicRepository Topics { get; }
-        ITopicStaticticsRepository TopicStatictics { get; }
+        ITopicStaticticsRepository TopicStatistics { get; }
         ITopicStatisticsTypeRepository StatisticsTypes { get; }
         IUserRepository Users { get; }
     }
