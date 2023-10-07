@@ -5,7 +5,7 @@ using Topics.DomainLayer.Entities;
 
 namespace Topics.BusinessLayer.Services.Repositories;
 
-public class TopicStatisticsRepository : GenericRepository<TopicStatistics>, ITopicStaticticsRepository
+public class TopicStatisticsRepository : GenericRepository<TopicStatistics>, ITopicStatisticsRepository
 {
     private static readonly string Get =
         "SELECT topic_statistics.id, " +

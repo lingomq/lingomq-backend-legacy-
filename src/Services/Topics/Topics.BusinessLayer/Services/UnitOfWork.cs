@@ -8,14 +8,14 @@ public class UnitOfWork : IUnitOfWork
     public ILanguageRepository Languages { get; }
     public ITopicLevelRepository TopicLevels { get; }
     public ITopicRepository Topics { get; }
-    public ITopicStaticticsRepository TopicStatistics { get; }
+    public ITopicStatisticsRepository TopicStatistics { get; }
     public ITopicStatisticsTypeRepository StatisticsTypes { get; }
     public IUserRepository Users { get; }
 
     public UnitOfWork(ILanguageRepository languageRepository,
         ITopicLevelRepository levelRepository,
         ITopicRepository topicRepository,
-        ITopicStaticticsRepository staticticsRepository,
+        ITopicStatisticsRepository staticticsRepository,
         ITopicStatisticsTypeRepository statisticsTypeRepository,
         IUserRepository userRepository)
     {

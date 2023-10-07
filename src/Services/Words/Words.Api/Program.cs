@@ -14,6 +14,7 @@ using Words.BusinessLayer.Services;
 using Words.BusinessLayer.Services.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration.AddJsonFile("appsettings.json");
 
 // Data layer
 builder.Services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev"]));
