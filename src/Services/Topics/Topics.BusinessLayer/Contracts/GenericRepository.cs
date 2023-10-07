@@ -8,7 +8,7 @@ namespace Topics.BusinessLayer.Contracts
     public abstract class GenericRepository<T> where T : BaseEntity
     {
         private readonly IDbConnection _connection;
-        public GenericRepository(IDbConnection connection) =>
+        protected GenericRepository(IDbConnection connection) =>
             _connection = connection;
         protected virtual async Task<List<T>> GetByQueryAsync<E>(string sql, E entity) where E : class
         {
@@ -17,7 +17,7 @@ namespace Topics.BusinessLayer.Contracts
 
             return values.Count() == 0 ? new List<T>() : values.ToList();
         }
-        protected virtual async Task ExecuteByTemplateAsync<E>(string sql, E entity) where E : class
+        protected virtual async Task ExecuteByTemplateAsync<TE>(string sql, TE entity) where TE : class
         {
             using var transactionScope = new TransactionScope();
 
