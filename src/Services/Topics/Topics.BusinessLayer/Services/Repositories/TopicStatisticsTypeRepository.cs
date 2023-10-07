@@ -1,12 +1,10 @@
-﻿using Dapper;
-using System.Data;
-using System.Transactions;
+﻿using System.Data;
 using Topics.BusinessLayer.Contracts;
 using Topics.DomainLayer.Entities;
 
 namespace Topics.BusinessLayer.Services.Repositories
 {
-    public class TopicStatisticsTypeRepository : ITopicStatisticsTypeRepository
+    public class TopicStatisticsTypeRepository : GenericRepository<TopicStatisticsType>, ITopicStatisticsTypeRepository
     {
         private readonly static string Get =
             "SELECT id as \"Id\", " +
@@ -29,50 +27,33 @@ namespace Topics.BusinessLayer.Services.Repositories
             "WHERE id = @Id";
 
         private readonly IDbConnection _connection;
-        public TopicStatisticsTypeRepository(IDbConnection connection) =>
+        public TopicStatisticsTypeRepository(IDbConnection connection) : base(connection) =>
             _connection = connection;
 
         public async Task AddAsync(TopicStatisticsType entity)
         {
-            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
-
-            await _connection.ExecuteAsync(Create, entity);
-            transactionScope.Complete();
-            transactionScope.Dispose();
+            await ExecuteByTemplateAsync(Create, entity);
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
-
-            await _connection.ExecuteAsync(Delete, new { Id = id });
-            transactionScope.Complete();
-            transactionScope.Dispose();
+            await ExecuteByTemplateAsync(Delete, new { Id = id });
         }
 
         public async Task<List<TopicStatisticsType>> GetAsync(int range)
         {
-            IEnumerable<TopicStatisticsType> types;
-            types = await _connection.QueryAsync<TopicStatisticsType>(GetRange, new { Count = range });
-
-            return types.Count() == 0 ? new List<TopicStatisticsType>() : types.ToList();
+            return await GetByQueryAsync(GetRange, new { Count = range });
         }
 
         public async Task<TopicStatisticsType?> GetByIdAsync(Guid id)
         {
-            IEnumerable<TopicStatisticsType> types;
-            types = await _connection.QueryAsync<TopicStatisticsType>(GetById, new { Id = id });
-
+            IEnumerable<TopicStatisticsType> types = await GetByQueryAsync(GetById, new { Id = id });
             return types.FirstOrDefault();
         }
 
         public async Task UpdateAsync(TopicStatisticsType entity)
         {
-            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
-
-            await _connection.ExecuteAsync(Update, entity);
-            transactionScope.Complete();
-            transactionScope.Dispose();
+            await ExecuteByTemplateAsync(Update, entity);
         }
     }
 }

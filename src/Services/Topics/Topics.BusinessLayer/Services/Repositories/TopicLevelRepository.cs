@@ -1,12 +1,10 @@
-﻿using Dapper;
-using System.Data;
-using System.Transactions;
+﻿using System.Data;
 using Topics.BusinessLayer.Contracts;
 using Topics.DomainLayer.Entities;
 
 namespace Topics.BusinessLayer.Services.Repositories
 {
-    public class TopicLevelRepository : ITopicLevelRepository
+    public class TopicLevelRepository : GenericRepository<TopicLevel>, ITopicLevelRepository
     {
         private readonly static string Get =
             "SELECT id as \"Id\", " +
@@ -29,50 +27,33 @@ namespace Topics.BusinessLayer.Services.Repositories
             "WHERE id = @Id";
 
         private readonly IDbConnection _connection;
-        public TopicLevelRepository(IDbConnection connection) =>
+        public TopicLevelRepository(IDbConnection connection) : base(connection) =>
             _connection = connection;
 
         public async Task AddAsync(TopicLevel entity)
         {
-            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
-
-            await _connection.ExecuteAsync(Create, entity);
-            transactionScope.Complete();
-            transactionScope.Dispose();
+            await ExecuteByTemplateAsync(Create, entity);
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
-
-            await _connection.ExecuteAsync(Delete, new { Id = id });
-            transactionScope.Complete(); 
-            transactionScope.Dispose();
+            await ExecuteByTemplateAsync(Delete, new { Id = id});
         }
 
         public async Task<List<TopicLevel>> GetAsync(int range)
         {
-            IEnumerable<TopicLevel> levels;
-            levels = await _connection.QueryAsync<TopicLevel>(GetRange, new { Count = range });
-
-            return levels.Count() == 0 ? new List<TopicLevel>() : levels.ToList();
+            return await GetByQueryAsync(GetRange, new { Count = range });
         }
 
         public async Task<TopicLevel?> GetByIdAsync(Guid id)
         {
-            IEnumerable<TopicLevel> levels;
-            levels = await _connection.QueryAsync<TopicLevel>(GetById, new { Id = id });
-
+            IEnumerable<TopicLevel> levels = await GetByQueryAsync(GetById, new { Id = id });
             return levels.FirstOrDefault();
         }
 
         public async Task UpdateAsync(TopicLevel entity)
         {
-            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
-
-            await _connection.ExecuteAsync(Update, entity);
-            transactionScope.Complete();
-            transactionScope.Dispose();
+            await ExecuteByTemplateAsync(Update, entity);
         }
     }
 }

@@ -1,12 +1,10 @@
-﻿using Dapper;
-using System.Data;
-using System.Transactions;
+﻿using System.Data;
 using Topics.BusinessLayer.Contracts;
 using Topics.DomainLayer.Entities;
 
 namespace Topics.BusinessLayer.Services.Repositories
 {
-    public class LanguageRepository : ILanguageRepository
+    public class LanguageRepository : GenericRepository<Language>, ILanguageRepository
     {
         private readonly static string Get =
             "SELECT id as \"Id\", name as \"Name\" " +
@@ -28,52 +26,33 @@ namespace Topics.BusinessLayer.Services.Repositories
             "DELETE FROM languages " +
             "WHERE id = @Id";
         private readonly IDbConnection _connection;
-        public LanguageRepository(IDbConnection connection) =>
+        public LanguageRepository(IDbConnection connection) : base(connection) =>
             _connection = connection;
 
         public async Task AddAsync(Language entity)
         {
-            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
-
-            await _connection.ExecuteAsync(Create, entity);
-            transactionScope.Complete();
-            transactionScope.Dispose();
+            await ExecuteByTemplateAsync(Create, entity);
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
-
-            await _connection.ExecuteAsync(Delete, new { Id = id });
-            transactionScope.Complete();
-            transactionScope.Dispose();
+            await ExecuteByTemplateAsync(Delete, new { Id = id });
         }
 
         public async Task<List<Language>> GetAsync(int range = int.MaxValue)
         {
-            IEnumerable<Language> languages;
-
-            languages = await _connection.QueryAsync<Language>(GetRange, new { Count = range });
-
-            return languages is null ? new List<Language>() : languages.ToList();
+            return await GetByQueryAsync(GetRange, new { Count = range });
         }
 
         public async Task<Language?> GetByIdAsync(Guid id)
         {
-            IEnumerable<Language> languages;
-
-            languages = await _connection.QueryAsync<Language>(GetById, new { Id = id });
-
-            return languages.FirstOrDefault() is null ? null : languages.FirstOrDefault();
+            IEnumerable<Language> languages = await GetByQueryAsync(GetById, new { Id = id });
+            return languages.FirstOrDefault();
         }
 
         public async Task UpdateAsync(Language entity)
         {
-            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
-
-            await _connection.ExecuteAsync(Update, entity);
-            transactionScope.Complete();
-            transactionScope.Dispose();
+            await ExecuteByTemplateAsync(Update, entity);
         }
     }
 }

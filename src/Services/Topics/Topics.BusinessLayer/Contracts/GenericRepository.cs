@@ -5,16 +5,11 @@ using Topics.DomainLayer.Entities;
 
 namespace Topics.BusinessLayer.Contracts
 {
-    public abstract class GenericTypeRepository<T> where T : BaseEntity
+    public abstract class GenericRepository<T> where T : BaseEntity
     {
         private readonly IDbConnection _connection;
-        public GenericTypeRepository(IDbConnection connection) =>
+        public GenericRepository(IDbConnection connection) =>
             _connection = connection;
-        public abstract Task<T?> GetByIdAsync(Guid id);
-        public abstract Task<List<T>> GetAsync(int range);
-        public abstract Task AddAsync(T entity);
-        public abstract Task UpdateAsync(T entity);
-        public abstract Task DeleteAsync(Guid id);
         protected virtual async Task<List<T>> GetByQueryAsync<E>(string sql, E entity) where E : class
         {
             IEnumerable<T> values;

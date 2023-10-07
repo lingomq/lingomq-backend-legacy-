@@ -1,13 +1,10 @@
-﻿using Dapper;
-using System;
-using System.Data;
-using System.Transactions;
+﻿using System.Data;
 using Topics.BusinessLayer.Contracts;
 using Topics.DomainLayer.Entities;
 
 namespace Topics.BusinessLayer.Services.Repositories
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : GenericRepository<User>, IUserRepository
     {
         private readonly static string Get =
             "SELECT id as \"Id\", email as \"Email\", phone as \"Phone\" " +
@@ -29,50 +26,33 @@ namespace Topics.BusinessLayer.Services.Repositories
             "phone = @Phone " +
             "WHERE id = @Id";
         private readonly IDbConnection _connection;
-        public UserRepository(IDbConnection connection) =>
+        public UserRepository(IDbConnection connection) : base(connection) =>
             _connection = connection;
 
         public async Task AddAsync(User entity)
         {
-            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
-
-            await _connection.ExecuteAsync(Create, entity);
-            transactionScope.Complete();
-            transactionScope.Dispose();
+            await ExecuteByTemplateAsync(Create, entity);
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
-
-            await _connection.ExecuteAsync(Delete, new { Id = id });
-            transactionScope.Complete();
-            transactionScope.Dispose();
+            await ExecuteByTemplateAsync(Delete, new { Id = id });
         }
 
         public async Task<List<User>> GetAsync(int range)
         {
-            IEnumerable<User> users;
-            users = await _connection.QueryAsync<User>(GetRange, new { Count = range });
-
-            return users.Count() == 0 ? new List<User>() : users.ToList();
+            return await GetByQueryAsync(GetRange, new { Count = range });
         }
 
         public async Task<User?> GetByIdAsync(Guid id)
         {
-            IEnumerable<User> users;
-            users = await _connection.QueryAsync<User>(GetById, new { Id = id });
-
+            IEnumerable<User> users = await GetByQueryAsync(GetById, new { Id = id });
             return users.FirstOrDefault();
         }
 
         public async Task UpdateAsync(User entity)
         {
-            using var transactionScope = new TransactionScope();
-
-            await _connection.ExecuteAsync(Update, entity);
-            transactionScope.Complete();
-            transactionScope.Dispose();
+            await ExecuteByTemplateAsync(Update, entity);
         }
     }
 }
