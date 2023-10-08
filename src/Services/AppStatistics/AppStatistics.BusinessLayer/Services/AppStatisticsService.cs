@@ -1,6 +1,8 @@
 ﻿using AppStatistics.BusinessLayer.Contracts.DataAccess;
 using AppStatistics.BusinessLayer.Contracts.Service;
+using AppStatistics.BusinessLayer.Exceptions.ClientExceptions;
 using AppStatistics.DomainLayer.Entities;
+using MongoDB.Driver;
 
 namespace AppStatistics.BusinessLayer.Services
 {
@@ -19,7 +21,7 @@ namespace AppStatistics.BusinessLayer.Services
         public async Task DeleteAsync(string id)
         {
             if (_dataAccess.GetAsync(id) is null)
-                throw new Exception("Not found");
+                throw new NotFoundException<StatisticsApp>();
 
             await _dataAccess.DeleteAsync(id);
         }
@@ -30,10 +32,13 @@ namespace AppStatistics.BusinessLayer.Services
         public async Task<List<StatisticsApp>> GetAsync() =>
             await _dataAccess.GetAsync();
 
+        public async Task<List<StatisticsApp>> GetByDateRange(DateTime start, DateTime finish) =>
+            await _dataAccess.GetByDateRange(start, finish);
+
         public async Task UpdateAsync(StatisticsApp entity)
         {
             if (_dataAccess.GetAsync(entity.Id) is null)
-                throw new Exception("Not found");
+                throw new NotFoundException<StatisticsApp>();
 
             await _dataAccess.UpdateAsync(entity);
         }

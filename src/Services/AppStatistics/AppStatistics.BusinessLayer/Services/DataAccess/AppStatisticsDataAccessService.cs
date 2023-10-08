@@ -13,13 +13,19 @@ namespace AppStatistics.BusinessLayer.Services.DataAccess
         public async Task CreateAsync(StatisticsApp entity) =>
             await _items.InsertOneAsync(entity);
 
-        public async Task DeleteAsync(StatisticsApp entity) =>
-            await _items.DeleteOneAsync(x => x.Id == entity.Id);
+        public async Task DeleteAsync(string id) =>
+            await _items.DeleteOneAsync(x => x.Id == id);
 
         public async Task<StatisticsApp?> GetAsync(string id)
         {
             IAsyncCursor<StatisticsApp> statistics = await _items.FindAsync(x => x.Id == id);
             return await statistics.FirstOrDefaultAsync();
+        }
+
+        public async Task<List<StatisticsApp>> GetByDateRange(DateTime start, DateTime finish)
+        {
+            IAsyncCursor<StatisticsApp> statistics = await _items.FindAsync(x => x.Date >= start && x.Date <= finish);
+            return await statistics.ToListAsync();
         }
 
         public async Task<List<StatisticsApp>> GetAsync()

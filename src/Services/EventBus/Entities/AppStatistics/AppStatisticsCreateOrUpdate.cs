@@ -1,6 +1,6 @@
-﻿namespace AppStatistics.DomainLayer.Entities
+﻿namespace EventBus.Entities.AppStatistics
 {
-    public class StatisticsApp : BaseEntity
+    public class AppStatisticsCreateOrUpdate
     {
         public int TotalUsers { get; set; }
         public int TotalWords { get; set; }
