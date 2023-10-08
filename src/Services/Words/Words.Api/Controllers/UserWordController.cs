@@ -1,4 +1,5 @@
-﻿using LingoMq.Responses;
+﻿using EventBus.Entities.AppStatistics;
+using LingoMq.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -6,6 +7,7 @@ using Words.Api.Common;
 using Words.BusinessLayer.Contracts;
 using Words.BusinessLayer.Dtos;
 using Words.BusinessLayer.Exceptions.ClientExceptions;
+using Words.BusinessLayer.MassTransit;
 using Words.DomainLayer.Entities;
 
 namespace Words.Api.Controllers
@@ -16,13 +18,15 @@ namespace Words.Api.Controllers
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWordChecker _wordChecker;
+        private readonly PublisherBase _publisher;
         private Guid UserId => new Guid(User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier)
             .FirstOrDefault()?.Value!);
 
-        public UserWordController(IUnitOfWork unitOfWork, IWordChecker wordChecker)
+        public UserWordController(IUnitOfWork unitOfWork, IWordChecker wordChecker, PublisherBase publisher)
         {
             _unitOfWork = unitOfWork;
             _wordChecker = wordChecker;
+            _publisher = publisher;
         }
 
         [HttpGet("user")]
@@ -78,6 +82,11 @@ namespace Words.Api.Controllers
             await ValidateBeforeExecute(userWordDto);
             UserWord word = await GetWordData(userWordDto, isForce, isAutocomplete);
 
+            await _publisher.Send(new AppStatisticsCreateOrUpdate()
+            {
+                TotalWords = 1,
+                Date = DateTime.Now
+            });
             await _unitOfWork.UserWords.AddAsync(word);
             return LingoMqResponse.AcceptedResult(word);
         }

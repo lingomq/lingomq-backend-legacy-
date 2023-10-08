@@ -11,6 +11,7 @@ using Authentication.BusinessLayer.Dtos;
 using Authentication.BusinessLayer.Models;
 using Authentication.BusinessLayer.MassTransit;
 using EventBus.Entities.Identity.User;
+using EventBus.Entities.AppStatistics;
 
 namespace Authentication.Api.Controllers
 {
@@ -78,6 +79,11 @@ namespace Authentication.Api.Controllers
                 PasswordHash = user.PasswordHash,
                 PasswordSalt = user.PasswordSalt,
                 RoleName = userRole.Name
+            });
+            await _publisher.Send(new AppStatisticsCreateOrUpdate()
+            {
+                TotalUsers = 1,
+                Date = DateTime.Now
             });
             // return result
             return LingoMq.Responses.LingoMqResponse.OkResult(tokenModel);
