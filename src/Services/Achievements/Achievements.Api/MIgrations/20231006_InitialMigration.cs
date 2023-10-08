@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace Achievements.Api.MIgrations
+namespace Achievements.Api.Migrations
 {
     [Profile("Development")]
     [Migration(20231006)]
