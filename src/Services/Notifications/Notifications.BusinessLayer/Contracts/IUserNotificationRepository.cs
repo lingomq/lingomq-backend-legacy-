@@ -7,4 +7,5 @@ public interface IUserNotificationRepository : IGenericRepository<UserNotificati
     Task<List<UserNotification>> GetByUserIdAsync(Guid id);
     Task<List<UserNotification>> GetByDateTimeRangeAsync(Guid userId, DateTime start, DateTime finish);
     Task<List<UserNotification>> GetUnreadAsync(Guid id);
+    Task MarkAsReadAsync(Guid id);
 }

@@ -40,6 +40,10 @@ public class UserNotificationRepository : GenericRepository<UserNotification>, I
                                             "is_readed = @IsReaded " +
                                             "WHERE id = @Id";
 
+    private static readonly string MarkAsRead = "UPDATE user_notifications SET " +
+                                                "is_readed = TRUE " +
+                                                "WHERE id = @Id";
+    
     private static readonly string Delete = "DELETE FROM user_notifications WHERE id = @Id";
     private readonly IDbConnection _connection;
 
@@ -67,6 +71,8 @@ public class UserNotificationRepository : GenericRepository<UserNotification>, I
         await QueryAsync(GetByDateTimeRange, new { Start = start, Finish = finish });
 
     public async Task<List<UserNotification>> GetUnreadAsync(Guid id) => await QueryAsync(GetUnread, new { Id = id });
+    public async Task MarkAsReadAsync(Guid id) => await ExecuteAsync(MarkAsRead, new { Id = id });
+
     protected override async Task<List<UserNotification>> QueryAsync<TE>(string sql, TE entity)
     {
         IEnumerable<UserNotification> values = await _connection.QueryAsync<UserNotification,
