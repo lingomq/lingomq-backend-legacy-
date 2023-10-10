@@ -4,7 +4,7 @@ namespace Notifications.BusinessLayer.Contracts;
 
 public interface IUserNotificationRepository : IGenericRepository<UserNotification>
 {
-    Task<List<UserNotification>> GetByUserId(Guid id);
-    Task<List<UserNotification>> GetByDateTimeRange(Guid userId, DateTime start, DateTime finish);
-    Task<List<UserNotification>> GetUnread(Guid id);
+    Task<List<UserNotification>> GetByUserIdAsync(Guid id);
+    Task<List<UserNotification>> GetByDateTimeRangeAsync(Guid userId, DateTime start, DateTime finish);
+    Task<List<UserNotification>> GetUnreadAsync(Guid id);
 }

@@ -10,4 +10,8 @@
     <ProjectReference Include="..\Notifications.DomainLayer\Notifications.DomainLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.4" />
+  </ItemGroup>
+
 </Project>
