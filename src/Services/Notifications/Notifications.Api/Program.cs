@@ -6,6 +6,7 @@ using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Notifications.Api.Middlewares;
 using Notifications.BusinessLayer.Contracts;
 using Notifications.BusinessLayer.MassTransit.Consumers;
 using Notifications.BusinessLayer.Services;
@@ -132,6 +133,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
