@@ -1,10 +1,10 @@
-﻿using System.Net;
+using System.Net;
+using Finances.BusinessLayer.Exceptions;
+using Finances.BusinessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Notifications.BusinessLayer.Exceptions;
-using Notifications.BusinessLayer.Models;
 
-namespace Notifications.Api.Middlewares;
+namespace Finances.Api.Middlewares;
 
 public class ExceptionHandlerMiddleware
 {
