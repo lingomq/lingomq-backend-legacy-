@@ -1,6 +1,6 @@
 using Newtonsoft.Json;
 
-namespace Achievements.BusinessLayer.Models.YooKassa;
+namespace Finances.BusinessLayer.Models.YooKassa;
 
 public class Confirmation
 {
