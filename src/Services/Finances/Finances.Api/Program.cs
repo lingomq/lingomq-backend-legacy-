@@ -1,6 +1,7 @@
 using System.Data;
 using System.Reflection;
 using System.Text;
+using Finances.Api.Middlewares;
 using Finances.BusinessLayer.Contracts;
 using Finances.BusinessLayer.MassTransit.Consumers;
 using Finances.BusinessLayer.Services;
@@ -133,6 +134,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseHttpsRedirection();
 
