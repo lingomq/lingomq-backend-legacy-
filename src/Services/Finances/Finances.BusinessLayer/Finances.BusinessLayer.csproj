@@ -11,4 +11,10 @@
     <ProjectReference Include="..\Finances.DomainLayer\Finances.DomainLayer.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="Dapper">
+      <HintPath>..\..\..\..\..\..\..\.nuget\packages\dapper\2.0.151\lib\net5.0\Dapper.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

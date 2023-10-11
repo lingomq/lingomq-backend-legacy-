@@ -4,6 +4,6 @@ namespace Finances.BusinessLayer.Contracts
 {
     public interface IUserFinanceRepository : IGenericRepository<UserFinance>
     {
-        Task<List<UserFinance?>> GetByUserId(Guid userId);
+        Task<List<UserFinance?>> GetByUserIdAsync(Guid userId);
     }
 }
