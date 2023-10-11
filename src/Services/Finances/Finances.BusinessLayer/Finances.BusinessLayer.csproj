@@ -8,12 +8,16 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Libs\Responses\Responses.csproj" />
+    <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\Finances.DomainLayer\Finances.DomainLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Dapper">
       <HintPath>..\..\..\..\..\..\..\.nuget\packages\dapper\2.0.151\lib\net5.0\Dapper.dll</HintPath>
+    </Reference>
+    <Reference Include="MassTransit.Abstractions">
+      <HintPath>..\..\..\..\..\..\..\.nuget\packages\masstransit.abstractions\8.1.0\lib\net7.0\MassTransit.Abstractions.dll</HintPath>
     </Reference>
   </ItemGroup>
 
