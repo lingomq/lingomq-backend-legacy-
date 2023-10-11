@@ -40,7 +40,7 @@ LingoMq - it is application, which represents opportunity to learns any language
     - <a href="https://github.com/lingomq/lingomq-backend/blob/dev/docs/dbDocs.md#appstatistics">AppStatistics</a>
 ## Обобщенное описание
 
-<img src="https://sun9-20.userapi.com/impg/gzvDs5NMX5TlrjYtf4U_vDfcDtMArkEIhQWT2g/T1lfMx_bJjA.jpg?size=1796x929&quality=96&sign=0ed3b1db05ef781c8c684aa37a97bb47&type=album" alt="Logo of the project" align="center">
+<img src="https://github.com/lingomq/lingomq-backend/assets/81153204/277744f3-bace-4c81-a2f7-b57e7ffe8b34" alt="Logo of the project" align="center">
 
 > Структура таблиц
 
@@ -383,7 +383,7 @@ LingoMq - it is application, which represents opportunity to learns any language
 | Achievements.UserAchievements | UserAchievements.UserId ->  Identity.Users.Id | FK_Achievements_UserAchievements_UserId ->  Identity.Users.Id |
 
 ## Оплата
-<img src="https://sun9-61.userapi.com/impg/0iuAnee_DYulsykUv8ygMdewZotBexML3V_mGA/wLp1FwniQzc.jpg?size=749x728&quality=95&sign=7484225a354735f1925e6d91bc7d0c6d&type=album"/>
+<img src="https://github.com/lingomq/lingomq-backend/assets/81153204/2e9acfb7-657e-4477-a74d-7d8f380a0a77"/>
 
 > Структура зоны оплаты
 
