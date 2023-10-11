@@ -6,4 +6,9 @@
 <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Libs\Responses\Responses.csproj" />
+    <ProjectReference Include="..\Finances.DomainLayer\Finances.DomainLayer.csproj" />
+  </ItemGroup>
+
 </Project>

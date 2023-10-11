@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace Notifications.BusinessLayer.Exceptions
+namespace Finances.BusinessLayer.Exceptions
 {
     public class ExceptionBase : Exception
     {
