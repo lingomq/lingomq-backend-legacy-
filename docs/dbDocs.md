@@ -399,6 +399,7 @@ LingoMq - it is application, which represents opportunity to learns any language
 | FK | UserId | GUID | Это поле - ссылка на конкретного пользователя | NOT NULL  |
 | FK | FinanceId | GUID | Это поле - ссылка на конкретную платную услугу | NOT NULL |
 |  | CreationDate | DateTime | Это поле - дата оплаты |  |
+|  | SubscriptionEndDate | DateTime | Это поле - дата оплаты |  |
 #### UserFinances:Ссылается на...
 | Зона.Таблица | Ключи | Названия |
 |---|---|---|
