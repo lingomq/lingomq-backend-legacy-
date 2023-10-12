@@ -1,6 +1,7 @@
 ﻿using LingoMq.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using Notifications.Api.Common;
 using Notifications.BusinessLayer.Contracts;
 using Notifications.BusinessLayer.Exceptions.ClientExceptions;
@@ -12,6 +13,7 @@ namespace Notifications.Api.Controllers;
 [ApiController]
 public class NotificationTypeController : ControllerBase
 {
+    private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
     private readonly IUnitOfWork _unitOfWork;
 
     public NotificationTypeController(IUnitOfWork unitOfWork) =>
@@ -22,6 +24,7 @@ public class NotificationTypeController : ControllerBase
     public async Task<IActionResult> Get(int range = int.MaxValue)
     {
         List<NotificationType> types = await _unitOfWork.NotificationTypes.GetAsync(range);
+        _logger.Info("GET /all/{range} {0}", nameof(List<NotificationType>));
         return LingoMqResponse.OkResult(types);
     }
 
@@ -33,6 +36,7 @@ public class NotificationTypeController : ControllerBase
         if (type is null)
             throw new NotFoundException<NotificationType>();
 
+        _logger.Info("GET /{id} {0}", nameof(NotificationType));
         return LingoMqResponse.OkResult(type);
     }
 
@@ -41,6 +45,7 @@ public class NotificationTypeController : ControllerBase
     public async Task<IActionResult> Create(NotificationType type)
     {
         await _unitOfWork.NotificationTypes.CreateAsync(type);
+        _logger.Info("POST / {0}", nameof(NotificationType));
         return LingoMqResponse.AcceptedResult(type);
     }
 
@@ -52,6 +57,7 @@ public class NotificationTypeController : ControllerBase
             throw new InvalidDataException<NotificationType>(new[] { "id" });
 
         await _unitOfWork.NotificationTypes.UpdateAsync(type);
+        _logger.Info("PUT / {0}", nameof(NotificationType));
         return LingoMqResponse.AcceptedResult(type);
     }
 
@@ -63,6 +69,7 @@ public class NotificationTypeController : ControllerBase
             throw new InvalidDataException<NotificationType>(new[] { "id" });
 
         await _unitOfWork.NotificationTypes.DeleteAsync(id);
+        _logger.Info("DELETE /{id} {0}", nameof(NotificationType));
         return LingoMqResponse.AcceptedResult();
     }
 }

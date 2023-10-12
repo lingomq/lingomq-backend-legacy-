@@ -6,6 +6,7 @@ using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NLog.Extensions.Logging;
 using Notifications.Api.Middlewares;
 using Notifications.BusinessLayer.Contracts;
 using Notifications.BusinessLayer.MassTransit.Consumers;
@@ -15,6 +16,13 @@ using Npgsql;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
+
+// Add Logging (NLog)
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.ClearProviders();
+    loggingBuilder.AddNLog();
+});
 
 // DataAccess
 builder.Services.AddTransient<IDbConnection>((sp) =>
