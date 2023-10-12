@@ -6,6 +6,7 @@ using Finances.DomainLayer.Entities;
 using LingoMq.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using System.Security.Claims;
 
 namespace Finances.Api.Controllers
@@ -14,6 +15,7 @@ namespace Finances.Api.Controllers
     [ApiController]
     public class UserFinanceController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPaymentService _paymentService;
         private Guid UserId => new(User.Claims
@@ -29,6 +31,7 @@ namespace Finances.Api.Controllers
         public async Task<IActionResult> Get()
         {
             List<UserFinance> finances = await _unitOfWork.UserFinances.GetByUserIdAsync(UserId);
+            _logger.Info("GET / {0}", nameof(List<UserFinance>));
             return LingoMqResponse.OkResult(finances);
         }
 
@@ -37,6 +40,7 @@ namespace Finances.Api.Controllers
         public async Task<IActionResult> Get(int range)
         {
             List<UserFinance> finances = await _unitOfWork.UserFinances.GetAsync(range);
+            _logger.Info("GET /all/{range} {0}", nameof(List<UserFinance>));
             return LingoMqResponse.OkResult(finances);
         }
 
@@ -48,6 +52,7 @@ namespace Finances.Api.Controllers
                 throw new NotFoundException<User>();
 
             List<UserFinance> finances = await _unitOfWork.UserFinances.GetByUserIdAsync(userId);
+            _logger.Info("GET /{userId} {0}", nameof(List<UserFinance>));
             return LingoMqResponse.OkResult(finances);
         }
 
@@ -71,6 +76,7 @@ namespace Finances.Api.Controllers
             if (currentFinance.EndSubscriptionDate < DateTime.UtcNow)
                 status = "exceed";
 
+            _logger.Info("GET /status/{userId}&{financeId} {0}", nameof(UserFinance));
             return LingoMqResponse.OkResult(new { Status = status, Data = currentFinance });
         }
 
@@ -101,6 +107,7 @@ namespace Finances.Api.Controllers
             else
                 await _unitOfWork.UserFinances.UpdateAsync(finance);
 
+            _logger.Info("POST /confirm {0}", nameof(UserFinance));
             return LingoMqResponse.AcceptedResult();
         }
     }

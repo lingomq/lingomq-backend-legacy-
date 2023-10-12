@@ -97,7 +97,7 @@ namespace Authentication.Api.Controllers
             
             TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto!);
 
-            _logger.Info("POST /refresh-token {0}", nameof(TokenModel));
+            _logger.Info("GET /refresh-token {0}", nameof(TokenModel));
             return LingoMq.Responses.LingoMqResponse.OkResult(tokenModel);
         }
     }

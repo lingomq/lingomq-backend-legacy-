@@ -3,11 +3,13 @@ using Finances.BusinessLayer.Exceptions;
 using Finances.BusinessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using NLog;
 
 namespace Finances.Api.Middlewares;
 
 public class ExceptionHandlerMiddleware
 {
+    private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
     private readonly RequestDelegate _next;
     public ExceptionHandlerMiddleware(RequestDelegate next)
     {
@@ -32,6 +34,10 @@ public class ExceptionHandlerMiddleware
                 };
                 await HandleAsync(context, (int)ex.ExceptionStatusCode, model);
             }
+
+            _logger.Error("Type: {0}; Message: {1};", ex.Source, ex.Message);
+
+            _logger.Warn("Type: {0}; Message: {1};", ex.Source, ex.Message);
         }
         catch (Exception ex)
         {
