@@ -12,6 +12,7 @@ using Authentication.BusinessLayer.Models;
 using Authentication.BusinessLayer.MassTransit;
 using EventBus.Entities.Identity.User;
 using EventBus.Entities.AppStatistics;
+using NLog;
 
 namespace Authentication.Api.Controllers
 {
@@ -19,6 +20,7 @@ namespace Authentication.Api.Controllers
     [ApiController]
     public class ConfirmController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private IJwtService _jwtService;
         private IUnitOfWork _unitOfWork;
         private Publisher _publisher;
@@ -85,7 +87,8 @@ namespace Authentication.Api.Controllers
                 TotalUsers = 1,
                 Date = DateTime.Now
             });
-            // return result
+
+            _logger.Info("GET / {0}", nameof(TokenModel));
             return LingoMq.Responses.LingoMqResponse.OkResult(tokenModel);
         }
     }

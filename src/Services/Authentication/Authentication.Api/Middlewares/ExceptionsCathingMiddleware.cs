@@ -2,13 +2,14 @@
 using Authentication.BusinessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using System;
+using NLog;
 using System.Net;
 
 namespace Authentication.Api.Middlewares
 {
     public class ExceptionsCathingMiddleware
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly RequestDelegate _next;
         public ExceptionsCathingMiddleware(RequestDelegate next)
         {
@@ -33,6 +34,8 @@ namespace Authentication.Api.Middlewares
                     };
                     await HandleAsync(context, (int)ex.ExceptionStatusCode, model);
                 }
+
+                _logger.Warn("Type: {0}; Message: {1};", ex.Source, ex.Message);
             }
             catch (Exception ex)
             {
@@ -42,6 +45,8 @@ namespace Authentication.Api.Middlewares
                     Code = 0,
                     Message = ex.Message
                 };
+
+                _logger.Error("Type: {0}; Message: {1};", ex.Source, ex.Message);
 
                 await HandleAsync(context, (int) HttpStatusCode.InternalServerError, model);
             }

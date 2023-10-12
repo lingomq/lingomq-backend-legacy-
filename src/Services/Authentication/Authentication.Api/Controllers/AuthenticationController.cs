@@ -10,6 +10,7 @@ using System.Security.Claims;
 using Authentication.BusinessLayer.MassTransit;
 using System.IdentityModel.Tokens.Jwt;
 using EventBus.Entities.Email;
+using NLog;
 
 namespace Authentication.Api.Controllers
 {
@@ -17,6 +18,7 @@ namespace Authentication.Api.Controllers
     [Route("api/v0/auth")]
     public class AuthenticationController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private IJwtService _jwtService;
         private IUnitOfWork _unitOfWork;
         private Publisher _publisher;
@@ -49,6 +51,7 @@ namespace Authentication.Api.Controllers
                 Subject = "Вход в аккаунт"
             });
 
+            _logger.Info("POST /sign-in {0}", nameof(TokenModel));
             return LingoMq.Responses.LingoMqResponse.OkResult(tokenModel);
         }
 
@@ -76,6 +79,7 @@ namespace Authentication.Api.Controllers
             await _publisher.Send(new EmailModelSignUp() { Email = model.Email!, Nickname = model.Nickname!,
                 Token = emailToken, Subject = "Подтверждение аккаунта"});
 
+            _logger.Info("POST /sign-up {0}", nameof(StatusCode));
             return LingoMq.Responses.LingoMqResponse.AcceptedResult();
         }
 
@@ -92,7 +96,8 @@ namespace Authentication.Api.Controllers
                 principal.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Name)!.Value);
             
             TokenModel tokenModel = _jwtService.CreateTokenPair(infoDto!);
-            
+
+            _logger.Info("POST /refresh-token {0}", nameof(TokenModel));
             return LingoMq.Responses.LingoMqResponse.OkResult(tokenModel);
         }
     }

@@ -14,14 +14,19 @@ using System.Reflection;
 using System.Text;
 using Authentication.BusinessLayer.MassTransit.Consumers;
 using EventBus.Entities.Identity.User;
+using NLog.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
 
-// Add services to the container.
+// Add Logging (NLog)
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.ClearProviders();
+    loggingBuilder.AddNLog();
+});
 
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -57,6 +62,7 @@ builder.Services.AddSwaggerGen(c =>
         });
 });
 
+// Data layer
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddTransient<IDbConnection>(
     (sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev"]));
@@ -66,6 +72,8 @@ builder.Services.AddTransient<IUserInfoRepository, UserInfoRepository>();
 builder.Services.AddTransient<IJwtService, JwtService>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 builder.Services.AddTransient<Publisher>();
+
+// Authentication
 builder.Services.AddAuthentication(x => {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
     x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -87,6 +95,7 @@ builder.Services.AddAuthentication(x => {
 
 builder.Services.AddAuthorization();
 
+// Add MassTransit
 builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
@@ -124,6 +133,8 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
+
+// Add Migrations
 builder.Services.AddFluentMigratorCore()
         .ConfigureRunner(cr => cr
         .AddPostgres()
