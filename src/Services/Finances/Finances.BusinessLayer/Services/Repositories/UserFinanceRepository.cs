@@ -64,7 +64,7 @@ public class UserFinanceRepository : GenericRepository<UserFinance>, IUserFinanc
     public async Task DeleteAsync(Guid id) =>
         await ExecuteAsync(Delete, new { Id = id });
 
-    public async Task<List<UserFinance?>> GetByUserIdAsync(Guid userId) =>
+    public async Task<List<UserFinance>> GetByUserIdAsync(Guid userId) =>
         await QueryAsync(GetByUserId, new { Id = userId });
     
     protected override async Task<List<UserFinance>> QueryAsync<TE>(string sql, TE entity)

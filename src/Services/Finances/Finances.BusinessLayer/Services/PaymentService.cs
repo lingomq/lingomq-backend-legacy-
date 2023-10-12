@@ -17,16 +17,16 @@ namespace Finances.BusinessLayer.Services
 
         public async Task<bool> ConfirmPayment(Guid paymentId)
         {
-            HttpResponseMessage response = await GetResponse(_url);
+            HttpResponseMessage response = await GetResponse(_url + paymentId);
             if (response.IsSuccessStatusCode)
                 return true;
 
             return false;
         }
 
-        public async Task<bool> ConfirmPaymentData(Guid userId, Guid financeId)
+        public async Task<bool> ConfirmPaymentData(Guid userId, Guid financeId, Guid paymentId)
         {
-            HttpResponseMessage response = await GetResponse(_url);
+            HttpResponseMessage response = await GetResponse(_url + paymentId);
 
             if (response.IsSuccessStatusCode)
             {
