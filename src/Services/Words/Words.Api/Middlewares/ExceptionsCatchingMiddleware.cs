@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using NLog;
 using System.Net;
 using Words.BusinessLayer.Exceptions;
 using Words.BusinessLayer.Models;
@@ -8,6 +9,7 @@ namespace Words.Api.Middlewares
 {
     public class ExceptionsCatchingMiddleware
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly RequestDelegate _next;
         public ExceptionsCatchingMiddleware(RequestDelegate next)
         {
@@ -32,6 +34,8 @@ namespace Words.Api.Middlewares
                     };
                     await HandleAsync(context, (int)ex.ExceptionStatusCode, model);
                 }
+
+                _logger.Warn("Type: {0}; Message: {1};", ex.Source, ex.Message);
             }
             catch (Exception ex)
             {
@@ -43,6 +47,8 @@ namespace Words.Api.Middlewares
                 };
 
                 await HandleAsync(context, (int)HttpStatusCode.InternalServerError, model);
+
+                _logger.Error("Type: {0}; Message: {1};", ex.Source, ex.Message);
             }
         }
         private async Task HandleCustomExceptionAsync(HttpContext context, ExceptionBase exceptionBase)

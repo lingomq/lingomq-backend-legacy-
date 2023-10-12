@@ -1,6 +1,7 @@
 ﻿using EventBus.Entities.Words;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using Words.Api.Common;
 using Words.BusinessLayer.Contracts;
 using Words.BusinessLayer.Exceptions.ClientExceptions;
@@ -13,6 +14,7 @@ namespace Words.Api.Controllers
     [ApiController]
     public class LanguageController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         private readonly PublisherBase _publisher;
         public LanguageController(IUnitOfWork unitOfWork, PublisherBase publisher)
@@ -26,6 +28,7 @@ namespace Words.Api.Controllers
         public async Task<IActionResult> Get(int range = int.MaxValue)
         {
             List<Language> languages = await _unitOfWork.Languages.GetAsync(range);
+            _logger.Info("GET /all/{range} {0}", nameof(List<Language>));
             return LingoMq.Responses.LingoMqResponse.OkResult(languages);
         }
         [HttpGet("name/{name}")]
@@ -36,6 +39,7 @@ namespace Words.Api.Controllers
             if (language is null)
                 throw new NotFoundException<Language>();
 
+            _logger.Info("GET /name/{name} {0}", nameof(Language));
             return LingoMq.Responses.LingoMqResponse.OkResult(language);
         }
         [HttpGet("{id}")]
@@ -46,6 +50,7 @@ namespace Words.Api.Controllers
             if (language is null)
                 throw new NotFoundException<Language>();
 
+            _logger.Info("GET /{id} {0}", nameof(Language));
             return LingoMq.Responses.LingoMqResponse.OkResult(language);
         }
         [HttpPost]
@@ -59,6 +64,8 @@ namespace Words.Api.Controllers
                 Id = language.Id,
                 Name = language.Name
             });
+
+            _logger.Info("POST / {0}", nameof(Language));
             return LingoMq.Responses.LingoMqResponse.AcceptedResult(language);
         }
         [HttpPut]
@@ -74,6 +81,8 @@ namespace Words.Api.Controllers
                 Id = language.Id,
                 Name = language.Name
             });
+
+            _logger.Info("PUT / {0}", nameof(Language));
             return LingoMq.Responses.LingoMqResponse.AcceptedResult(language);
         }
         [HttpDelete("{id}")]
@@ -88,6 +97,7 @@ namespace Words.Api.Controllers
                 Id = id,
             });
             await _unitOfWork.Languages.DeleteAsync(id);
+            _logger.Info("DELETE /{id} {0}", nameof(Language));
             return LingoMq.Responses.LingoMqResponse.AcceptedResult("Language has been removed");
         }
     }

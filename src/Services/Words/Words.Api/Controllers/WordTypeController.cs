@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using Words.Api.Common;
 using Words.BusinessLayer.Contracts;
 using Words.BusinessLayer.Exceptions.ClientExceptions;
@@ -11,6 +12,7 @@ namespace Words.Api.Controllers
     [ApiController]
     public class WordTypeController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         public WordTypeController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
@@ -20,6 +22,7 @@ namespace Words.Api.Controllers
         public async Task<IActionResult> Get(int range = int.MaxValue)
         {
             List<WordType> wordTypes = await _unitOfWork.WordTypes.GetAsync(range);
+            _logger.Info("GET /all/{range} {0}", nameof(List<WordType>));
             return LingoMq.Responses.LingoMqResponse.OkResult(wordTypes);
         }
 
@@ -31,6 +34,7 @@ namespace Words.Api.Controllers
             if (wordType is null)
                 throw new NotFoundException<WordType>();
 
+            _logger.Info("GET /{id} {0}", nameof(WordType));
             return LingoMq.Responses.LingoMqResponse.OkResult(wordType);
         }
 
@@ -39,6 +43,7 @@ namespace Words.Api.Controllers
         public async Task<IActionResult> Create(WordType wordType)
         {
             await _unitOfWork.WordTypes.AddAsync(wordType);
+            _logger.Info("POST / {0}", nameof(WordType));
             return LingoMq.Responses.LingoMqResponse.AcceptedResult(wordType);
         }
 
@@ -50,6 +55,7 @@ namespace Words.Api.Controllers
                 throw new NotFoundException<WordType>();
 
             await _unitOfWork.WordTypes.UpdateAsync(wordType);
+            _logger.Info("PUT / {0}", nameof(WordType));
             return LingoMq.Responses.LingoMqResponse.AcceptedResult(wordType);
         }
 
@@ -61,6 +67,7 @@ namespace Words.Api.Controllers
                 throw new InvalidDataException<WordType>(parameters: new string[] { "id" });
 
             await _unitOfWork.WordTypes.DeleteAsync(id);
+            _logger.Info("DELETE /{id} {0}", nameof(WordType));
             return LingoMq.Responses.LingoMqResponse.AcceptedResult("WordType is succesfully remove");
         }
     }

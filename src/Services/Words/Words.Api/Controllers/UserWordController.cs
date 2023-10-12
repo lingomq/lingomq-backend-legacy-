@@ -2,6 +2,7 @@
 using LingoMq.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using System.Security.Claims;
 using Words.Api.Common;
 using Words.BusinessLayer.Contracts;
@@ -16,6 +17,7 @@ namespace Words.Api.Controllers
     [ApiController]
     public class UserWordController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         private readonly IWordChecker _wordChecker;
         private readonly PublisherBase _publisher;
@@ -34,6 +36,7 @@ namespace Words.Api.Controllers
         public async Task<IActionResult> Get()
         {
             List<UserWord> words = await _unitOfWork.UserWords.GetByUserIdAsync(UserId);
+            _logger.Info("GET /user {0}", nameof(List<UserWord>));
             return LingoMqResponse.OkResult(words);
         }
 
@@ -42,6 +45,7 @@ namespace Words.Api.Controllers
         public async Task<IActionResult> Get(Guid userId)
         {
             List<UserWord> words = await _unitOfWork.UserWords.GetByUserIdAsync(userId);
+            _logger.Info("GET /user/{userId} {0}", nameof(List<UserWord>));
             return LingoMqResponse.OkResult(words);
         }
 
@@ -53,6 +57,7 @@ namespace Words.Api.Controllers
             if (userWord is null)
                 throw new NotFoundException<UserWord>();
 
+            _logger.Info("GET /famous {0}", nameof(UserWord));
             return LingoMqResponse.OkResult(userWord);
         }
 
@@ -64,6 +69,7 @@ namespace Words.Api.Controllers
             if (userWord is null)
                 throw new NotFoundException<UserWord>();
 
+            _logger.Info("GET /word/{wordId} {0}", nameof(UserWord));
             return LingoMqResponse.OkResult(userWord);
         }
 
@@ -72,6 +78,7 @@ namespace Words.Api.Controllers
         public async Task<IActionResult> GetCountWordsPerDay(Guid userId, DateTime date)
         {
             int count = await _unitOfWork.UserWords.GetCountWordsPerDayAsync(userId, date);
+            _logger.Info("GET /word/count/{userId}&{date} {0}", nameof(StatusCode));
             return LingoMqResponse.OkResult(new { Count = count });
         }
 
@@ -88,6 +95,7 @@ namespace Words.Api.Controllers
                 Date = DateTime.Now
             });
             await _unitOfWork.UserWords.AddAsync(word);
+            _logger.Info("POST /{isForce}&{isAutocomplete} {0}", nameof(UserWord));
             return LingoMqResponse.AcceptedResult(word);
         }
 
@@ -102,6 +110,7 @@ namespace Words.Api.Controllers
             UserWord word = await GetWordData(userWordDto, isForce, isAutocomplete);
 
             await _unitOfWork.UserWords.UpdateAsync(word);
+            _logger.Info("PUT /{isForce}&{isAutocomplete} {0}", nameof(UserWord));
             return LingoMqResponse.AcceptedResult(word);
         }
 
@@ -113,6 +122,7 @@ namespace Words.Api.Controllers
                 throw new InvalidDataException<UserWord>(new string[] { "id" });
 
             await _unitOfWork.UserWords.DeleteAsync(id);
+            _logger.Info("DELETE /{id} {0}", nameof(UserWord));
             return LingoMqResponse.AcceptedResult();
         }
 
