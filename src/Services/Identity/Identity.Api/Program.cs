@@ -9,6 +9,7 @@ using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using NLog.Extensions.Logging;
 using Npgsql;
 using System.Data;
 using System.Reflection;
@@ -16,6 +17,13 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
+
+// Add Logging (NLog)
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.ClearProviders();
+    loggingBuilder.AddNLog();
+});
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

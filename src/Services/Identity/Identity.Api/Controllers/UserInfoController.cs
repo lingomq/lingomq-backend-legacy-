@@ -7,6 +7,7 @@ using Identity.BusinessLayer.MassTransit;
 using Identity.DomainLayer.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using System.Security.Claims;
 
 namespace Identity.Api.Controllers
@@ -15,6 +16,7 @@ namespace Identity.Api.Controllers
     [ApiController]
     public class UserInfoController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         private readonly PublisherBase _publisher;
         private Guid UserId => new Guid(User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier)
@@ -38,6 +40,7 @@ namespace Identity.Api.Controllers
             if (info is null)
                 throw new NotFoundException<UserInfo>("Данные не найдены");
 
+            _logger.Info("GET / {0}", nameof(UserDto));
             return LingoMq.Responses.LingoMqResponse.OkResult(info);
         }
         [HttpGet("all/{range}")]
@@ -46,6 +49,7 @@ namespace Identity.Api.Controllers
         {
             List<UserInfo> infos = await _unitOfWork.UserInfos.GetAsync(range);
 
+            _logger.Info("GET /all/{range} {0}", nameof(List<UserInfo>));
             return LingoMq.Responses.LingoMqResponse.OkResult(infos);
         }
         [HttpGet("{nickname}")]
@@ -57,6 +61,7 @@ namespace Identity.Api.Controllers
             if (info is null)
                 throw new NotFoundException<UserInfo>("Данные не найдены");
 
+            _logger.Info("GET /{nickname} {0}", nameof(UserInfo));
             return LingoMq.Responses.LingoMqResponse.OkResult(info);
         }
         [HttpPut]
@@ -80,6 +85,7 @@ namespace Identity.Api.Controllers
                 IsRemoved = info.IsRemoved
             });
 
+            _logger.Info("PUT / {0}", nameof(UserInfo));
             return LingoMq.Responses.LingoMqResponse.OkResult(info, "succesfully updated");
         }
         [HttpPut("admin")]
@@ -106,6 +112,7 @@ namespace Identity.Api.Controllers
                 IsRemoved = info.IsRemoved
             });
 
+            _logger.Info("PUT /admin {0}", nameof(UserInfo));
             return LingoMq.Responses.LingoMqResponse.OkResult(info, "succesfully updated");
         }
     }

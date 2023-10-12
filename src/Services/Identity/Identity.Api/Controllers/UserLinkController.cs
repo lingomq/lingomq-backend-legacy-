@@ -4,15 +4,17 @@ using Identity.BusinessLayer.Exceptions.ClientExceptions;
 using Identity.DomainLayer.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace Identity.Api.Controllers
 {
     [Route("api/user/link")]
     [ApiController]
-    public class UserLinkRepository : ControllerBase
+    public class UserLinkController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
-        public UserLinkRepository(IUnitOfWork unitOfWork) =>
+        public UserLinkController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
 
         [HttpGet("info-id/{userInfoId}")]
@@ -26,6 +28,7 @@ namespace Identity.Api.Controllers
 
             List<UserLink> links = await _unitOfWork.UserLinks.GetByUserInfoIdAsync(userInfoId);
 
+            _logger.Info("GET /info-id/{userInfoId} {0}", nameof(List<UserLink>));
             return LingoMq.Responses.LingoMqResponse.OkResult(links);
         }
 
@@ -35,6 +38,7 @@ namespace Identity.Api.Controllers
         {
             List<UserLink> links = await _unitOfWork.UserLinks.GetAllByIdAsync(linkId);
 
+            _logger.Info("GET /{linkId} {0}", nameof(List<UserLink>));
             return LingoMq.Responses.LingoMqResponse.OkResult(links);
         }
         [HttpPost]
@@ -53,6 +57,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.UserLinks.AddAsync(link);
 
+            _logger.Info("POST / {0}", nameof(UserLink));
             return LingoMq.Responses.LingoMqResponse.OkResult(link);
         }
         [HttpPut]
@@ -71,6 +76,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.UserLinks.UpdateAsync(link);
 
+            _logger.Info("PUT / {0}", nameof(UserLink));
             return LingoMq.Responses.LingoMqResponse.OkResult(link);
         }
         [HttpDelete("{id}")]
@@ -84,6 +90,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.UserLinks.DeleteAsync(id);
 
+            _logger.Info("DELETE /{id} {0}", nameof(UserLink));
             return LingoMq.Responses.LingoMqResponse.OkResult(link);
         }
     }

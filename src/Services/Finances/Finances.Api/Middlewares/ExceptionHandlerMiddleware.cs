@@ -35,8 +35,6 @@ public class ExceptionHandlerMiddleware
                 await HandleAsync(context, (int)ex.ExceptionStatusCode, model);
             }
 
-            _logger.Error("Type: {0}; Message: {1};", ex.Source, ex.Message);
-
             _logger.Warn("Type: {0}; Message: {1};", ex.Source, ex.Message);
         }
         catch (Exception ex)
@@ -49,6 +47,8 @@ public class ExceptionHandlerMiddleware
             };
 
             await HandleAsync(context, (int)HttpStatusCode.InternalServerError, model);
+
+            _logger.Error("Type: {0}; Message: {1};", ex.Source, ex.Message);
         }
     }
     private async Task HandleCustomExceptionAsync(HttpContext context, ExceptionBase exceptionBase)

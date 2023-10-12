@@ -7,6 +7,7 @@ using Identity.BusinessLayer.MassTransit;
 using Identity.DomainLayer.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace Identity.Api.Controllers
 {
@@ -14,6 +15,7 @@ namespace Identity.Api.Controllers
     [ApiController]
     public class UserRoleController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         private readonly PublisherBase _publisher;
         public UserRoleController(IUnitOfWork unitOfWork, PublisherBase publisher)
@@ -27,6 +29,7 @@ namespace Identity.Api.Controllers
         public async Task<IActionResult> Get(int range = int.MaxValue)
         {
             List<UserRole> roles = await _unitOfWork.UserRoles.GetAsync(range);
+            _logger.Info("GET /all/{range} {0}", nameof(List<UserRole>));
             return LingoMq.Responses.LingoMqResponse.OkResult(roles);
         }
 
@@ -39,6 +42,7 @@ namespace Identity.Api.Controllers
             if (role is null)
                 throw new NotFoundException<UserRole>();
 
+            _logger.Info("GET /{id} {0}", nameof(UserRole));
             return LingoMq.Responses.LingoMqResponse.OkResult(role);
         }
 
@@ -51,6 +55,7 @@ namespace Identity.Api.Controllers
             if (role is null)
                 throw new NotFoundException<UserRole>();
 
+            _logger.Info("GET /name/{name} {0}", nameof(UserRole));
             return LingoMq.Responses.LingoMqResponse.OkResult(role);
         }
         [HttpPost]
@@ -65,6 +70,7 @@ namespace Identity.Api.Controllers
                 Name = role.Name
             });
 
+            _logger.Info("POST / {0}", nameof(UserRole));
             return LingoMq.Responses.LingoMqResponse.OkResult(role, "role has been succesfully appended");
         }
         [HttpPut]
@@ -79,6 +85,7 @@ namespace Identity.Api.Controllers
                 Name = role.Name
             });
 
+            _logger.Info("PUT / {0}", nameof(UserRole));
             return LingoMq.Responses.LingoMqResponse.OkResult(role, "role has been succesfully updated");
         }
         [HttpDelete("{id}")]
@@ -99,6 +106,7 @@ namespace Identity.Api.Controllers
                 Id = role.Id
             });
 
+            _logger.Info("DELETE /{id} {0}", nameof(UserRole));
             return LingoMq.Responses.LingoMqResponse.OkResult(role, "role has been succesfully removed");
         }
     }

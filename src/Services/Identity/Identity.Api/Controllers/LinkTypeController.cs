@@ -4,6 +4,7 @@ using Identity.BusinessLayer.Exceptions.ClientExceptions;
 using Identity.DomainLayer.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace Identity.Api.Controllers
 {
@@ -11,6 +12,7 @@ namespace Identity.Api.Controllers
     [ApiController]
     public class LinkTypeController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         public LinkTypeController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
@@ -20,6 +22,7 @@ namespace Identity.Api.Controllers
         public async Task<IActionResult> Get(int range = int.MaxValue)
         {
             List<LinkType> types = await _unitOfWork.LinkTypes.GetAsync(range);
+            _logger.Info("GET /all/{range} {0}", nameof(List<LinkType>));
             return LingoMq.Responses.LingoMqResponse.OkResult(types);
         }
 
@@ -32,6 +35,7 @@ namespace Identity.Api.Controllers
             if (type is null)
                 throw new NotFoundException<LinkType>();
 
+            _logger.Info("GET /{linkId} {0}", nameof(LinkType));
             return LingoMq.Responses.LingoMqResponse.OkResult(type);
         }
         [HttpGet("name/{name}")]
@@ -43,6 +47,7 @@ namespace Identity.Api.Controllers
             if (type is null)
                 throw new NotFoundException<LinkType>();
 
+            _logger.Info("GET /name/{name} {0}", nameof(LinkType));
             return LingoMq.Responses.LingoMqResponse.OkResult(type);
         }
         [HttpPost]
@@ -51,6 +56,7 @@ namespace Identity.Api.Controllers
         {
             await _unitOfWork.LinkTypes.AddAsync(linkType);
 
+            _logger.Info("POST / {0}", nameof(LinkType));
             return LingoMq.Responses.LingoMqResponse.OkResult(linkType);
         }
         [HttpPut]
@@ -59,6 +65,7 @@ namespace Identity.Api.Controllers
         {
             await _unitOfWork.LinkTypes.UpdateAsync(linkType);
 
+            _logger.Info("PUT / {0}", nameof(LinkType));
             return LingoMq.Responses.LingoMqResponse.OkResult(linkType);
         }
         [HttpDelete("{id}")]
@@ -72,6 +79,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.LinkTypes.DeleteAsync(id);
 
+            _logger.Info("DELETE /{id} {0}", nameof(LinkType));
             return LingoMq.Responses.LingoMqResponse.OkResult(type);
         }
     }

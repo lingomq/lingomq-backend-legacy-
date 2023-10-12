@@ -12,6 +12,7 @@ using Identity.BusinessLayer.MassTransit;
 using Identity.DomainLayer.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using System.Security.Claims;
 
 namespace Identity.Api.Controllers
@@ -20,6 +21,7 @@ namespace Identity.Api.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         private readonly PublisherBase _publisher;
         private Guid UserId => new Guid(User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier)
@@ -40,6 +42,7 @@ namespace Identity.Api.Controllers
             if (user is null)
                 throw new NotFoundException<User>("Пользователь не найден");
 
+            _logger.Info("GET / {0}", nameof(UserDto));
             return LingoMq.Responses.LingoMqResponse.OkResult(user);
         }
 
@@ -51,6 +54,7 @@ namespace Identity.Api.Controllers
             if (user is null)
                 throw new NotFoundException<User>("Пользователь не найден");
 
+            _logger.Info("GET /{userId} {0}", nameof(UserDto));
             return LingoMq.Responses.LingoMqResponse.OkResult(user);
         }
 
@@ -72,6 +76,7 @@ namespace Identity.Api.Controllers
                 Phone = user.Phone
             });
 
+            _logger.Info("PUT / {0}", nameof(UserDto));
             return LingoMq.Responses.LingoMqResponse.OkResult(user, "succesfully update");
         }
 
@@ -102,6 +107,7 @@ namespace Identity.Api.Controllers
                 PasswordSalt = user.PasswordSalt
             });
 
+            _logger.Info("PUT /credentials {0}", nameof(UserDto));
             return LingoMq.Responses.LingoMqResponse.OkResult(user, "password succesfully update");
         }
         [HttpDelete]
@@ -121,8 +127,10 @@ namespace Identity.Api.Controllers
                 Id = UserId,
             });
 
+            _logger.Info("DELETE / {0}", nameof(UserDto));
             return LingoMq.Responses.LingoMqResponse.OkResult("user has been successfully removed");
         }
+
         [HttpDelete("{userId}")]
         [Authorize(Roles = AccessRoles.Admin)]
         public async Task<IActionResult> Delete(Guid userId)
@@ -142,6 +150,7 @@ namespace Identity.Api.Controllers
                 Id = userId,
             });
 
+            _logger.Info("DELETE /{userId} {0}", nameof(UserDto));
             return LingoMq.Responses.LingoMqResponse.OkResult("user has been successfully removed");
         }
     }

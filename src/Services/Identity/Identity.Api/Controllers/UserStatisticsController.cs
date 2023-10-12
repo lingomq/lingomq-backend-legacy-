@@ -5,6 +5,7 @@ using Identity.BusinessLayer.Exceptions.ClientExceptions;
 using Identity.DomainLayer.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using System.Security.Claims;
 
 namespace Identity.Api.Controllers
@@ -13,6 +14,7 @@ namespace Identity.Api.Controllers
     [ApiController]
     public class UserStatisticsController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         public UserStatisticsController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
@@ -33,6 +35,7 @@ namespace Identity.Api.Controllers
             if (statistics is null)
                 throw new NotFoundException<UserStatistics>("The statistics was not found");
 
+            _logger.Info("GET /{userId} {0}", nameof(UserStatistics));
             return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
         }
         [HttpPut("hour/add")]
@@ -48,6 +51,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.UserStatistics.UpdateAsync(statistics);
 
+            _logger.Info("PUT /hour/add {0}", nameof(UserStatistics));
             return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
         }
         [HttpPut("word/add")]
@@ -67,6 +71,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.UserStatistics.UpdateAsync(statistics);
 
+            _logger.Info("PUT /word/add {0}", nameof(UserStatistics));
             return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
         }
         [HttpPut("visit")]
@@ -93,6 +98,7 @@ namespace Identity.Api.Controllers
 
             await _unitOfWork.UserStatistics.UpdateAsync(statistics);
 
+            _logger.Info("PUT /visit {0}", nameof(UserStatistics));
             return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
         }
     }

@@ -3,11 +3,13 @@ using Newtonsoft.Json;
 using Identity.BusinessLayer.Exceptions;
 using Identity.BusinessLayer.Models;
 using System.Net;
+using NLog;
 
 namespace Identity.Api.Middlewares
 {
     public class ExceptionHandlerMiddleware
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly RequestDelegate _next;
         public ExceptionHandlerMiddleware(RequestDelegate next) =>
             _next = next;
@@ -31,6 +33,8 @@ namespace Identity.Api.Middlewares
                     };
                     await HandleAsync(context, (int)ex.ExceptionStatusCode, model);
                 }
+
+                _logger.Warn("Type: {0}; Message: {1};", ex.Source, ex.Message);
             }
             catch (Exception ex)
             {
@@ -42,6 +46,8 @@ namespace Identity.Api.Middlewares
                 };
 
                 await HandleAsync(context, (int)HttpStatusCode.InternalServerError, model);
+
+                _logger.Error("Type: {0}; Message: {1};", ex.Source, ex.Message);
             }
         }
 
