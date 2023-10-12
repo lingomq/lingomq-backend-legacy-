@@ -2,12 +2,14 @@
 using Achievements.BusinessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using NLog;
 using System.Net;
 
 namespace Achievements.Api.Middlewares
 {
     public class ExceptionHandlerMiddleware
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly RequestDelegate _next;
         public ExceptionHandlerMiddleware(RequestDelegate next)
         {
@@ -32,6 +34,8 @@ namespace Achievements.Api.Middlewares
                     };
                     await HandleAsync(context, (int)ex.ExceptionStatusCode, model);
                 }
+
+                _logger.Warn("Type: {0}; Message: {1};", ex.Source, ex.Message);
             }
             catch (Exception ex)
             {
@@ -41,6 +45,8 @@ namespace Achievements.Api.Middlewares
                     Code = 0,
                     Message = ex.Message
                 };
+
+                _logger.Error("Type: {0}; Message: {1};", ex.Source, ex.Message);
 
                 await HandleAsync(context, (int)HttpStatusCode.InternalServerError, model);
             }
