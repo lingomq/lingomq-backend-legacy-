@@ -1,6 +1,7 @@
 ﻿using LingoMq.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using Topics.Api.Common;
 using Topics.BusinessLayer.Contracts;
 using Topics.BusinessLayer.Exceptions.ClientExceptions;
@@ -12,6 +13,7 @@ namespace Topics.Api.Controllers
     [ApiController]
     public class TopicStatisticsTypeController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         public TopicStatisticsTypeController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
@@ -22,6 +24,7 @@ namespace Topics.Api.Controllers
         {
             List<TopicStatisticsType> types = await _unitOfWork.StatisticsTypes.GetAsync(range);
 
+            _logger.Info("GET /all/{range} {0}", nameof(List<TopicStatisticsType>));
             return LingoMqResponse.OkResult(types);
         }
 
@@ -30,6 +33,7 @@ namespace Topics.Api.Controllers
         public async Task<IActionResult> Create(TopicStatisticsType type)
         {
             await _unitOfWork.StatisticsTypes.AddAsync(type);
+            _logger.Info("POST / {0}", nameof(TopicStatisticsType));
             return LingoMqResponse.AcceptedResult(type);
         }
 
@@ -41,6 +45,7 @@ namespace Topics.Api.Controllers
                 throw new InvalidDataException<TopicStatisticsType>(new string[] { "Id" });
 
             await _unitOfWork.StatisticsTypes.UpdateAsync(type);
+            _logger.Info("PUT / {0}", nameof(TopicStatisticsType));
             return LingoMqResponse.AcceptedResult(type);
         }
 
@@ -52,6 +57,7 @@ namespace Topics.Api.Controllers
                 throw new InvalidDataException<TopicStatisticsType>(new string[] { "Id" });
 
             await _unitOfWork.StatisticsTypes.DeleteAsync(id);
+            _logger.Info("DELETE /{id} {0}", nameof(TopicStatisticsType));
             return LingoMqResponse.AcceptedResult();
         }
     }

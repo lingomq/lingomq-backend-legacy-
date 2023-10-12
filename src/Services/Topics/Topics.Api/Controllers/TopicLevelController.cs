@@ -1,6 +1,7 @@
 ﻿using LingoMq.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using Topics.Api.Common;
 using Topics.BusinessLayer.Contracts;
 using Topics.BusinessLayer.Exceptions.ClientExceptions;
@@ -12,6 +13,7 @@ namespace Topics.Api.Controllers
     [ApiController]
     public class TopicLevelController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         public TopicLevelController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
@@ -22,6 +24,7 @@ namespace Topics.Api.Controllers
         {
             List<TopicLevel> levels = await _unitOfWork.TopicLevels.GetAsync(range);
 
+            _logger.Info("GET /all/{range} {0}", nameof(List<TopicLevel>));
             return LingoMqResponse.OkResult(levels);
         }
 
@@ -33,6 +36,7 @@ namespace Topics.Api.Controllers
             if (level is null)
                 throw new NotFoundException<TopicLevel>();
 
+            _logger.Info("GET /{id} {0}", nameof(TopicLevel));
             return LingoMqResponse.OkResult(level);
         }
 
@@ -41,6 +45,7 @@ namespace Topics.Api.Controllers
         public async Task<IActionResult> Create(TopicLevel level)
         {
             await _unitOfWork.TopicLevels.AddAsync(level);
+            _logger.Info("POST / {0}", nameof(TopicLevel));
             return LingoMqResponse.AcceptedResult(level);
         }
 
@@ -52,6 +57,7 @@ namespace Topics.Api.Controllers
                 throw new NotFoundException<TopicLevel>();
 
             await _unitOfWork.TopicLevels.UpdateAsync(level);
+            _logger.Info("PUT / {0}", nameof(TopicLevel));
             return LingoMqResponse.AcceptedResult(level);
         }
 
@@ -63,6 +69,7 @@ namespace Topics.Api.Controllers
                 throw new NotFoundException<TopicLevel>();
 
             await _unitOfWork.TopicLevels.DeleteAsync(id);
+            _logger.Info("DELETE /{id} {0}", nameof(TopicLevel));
             return LingoMqResponse.AcceptedResult();
         }
     }

@@ -1,6 +1,7 @@
 ﻿using LingoMq.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using Topics.Api.Common;
 using Topics.BusinessLayer.Contracts;
 using Topics.BusinessLayer.Dtos;
@@ -14,6 +15,7 @@ namespace Topics.Api.Controllers
     [ApiController]
     public class TopicStatisticsController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         public TopicStatisticsController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
@@ -23,6 +25,7 @@ namespace Topics.Api.Controllers
         public async Task<IActionResult> Get(int range)
         {
             List<TopicStatistics> statistics = await _unitOfWork.TopicStatistics.GetAsync(range);
+            _logger.Info("GET /all/{range} {0}", nameof(List<TopicStatistics>));
             return LingoMqResponse.OkResult(statistics);
         }
 
@@ -31,6 +34,7 @@ namespace Topics.Api.Controllers
         public async Task<IActionResult> GetByTopicId(Guid id)
         {
             List<TopicStatistics> statistics = await _unitOfWork.TopicStatistics.GetByTopicIdAsync(id);
+            _logger.Info("GET /topic/{id} {0}", nameof(List<TopicStatistics>));
             return LingoMqResponse.OkResult(statistics);
         }
 
@@ -42,6 +46,7 @@ namespace Topics.Api.Controllers
             if (statistics is null)
                 throw new NotFoundException<TopicStatistics>();
 
+            _logger.Info("GET /{id} {0}", nameof(TopicStatistics));
             return LingoMqResponse.OkResult(statistics);
         }
 
@@ -54,6 +59,7 @@ namespace Topics.Api.Controllers
 
             await _unitOfWork.TopicStatistics.AddAsync(statistics.ToModel());
 
+            _logger.Info("POST / {0}", nameof(TopicStatistics));
             return LingoMqResponse.AcceptedResult(statistics);
         }
 
@@ -65,6 +71,7 @@ namespace Topics.Api.Controllers
                 throw new InvalidDataException<TopicStatisticsDto>(new string[] { "Id" });
 
             await _unitOfWork.TopicStatistics.UpdateAsync(statisticsDto.ToModel());
+            _logger.Info("PUT / {0}", nameof(TopicStatistics));
             return LingoMqResponse.AcceptedResult(statisticsDto);
         }
 
@@ -76,6 +83,7 @@ namespace Topics.Api.Controllers
                 throw new InvalidDataException<TopicStatisticsDto>(new string[] { "Id" });
 
             await _unitOfWork.TopicStatistics.DeleteAsync(id);
+            _logger.Info("DELETE /{id} {0}", nameof(TopicStatistics));
             return LingoMqResponse.AcceptedResult();
         }
 
