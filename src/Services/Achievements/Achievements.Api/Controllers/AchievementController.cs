@@ -5,6 +5,7 @@ using Achievements.DomainLayer.Entities;
 using LingoMq.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace Achievements.Api.Controllers
 {
@@ -12,6 +13,7 @@ namespace Achievements.Api.Controllers
     [ApiController]
     public class AchievementController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         public AchievementController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
@@ -21,6 +23,7 @@ namespace Achievements.Api.Controllers
         public async Task<IActionResult> Get(int range)
         {
             List<Achievement> achievements = await _unitOfWork.Achievements.GetAsync(range);
+            _logger.Info("GET /all/{range} {0}", nameof(List<Achievement>));
             return LingoMqResponse.OkResult(achievements);
         }
 
@@ -32,6 +35,7 @@ namespace Achievements.Api.Controllers
             if (achievement is null)
                 throw new NotFoundException<Achievement>();
 
+            _logger.Info("GET /{id} {0}", nameof(Achievement));
             return LingoMqResponse.OkResult(achievement);
         }
 
@@ -40,6 +44,7 @@ namespace Achievements.Api.Controllers
         public async Task<IActionResult> Create(Achievement achievement)
         {
             await _unitOfWork.Achievements.CreateAsync(achievement);
+            _logger.Info("POST / {0}", nameof(Achievement));
             return LingoMqResponse.AcceptedResult(achievement);
         }
 
@@ -52,6 +57,7 @@ namespace Achievements.Api.Controllers
 
             await _unitOfWork.Achievements.UpdateAsync(achievement);
 
+            _logger.Info("PUT / {0}", nameof(Achievement));
             return LingoMqResponse.AcceptedResult(achievement);
         }
 
@@ -64,6 +70,7 @@ namespace Achievements.Api.Controllers
 
             await _unitOfWork.Achievements.DeleteAsync(id);
 
+            _logger.Info("DELETE / {0}", nameof(Achievement));
             return LingoMqResponse.AcceptedResult();
         }
     }

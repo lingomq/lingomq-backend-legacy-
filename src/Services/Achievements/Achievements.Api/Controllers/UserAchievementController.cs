@@ -5,6 +5,7 @@ using Achievements.DomainLayer.Entities;
 using LingoMq.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 using System.Security.Claims;
 
 namespace Achievements.Api.Controllers
@@ -13,6 +14,7 @@ namespace Achievements.Api.Controllers
     [ApiController]
     public class UserAchievementController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IUnitOfWork _unitOfWork;
         public UserAchievementController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
@@ -24,6 +26,7 @@ namespace Achievements.Api.Controllers
         public async Task<IActionResult> Get()
         {
             List<UserAchievement> achievements = await _unitOfWork.UserAchievements.GetByUserIdAsync(UserId);
+            _logger.Info("GET / {0}", nameof(List<Achievement>));
             return LingoMqResponse.OkResult(achievements);
         }
 
@@ -32,6 +35,7 @@ namespace Achievements.Api.Controllers
         public async Task<IActionResult> Get(Guid userId)
         {
             List<UserAchievement> achievements = await _unitOfWork.UserAchievements.GetByUserIdAsync(userId);
+            _logger.Info("GET /{userId} {0}", nameof(List<Achievement>));
             return LingoMqResponse.OkResult(achievements);
         }
 
@@ -40,6 +44,7 @@ namespace Achievements.Api.Controllers
         public async Task<IActionResult> GetAchievemensCount(Guid userId)
         {
             int count = await _unitOfWork.UserAchievements.GetCountAchievementsByUserIdAsync(userId);
+            _logger.Info("GET /count/{userId} Count");
             return LingoMqResponse.OkResult(new { Count = count });
         }
 
@@ -48,6 +53,7 @@ namespace Achievements.Api.Controllers
         public async Task<IActionResult> GetAll(int count = int.MaxValue)
         {
             List<UserAchievement> userAchievements = await _unitOfWork.UserAchievements.GetAsync(count);
+            _logger.Info("GET /all/{count} {0}", nameof(List<Achievement>));
             return LingoMqResponse.OkResult(userAchievements);
         }
 
@@ -59,6 +65,7 @@ namespace Achievements.Api.Controllers
             if (userAchievement is null)
                 throw new NotFoundException<UserAchievement>();
 
+            _logger.Info("GET /id/{id} {0}", nameof(Achievement));
             return LingoMqResponse.OkResult(userAchievement);
         }
     }
