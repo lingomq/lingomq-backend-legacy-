@@ -4,9 +4,17 @@ using AppStatistics.BusinessLayer.MassTransit.Consumers;
 using AppStatistics.BusinessLayer.Services;
 using AppStatistics.BusinessLayer.Services.DataAccess;
 using MassTransit;
+using NLog.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration.AddJsonFile("appsettings.json");
+
+// Add Logging (NLog)
+builder.Services.AddLogging(loggingBuilder =>
+{
+    loggingBuilder.ClearProviders();
+    loggingBuilder.AddNLog();
+});
 
 // DataLayer
 builder.Services.AddTransient<IMongoDbFactory>((sp) => new MongoDbFactory(builder.Configuration["ConnectionStrings:MongoDb"]!));

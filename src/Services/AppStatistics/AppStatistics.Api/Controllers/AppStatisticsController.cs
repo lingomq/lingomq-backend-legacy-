@@ -4,6 +4,7 @@ using AppStatistics.DomainLayer.Entities;
 using LingoMq.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NLog;
 
 namespace AppStatistics.Api.Controllers
 {
@@ -11,6 +12,7 @@ namespace AppStatistics.Api.Controllers
     [ApiController]
     public class AppStatisticsController : ControllerBase
     {
+        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
         private readonly IAppStatisticsService _appStatisticsService;
         public AppStatisticsController(IAppStatisticsService appStatisticsService) =>
             _appStatisticsService = appStatisticsService;
@@ -26,6 +28,7 @@ namespace AppStatistics.Api.Controllers
             if (statistics is null)
                 throw new NotFoundException<StatisticsApp>();
 
+            _logger.Info("GET / {0}", nameof(List<StatisticsApp>));
             return LingoMqResponse.OkResult(statistics);
         }
 
@@ -34,6 +37,7 @@ namespace AppStatistics.Api.Controllers
         public async Task<IActionResult> Get(DateTime from, DateTime to)
         {
             List<StatisticsApp> statisticsList = await _appStatisticsService.GetByDateRange(from, to);
+            _logger.Info("GET /{from}&{to} {0}", nameof(List<StatisticsApp>));
             return LingoMqResponse.OkResult(statisticsList);
         }
     }
