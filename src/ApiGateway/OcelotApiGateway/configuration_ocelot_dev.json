@@ -1,0 +1,2660 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:9998"
+  },
+  "ReRoutes": [
+    // == Achievement Microservice ==
+    // achievements-api - achievement-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/achievements/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "achievements-api",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/achievements/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "10s",
+        "PeriodTimespan": 10,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/achievements/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "achievements-api",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/achievements/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/achievements",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "achievements-api",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/achievements",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/achievements",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "achievements-api",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/achievements",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/achievements/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "achievements-api",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/achievements/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    // achievements-api - user-achievement-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/achievements/user",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "achievements-api",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/achievements/user",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/achievements/user/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "achievements-api",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/achievements/user/{userId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/achievements/user/count/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "achievements-api",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/achievements/user/count/{userId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/achievements/user/all/{count}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "achievements-api",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/achievements/user/all/{count}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/achievements/user/id/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "achievements-api",
+          "Port": 7001
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/achievements/user/id/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+
+    // == AppStatistics Microservice ==
+    // app-statistics-api - app-statistics-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/app-statistics",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "app-statistics-api",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/app-statistics",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/app-statistics/{from}&{to}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "app-statistics-api",
+          "Port": 7002
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/app-statistics/{from}&{to}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      }
+    },
+
+    // == Authentication Microservice ==
+    // authentication-api - authentication-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/auth/sign-in",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication-api",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/auth/sign-in",
+      "UpstreamHttpMethod": [ "POST" ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 3
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/auth/sign-up",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication-api",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/auth/sign-up",
+      "UpstreamHttpMethod": [ "POST" ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 3
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/auth/refresh-token",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication-api",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/auth/refresh-token",
+      "UpstreamHttpMethod": [ "GET" ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 3
+      }
+    },
+    // authentication-api - confirm-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/confirm",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication-api",
+          "Port": 7003
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/confirm",
+      "UpstreamHttpMethod": [ "GET" ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 3
+      }
+    },
+
+    // == Finances Microservice ==
+    // finances-api - finances-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/finances/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "finances-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/finances/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/finances/{from}&{to}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "finances-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/finances/{from}&{to}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    // finances-api - finances-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/finances/user",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "finances-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/finances/user",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/finances/user/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "finances-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/finances/user/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/finances/user/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "finances-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/finances/user/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/finances/user/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "finances-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/finances/user/{userId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/finances/user/status/{userId}&{financeId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "finances-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/finances/user/status/{userId}&{financeId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/finances/user/confirm",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "finances-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/finances/user/confirm",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+
+    // == Identity Microservice ==
+    // identity-api - link-type-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/link-type/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/link-type/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/link-type/{linkId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/link-type/{linkId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/link-type/name/{name}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/link-type/name/{name}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/link-type",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/link-type",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/link-type",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/link-type",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/link-type/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/link-type/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    // identity-api - user-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/{userId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/credentials",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/credentials",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/credentials",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/credentials",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/{userId}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    // identity-api - user-info-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/info",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/info",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/info/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/info/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/info/{nickname}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/info/{nickname}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/info",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/info",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/info/admin",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/info/admin",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    // identity-api - user-link-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/link/info-id/{userInfoId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/link/info-id/{userInfoId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/link/{linkId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/link/{linkId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/link",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/link",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/link",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/link",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/link/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/link/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    // identity-api - user-role-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/role/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/role/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/role/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/role/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/role/name/{name}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/role/name/{name}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/role",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/role",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/role",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/role",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/role/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/role/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    // identity-api - user-statistics-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/statistics/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/statistics/{userId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/statistics/hour/add",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/statistics/hour/add",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/statistics/word/add",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/statistics/word/add",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/identity/user/statistics/visit",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 7005
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/identity/user/statistics/visit",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+
+    // == Notifications Microservice ==
+    // notifications-api - notification-type-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/notifications/type/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/notifications/type/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/notifications/type/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/notifications/type/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/notifications/type",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/notifications/type",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/notifications/type",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/notifications/type",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/notifications/type/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/notifications/type/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    // notifications-api - user-notification-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/notifications/user",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/notifications/user",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/notifications/user/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 7006
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/notifications/user/{id}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+
+    // == Topic Microservice ==
+    // topic-api - topic-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/language/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/language/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/level/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/level/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    // topic-api - topic-level-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/level/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/level/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/level/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/level/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/level",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/level",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/level",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/level",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/level/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/level/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    // topic-api - topic-statistics-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/topic/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/topic/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/statistics",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/statistics",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/statistics",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/statistics",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    // topic-api - topic-statistics-type-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/types/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/types/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/types",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/types",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/types",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/types",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/types/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 7007
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/types/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+
+    // == Words Microservice ==
+    // words-api - language-controller
+
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/languages/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/languages/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/languages/name/{name}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/languages/name/{name}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/languages/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/languages/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/languages",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/languages",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/languages",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/languages",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/languages/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/languages/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+
+    // words-api - user-word-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/user-words/user",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/user-words/user",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/user-words/user/{userId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/user-words/user/{userId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/user-words/user/famous",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/user-words/user/famous",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/user-words/word/{wordId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/user-words/word/{wordId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/user-words/word/count/{userId}&{date}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/user-words/word/count/{userId}&{date}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/user-words/{isForce}&{isAutocomplete}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/user-words/{isForce}&{isAutocomplete}",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/user-words/{isForce}&{isAutocomplete}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/user-words/{isForce}&{isAutocomplete}",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/user-words/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/user-words/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+
+    // words-api - user-word-type-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/user-word-types/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/user-word-types/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/user-word-types/all/{wordId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/user-word-types/all/{wordId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/user-word-types/typeId/{typeId}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/user-word-types/typeId/{typeId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/user-word-types",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/user-word-types",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/user-word-types/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/user-word-types/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+
+    // words-api - word-type-controller
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/word-types/all/{range}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/word-types/all/{range}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/word-types/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/word-types/{id}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/word-types",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/word-types",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/word-types",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/word-types",
+      "UpstreamHttpMethod": [ "PUT" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api.lingomq/words/word-types/{id}",
+      "DownstreamScheme": "https",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 7008
+        }
+      ],
+      "UpstreamPathTemplate": "/api/v0/api/words/word-types/{id}",
+      "UpstreamHttpMethod": [ "DELETE" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    }
+  ]
+}

@@ -8,7 +8,7 @@ using NLog;
 
 namespace Identity.Api.Controllers
 {
-    [Route("api/v0/link-type")]
+    [Route("api/v0/identity/link-type")]
     [ApiController]
     public class LinkTypeController : ControllerBase
     {

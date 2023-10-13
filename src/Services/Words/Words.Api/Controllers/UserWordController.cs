@@ -13,7 +13,7 @@ using Words.DomainLayer.Entities;
 
 namespace Words.Api.Controllers
 {
-    [Route("api/words/user-words")]
+    [Route("api/v0/words/user-words")]
     [ApiController]
     public class UserWordController : ControllerBase
     {

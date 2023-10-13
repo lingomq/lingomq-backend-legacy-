@@ -9,7 +9,7 @@ using Words.DomainLayer.Entities;
 
 namespace Words.Api.Controllers
 {
-    [Route("api/words/user-word-types")]
+    [Route("api/v0/words/user-word-types")]
     [ApiController]
     public class UserWordTypeController : ControllerBase
     {

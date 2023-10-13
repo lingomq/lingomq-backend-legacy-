@@ -9,7 +9,7 @@ using NLog;
 
 namespace Achievements.Api.Controllers
 {
-    [Route("api/achievements")]
+    [Route("api/v0/achievements")]
     [ApiController]
     public class AchievementController : ControllerBase
     {

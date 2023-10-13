@@ -10,7 +10,7 @@ using System.Security.Claims;
 
 namespace Identity.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/v0/identity/user/statistics")]
     [ApiController]
     public class UserStatisticsController : ControllerBase
     {

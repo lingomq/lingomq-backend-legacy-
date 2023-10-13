@@ -11,7 +11,7 @@ using System.Security.Claims;
 
 namespace Finances.Api.Controllers
 {
-    [Route("api/finances/user")]
+    [Route("api/v0/finances/user")]
     [ApiController]
     public class UserFinanceController : ControllerBase
     {

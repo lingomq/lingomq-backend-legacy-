@@ -17,7 +17,7 @@ using System.Security.Claims;
 
 namespace Identity.Api.Controllers
 {
-    [Route("api/v0/user")]
+    [Route("api/v0/identity/user")]
     [ApiController]
     public class UserController : ControllerBase
     {

@@ -8,7 +8,7 @@ using NLog;
 
 namespace AppStatistics.Api.Controllers
 {
-    [Route("api/app-statistics")]
+    [Route("api/v0/app-statistics")]
     [ApiController]
     public class AppStatisticsController : ControllerBase
     {

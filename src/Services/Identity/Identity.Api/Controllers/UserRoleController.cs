@@ -11,7 +11,7 @@ using NLog;
 
 namespace Identity.Api.Controllers
 {
-    [Route("api/user/role")]
+    [Route("api/v0/identity/user/role")]
     [ApiController]
     public class UserRoleController : ControllerBase
     {
