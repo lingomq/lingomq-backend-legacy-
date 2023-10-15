@@ -3,6 +3,9 @@
 
 logs/
 .env
+src/.env
+*.env
+src/*.env
 **/appsettings.json
 appsettings.json
 **/appsettings.Development.json
