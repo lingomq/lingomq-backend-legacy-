@@ -2,7 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=dotnetcore,visualstudiocode,visualstudio
 
 logs/
-
+.env
 **/appsettings.json
 appsettings.json
 **/appsettings.Development.json
@@ -435,5 +435,3 @@ FodyWeavers.xsd
 # Additional files built by Visual Studio
 
 # End of https://www.toptal.com/developers/gitignore/api/dotnetcore,visualstudiocode,visualstudio
-. i d e a  
- 
