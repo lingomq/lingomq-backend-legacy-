@@ -1,0 +1,170 @@
+version: "3"
+services:
+    mongo-db:
+      image: mongo
+      restart: always
+      hostname: mongodb
+      ports:
+        - "27017:27017"
+    
+    rabbit-mq:
+      image: rabbitmq:3.10.7-management
+      hostname: rabbitmq
+      restart: always
+      container-name: rabbitmq
+      expose:
+        - "5672"
+        - "15672"
+      volumes:
+        - rabbitmq:/rabbitmq
+      ports:
+        - "15672:15672"
+
+    psql:
+      image: postgres:13.3
+      hostname: psql
+      restart: always
+      container_name: postgres
+      env_file:
+        - pg.env
+      ports:
+        - "5432:5432"
+      stdin_open: true
+      volumes:
+        - database:/var/lib/posgresql/data
+      tty: true
+      command: posgres -c 'max_connections=20'
+
+    achievements-api:
+      env_file:
+        - default_service.env
+      image: achievements-api:v0.dev
+      build:
+        context: .
+        dockerfile: Services/Achievements/Achievements.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7001:80"
+
+    app-statistics-api:
+      env_file:
+        - slim_service.env
+      image: app-statistics-api:v0.dev
+      build:
+        context: .
+        dockerfile: Services/AppStatistics/AppStatistics.Api/Dockerfile
+      depends_on:
+        - psql
+        - mongodb
+      ports:
+        - "7002:80"
+
+    authentication-api:
+      env_file:
+        - default_service.env
+      image: authentication-api:v0.dev
+      build:
+        context: .
+        dockerfile: Services/Authentication/Authentication.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7003:80"
+
+    email-api:
+      env_file:
+        - slim_service.env
+      image: email-api:v0.dev
+      build:
+        context: .
+        dockerfile: Services/Email/Email.Api/Dockerfile
+      ports:
+        - "7004:80"
+    
+    finances-api:
+      env_file:
+        - default_service.env
+      image: finances-api:v0.dev
+      build:
+        context: .
+        dockerfile: Services/Finances/Finances.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7005:80"
+
+    identity-api:
+      env_file:
+        - default_service.env
+      image: identity-api:v0.dev
+      build:
+        context: .
+        dockerfile: Services/Identity/Identity.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7006:80"
+
+    notifications-api:
+      env_file:
+        - default_service.env
+      image: notifications-api:v0.dev
+      build:
+        context: .
+        dockerfile: Services/Notifications/Notifications.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7007:80"
+
+    topics-api:
+      env_file:
+        - default_service.env
+      image: topics-api:v0.dev
+      build:
+        context: .
+        dockerfile: Services/Topics/Topics.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7008:80"
+
+    words-api:
+      env_file:
+        - default_service.env
+      image: words-api:v0.dev
+      build:
+        context: .
+        dockerfile: Services/Words/Words.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7009:80"
+
+    ocelot-gateway:
+      environment:
+        ASPNETCORE_HTTPS_PORT: "9998"
+        ASPNETCORE_URLS: https://+:443;https://+:80
+        ASPNETCORE_Kestrel__Certificates__Default__Password: password
+        ASPNETCORE_Kestrel__Certificates__Default_Path: /https/aspnetapp.pfx
+      image: ocelot-gateway:v0.dev
+      build:
+        context: .
+        dockerfile: ApiGateway/OcelotApiGateway/Dockerfile
+      volumes: 
+        - ~/.aspnet/https:/https:ro
+      ports:
+        - "9999:443"
+        - "9998:80"
+
+    volumes:
+      database: 
+      rabbitmq:

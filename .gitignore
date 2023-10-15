@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/dotnetcore,visualstudiocode,visualstudio
 # Edit at https://www.toptal.com/developers/gitignore?templates=dotnetcore,visualstudiocode,visualstudio
 
+logs/
+
 **/appsettings.json
 appsettings.json
 **/appsettings.Development.json
