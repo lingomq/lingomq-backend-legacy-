@@ -15,7 +15,9 @@ using Topics.BusinessLayer.Services;
 using Topics.BusinessLayer.Services.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.AddJsonFile("appsettings.json");
+builder.Configuration
+    .AddJsonFile("appsettings.json", false, true)
+    .AddEnvironmentVariables();
 
 // Add Logging (NLog)
 builder.Services.AddLogging(loggingBuilder =>

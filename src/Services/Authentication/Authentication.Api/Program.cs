@@ -17,7 +17,9 @@ using EventBus.Entities.Identity.User;
 using NLog.Extensions.Logging;
 
 var builder = WebApplication.CreateBuilder(args);
-builder.Configuration.AddJsonFile("appsettings.json");
+builder.Configuration
+    .AddJsonFile("appsettings.json", false, true)
+    .AddEnvironmentVariables();
 
 // Add Logging (NLog)
 builder.Services.AddLogging(loggingBuilder =>

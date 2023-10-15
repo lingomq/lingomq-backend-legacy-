@@ -5,10 +5,14 @@ using EventBus.Entities.Email;
 using MassTransit;
 
 var builder = WebApplication.CreateBuilder(args);
+builder.Configuration
+    .AddJsonFile("appsettings.json", false, true)
+    .AddEnvironmentVariables();
 
-// Add services to the container.
-
+// Services
 builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+// Add MassTransit
 builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
