@@ -1,7 +1,6 @@
 using Cryptography.Entities;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
-using System.Text;
 
 namespace Cryptography.Cryptors;
 

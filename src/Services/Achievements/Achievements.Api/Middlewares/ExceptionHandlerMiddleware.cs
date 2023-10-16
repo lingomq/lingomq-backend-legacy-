@@ -7,6 +7,10 @@ using System.Net;
 
 namespace Achievements.Api.Middlewares
 {
+    /// <summary>
+    /// This class <c>ExceptionHandlerMiddleware</c> is a class which handle a lot of 
+    /// program exceptions without sending this summary to user
+    /// </summary>
     public class ExceptionHandlerMiddleware
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();

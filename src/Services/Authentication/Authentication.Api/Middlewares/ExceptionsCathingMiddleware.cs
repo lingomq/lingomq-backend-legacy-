@@ -7,6 +7,10 @@ using System.Net;
 
 namespace Authentication.Api.Middlewares
 {
+    /// <summary>
+    /// This class <c>ExceptionHandlerMiddleware</c> is a class which handle a lot of 
+    /// program exceptions without sending this summary to user
+    /// </summary>
     public class ExceptionsCathingMiddleware
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();

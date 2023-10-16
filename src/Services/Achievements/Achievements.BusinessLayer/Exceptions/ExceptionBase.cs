@@ -3,6 +3,10 @@ using System.Net;
 
 namespace Achievements.BusinessLayer.Exceptions
 {
+    /// <summary>
+    /// This class (<c>ExceptionBase</c>) is a custom parent exceptions
+    /// for work with responses
+    /// </summary>
     public class ExceptionBase : Exception
     {
         public int Code;
