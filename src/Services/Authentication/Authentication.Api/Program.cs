@@ -68,7 +68,7 @@ builder.Services.AddSwaggerGen(c =>
 // Data layer
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddTransient<IDbConnection>(
-    (sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev"]));
+    (sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev:Authentication"]));
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddTransient<IUserInfoRepository, UserInfoRepository>();
@@ -141,10 +141,13 @@ builder.Services.AddMassTransit(x =>
 builder.Services.AddFluentMigratorCore()
         .ConfigureRunner(cr => cr
         .AddPostgres()
-        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev"])
+        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev:Authentication"])
         .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
 
 var app = builder.Build();
+
+builder.Configuration
+    .AddEnvironmentVariables();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -167,7 +170,6 @@ using (var serviceScope = app.Services.CreateScope())
     var services = serviceScope.ServiceProvider;
 
     var runner = services.GetRequiredService<IMigrationRunner>();
-
     runner.MigrateUp();
 }
 

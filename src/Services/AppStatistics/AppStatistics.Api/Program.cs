@@ -9,8 +9,7 @@ using NLog.Extensions.Logging;
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", true, true)
-    .AddEnvironmentVariables();
+    .AddJsonFile("appsettings.json", true, true);
 
 // Add Logging (NLog)
 builder.Services.AddLogging(loggingBuilder =>
@@ -53,6 +52,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+builder.Configuration
+    .AddEnvironmentVariables();
 
 if (app.Environment.IsDevelopment())
 {

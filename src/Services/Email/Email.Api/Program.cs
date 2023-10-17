@@ -41,6 +41,9 @@ builder.Services.AddMassTransit(x =>
 
 var app = builder.Build();
 
+builder.Configuration
+    .AddEnvironmentVariables();
+
 app.UseHttpsRedirection();
 
 app.Run();

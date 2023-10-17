@@ -29,7 +29,7 @@ builder.Services.AddLogging(loggingBuilder =>
 
 // DataAccess
 builder.Services.AddTransient<IDbConnection>((sp) =>
-    new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev"]));
+    new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev:Notification"]));
 builder.Services.AddTransient<INotificationRepository, NotificationRepository>();
 builder.Services.AddTransient<INotificationTypeRepository, NotificationTypeRepository>();
 builder.Services.AddTransient<IUserNotificationRepository, UserNotificationRepository>();
@@ -61,7 +61,7 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddFluentMigratorCore()
         .ConfigureRunner(cr => cr
         .AddPostgres()
-        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev"])
+        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev:Notification"])
         .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
 
 // MassTransit
@@ -138,6 +138,9 @@ builder.Services.AddEndpointsApiExplorer();
 
 
 var app = builder.Build();
+
+builder.Configuration
+    .AddEnvironmentVariables();
 
 if (app.Environment.IsDevelopment())
 {

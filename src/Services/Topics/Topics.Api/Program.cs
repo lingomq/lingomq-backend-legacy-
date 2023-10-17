@@ -28,7 +28,7 @@ builder.Services.AddLogging(loggingBuilder =>
 });
 
 // DataLayer
-builder.Services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev"]));
+builder.Services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev:Topics"]));
 builder.Services.AddTransient<ILanguageRepository, LanguageRepository>();
 builder.Services.AddTransient<ITopicLevelRepository, TopicLevelRepository>();
 builder.Services.AddTransient<ITopicRepository, TopicRepository>();
@@ -62,7 +62,7 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddFluentMigratorCore()
         .ConfigureRunner(cr => cr
         .AddPostgres()
-        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev"])
+        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev:Topics"])
         .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
 
 // MassTransit

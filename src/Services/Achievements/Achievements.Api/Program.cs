@@ -17,18 +17,17 @@ using System.Text;
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", true, true)
-    .AddEnvironmentVariables();
+    .AddJsonFile("appsettings.json", true, true);
 
 // Add Logging (NLog)
-builder.Services.AddLogging(loggingBuilder =>
+ builder.Services.AddLogging(loggingBuilder =>
 {
     loggingBuilder.ClearProviders();
     loggingBuilder.AddNLog();
 });
 
 // Data layer
-builder.Services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev"]));
+builder.Services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:dev:Achievements"]));
 builder.Services.AddTransient<IAchievementRepository, AchievementRepository>();
 builder.Services.AddTransient<IUserAchievementRepository, UserAchievementRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
@@ -59,7 +58,7 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddFluentMigratorCore()
         .ConfigureRunner(cr => cr
         .AddPostgres()
-        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev"])
+        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev:Achievements"])
         .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
 
 builder.Services.AddControllers();
@@ -137,6 +136,9 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 var app = builder.Build();
+
+builder.Configuration
+    .AddEnvironmentVariables();
 
 if (app.Environment.IsDevelopment())
 {

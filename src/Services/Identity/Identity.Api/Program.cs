@@ -66,7 +66,7 @@ builder.Services.AddSwaggerGen(c =>
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.AddTransient<IDbConnection>(
-    (sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev"]));
+    (sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev:Identity"]));
 builder.Services.AddTransient<ILinkTypeRepository, LinkTypeRepository>();
 builder.Services.AddTransient<IUserInfoRepository, UserInfoRepository>();
 builder.Services.AddTransient<IUserLinkRepository, UserLinkRepository>();
@@ -121,10 +121,13 @@ builder.Services.AddMassTransit(x =>
 builder.Services.AddFluentMigratorCore()
         .ConfigureRunner(cr => cr
         .AddPostgres()
-        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev"])
+        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev:Identity"])
         .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
 
 var app = builder.Build();
+
+builder.Configuration
+    .AddEnvironmentVariables();
 
 if (app.Environment.IsDevelopment())
 {

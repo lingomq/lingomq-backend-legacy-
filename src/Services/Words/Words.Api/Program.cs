@@ -29,7 +29,7 @@ builder.Services.AddLogging(loggingBuilder =>
 });
 
 // Data layer
-builder.Services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev"]));
+builder.Services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev:Topics"]));
 builder.Services.AddTransient<ILanguageRepository, LanguageRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserWordRepository, UserWordRepository>();
@@ -66,7 +66,7 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddFluentMigratorCore()
         .ConfigureRunner(cr => cr
         .AddPostgres()
-        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev"])
+        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev:Words"])
         .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
 
 // MassTransin
@@ -144,6 +144,9 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+builder.Configuration
+    .AddEnvironmentVariables();
 
 if (app.Environment.IsDevelopment())
 {

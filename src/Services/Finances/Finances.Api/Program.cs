@@ -29,7 +29,7 @@ builder.Services.AddLogging(loggingBuilder =>
 
 // Data Layer
 builder.Services.AddTransient<IDbConnection>((sp) =>
-    new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev"]));
+    new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev:Finances"]));
 builder.Services.AddTransient<IFinanceRepository, FinanceRepository>();
 builder.Services.AddTransient<IUserFinanceRepository, UserFinanceRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
@@ -63,7 +63,7 @@ builder.Services.AddAuthentication(x =>
 builder.Services.AddFluentMigratorCore()
         .ConfigureRunner(cr => cr
         .AddPostgres()
-        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev"])
+        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev:Finances"])
         .ScanIn(Assembly.GetExecutingAssembly()).For.Migrations());
 
 // MassTransit
@@ -139,6 +139,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
+
+builder.Configuration
+    .AddEnvironmentVariables();
 
 if (app.Environment.IsDevelopment())
 {
