@@ -17,7 +17,8 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
-    .AddJsonFile("appsettings.json", false, true)
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", true, true)
     .AddEnvironmentVariables();
 
 // Add Logging (NLog)

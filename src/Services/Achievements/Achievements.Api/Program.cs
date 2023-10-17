@@ -8,7 +8,6 @@ using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using NLog;
 using NLog.Extensions.Logging;
 using Npgsql;
 using System.Data;
@@ -17,7 +16,8 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
-    .AddJsonFile("appsettings.json", false, true)
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", true, true)
     .AddEnvironmentVariables();
 
 // Add Logging (NLog)
