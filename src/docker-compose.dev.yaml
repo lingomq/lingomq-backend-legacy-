@@ -33,7 +33,7 @@ services:
 
     achievements-api:
       env_file:
-        - achievements.env
+        - .env
       image: achievements-api:v0.dev
       build:
         context: .
@@ -46,7 +46,7 @@ services:
 
     app-statistics-api:
       env_file:
-        - app-statistics.env
+        - .env
       image: app-statistics-api:v0.dev
       build:
         context: .
@@ -59,7 +59,7 @@ services:
 
     authentication-api:
       env_file:
-        - authentication.env
+        - .env
       image: authentication-api:v0.dev
       build:
         context: .
@@ -72,7 +72,7 @@ services:
 
     email-api:
       env_file:
-        - email.env
+        - .env
       image: email-api:v0.dev
       build:
         context: .
@@ -82,7 +82,7 @@ services:
     
     finances-api:
       env_file:
-        - finances.env
+        - .env
       image: finances-api:v0.dev
       build:
         context: .
@@ -95,7 +95,7 @@ services:
 
     identity-api:
       env_file:
-        - identity.env
+        - .env
       image: identity-api:v0.dev
       build:
         context: .
@@ -108,7 +108,7 @@ services:
 
     notifications-api:
       env_file:
-        - notifications.env
+        - .env
       image: notifications-api:v0.dev
       build:
         context: .
@@ -121,7 +121,7 @@ services:
 
     topics-api:
       env_file:
-        - topics.env
+        - .env
       image: topics-api:v0.dev
       build:
         context: .
@@ -134,7 +134,7 @@ services:
 
     words-api:
       env_file:
-        - words.env
+        - .env
       image: words-api:v0.dev
       build:
         context: .
