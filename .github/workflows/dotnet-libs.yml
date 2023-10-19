@@ -1,0 +1,36 @@
+name: .NET LingoMq Libs
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: 6.0.x
+    - name: Restore cryptography dependencies
+      run: |
+            cd src/Libs/Cryptography
+            dotnet restore 
+    - name: Build cryptography lib
+      run: |
+            cd src/Libs/Cryptography
+            dotnet restore 
+
+    - name: Restore response dependencies
+      run: |
+            cd src/Libs/Responses
+            dotnet restore 
+    - name: Build response lib
+      run: |
+            cd src/Libs/Responses
+            dotnet restore 
