@@ -24,7 +24,7 @@ jobs:
     - name: Build cryptography lib
       run: |
             cd src/Libs/Cryptography
-            dotnet restore 
+            dotnet build 
 
     - name: Restore response dependencies
       run: |
@@ -33,4 +33,4 @@ jobs:
     - name: Build response lib
       run: |
             cd src/Libs/Responses
-            dotnet restore 
+            dotnet build 
