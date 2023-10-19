@@ -13,9 +13,9 @@ namespace Words.BusinessLayer.Services.Repositories
         private readonly static string Get =
             "SELECT id as \"Id\", type_name as \"TypeName\" " +
             "FROM word_types ";
-        private readonly static string GetRange =
+        private readonly static string GetRange = Get +
             "LIMIT @Count";
-        private readonly static string GetById =
+        private readonly static string GetById = Get +
             "WHERE id = @Id";
         private readonly static string Create =
             "INSERT INTO word_types (id, type_name) " +

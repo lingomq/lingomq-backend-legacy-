@@ -258,7 +258,7 @@
           "Port": 7002
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/app-statistics",
+      "UpstreamPathTemplate": "/api/v0/app-statistics",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -279,7 +279,7 @@
           "Port": 7002
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/app-statistics/{from}&{to}",
+      "UpstreamPathTemplate": "/api/v0/app-statistics/{from}&{to}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -303,7 +303,7 @@
           "Port": 7003
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/auth/sign-in",
+      "UpstreamPathTemplate": "/api/v0/auth/sign-in",
       "UpstreamHttpMethod": [ "POST" ],
       "RateLimitOptions": {
         "EnableRateLimiting": true,
@@ -321,7 +321,7 @@
           "Port": 7003
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/auth/sign-up",
+      "UpstreamPathTemplate": "/api/v0/auth/sign-up",
       "UpstreamHttpMethod": [ "POST" ],
       "RateLimitOptions": {
         "EnableRateLimiting": true,
@@ -339,7 +339,7 @@
           "Port": 7003
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/auth/refresh-token",
+      "UpstreamPathTemplate": "/api/v0/auth/refresh-token",
       "UpstreamHttpMethod": [ "GET" ],
       "RateLimitOptions": {
         "EnableRateLimiting": true,
@@ -358,7 +358,7 @@
           "Port": 7003
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/confirm",
+      "UpstreamPathTemplate": "/api/v0/confirm",
       "UpstreamHttpMethod": [ "GET" ],
       "RateLimitOptions": {
         "EnableRateLimiting": true,
@@ -379,7 +379,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/finances/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/finances/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -403,7 +403,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/finances/{from}&{to}",
+      "UpstreamPathTemplate": "/api/v0/finances/{from}&{to}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -428,7 +428,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/finances/user",
+      "UpstreamPathTemplate": "/api/v0/finances/user",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -452,7 +452,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/finances/user/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/finances/user/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -476,7 +476,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/finances/user/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/finances/user/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -500,7 +500,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/finances/user/{userId}",
+      "UpstreamPathTemplate": "/api/v0/finances/user/{userId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -524,7 +524,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/finances/user/status/{userId}&{financeId}",
+      "UpstreamPathTemplate": "/api/v0/finances/user/status/{userId}&{financeId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -548,7 +548,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/finances/user/confirm",
+      "UpstreamPathTemplate": "/api/v0/finances/user/confirm",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -575,7 +575,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/link-type/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/identity/link-type/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -599,7 +599,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/link-type/{linkId}",
+      "UpstreamPathTemplate": "/api/v0/identity/link-type/{linkId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -623,7 +623,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/link-type/name/{name}",
+      "UpstreamPathTemplate": "/api/v0/identity/link-type/name/{name}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -647,7 +647,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/link-type",
+      "UpstreamPathTemplate": "/api/v0/identity/link-type",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -671,7 +671,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/link-type",
+      "UpstreamPathTemplate": "/api/v0/identity/link-type",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -695,7 +695,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/link-type/{id}",
+      "UpstreamPathTemplate": "/api/v0/identity/link-type/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -720,7 +720,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user",
+      "UpstreamPathTemplate": "/api/v0/identity/user",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -744,7 +744,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/{userId}",
+      "UpstreamPathTemplate": "/api/v0/identity/user/{userId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -768,7 +768,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user",
+      "UpstreamPathTemplate": "/api/v0/identity/user",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -792,7 +792,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/credentials",
+      "UpstreamPathTemplate": "/api/v0/identity/user/credentials",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -816,7 +816,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/credentials",
+      "UpstreamPathTemplate": "/api/v0/identity/user/credentials",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -840,7 +840,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user",
+      "UpstreamPathTemplate": "/api/v0/identity/user",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -864,7 +864,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/{userId}",
+      "UpstreamPathTemplate": "/api/v0/identity/user/{userId}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -889,7 +889,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/info",
+      "UpstreamPathTemplate": "/api/v0/identity/user/info",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -913,7 +913,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/info/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/identity/user/info/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -937,7 +937,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/info/{nickname}",
+      "UpstreamPathTemplate": "/api/v0/identity/user/info/{nickname}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -961,7 +961,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/info",
+      "UpstreamPathTemplate": "/api/v0/identity/user/info",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -985,7 +985,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/info/admin",
+      "UpstreamPathTemplate": "/api/v0/identity/user/info/admin",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1010,7 +1010,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/link/info-id/{userInfoId}",
+      "UpstreamPathTemplate": "/api/v0/identity/user/link/info-id/{userInfoId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1034,7 +1034,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/link/{linkId}",
+      "UpstreamPathTemplate": "/api/v0/identity/user/link/{linkId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1058,7 +1058,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/link",
+      "UpstreamPathTemplate": "/api/v0/identity/user/link",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1082,7 +1082,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/link",
+      "UpstreamPathTemplate": "/api/v0/identity/user/link",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1106,7 +1106,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/link/{id}",
+      "UpstreamPathTemplate": "/api/v0/identity/user/link/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1131,7 +1131,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/role/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/identity/user/role/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1155,7 +1155,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/role/{id}",
+      "UpstreamPathTemplate": "/api/v0/identity/user/role/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1179,7 +1179,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/role/name/{name}",
+      "UpstreamPathTemplate": "/api/v0/identity/user/role/name/{name}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1203,7 +1203,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/role",
+      "UpstreamPathTemplate": "/api/v0/identity/user/role",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1227,7 +1227,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/role",
+      "UpstreamPathTemplate": "/api/v0/identity/user/role",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1251,7 +1251,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/role/{id}",
+      "UpstreamPathTemplate": "/api/v0/identity/user/role/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1276,7 +1276,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/statistics/{userId}",
+      "UpstreamPathTemplate": "/api/v0/identity/user/statistics/{userId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1300,7 +1300,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/statistics/hour/add",
+      "UpstreamPathTemplate": "/api/v0/identity/user/statistics/hour/add",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1324,7 +1324,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/statistics/word/add",
+      "UpstreamPathTemplate": "/api/v0/identity/user/statistics/word/add",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1348,7 +1348,7 @@
           "Port": 7005
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/identity/user/statistics/visit",
+      "UpstreamPathTemplate": "/api/v0/identity/user/statistics/visit",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1375,7 +1375,7 @@
           "Port": 7006
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/notifications/type/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/notifications/type/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1399,7 +1399,7 @@
           "Port": 7006
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/notifications/type/{id}",
+      "UpstreamPathTemplate": "/api/v0/notifications/type/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1423,7 +1423,7 @@
           "Port": 7006
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/notifications/type",
+      "UpstreamPathTemplate": "/api/v0/notifications/type",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1447,7 +1447,7 @@
           "Port": 7006
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/notifications/type",
+      "UpstreamPathTemplate": "/api/v0/notifications/type",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1471,7 +1471,7 @@
           "Port": 7006
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/notifications/type/{id}",
+      "UpstreamPathTemplate": "/api/v0/notifications/type/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1496,7 +1496,7 @@
           "Port": 7006
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/notifications/user",
+      "UpstreamPathTemplate": "/api/v0/notifications/user",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1520,7 +1520,7 @@
           "Port": 7006
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/notifications/user/{id}",
+      "UpstreamPathTemplate": "/api/v0/notifications/user/{id}",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1547,7 +1547,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/topics/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1571,7 +1571,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/language/{id}",
+      "UpstreamPathTemplate": "/api/v0/topics/language/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1595,7 +1595,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/level/{id}",
+      "UpstreamPathTemplate": "/api/v0/topics/level/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1619,7 +1619,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/{id}",
+      "UpstreamPathTemplate": "/api/v0/topics/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1643,7 +1643,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics",
+      "UpstreamPathTemplate": "/api/v0/topics",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1667,7 +1667,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics",
+      "UpstreamPathTemplate": "/api/v0/topics",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1691,7 +1691,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/{id}",
+      "UpstreamPathTemplate": "/api/v0/topics/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1716,7 +1716,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/level/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/topics/level/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1740,7 +1740,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/level/{id}",
+      "UpstreamPathTemplate": "/api/v0/topics/level/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1764,7 +1764,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/level",
+      "UpstreamPathTemplate": "/api/v0/topics/level",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1788,7 +1788,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/level",
+      "UpstreamPathTemplate": "/api/v0/topics/level",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1812,7 +1812,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/level/{id}",
+      "UpstreamPathTemplate": "/api/v0/topics/level/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1837,7 +1837,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/{id}",
+      "UpstreamPathTemplate": "/api/v0/topics/statistics/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1861,7 +1861,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/topics/statistics/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1885,7 +1885,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/topic/{id}",
+      "UpstreamPathTemplate": "/api/v0/topics/statistics/topic/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1909,7 +1909,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/statistics",
+      "UpstreamPathTemplate": "/api/v0/topics/statistics",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1933,7 +1933,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/statistics",
+      "UpstreamPathTemplate": "/api/v0/topics/statistics",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1957,7 +1957,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/{id}",
+      "UpstreamPathTemplate": "/api/v0/topics/statistics/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1982,7 +1982,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/types/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/topics/statistics/types/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2006,7 +2006,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/types",
+      "UpstreamPathTemplate": "/api/v0/topics/statistics/types",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2030,7 +2030,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/types",
+      "UpstreamPathTemplate": "/api/v0/topics/statistics/types",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2054,7 +2054,7 @@
           "Port": 7007
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/topics/statistics/types/{id}",
+      "UpstreamPathTemplate": "/api/v0/topics/statistics/types/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2082,7 +2082,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/languages/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/words/languages/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2106,7 +2106,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/languages/name/{name}",
+      "UpstreamPathTemplate": "/api/v0/words/languages/name/{name}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2130,7 +2130,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/languages/{id}",
+      "UpstreamPathTemplate": "/api/v0/words/languages/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2154,7 +2154,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/languages",
+      "UpstreamPathTemplate": "/api/v0/words/languages",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2178,7 +2178,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/languages",
+      "UpstreamPathTemplate": "/api/v0/words/languages",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2202,7 +2202,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/languages/{id}",
+      "UpstreamPathTemplate": "/api/v0/words/languages/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2228,7 +2228,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/user-words/user",
+      "UpstreamPathTemplate": "/api/v0/words/user-words/user",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2252,7 +2252,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/user-words/user/{userId}",
+      "UpstreamPathTemplate": "/api/v0/words/user-words/user/{userId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2276,7 +2276,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/user-words/user/famous",
+      "UpstreamPathTemplate": "/api/v0/words/user-words/user/famous",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2300,7 +2300,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/user-words/word/{wordId}",
+      "UpstreamPathTemplate": "/api/v0/words/user-words/word/{wordId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2324,7 +2324,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/user-words/word/count/{userId}&{date}",
+      "UpstreamPathTemplate": "/api/v0/words/user-words/word/count/{userId}&{date}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2348,7 +2348,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/user-words/{isForce}&{isAutocomplete}",
+      "UpstreamPathTemplate": "/api/v0/words/user-words/{isForce}&{isAutocomplete}",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2372,7 +2372,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/user-words/{isForce}&{isAutocomplete}",
+      "UpstreamPathTemplate": "/api/v0/words/user-words/{isForce}&{isAutocomplete}",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2396,7 +2396,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/user-words/{id}",
+      "UpstreamPathTemplate": "/api/v0/words/user-words/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2422,7 +2422,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/user-word-types/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/words/user-word-types/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2446,7 +2446,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/user-word-types/all/{wordId}",
+      "UpstreamPathTemplate": "/api/v0/words/user-word-types/all/{wordId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2470,7 +2470,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/user-word-types/typeId/{typeId}",
+      "UpstreamPathTemplate": "/api/v0/words/user-word-types/typeId/{typeId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2494,7 +2494,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/user-word-types",
+      "UpstreamPathTemplate": "/api/v0/words/user-word-types",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2518,7 +2518,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/user-word-types/{id}",
+      "UpstreamPathTemplate": "/api/v0/words/user-word-types/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2544,7 +2544,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/word-types/all/{range}",
+      "UpstreamPathTemplate": "/api/v0/words/word-types/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2568,7 +2568,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/word-types/{id}",
+      "UpstreamPathTemplate": "/api/v0/words/word-types/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2592,7 +2592,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/word-types",
+      "UpstreamPathTemplate": "/api/v0/words/word-types",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2617,7 +2617,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/word-types",
+      "UpstreamPathTemplate": "/api/v0/words/word-types",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2641,7 +2641,7 @@
           "Port": 7008
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/api/words/word-types/{id}",
+      "UpstreamPathTemplate": "/api/v0/words/word-types/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40

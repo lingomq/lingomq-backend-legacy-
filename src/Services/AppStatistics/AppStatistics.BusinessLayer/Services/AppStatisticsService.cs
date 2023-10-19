@@ -37,7 +37,7 @@ namespace AppStatistics.BusinessLayer.Services
 
         public async Task UpdateAsync(StatisticsApp entity)
         {
-            if (_dataAccess.GetAsync(entity.Id) is null)
+            if (_dataAccess.GetAsync(entity.Id!) is null)
                 throw new NotFoundException<StatisticsApp>();
 
             await _dataAccess.UpdateAsync(entity);
