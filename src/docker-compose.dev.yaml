@@ -21,7 +21,9 @@ services:
         - "15672:15672"
 
     psql:
-      image: postgres:13.3
+      build:
+        context: .
+        dockerfile: Postgres.Dockerfile
       hostname: psql
       restart: always
       container_name: postgres
@@ -29,11 +31,14 @@ services:
         - postgres.env
       ports:
         - "5432:5432"
+      volumes:
+        - postgresdb:/var/lib/postgresql/data
       stdin_open: true
       tty: true
       command: postgres -c 'max_connections=20'
 
     achievements-api:
+      restart: always
       env_file:
         - .env
       image: achievements-api:v0.dev
@@ -47,6 +52,7 @@ services:
         - "7001:80"
 
     app-statistics-api:
+      restart: always
       env_file:
         - .env
       image: app-statistics-api:v0.dev
@@ -60,6 +66,7 @@ services:
         - "7002:80"
 
     authentication-api:
+      restart: always
       env_file:
         - .env
       image: authentication-api:v0.dev
@@ -73,6 +80,7 @@ services:
         - "7003:80"
 
     email-api:
+      restart: always
       env_file:
         - .env
       image: email-api:v0.dev
@@ -83,6 +91,7 @@ services:
         - "7004:80"
     
     finances-api:
+      restart: always
       env_file:
         - .env
       image: finances-api:v0.dev
@@ -96,6 +105,7 @@ services:
         - "7005:80"
 
     identity-api:
+      restart: always
       env_file:
         - .env
       image: identity-api:v0.dev
@@ -109,6 +119,7 @@ services:
         - "7006:80"
 
     notifications-api:
+      restart: always
       env_file:
         - .env
       image: notifications-api:v0.dev
@@ -122,6 +133,7 @@ services:
         - "7007:80"
 
     topics-api:
+      restart: always
       env_file:
         - .env
       image: topics-api:v0.dev
@@ -135,6 +147,7 @@ services:
         - "7008:80"
 
     words-api:
+      restart: always
       env_file:
         - .env
       image: words-api:v0.dev
@@ -148,6 +161,7 @@ services:
         - "7009:80"
 
     ocelot-gateway:
+      restart: always
       ports:
         - 80
         - 443
@@ -165,3 +179,4 @@ services:
 
 volumes:
   rabbitmq:
+  postgresdb:
