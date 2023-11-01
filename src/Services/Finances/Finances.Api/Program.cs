@@ -36,7 +36,7 @@ builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 // Add other services
-builder.Services.AddTransient<IPaymentService>();
+builder.Services.AddTransient<IPaymentService, PaymentService>();
 
 // Authentication (current: JWT)
 builder.Services.AddAuthentication(x =>
