@@ -2,7 +2,6 @@
 using AppStatistics.BusinessLayer.Contracts.Service;
 using AppStatistics.BusinessLayer.Exceptions.ClientExceptions;
 using AppStatistics.DomainLayer.Entities;
-using MongoDB.Driver;
 
 namespace AppStatistics.BusinessLayer.Services
 {

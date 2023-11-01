@@ -6,15 +6,15 @@
     // == Achievement Microservice ==
     // achievements-api - achievement-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/achievements/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/achievements/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 7001
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/achievements/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/achievements/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -30,15 +30,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/achievements/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/achievements/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 7001
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/achievements/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/achievements/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -54,15 +54,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/achievements",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/achievements",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 7001
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/achievements",
+      "UpstreamPathTemplate": "/api.lingomq/achievements",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -78,15 +78,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/achievements",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/achievements",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 7001
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/achievements",
+      "UpstreamPathTemplate": "/api.lingomq/achievements",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -102,15 +102,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/achievements/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/achievements/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 7001
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/achievements/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/achievements/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -127,15 +127,15 @@
     },
     // achievements-api - user-achievement-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/achievements/user",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/achievements/user",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 7001
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/achievements/user",
+      "UpstreamPathTemplate": "/api.lingomq/achievements/user",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -151,15 +151,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/achievements/user/{userId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/achievements/user/{userId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 7001
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/achievements/user/{userId}",
+      "UpstreamPathTemplate": "/api.lingomq/achievements/user/{userId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -175,15 +175,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/achievements/user/count/{userId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/achievements/user/count/{userId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 7001
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/achievements/user/count/{userId}",
+      "UpstreamPathTemplate": "/api.lingomq/achievements/user/count/{userId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -199,15 +199,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/achievements/user/all/{count}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/achievements/user/all/{count}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 7001
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/achievements/user/all/{count}",
+      "UpstreamPathTemplate": "/api.lingomq/achievements/user/all/{count}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -223,15 +223,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/achievements/user/id/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/achievements/user/id/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 7001
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/achievements/user/id/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/achievements/user/id/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -250,15 +250,15 @@
     // == AppStatistics Microservice ==
     // app-statistics-api - app-statistics-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/app-statistics",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/app-statistics",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "app-statistics-api",
-          "Port": 7002
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/app-statistics",
+      "UpstreamPathTemplate": "/api.lingomq/app-statistics",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -271,15 +271,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/app-statistics/{from}&{to}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/app-statistics/{from}&{to}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "app-statistics-api",
-          "Port": 7002
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/app-statistics/{from}&{to}",
+      "UpstreamPathTemplate": "/api.lingomq/app-statistics/{from}&{to}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -295,15 +295,15 @@
     // == Authentication Microservice ==
     // authentication-api - authentication-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/auth/sign-in",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/auth/sign-in",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "authentication-api",
-          "Port": 7003
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/auth/sign-in",
+      "UpstreamPathTemplate": "/api.lingomq/auth/sign-in",
       "UpstreamHttpMethod": [ "POST" ],
       "RateLimitOptions": {
         "EnableRateLimiting": true,
@@ -313,15 +313,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/auth/sign-up",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/auth/sign-in",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "authentication-api",
-          "Port": 7003
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/auth/sign-up",
+      "UpstreamPathTemplate": "/api.lingomq/auth/sign-up",
       "UpstreamHttpMethod": [ "POST" ],
       "RateLimitOptions": {
         "EnableRateLimiting": true,
@@ -332,11 +332,11 @@
     },
     {
       "DownstreamPathTemplate": "/api.lingomq/auth/refresh-token",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "authentication-api",
-          "Port": 7003
+          "Port": 80
         }
       ],
       "UpstreamPathTemplate": "/api/v0/auth/refresh-token",
@@ -350,15 +350,15 @@
     },
     // authentication-api - confirm-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/confirm",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/confirm",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "authentication-api",
-          "Port": 7003
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/confirm",
+      "UpstreamPathTemplate": "/api.lingomq/confirm",
       "UpstreamHttpMethod": [ "GET" ],
       "RateLimitOptions": {
         "EnableRateLimiting": true,
@@ -371,15 +371,15 @@
     // == Finances Microservice ==
     // finances-api - finances-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/finances/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/finances/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/finances/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/finances/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -395,15 +395,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/finances/{from}&{to}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/finances/{from}&{to}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/finances/{from}&{to}",
+      "UpstreamPathTemplate": "/api.lingomq/finances/{from}&{to}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -418,41 +418,17 @@
         "AuthenticationProviderKey": "Bearer"
       }
     },
-    // finances-api - finances-controller
+    // finances-api - user-finance-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/finances/user",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/finances/user",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/finances/user",
-      "UpstreamHttpMethod": [ "GET" ],
-      "FileCacheOptions": {
-        "TtlSeconds": 40
-      },
-      "RateLimitOptions": {
-        "EnableRateLimiting": true,
-        "Period": "5s",
-        "PeriodTimespan": 5,
-        "Limit": 10
-      },
-      "AuthenticationOptions": {
-        "AuthenticationProviderKey": "Bearer"
-      }
-    },
-    {
-      "DownstreamPathTemplate": "/api.lingomq/finances/user/all/{range}",
-      "DownstreamScheme": "https",
-      "DownstreamHostAndPorts": [
-        {
-          "Host": "finances-api",
-          "Port": 7005
-        }
-      ],
-      "UpstreamPathTemplate": "/api/v0/finances/user/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/finances/user",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -468,15 +444,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/finances/user/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/finances/user/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/finances/user/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/finances/user/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -492,15 +468,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/finances/user/{userId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/finances/user/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/finances/user/{userId}",
+      "UpstreamPathTemplate": "/api.lingomq/finances/user/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -516,15 +492,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/finances/user/status/{userId}&{financeId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/finances/user/{userId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/finances/user/status/{userId}&{financeId}",
+      "UpstreamPathTemplate": "/api.lingomq/finances/user/{userId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -540,15 +516,39 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/finances/user/confirm",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/finances/user/status/{userId}&{financeId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/finances/user/confirm",
+      "UpstreamPathTemplate": "/api.lingomq/finances/user/status/{userId}&{financeId}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v0/finances/user/confirm",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "finances-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/finances/user/confirm",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -567,15 +567,15 @@
     // == Identity Microservice ==
     // identity-api - link-type-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/link-type/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/link-type/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/link-type/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/link-type/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -591,15 +591,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/link-type/{linkId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/link-type/{linkId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/link-type/{linkId}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/link-type/{linkId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -615,15 +615,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/link-type/name/{name}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/link-type/name/{name}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/link-type/name/{name}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/link-type/name/{name}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -639,15 +639,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/link-type",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/link-type",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/link-type",
+      "UpstreamPathTemplate": "/api.lingomq/identity/link-type",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -663,15 +663,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/link-type",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/link-type",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/link-type",
+      "UpstreamPathTemplate": "/api.lingomq/identity/link-type",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -687,15 +687,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/link-type/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/link-type/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/link-type/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/link-type/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -712,15 +712,15 @@
     },
     // identity-api - user-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -736,15 +736,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/{userId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/{userId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/{userId}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/{userId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -760,15 +760,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -784,15 +784,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/credentials",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/credentials",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/credentials",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/credentials",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -808,15 +808,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/credentials",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/credentials",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/credentials",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/credentials",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -832,15 +832,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -856,15 +856,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/{userId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/{userId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/{userId}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/{userId}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -881,15 +881,15 @@
     },
     // identity-api - user-info-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/info",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/info",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/info",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/info",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -905,15 +905,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/info/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/info/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/info/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/info/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -929,15 +929,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/info/{nickname}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/info/{nickname}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/info/{nickname}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/info/{nickname}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -953,15 +953,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/info",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/info",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/info",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/info",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -977,15 +977,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/info/admin",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/info/admin",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/info/admin",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/info/admin",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1002,15 +1002,15 @@
     },
     // identity-api - user-link-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/link/info-id/{userInfoId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/link/info-id/{userInfoId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/link/info-id/{userInfoId}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/link/info-id/{userInfoId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1026,15 +1026,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/link/{linkId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/link/{linkId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/link/{linkId}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/link/{linkId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1050,15 +1050,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/link",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/link",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/link",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/link",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1074,15 +1074,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/link",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/link",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/link",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/link",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1098,15 +1098,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/link/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/link/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/link/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/link/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1123,15 +1123,15 @@
     },
     // identity-api - user-role-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/role/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/role/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/role/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/role/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1147,15 +1147,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/role/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/role/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/role/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/role/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1171,15 +1171,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/role/name/{name}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/role/name/{name}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/role/name/{name}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/role/name/{name}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1195,15 +1195,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/role",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/role",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/role",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/role",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1219,15 +1219,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/role",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/role",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/role",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/role",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1243,15 +1243,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/role/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/role/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/role/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/role/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1268,15 +1268,15 @@
     },
     // identity-api - user-statistics-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/statistics/{userId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/statistics/{userId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/statistics/{userId}",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/{userId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1292,15 +1292,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/statistics/hour/add",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/statistics/hour/add",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/statistics/hour/add",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/hour/add",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1316,15 +1316,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/statistics/word/add",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/statistics/word/add",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/statistics/word/add",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/word/add",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1340,15 +1340,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/identity/user/statistics/visit",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/identity/user/statistics/visit",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 7005
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/identity/user/statistics/visit",
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/visit",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1367,15 +1367,15 @@
     // == Notifications Microservice ==
     // notifications-api - notification-type-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/notifications/type/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/notifications/type/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 7006
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/notifications/type/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/notifications/type/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1391,15 +1391,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/notifications/type/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/notifications/type/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 7006
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/notifications/type/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/notifications/type/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1415,15 +1415,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/notifications/type",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/notifications/type",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 7006
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/notifications/type",
+      "UpstreamPathTemplate": "/api.lingomq/notifications/type",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1439,15 +1439,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/notifications/type",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/notifications/type",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 7006
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/notifications/type",
+      "UpstreamPathTemplate": "/api.lingomq/notifications/type",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1463,15 +1463,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/notifications/type/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/notifications/type/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 7006
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/notifications/type/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/notifications/type/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1488,15 +1488,15 @@
     },
     // notifications-api - user-notification-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/notifications/user",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/notifications/user",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 7006
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/notifications/user",
+      "UpstreamPathTemplate": "/api.lingomq/notifications/user",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1512,15 +1512,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/notifications/user/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/notifications/user/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 7006
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/notifications/user/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/notifications/user/{id}",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1539,15 +1539,15 @@
     // == Topic Microservice ==
     // topic-api - topic-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1563,15 +1563,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/language/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/language/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/language/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/language/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1587,15 +1587,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/level/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/level/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/level/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/level/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1611,15 +1611,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1635,15 +1635,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics",
+      "UpstreamPathTemplate": "/api.lingomq/topics",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1659,15 +1659,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics",
+      "UpstreamPathTemplate": "/api.lingomq/topics",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1683,15 +1683,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1708,15 +1708,15 @@
     },
     // topic-api - topic-level-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/level/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/level/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/level/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/level/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1732,15 +1732,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/level/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/level/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/level/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/level/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1756,15 +1756,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/level",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/level",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/level",
+      "UpstreamPathTemplate": "/api.lingomq/topics/level",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1780,15 +1780,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/level",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/level",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/level",
+      "UpstreamPathTemplate": "/api.lingomq/topics/level",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1804,15 +1804,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/level/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/level/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/level/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/level/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1829,15 +1829,15 @@
     },
     // topic-api - topic-statistics-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/statistics/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/statistics/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/statistics/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1853,15 +1853,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/statistics/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/statistics/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/statistics/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1877,15 +1877,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/topic/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/statistics/topic/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/statistics/topic/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/statistics/topic/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1901,15 +1901,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/statistics",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/statistics",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/statistics",
+      "UpstreamPathTemplate": "/api.lingomq/topics/statistics",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1925,15 +1925,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/statistics",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/statistics",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/statistics",
+      "UpstreamPathTemplate": "/api.lingomq/topics/statistics",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1949,15 +1949,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/statistics/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/statistics/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/statistics/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1974,15 +1974,15 @@
     },
     // topic-api - topic-statistics-type-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/types/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/statistics/types/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/statistics/types/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/statistics/types/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -1998,15 +1998,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/types",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/statistics/types",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/statistics/types",
+      "UpstreamPathTemplate": "/api.lingomq/topics/statistics/types",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2022,15 +2022,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/types",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/statistics/types",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/statistics/types",
+      "UpstreamPathTemplate": "/api.lingomq/topics/statistics/types",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2046,15 +2046,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/topics/statistics/types/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/topics/statistics/types/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 7007
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/topics/statistics/types/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/statistics/types/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2074,15 +2074,15 @@
     // words-api - language-controller
 
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/languages/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/languages/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/languages/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/words/languages/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2098,15 +2098,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/languages/name/{name}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/languages/name/{name}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/languages/name/{name}",
+      "UpstreamPathTemplate": "/api.lingomq/words/languages/name/{name}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2122,15 +2122,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/languages/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/languages/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/languages/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/words/languages/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2146,15 +2146,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/languages",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/languages",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/languages",
+      "UpstreamPathTemplate": "/api.lingomq/words/languages",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2170,15 +2170,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/languages",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/languages",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/languages",
+      "UpstreamPathTemplate": "/api.lingomq/words/languages",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2194,15 +2194,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/languages/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/languages/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/languages/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/words/languages/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2220,15 +2220,15 @@
 
     // words-api - user-word-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/user-words/user",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/user-words/user",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/user-words/user",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/user",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2244,15 +2244,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/user-words/user/{userId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/user-words/user/{userId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/user-words/user/{userId}",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/user/{userId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2268,15 +2268,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/user-words/user/famous",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/user-words/user/famous",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/user-words/user/famous",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/user/famous",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2292,15 +2292,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/user-words/word/{wordId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/user-words/word/{wordId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/user-words/word/{wordId}",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/word/{wordId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2316,15 +2316,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/user-words/word/count/{userId}&{date}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/user-words/word/count/{userId}&{date}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/user-words/word/count/{userId}&{date}",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/word/count/{userId}&{date}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2340,15 +2340,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/user-words/{isForce}&{isAutocomplete}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/user-words/{isForce}&{isAutocomplete}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/user-words/{isForce}&{isAutocomplete}",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/{isForce}&{isAutocomplete}",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2364,15 +2364,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/user-words/{isForce}&{isAutocomplete}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/user-words/{isForce}&{isAutocomplete}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/user-words/{isForce}&{isAutocomplete}",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/{isForce}&{isAutocomplete}",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2388,15 +2388,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/user-words/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/user-words/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/user-words/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2414,15 +2414,15 @@
 
     // words-api - user-word-type-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/user-word-types/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/user-word-types/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/user-word-types/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-word-types/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2438,15 +2438,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/user-word-types/all/{wordId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/user-word-types/all/{wordId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/user-word-types/all/{wordId}",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-word-types/all/{wordId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2462,15 +2462,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/user-word-types/typeId/{typeId}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/user-word-types/typeId/{typeId}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/user-word-types/typeId/{typeId}",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-word-types/typeId/{typeId}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2486,15 +2486,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/user-word-types",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/user-word-types",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/user-word-types",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-word-types",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2510,15 +2510,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/user-word-types/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/user-word-types/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/user-word-types/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-word-types/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2536,15 +2536,15 @@
 
     // words-api - word-type-controller
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/word-types/all/{range}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/word-types/all/{range}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/word-types/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/words/word-types/all/{range}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2560,15 +2560,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/word-types/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/word-types/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/word-types/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/words/word-types/{id}",
       "UpstreamHttpMethod": [ "GET" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2584,15 +2584,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/word-types",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/word-types",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/word-types",
+      "UpstreamPathTemplate": "/api.lingomq/words/word-types",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2609,15 +2609,15 @@
     },
 
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/word-types",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/word-types",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/word-types",
+      "UpstreamPathTemplate": "/api.lingomq/words/word-types",
       "UpstreamHttpMethod": [ "PUT" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
@@ -2633,15 +2633,15 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/words/word-types/{id}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/v0/words/word-types/{id}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 7008
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/words/word-types/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/words/word-types/{id}",
       "UpstreamHttpMethod": [ "DELETE" ],
       "FileCacheOptions": {
         "TtlSeconds": 40
