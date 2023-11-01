@@ -15,6 +15,8 @@ services:
       expose:
         - "5672"
         - "15672"
+      volumes:
+        - rabbitmq:/rabbitmq
       ports:
         - "15672:15672"
 
@@ -146,17 +148,20 @@ services:
         - "7009:80"
 
     ocelot-gateway:
+      ports:
+        - 80
+        - 443
       environment:
-        ASPNETCORE_HTTPS_PORT: "9998"
-        ASPNETCORE_URLS: https://+:443;https://+:80
-        ASPNETCORE_Kestrel__Certificates__Default__Password: password
-        ASPNETCORE_Kestrel__Certificates__Default_Path: /https/aspnetapp.pfx
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=https://+:443;http://+:80
+        - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+        - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
       image: ocelot-gateway:v0.dev
       build:
         context: .
         dockerfile: ApiGateway/OcelotApiGateway/Dockerfile
       volumes: 
         - ~/.aspnet/https:/https:ro
-      ports:
-        - "9999:443"
-        - "9998:80"
+
+volumes:
+  rabbitmq:
