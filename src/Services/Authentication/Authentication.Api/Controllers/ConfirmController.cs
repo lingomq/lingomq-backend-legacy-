@@ -31,7 +31,7 @@ namespace Authentication.Api.Controllers
             _publisher = publisher;
         }
 
-        [HttpGet]
+        [HttpGet("{token}")]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string token)
         {

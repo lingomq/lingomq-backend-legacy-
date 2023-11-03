@@ -38,6 +38,7 @@ services:
       command: postgres -c 'max_connections=20'
 
     achievements-api:
+      hostname: achievements-api
       restart: always
       env_file:
         - .env
@@ -52,6 +53,7 @@ services:
         - "7001:80"
 
     app-statistics-api:
+      hostname: app-statistics-api
       restart: always
       env_file:
         - .env
@@ -66,6 +68,7 @@ services:
         - "7002:80"
 
     authentication-api:
+      hostname: authentication-api
       restart: always
       env_file:
         - .env
@@ -80,6 +83,7 @@ services:
         - "7003:80"
 
     email-api:
+      hostname: email-api
       restart: always
       env_file:
         - .env
@@ -91,6 +95,7 @@ services:
         - "7004:80"
     
     finances-api:
+      hostname: finances-api
       restart: always
       env_file:
         - .env
@@ -105,6 +110,7 @@ services:
         - "7005:80"
 
     identity-api:
+      hostname: identity-api
       restart: always
       env_file:
         - .env
@@ -119,6 +125,7 @@ services:
         - "7006:80"
 
     notifications-api:
+      hostname: notifications-api
       restart: always
       env_file:
         - .env
@@ -133,6 +140,7 @@ services:
         - "7007:80"
 
     topics-api:
+      hostname: topics-api
       restart: always
       env_file:
         - .env
@@ -147,6 +155,7 @@ services:
         - "7008:80"
 
     words-api:
+      hostname: words-api
       restart: always
       env_file:
         - .env
@@ -162,9 +171,11 @@ services:
 
     ocelot-gateway:
       restart: always
+      env_file:
+        - .env
       ports:
-        - 80
-        - 443
+        - "9998:80"
+        - "9999:443"
       environment:
         - ASPNETCORE_ENVIRONMENT=Development
         - ASPNETCORE_URLS=https://+:443;http://+:80

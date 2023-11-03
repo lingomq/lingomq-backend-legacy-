@@ -108,7 +108,8 @@ builder.Services.AddMassTransit(x =>
     x.AddConsumer<IdentityUpdateUserConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
-        cfg.Host("localhost", "/", h =>
+        
+        cfg.Host(builder.Configuration["RabbitMq:Uri"]!, "/", h =>
         {
             h.Username(builder.Configuration["RabbitMq:UserName"]);
             h.Password(builder.Configuration["RabbitMq:Password"]);

@@ -2,7 +2,7 @@
   "GlobalConfiguration": {
     "BaseUrl": "https://localhost:9999"
   },
-  "ReRoutes": [
+  "Routes": [
     // == Achievement Microservice ==
     // achievements-api - achievement-controller
     {
@@ -11,7 +11,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 80
+          "Port": 7001
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/achievements/all/{range}",
@@ -35,7 +35,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 80
+          "Port": 7001
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/achievements/{id}",
@@ -59,7 +59,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 80
+          "Port": 7001
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/achievements",
@@ -83,7 +83,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 80
+          "Port": 7001
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/achievements",
@@ -107,7 +107,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 80
+          "Port": 7001
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/achievements/{id}",
@@ -132,7 +132,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 80
+          "Port": 7001
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/achievements/user",
@@ -156,7 +156,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 80
+          "Port": 7001
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/achievements/user/{userId}",
@@ -180,7 +180,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 80
+          "Port": 7001
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/achievements/user/count/{userId}",
@@ -204,7 +204,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 80
+          "Port": 7001
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/achievements/user/all/{count}",
@@ -228,7 +228,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "achievements-api",
-          "Port": 80
+          "Port": 7001
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/achievements/user/id/{id}",
@@ -255,7 +255,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "app-statistics-api",
-          "Port": 80
+          "Port": 7002
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/app-statistics",
@@ -276,7 +276,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "app-statistics-api",
-          "Port": 80
+          "Port": 7002
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/app-statistics/{from}&{to}",
@@ -297,10 +297,11 @@
     {
       "DownstreamPathTemplate": "/api/v0/auth/sign-in",
       "DownstreamScheme": "http",
+      "DownstreamHttpMethod": [ "POST "],
       "DownstreamHostAndPorts": [
         {
           "Host": "authentication-api",
-          "Port": 80
+          "Port": 7003
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/auth/sign-in",
@@ -313,12 +314,13 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api/v0/auth/sign-in",
+      "DownstreamPathTemplate": "/api/v0/auth/sign-up",
       "DownstreamScheme": "http",
+      "DownstreamHttpMethod": [ "POST "],
       "DownstreamHostAndPorts": [
         {
           "Host": "authentication-api",
-          "Port": 80
+          "Port": 7003
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/auth/sign-up",
@@ -336,7 +338,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "authentication-api",
-          "Port": 80
+          "Port": 7003
         }
       ],
       "UpstreamPathTemplate": "/api/v0/auth/refresh-token",
@@ -350,15 +352,15 @@
     },
     // authentication-api - confirm-controller
     {
-      "DownstreamPathTemplate": "/api/v0/confirm",
+      "DownstreamPathTemplate": "/api/v0/confirm/{token}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "authentication-api",
-          "Port": 80
+          "Port": 7003
         }
       ],
-      "UpstreamPathTemplate": "/api.lingomq/confirm",
+      "UpstreamPathTemplate": "/api.lingomq/confirm/{token}",
       "UpstreamHttpMethod": [ "GET" ],
       "RateLimitOptions": {
         "EnableRateLimiting": true,
@@ -376,7 +378,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 80
+          "Port": 7003
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/finances/all/{range}",
@@ -400,7 +402,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 80
+          "Port": 7003
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/finances/{from}&{to}",
@@ -425,7 +427,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 80
+          "Port": 7005
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/finances/user",
@@ -449,7 +451,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 80
+          "Port": 7005
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/finances/user/all/{range}",
@@ -473,7 +475,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 80
+          "Port": 7005
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/finances/user/all/{range}",
@@ -497,7 +499,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 80
+          "Port": 7005
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/finances/user/{userId}",
@@ -521,7 +523,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 80
+          "Port": 7005
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/finances/user/status/{userId}&{financeId}",
@@ -545,7 +547,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "finances-api",
-          "Port": 80
+          "Port": 7005
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/finances/user/confirm",
@@ -572,7 +574,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/link-type/all/{range}",
@@ -596,7 +598,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/link-type/{linkId}",
@@ -620,7 +622,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/link-type/name/{name}",
@@ -644,7 +646,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/link-type",
@@ -668,7 +670,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/link-type",
@@ -692,7 +694,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/link-type/{id}",
@@ -717,7 +719,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user",
@@ -741,7 +743,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/{userId}",
@@ -765,7 +767,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user",
@@ -789,7 +791,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/credentials",
@@ -813,7 +815,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/credentials",
@@ -837,7 +839,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user",
@@ -861,7 +863,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/{userId}",
@@ -886,7 +888,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/info",
@@ -910,7 +912,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/info/all/{range}",
@@ -934,7 +936,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/info/{nickname}",
@@ -958,7 +960,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/info",
@@ -982,7 +984,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/info/admin",
@@ -1007,7 +1009,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/link/info-id/{userInfoId}",
@@ -1031,7 +1033,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/link/{linkId}",
@@ -1055,7 +1057,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/link",
@@ -1079,7 +1081,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/link",
@@ -1103,7 +1105,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/link/{id}",
@@ -1128,7 +1130,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/role/all/{range}",
@@ -1152,7 +1154,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/role/{id}",
@@ -1176,7 +1178,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/role/name/{name}",
@@ -1200,7 +1202,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/role",
@@ -1224,7 +1226,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/role",
@@ -1248,7 +1250,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/role/{id}",
@@ -1273,7 +1275,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/{userId}",
@@ -1297,7 +1299,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/hour/add",
@@ -1321,7 +1323,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/word/add",
@@ -1345,7 +1347,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "identity-api",
-          "Port": 80
+          "Port": 7006
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/visit",
@@ -1372,7 +1374,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 80
+          "Port": 7007
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/notifications/type/all/{range}",
@@ -1396,7 +1398,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 80
+          "Port": 7007
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/notifications/type/{id}",
@@ -1420,7 +1422,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 80
+          "Port": 7007
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/notifications/type",
@@ -1444,7 +1446,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 80
+          "Port": 7007
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/notifications/type",
@@ -1468,7 +1470,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 80
+          "Port": 7007
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/notifications/type/{id}",
@@ -1493,7 +1495,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 80
+          "Port": 7007
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/notifications/user",
@@ -1517,7 +1519,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "notifications-api",
-          "Port": 80
+          "Port": 7007
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/notifications/user/{id}",
@@ -1544,7 +1546,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/all/{range}",
@@ -1568,7 +1570,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/language/{id}",
@@ -1592,7 +1594,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/level/{id}",
@@ -1616,7 +1618,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/{id}",
@@ -1640,7 +1642,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics",
@@ -1664,7 +1666,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics",
@@ -1688,7 +1690,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/{id}",
@@ -1713,7 +1715,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/level/all/{range}",
@@ -1737,7 +1739,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/level/{id}",
@@ -1761,7 +1763,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/level",
@@ -1785,7 +1787,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/level",
@@ -1809,7 +1811,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/level/{id}",
@@ -1834,7 +1836,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/statistics/{id}",
@@ -1858,7 +1860,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/statistics/all/{range}",
@@ -1882,7 +1884,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/statistics/topic/{id}",
@@ -1906,7 +1908,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/statistics",
@@ -1930,7 +1932,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/statistics",
@@ -1954,7 +1956,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/statistics/{id}",
@@ -1979,7 +1981,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/statistics/types/all/{range}",
@@ -2003,7 +2005,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/statistics/types",
@@ -2027,7 +2029,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/statistics/types",
@@ -2051,7 +2053,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "topics-api",
-          "Port": 80
+          "Port": 7008
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/statistics/types/{id}",
@@ -2079,7 +2081,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/languages/all/{range}",
@@ -2103,7 +2105,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/languages/name/{name}",
@@ -2127,7 +2129,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/languages/{id}",
@@ -2151,7 +2153,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/languages",
@@ -2175,7 +2177,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/languages",
@@ -2199,7 +2201,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/languages/{id}",
@@ -2225,7 +2227,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-words/user",
@@ -2249,7 +2251,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-words/user/{userId}",
@@ -2273,7 +2275,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-words/user/famous",
@@ -2297,7 +2299,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-words/word/{wordId}",
@@ -2321,7 +2323,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-words/word/count/{userId}&{date}",
@@ -2345,7 +2347,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-words/{isForce}&{isAutocomplete}",
@@ -2369,7 +2371,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-words/{isForce}&{isAutocomplete}",
@@ -2393,7 +2395,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-words/{id}",
@@ -2419,7 +2421,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-word-types/all/{range}",
@@ -2443,7 +2445,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-word-types/all/{wordId}",
@@ -2467,7 +2469,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-word-types/typeId/{typeId}",
@@ -2491,7 +2493,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-word-types",
@@ -2515,7 +2517,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-word-types/{id}",
@@ -2541,7 +2543,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/word-types/all/{range}",
@@ -2565,7 +2567,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/word-types/{id}",
@@ -2589,7 +2591,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/word-types",
@@ -2614,7 +2616,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/word-types",
@@ -2638,7 +2640,7 @@
       "DownstreamHostAndPorts": [
         {
           "Host": "words-api",
-          "Port": 80
+          "Port": 7009
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/word-types/{id}",
