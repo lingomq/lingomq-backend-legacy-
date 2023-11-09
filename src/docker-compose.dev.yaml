@@ -42,7 +42,7 @@ services:
       restart: always
       env_file:
         - .env
-      image: achievements-api:v0.dev
+      image: achievements-api:dev
       build:
         context: .
         dockerfile: Services/Achievements/Achievements.Api/Dockerfile
@@ -57,7 +57,7 @@ services:
       restart: always
       env_file:
         - .env
-      image: app-statistics-api:v0.dev
+      image: app-statistics-api:dev
       build:
         context: .
         dockerfile: Services/AppStatistics/AppStatistics.Api/Dockerfile
@@ -68,11 +68,13 @@ services:
         - "7002:80"
 
     authentication-api:
-      hostname: authentication-api
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=http://0.0.0.0:80
       restart: always
       env_file:
         - .env
-      image: authentication-api:v0.dev
+      image: authentication-api
       build:
         context: .
         dockerfile: Services/Authentication/Authentication.Api/Dockerfile
@@ -80,14 +82,14 @@ services:
         - psql
         - rabbitmq
       ports:
-        - "7003:80"
+        - 7003:80
 
     email-api:
       hostname: email-api
       restart: always
       env_file:
         - .env
-      image: email-api:v0.dev
+      image: email-api:dev
       build:
         context: .
         dockerfile: Services/Email/Email.Api/Dockerfile
@@ -99,7 +101,7 @@ services:
       restart: always
       env_file:
         - .env
-      image: finances-api:v0.dev
+      image: finances-api:dev
       build:
         context: .
         dockerfile: Services/Finances/Finances.Api/Dockerfile
@@ -114,7 +116,7 @@ services:
       restart: always
       env_file:
         - .env
-      image: identity-api:v0.dev
+      image: identity-api:dev
       build:
         context: .
         dockerfile: Services/Identity/Identity.Api/Dockerfile
@@ -129,7 +131,7 @@ services:
       restart: always
       env_file:
         - .env
-      image: notifications-api:v0.dev
+      image: notifications-api:dev
       build:
         context: .
         dockerfile: Services/Notifications/Notifications.Api/Dockerfile
@@ -144,7 +146,7 @@ services:
       restart: always
       env_file:
         - .env
-      image: topics-api:v0.dev
+      image: topics-api:dev
       build:
         context: .
         dockerfile: Services/Topics/Topics.Api/Dockerfile
@@ -159,7 +161,7 @@ services:
       restart: always
       env_file:
         - .env
-      image: words-api:v0.dev
+      image: words-api:dev
       build:
         context: .
         dockerfile: Services/Words/Words.Api/Dockerfile
@@ -174,14 +176,14 @@ services:
       env_file:
         - .env
       ports:
-        - "9998:80"
-        - "9999:443"
+        - 9998:80
+        - 9999:443
       environment:
         - ASPNETCORE_ENVIRONMENT=Development
         - ASPNETCORE_URLS=https://+:443;http://+:80
         - ASPNETCORE_Kestrel__Certificates__Default__Password=password
         - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
-      image: ocelot-gateway:v0.dev
+      image: ocelot-gateway:dev
       build:
         context: .
         dockerfile: ApiGateway/OcelotApiGateway/Dockerfile
@@ -191,3 +193,8 @@ services:
 volumes:
   rabbitmq:
   postgresdb:
+
+
+networks:
+    common_network:
+        driver: bridge

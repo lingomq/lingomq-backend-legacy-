@@ -23,11 +23,11 @@ builder.Configuration
     .AddEnvironmentVariables();
 
 // Add Logging (NLog)
-builder.Services.AddLogging(loggingBuilder =>
+/*builder.Services.AddLogging(loggingBuilder =>
 {
     loggingBuilder.ClearProviders();
     loggingBuilder.AddNLog();
-});
+});*/
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -156,8 +156,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHttpsRedirection();
 
 app.UseAuthentication();
 app.UseAuthorization();
