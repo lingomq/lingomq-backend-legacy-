@@ -83,7 +83,7 @@ namespace Authentication.Api.Controllers
             return LingoMq.Responses.LingoMqResponse.AcceptedResult();
         }
 
-        [HttpGet("refresh-token")]
+        [HttpGet("refresh-token/{token}")]
         [AllowAnonymous]
         public async Task<IActionResult> RefreshToken(string token)
         {        

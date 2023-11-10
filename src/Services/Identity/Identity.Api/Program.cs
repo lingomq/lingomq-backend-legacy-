@@ -1,5 +1,6 @@
 using FluentMigrator.Runner;
 using Identity.Api.Middlewares;
+using Identity.Api.Services;
 using Identity.BusinessLayer.Contracts;
 using Identity.BusinessLayer.MassTransit;
 using Identity.BusinessLayer.MassTransit.Consumers;
@@ -74,6 +75,7 @@ builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddTransient<IUserStatisticsRepository, UserStatisticsRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IDatabaseDataMigrator, DatabaseDataMigrator>();
 builder.Services.AddTransient<PublisherBase>();
 
 builder.Services.AddAuthentication(x => {
@@ -148,8 +150,10 @@ using (var serviceScope = app.Services.CreateScope())
     var services = serviceScope.ServiceProvider;
 
     var runner = services.GetRequiredService<IMigrationRunner>();
-
+    var dataMigrator = services.GetRequiredService<IDatabaseDataMigrator>();
     runner.MigrateUp();
+
+    await dataMigrator.AddRoles();
 }
 
 app.Run();

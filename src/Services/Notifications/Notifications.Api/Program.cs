@@ -8,6 +8,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Extensions.Logging;
 using Notifications.Api.Middlewares;
+using Notifications.Api.Services;
 using Notifications.BusinessLayer.Contracts;
 using Notifications.BusinessLayer.MassTransit.Consumers;
 using Notifications.BusinessLayer.Services;
@@ -146,6 +147,14 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+
+    var runner = services.GetRequiredService<IMigrationRunner>();
+    runner.MigrateUp();
 }
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();

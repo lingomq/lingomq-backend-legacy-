@@ -9,6 +9,7 @@ using System.Data;
 using System.Reflection;
 using System.Text;
 using Topics.Api.Middlewares;
+using Topics.Api.Services;
 using Topics.BusinessLayer.Contracts;
 using Topics.BusinessLayer.MassTransit.Consumers.IdentityConsumers;
 using Topics.BusinessLayer.Services;
@@ -155,15 +156,12 @@ app.MapControllers();
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 // Auto migrations
-
 using (var serviceScope = app.Services.CreateScope())
 {
     var services = serviceScope.ServiceProvider;
 
     var runner = services.GetRequiredService<IMigrationRunner>();
-
     runner.MigrateUp();
 }
-
 
 app.Run();

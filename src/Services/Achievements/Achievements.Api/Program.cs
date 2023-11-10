@@ -13,6 +13,7 @@ using Npgsql;
 using System.Data;
 using System.Reflection;
 using System.Text;
+using Achievements.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
@@ -155,13 +156,11 @@ app.MapControllers();
 app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 // Auto migrations
-
 using (var serviceScope = app.Services.CreateScope())
 {
     var services = serviceScope.ServiceProvider;
 
     var runner = services.GetRequiredService<IMigrationRunner>();
-
     runner.MigrateUp();
 }
 

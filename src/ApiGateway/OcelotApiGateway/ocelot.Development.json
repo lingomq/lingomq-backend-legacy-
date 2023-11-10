@@ -264,15 +264,16 @@
       }
     },
     {
-      "DownstreamPathTemplate": "/api.lingomq/auth/refresh-token",
+      "DownstreamPathTemplate": "/api.lingomq/auth/refresh-token/{token}",
       "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [ "Get" ],
       "DownstreamHostAndPorts": [
         {
           "Host": "authentication-api",
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/v0/auth/refresh-token",
+      "UpstreamPathTemplate": "/api/v0/auth/refresh-token/{token}",
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "5s",

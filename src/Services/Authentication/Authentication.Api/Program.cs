@@ -15,6 +15,8 @@ using System.Text;
 using Authentication.BusinessLayer.MassTransit.Consumers;
 using EventBus.Entities.Identity.User;
 using NLog.Extensions.Logging;
+using Authentication.DomainLayer.Entities;
+using Authentication.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
@@ -74,6 +76,7 @@ builder.Services.AddTransient<IUserRoleRepository, UserRoleRepository>();
 builder.Services.AddTransient<IUserInfoRepository, UserInfoRepository>();
 builder.Services.AddTransient<IJwtService, JwtService>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IDatabaseDataMigrator, DatabaseDataMigrator>();
 builder.Services.AddTransient<Publisher>();
 
 // Authentication
@@ -169,7 +172,11 @@ using (var serviceScope = app.Services.CreateScope())
     var services = serviceScope.ServiceProvider;
 
     var runner = services.GetRequiredService<IMigrationRunner>();
+    var dataMigrator = services.GetRequiredService<IDatabaseDataMigrator>(); 
     runner.MigrateUp();
+
+    await dataMigrator.AddRoles();
 }
+
 
 app.Run();

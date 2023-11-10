@@ -13,6 +13,7 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Extensions.Logging;
 using Npgsql;
+using Finances.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
@@ -147,6 +148,15 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+
+
+using (var serviceScope = app.Services.CreateScope())
+{
+    var services = serviceScope.ServiceProvider;
+
+    var runner = services.GetRequiredService<IMigrationRunner>();
+    runner.MigrateUp();
 }
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();
