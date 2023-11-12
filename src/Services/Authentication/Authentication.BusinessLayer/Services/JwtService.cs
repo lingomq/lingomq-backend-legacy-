@@ -32,7 +32,8 @@ namespace Authentication.BusinessLayer.Services
 
             return new TokenModel() { 
                 AccessToken = tokenHandler.WriteToken(accessToken),
-                RefreshToken = tokenHandler.WriteToken(refreshToken)    
+                RefreshToken = tokenHandler.WriteToken(refreshToken),
+                AccessExpiredAt =  DateTime.Now.AddMinutes(int.Parse(_configuration["JWT:ExpiredMinutesAccessToken"]!))
             };
         }
         public List<Claim> GenerateRefreshTokenClaims(UserInfoDto userInfo)
