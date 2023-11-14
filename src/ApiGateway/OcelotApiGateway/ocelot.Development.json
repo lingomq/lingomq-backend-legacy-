@@ -284,6 +284,7 @@
     {
       "DownstreamPathTemplate": "/api/v0/confirm/{token}",
       "DownstreamScheme": "http",
+      "UpstreamHttpMethod": [ "Get" ],
       "DownstreamHostAndPorts": [
         {
           "Host": "authentication-api",
@@ -624,6 +625,7 @@
     },
     {
       "DownstreamPathTemplate": "/api/v0/identity/user/info",
+      "UpstreamHttpMethod": [ "Get" ],
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -632,15 +634,21 @@
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/identity/user/info",
-      "FileCacheOptions": {
-        "TtlSeconds": 40
-      },
-      "RateLimitOptions": {
-        "EnableRateLimiting": true,
-        "Period": "5s",
-        "PeriodTimespan": 5,
-        "Limit": 10
-      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v0/identity/user/info",
+      "UpstreamHttpMethod": [ "Put" ],
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/info",
       "AuthenticationOptions": {
         "AuthenticationProviderKey": "Bearer"
       }

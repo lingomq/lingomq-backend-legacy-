@@ -64,6 +64,7 @@ namespace Identity.Api.Controllers
             _logger.Info("GET /{nickname} {0}", nameof(UserInfo));
             return LingoMq.Responses.LingoMqResponse.OkResult(info);
         }
+
         [HttpPut]
         [Authorize(Roles = AccessRoles.All)]
         public async Task<IActionResult> Update(UserInfo info)

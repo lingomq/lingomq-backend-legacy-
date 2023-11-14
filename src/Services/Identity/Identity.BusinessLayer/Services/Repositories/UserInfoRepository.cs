@@ -34,7 +34,7 @@ namespace Identity.BusinessLayer.Services.Repositories
         private readonly static string Update =
                 "UPDATE user_infos " +
                 "SET nickname = @Nickname," +
-                "image_uri = @Phone," +
+                "image_uri = @ImageUri," +
                 "additional = @Additional," +
                 "role_id = @RoleId, " +
                 "user_id = @UserId, " +

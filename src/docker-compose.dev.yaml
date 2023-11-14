@@ -84,17 +84,17 @@ services:
       ports:
         - 7003:80
 
-    # email-api:
-    #   hostname: email-api
-    #   restart: always
-    #   env_file:
-    #     - .env
-    #   image: email-api:dev
-    #   build:
-    #     context: .
-    #     dockerfile: Services/Email/Email.Api/Dockerfile
-    #   ports:
-    #     - "7004:80"
+    email-api:
+      hostname: email-api
+      restart: always
+      env_file:
+        - .env
+      image: email-api:dev
+      build:
+        context: .
+        dockerfile: Services/Email/Email.Api/Dockerfile
+      ports:
+        - "7004:80"
     
     # finances-api:
     #   hostname: finances-api
@@ -111,20 +111,20 @@ services:
     #   ports:
     #     - "7005:80"
 
-    # identity-api:
-    #   hostname: identity-api
-    #   restart: always
-    #   env_file:
-    #     - .env
-    #   image: identity-api:dev
-    #   build:
-    #     context: .
-    #     dockerfile: Services/Identity/Identity.Api/Dockerfile
-    #   depends_on:
-    #     - psql
-    #     - rabbitmq
-    #   ports:
-    #     - "7006:80"
+    identity-api:
+      hostname: identity-api
+      restart: always
+      env_file:
+        - .env
+      image: identity-api:dev
+      build:
+        context: .
+        dockerfile: Services/Identity/Identity.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7006:80"
 
     # notifications-api:
     #   hostname: notifications-api

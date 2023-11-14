@@ -39,6 +39,9 @@ namespace Authentication.Api.Controllers
             if (infoDto is null || user is null)
                 throw new NotFoundException<User>();
 
+            if (!infoDto.UserId.Equals(user.Id)) 
+                throw new NotFoundException<User>();
+
             if (!ValidationService.IsValidPassword(ref user, model.Password!))
                 throw new InvalidDataException<User>();
 

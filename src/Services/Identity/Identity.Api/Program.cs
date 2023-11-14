@@ -25,7 +25,6 @@ builder.Configuration
 // Add Logging (NLog)
 builder.Services.AddLogging(loggingBuilder =>
 {
-    loggingBuilder.ClearProviders();
     loggingBuilder.AddNLog();
 });
 
