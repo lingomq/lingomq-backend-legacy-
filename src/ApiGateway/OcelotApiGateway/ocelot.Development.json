@@ -230,7 +230,7 @@
     {
       "DownstreamPathTemplate": "/api/v0/auth/sign-in",
       "DownstreamScheme": "http",
-      "UpstreamHttpMethod": [ "Post "],
+      "UpstreamHttpMethod": [ "Post " ],
       "DownstreamHostAndPorts": [
         {
           "Host": "authentication-api",
@@ -248,7 +248,7 @@
     {
       "DownstreamPathTemplate": "/api/v0/auth/sign-up",
       "DownstreamScheme": "http",
-      "UpstreamHttpMethod": [ "Post "],
+      "UpstreamHttpMethod": [ "Post " ],
       "DownstreamHostAndPorts": [
         {
           "Host": "authentication-api",
@@ -567,6 +567,32 @@
       "FileCacheOptions": {
         "TtlSeconds": 40
       },
+      "UpstreamHttpMethod": [ "Put" ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "5s",
+        "PeriodTimespan": 5,
+        "Limit": 10
+      },
+      "AuthenticationOptions": {
+        "AuthenticationProviderKey": "Bearer"
+      }
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/v0/identity/user",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user",
+      "FileCacheOptions": {
+        "TtlSeconds": 40
+      },
+      "UpstreamHttpMethod": [ "Delete" ],
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "5s",

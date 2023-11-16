@@ -9,6 +9,7 @@ using Identity.BusinessLayer.Exceptions.ClientExceptions;
 using Identity.BusinessLayer.Exceptions.ServerExceptions;
 using Identity.BusinessLayer.Extensions;
 using Identity.BusinessLayer.MassTransit;
+using Identity.BusinessLayer.Models;
 using Identity.DomainLayer.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -82,14 +83,14 @@ namespace Identity.Api.Controllers
 
         [HttpPut("credentials")]
         [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Update(string password)
+        public async Task<IActionResult> Update(UserCredentialsModel userCredentialsModel)
         {
             if (UserId == Guid.Empty)
                 throw new UnauthorizedException<User>("Вы не авторизованы");
 
             Cryptor cryptor = new Cryptor(new Sha256Alghoritm());
             BaseKeyPair keyPair = cryptor
-            .Crypt(password);
+            .Crypt(userCredentialsModel.Password);
 
             User user = new User()
             {
