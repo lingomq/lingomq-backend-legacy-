@@ -9,11 +9,12 @@ using Words.BusinessLayer.Contracts;
 using Words.BusinessLayer.Dtos;
 using Words.BusinessLayer.Exceptions.ClientExceptions;
 using Words.BusinessLayer.MassTransit;
+using Words.BusinessLayer.Services;
 using Words.DomainLayer.Entities;
 
 namespace Words.Api.Controllers
 {
-    [Route("api/v0/words/user-words")]
+    [Route("api/words/user-words")]
     [ApiController]
     public class UserWordController : ControllerBase
     {
@@ -82,9 +83,9 @@ namespace Words.Api.Controllers
             return LingoMqResponse.OkResult(new { Count = count });
         }
 
-        [HttpPost("{isForce}&{isAutocomplete}")]
+        [HttpPost("{isForce}/{isAutocomplete}")]
         [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Create(UserWordDto userWordDto, bool isForce = false, bool isAutocomplete = false)
+        public async Task<IActionResult> Create([FromBody] UserWordDto userWordDto, bool isForce = false, bool isAutocomplete = false)
         {
             await ValidateBeforeExecute(userWordDto);
             UserWord word = await GetWordData(userWordDto, isForce, isAutocomplete);
@@ -99,9 +100,9 @@ namespace Words.Api.Controllers
             return LingoMqResponse.AcceptedResult(word);
         }
 
-        [HttpPut("{isForce}&{isAutocomplete}")]
+        [HttpPut("{isForce}/{isAutocomplete}")]
         [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Update(UserWordDto userWordDto, bool isForce = false, bool isAutocomplete = false)
+        public async Task<IActionResult> Update([FromBody] UserWordDto userWordDto, bool isForce = false, bool isAutocomplete = false)
         {
             if (await _unitOfWork.UserWords.GetByIdAsync(userWordDto.Id) is null)
                 throw new NotFoundException<UserWord>();
@@ -130,8 +131,8 @@ namespace Words.Api.Controllers
         {
             string correctWord = await _wordChecker.SpellCorrector(userWordDto.Word!);
 
-            if (!correctWord.Equals(userWordDto) && !isForce)
-                throw new InvalidDataException<UserWordType>("wrong word");
+            if (!correctWord.Equals(userWordDto.Word) && !isForce)
+                throw new InvalidDataException<RightWordModel>(new RightWordModel() { RightWord = correctWord }, "wrong word");
 
             UserWord word = new UserWord()
             {

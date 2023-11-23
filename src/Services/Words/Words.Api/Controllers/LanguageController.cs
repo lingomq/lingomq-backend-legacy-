@@ -10,7 +10,7 @@ using Words.DomainLayer.Entities;
 
 namespace Words.Api.Controllers
 {
-    [Route("api/v0/words/languages")]
+    [Route("api/words/languages")]
     [ApiController]
     public class LanguageController : ControllerBase
     {

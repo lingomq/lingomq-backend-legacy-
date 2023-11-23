@@ -8,7 +8,7 @@ using Words.DomainLayer.Entities;
 
 namespace Words.Api.Controllers
 {
-    [Route("api/v0/words/word-types")]
+    [Route("api/words/word-types")]
     [ApiController]
     public class WordTypeController : ControllerBase
     {

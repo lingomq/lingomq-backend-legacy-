@@ -18,8 +18,8 @@ namespace Words.BusinessLayer.Services.Repositories
         private readonly static string GetByEmail = Get +
             " WHERE email = @Email";
         private readonly static string Create =
-            "INSERT INTO users (id, email, phone) " +
-            "VALUES (@Id, @Email, @Phone)";
+            "INSERT INTO users (id, email, phone, password_hash, password_salt) " +
+            "VALUES (@Id, @Email, @Phone, '', '')";
         private readonly static string Delete =
             "DELETE FROM users " +
             "WHERE id = @Id";

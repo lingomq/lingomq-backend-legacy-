@@ -6,11 +6,11 @@ using Words.BusinessLayer.Dtos;
 
 namespace Words.BusinessLayer.MassTransit.Consumers
 {
-    public class IdentityUpdateUserConsumer : IConsumer<IdentityModelUpdateUser>
+    public class WordsUpdateUserConsumer : IConsumer<IdentityModelUpdateUser>
     {
-        private readonly ILogger<IdentityUpdateUserConsumer> _logger;
+        private readonly ILogger<WordsUpdateUserConsumer> _logger;
         private readonly IUnitOfWork _unitOfWork;
-        public IdentityUpdateUserConsumer(ILogger<IdentityUpdateUserConsumer> logger, IUnitOfWork unitOfWork)
+        public WordsUpdateUserConsumer(ILogger<WordsUpdateUserConsumer> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;

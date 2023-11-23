@@ -16,7 +16,7 @@ using NLog;
 
 namespace Authentication.Api.Controllers
 {
-    [Route("api/v0/confirm")]
+    [Route("api/auth/confirm")]
     [ApiController]
     public class ConfirmController : ControllerBase
     {

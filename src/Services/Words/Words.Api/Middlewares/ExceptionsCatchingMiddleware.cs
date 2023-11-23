@@ -50,9 +50,9 @@ namespace Words.Api.Middlewares
                     Message = ex.Message
                 };
 
-                await HandleAsync(context, (int)HttpStatusCode.InternalServerError, model);
 
                 _logger.Error("Type: {0}; Message: {1};", ex.Source, ex.Message);
+                await HandleAsync(context, (int)HttpStatusCode.InternalServerError, model);
             }
         }
         private async Task HandleCustomExceptionAsync(HttpContext context, ExceptionBase exceptionBase)

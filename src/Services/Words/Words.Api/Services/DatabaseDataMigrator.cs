@@ -5,23 +5,43 @@ namespace Words.Api.Services
 {
     public class DatabaseDataMigrator : IDatabaseDataMigrator
     {
-        private readonly IUserRoleRepository _roleRepository;
-        public DatabaseDataMigrator(IUserRoleRepository roleRepository) =>
-            _roleRepository = roleRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        public DatabaseDataMigrator(IUnitOfWork unitOfWork) => _unitOfWork = unitOfWork;
 
-        public async Task AddRoles()
+        public async Task AddLanguages()
         {
-            List<string> roleNames = new List<string>() { "user", "admin", "moderator" };
-            var rolesFromDatabase = await _roleRepository.GetAsync(10);
+            List<string> languageNames = new List<string>() { "english", "russian" };
+            var languagesFromDatabase = await _unitOfWork.Languages.GetAsync(10);
 
-            foreach (var roleName in rolesFromDatabase.Select(x => x.Name))
+            foreach (var languageName in languagesFromDatabase.Select(x => x.Name))
             {
-                if (roleNames.Contains(roleName!))
-                    roleNames.Remove(roleName!);
+                if (languageNames.Contains(languageName!))
+                    languageNames.Remove(languageName!);
             }
 
-            foreach (string roleName in roleNames)
-                await _roleRepository.AddAsync(new UserRole() { Id = Guid.NewGuid(), Name = roleName });
+            foreach (string languageName in languageNames)
+                await _unitOfWork.Languages.AddAsync(new Language() { Id = Guid.NewGuid(), Name = languageName });
+        }
+
+        public async Task AddWordTypes()
+        {
+            List<string> wordTypeNames = new List<string>() { "important", "usual" };
+            var wordTypeFromDatabase = await _unitOfWork.WordTypes.GetAsync(10);
+
+            foreach (var wordTypeName in wordTypeFromDatabase.Select(x => x.TypeName))
+            {
+                if (wordTypeNames.Contains(wordTypeName!))
+                    wordTypeNames.Remove(wordTypeName!);
+            }
+
+            foreach (string wordTypeName in wordTypeNames)
+                await _unitOfWork.WordTypes.AddAsync(new WordType() { Id = Guid.NewGuid(), TypeName = wordTypeName });
+        }
+
+        public async Task DoWork()
+        {
+            await AddLanguages();
+            await AddWordTypes();
         }
     }
 }

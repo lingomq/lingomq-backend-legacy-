@@ -15,7 +15,7 @@ namespace Words.BusinessLayer.Services
 
         public async Task<string> SpellCorrector(string word, string language = "english")
         {
-            string correct = "";
+            string correct = word;
             HttpClient client = new HttpClient();
             string uri = _uri + "&key=" + _configuration["Keys:SpellCheckerApiKey"] + "&text=" + word;
 
@@ -26,8 +26,13 @@ namespace Words.BusinessLayer.Services
                 string json = await response.Content.ReadAsStringAsync();
                 TextGearsResponseModel responseModel = JsonConvert.DeserializeObject<TextGearsResponseModel>(json);
 
-                if (responseModel.Response!.Errors is not null)
+                if (responseModel.Response!.Errors is not null && responseModel.Response!.Errors.Any())
+                {
+                    Console.WriteLine(responseModel.Response.Errors.First().Better!.First());
+                    Console.WriteLine(responseModel.Response.Errors.First().Better!);
                     correct = responseModel.Response.Errors.First().Better!.First();
+                }
+                    
             }
 
             return correct;

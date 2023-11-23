@@ -156,20 +156,20 @@ services:
     #   ports:
     #     - "7008:80"
 
-    # words-api:
-    #   hostname: words-api
-    #   restart: always
-    #   env_file:
-    #     - .env
-    #   image: words-api:dev
-    #   build:
-    #     context: .
-    #     dockerfile: Services/Words/Words.Api/Dockerfile
-    #   depends_on:
-    #     - psql
-    #     - rabbitmq
-    #   ports:
-    #     - "7009:80"
+    words-api:
+      hostname: words-api
+      restart: always
+      env_file:
+        - .env
+      image: words-api:dev
+      build:
+        context: .
+        dockerfile: Services/Words/Words.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7009:80"
 
     ocelot-gateway:
       restart: always

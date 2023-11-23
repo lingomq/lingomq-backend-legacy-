@@ -12,7 +12,7 @@ using System.Security.Claims;
 
 namespace Identity.Api.Controllers
 {
-    [Route("api/v0/identity/user/info")]
+    [Route("api/identity/user/info")]
     [ApiController]
     public class UserInfoController : ControllerBase
     {
@@ -52,7 +52,7 @@ namespace Identity.Api.Controllers
             _logger.Info("GET /all/{range} {0}", nameof(List<UserInfo>));
             return LingoMq.Responses.LingoMqResponse.OkResult(infos);
         }
-        [HttpGet("{nickname}")]
+        [HttpGet("nickname/{nickname}")]
         [Authorize(Roles = AccessRoles.All)]
         public async Task<IActionResult> Get(string nickname)
         {

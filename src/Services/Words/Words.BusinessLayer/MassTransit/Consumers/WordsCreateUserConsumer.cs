@@ -5,11 +5,11 @@ using Words.BusinessLayer.Contracts;
 using Words.BusinessLayer.Dtos;
 namespace Words.BusinessLayer.MassTransit.Consumers;
 
-public class IdentityCreateUserConsumer : IConsumer<IdentityModelCreateUser>
+public class WordsCreateUserConsumer : IConsumer<IdentityModelCreateUser>
 {
-    private readonly ILogger<IdentityCreateUserConsumer> _logger;
+    private readonly ILogger<WordsCreateUserConsumer> _logger;
     private readonly IUnitOfWork _unitOfWork;
-    public IdentityCreateUserConsumer(ILogger<IdentityCreateUserConsumer> logger,
+    public WordsCreateUserConsumer(ILogger<WordsCreateUserConsumer> logger,
         IUnitOfWork unitOfWork)
     {
         _logger = logger;
@@ -25,7 +25,6 @@ public class IdentityCreateUserConsumer : IConsumer<IdentityModelCreateUser>
         };
 
         await _unitOfWork.Users.AddAsync(user);
-
         _logger.LogInformation("[+] [Words Create Consumer] Succesfully get message." +
                                "{0}:{1} has been added", user.Id, user.Email);
     }

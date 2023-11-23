@@ -105,7 +105,6 @@ builder.Services.AddAuthorization();
 builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
-    x.AddDelayedMessageScheduler();
     x.AddConsumer<IdentityDeleteUserConsumer>();
     x.AddConsumer<IdentityUpdateUserCredentialsConsumer>();
     x.AddConsumer<IdentityUpdateUserConsumer>();
@@ -134,9 +133,9 @@ builder.Services.AddMassTransit(x =>
         });
         
         cfg.ClearSerialization();
-        cfg.Publish<Publisher>();
         cfg.UseRawJsonSerializer();
         cfg.ConfigureEndpoints(context);
+        cfg.Publish<Publisher>();
     });
 });
 

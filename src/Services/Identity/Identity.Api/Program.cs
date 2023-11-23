@@ -8,6 +8,7 @@ using Identity.BusinessLayer.Services;
 using Identity.BusinessLayer.Services.Repositories;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Extensions.Logging;
@@ -65,17 +66,17 @@ builder.Services.AddSwaggerGen(c =>
 });
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
-builder.Services.AddTransient<IDbConnection>(
+builder.Services.AddScoped<IDbConnection>(
     (sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev:Identity"]));
-builder.Services.AddTransient<ILinkTypeRepository, LinkTypeRepository>();
-builder.Services.AddTransient<IUserInfoRepository, UserInfoRepository>();
-builder.Services.AddTransient<IUserLinkRepository, UserLinkRepository>();
-builder.Services.AddTransient<IUserRepository, UserRepository>();
-builder.Services.AddTransient<IUserRoleRepository, UserRoleRepository>();
-builder.Services.AddTransient<IUserStatisticsRepository, UserStatisticsRepository>();
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-builder.Services.AddTransient<IDatabaseDataMigrator, DatabaseDataMigrator>();
-builder.Services.AddTransient<PublisherBase>();
+builder.Services.AddScoped<ILinkTypeRepository, LinkTypeRepository>();
+builder.Services.AddScoped<IUserInfoRepository, UserInfoRepository>();
+builder.Services.AddScoped<IUserLinkRepository, UserLinkRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRoleRepository, UserRoleRepository>();
+builder.Services.AddScoped<IUserStatisticsRepository, UserStatisticsRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddScoped<IDatabaseDataMigrator, DatabaseDataMigrator>();
+builder.Services.AddScoped<PublisherBase>();
 
 builder.Services.AddAuthentication(x => {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -96,10 +97,15 @@ builder.Services.AddAuthentication(x => {
         };
     });
 
+builder.Services
+    .AddMvc(o =>
+    {
+        o.Filters.Add(new ResponseCacheAttribute { NoStore = true, Location = ResponseCacheLocation.None });
+    });
+
 builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
-    x.AddDelayedMessageScheduler();
     x.AddConsumer<IdentityCreateUserConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {

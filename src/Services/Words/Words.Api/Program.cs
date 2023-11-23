@@ -25,19 +25,19 @@ builder.Configuration
 // Add Logging (NLog)
 builder.Services.AddLogging(loggingBuilder =>
 {
-    loggingBuilder.ClearProviders();
     loggingBuilder.AddNLog();
 });
 
 // Data layer
-builder.Services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev:Topics"]));
-builder.Services.AddTransient<ILanguageRepository, LanguageRepository>();
-builder.Services.AddTransient<IUserRepository, UserRepository>();
-builder.Services.AddTransient<IUserWordRepository, UserWordRepository>();
-builder.Services.AddTransient<IUserWordTypeRepository, UserWordTypeRepository>();
-builder.Services.AddTransient<IWordTypeRepository, WordTypeRepository>();
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
-builder.Services.AddTransient<PublisherBase>();
+builder.Services.AddScoped<IDbConnection>((sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev:Words"]));
+builder.Services.AddScoped<ILanguageRepository, LanguageRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserWordRepository, UserWordRepository>();
+builder.Services.AddScoped<IUserWordTypeRepository, UserWordTypeRepository>();
+builder.Services.AddScoped<IWordTypeRepository, WordTypeRepository>();
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IDatabaseDataMigrator, DatabaseDataMigrator>();
+builder.Services.AddScoped<PublisherBase>();
 
 // Other services
 builder.Services.AddTransient<IWordChecker, WordChecker>();
@@ -74,10 +74,9 @@ builder.Services.AddFluentMigratorCore()
 builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
-    x.AddDelayedMessageScheduler();
-    x.AddConsumer<IdentityDeleteUserConsumer>();
-    x.AddConsumer<IdentityUpdateUserConsumer>();
-    x.AddConsumer<IdentityCreateUserConsumer>();
+    x.AddConsumer<WordsDeleteUserConsumer>();
+    x.AddConsumer<WordsUpdateUserConsumer>();
+    x.AddConsumer<WordsCreateUserConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host(builder.Configuration["RabbitMq:Uri"]!, "/", h =>
@@ -86,22 +85,22 @@ builder.Services.AddMassTransit(x =>
             h.Password(builder.Configuration["RabbitMq:Password"]);
         });
 
-        cfg.ReceiveEndpoint(typeof(IdentityDeleteUserConsumer).Name.ToLower(), endpoint =>
+        cfg.ReceiveEndpoint(typeof(WordsDeleteUserConsumer).Name.ToLower(), endpoint =>
         {
-            endpoint.ConfigureConsumer<IdentityDeleteUserConsumer>(context);
+            endpoint.ConfigureConsumer<WordsDeleteUserConsumer>(context);
         }); 
-        cfg.ReceiveEndpoint(typeof(IdentityUpdateUserConsumer).Name.ToLower(), endpoint =>
+        cfg.ReceiveEndpoint(typeof(WordsUpdateUserConsumer).Name.ToLower(), endpoint =>
         {
-            endpoint.ConfigureConsumer<IdentityUpdateUserConsumer>(context);
+            endpoint.ConfigureConsumer<WordsUpdateUserConsumer>(context);
         });
-        cfg.ReceiveEndpoint(typeof(IdentityCreateUserConsumer).Name.ToLower(), endpoint =>
+        cfg.ReceiveEndpoint(typeof(WordsCreateUserConsumer).Name.ToLower(), endpoint =>
         {
-            endpoint.ConfigureConsumer<IdentityCreateUserConsumer>(context);
+            endpoint.ConfigureConsumer<WordsCreateUserConsumer>(context);
         });
         cfg.ClearSerialization();
-        cfg.Publish<PublisherBase>();
         cfg.UseRawJsonSerializer();
         cfg.ConfigureEndpoints(context);
+        cfg.Publish<PublisherBase>();
     });
 });
 
@@ -170,6 +169,9 @@ using (var serviceScope = app.Services.CreateScope())
 
     var runner = services.GetRequiredService<IMigrationRunner>();
     runner.MigrateUp();
+
+    var dataMigrator = services.GetRequiredService<IDatabaseDataMigrator>();
+    await dataMigrator.DoWork();
 }
 
 app.Run();

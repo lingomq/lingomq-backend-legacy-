@@ -15,7 +15,7 @@ using NLog;
 namespace Authentication.Api.Controllers
 {
     [ApiController]
-    [Route("api/v0/auth")]
+    [Route("api/auth")]
     public class AuthenticationController : ControllerBase
     {
         private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
