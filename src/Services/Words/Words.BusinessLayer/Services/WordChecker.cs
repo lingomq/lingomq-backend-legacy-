@@ -26,7 +26,8 @@ namespace Words.BusinessLayer.Services
                 string json = await response.Content.ReadAsStringAsync();
                 TextGearsResponseModel responseModel = JsonConvert.DeserializeObject<TextGearsResponseModel>(json);
 
-                if (responseModel.Response!.Errors is not null && responseModel.Response!.Errors.Any())
+                if (responseModel.Response!.Errors is not null && responseModel.Response!.Errors.Any() &&
+                    responseModel.Response!.Errors.First().Better is not null)
                 {
                     Console.WriteLine(responseModel.Response.Errors.First().Better!.First());
                     Console.WriteLine(responseModel.Response.Errors.First().Better!);

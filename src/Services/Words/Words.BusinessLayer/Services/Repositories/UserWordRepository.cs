@@ -25,7 +25,7 @@ namespace Words.BusinessLayer.Services.Repositories
         private readonly static string GetRange = Get +
             "LIMIT @Count";
         private readonly static string GetById = Get +
-            "WHERE id = @Id";
+            "WHERE user_words.id = @Id";
         private readonly static string GetByWord = Get +
             "WHERE word = @Word";
         private readonly static string GetByUserId = Get +
@@ -43,7 +43,7 @@ namespace Words.BusinessLayer.Services.Repositories
             "SET word = @Word, translated = @Translated, repeats = @Repeats, " +
             "created_at = @CreatedAt, language_id = @LanguageId, user_id = @UserId";
         private readonly static string Delete =
-            "DELETE FROM user_words" +
+            "DELETE FROM user_words " +
             "WHERE id = @Id";
         private readonly IDbConnection _connection;
         public UserWordRepository(IDbConnection connection) =>
