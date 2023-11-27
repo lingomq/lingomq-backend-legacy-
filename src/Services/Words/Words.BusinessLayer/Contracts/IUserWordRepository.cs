@@ -8,5 +8,6 @@ namespace Words.BusinessLayer.Contracts
         Task<UserWord?> GetByWordAsync(string word);
         Task<List<UserWord>> GetByUserIdAsync(Guid id);
         Task<UserWord?> GetMostRepeatedWordAsync();
+        Task<bool> AddRepeatsAsync(Guid wordId, int count);
     }
 }

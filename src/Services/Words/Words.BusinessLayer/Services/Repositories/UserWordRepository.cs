@@ -32,7 +32,7 @@ namespace Words.BusinessLayer.Services.Repositories
             "WHERE user_id = @Id";
         private readonly static string GetCountPerDay =
             "SELECT COUNT(*) FROM user_words " +
-            "WHERE id = @Id, created_at = @CreatedAt";
+            "WHERE user_id = @Id AND DATE(created_at) = @CreatedAt";
         private readonly static string GetMostRepeated = Get +
             "WHERE repeats = (SELECT MAX(repeats) FROM user_words) ";
         private readonly static string Create =
@@ -41,7 +41,12 @@ namespace Words.BusinessLayer.Services.Repositories
         private readonly static string Update =
             "UPDATE user_words " +
             "SET word = @Word, translated = @Translated, repeats = @Repeats, " +
-            "created_at = @CreatedAt, language_id = @LanguageId, user_id = @UserId";
+            "created_at = @CreatedAt, language_id = @LanguageId, user_id = @UserId " +
+            "WHERE id = @WordId";
+        private readonly static string AddRepeats =
+            "UPDATE user_words " +
+            "SET repeats = repeats + @Repeats " +
+            "WHERE id = @WordId";
         private readonly static string Delete =
             "DELETE FROM user_words " +
             "WHERE id = @Id";
@@ -118,6 +123,17 @@ namespace Words.BusinessLayer.Services.Repositories
             transactionScope.Dispose();
 
             return entity;
+        }
+
+        public async Task<bool> AddRepeatsAsync(Guid wordId, int count)
+        {
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+
+            await _connection.ExecuteAsync(AddRepeats, new { Repeats = count, WordId = wordId });
+            transactionScope.Complete();
+            transactionScope.Dispose();
+
+            return true;
         }
 
         private async Task<List<UserWord>> TemplateGet<T>(string sql, T entity)

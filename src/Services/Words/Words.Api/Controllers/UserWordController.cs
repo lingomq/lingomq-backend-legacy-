@@ -74,7 +74,7 @@ namespace Words.Api.Controllers
             return LingoMqResponse.OkResult(userWord);
         }
 
-        [HttpGet("word/count/{userId}&{date}")]
+        [HttpGet("word/count/{userId}/{date}")]
         [Authorize(Roles = AccessRoles.All)]
         public async Task<IActionResult> GetCountWordsPerDay(Guid userId, DateTime date)
         {
@@ -100,19 +100,12 @@ namespace Words.Api.Controllers
             return LingoMqResponse.AcceptedResult(word);
         }
 
-        [HttpPut("{isForce}/{isAutocomplete}")]
+        [HttpPut("add/repeats/{wordId}")]
         [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Update([FromBody] UserWordDto userWordDto, bool isForce = false, bool isAutocomplete = false)
+        public async Task<IActionResult> AddRepeats(Guid wordId)
         {
-            if (await _unitOfWork.UserWords.GetByIdAsync(userWordDto.Id) is null)
-                throw new NotFoundException<UserWord>();
-
-            await ValidateBeforeExecute(userWordDto);
-            UserWord word = await GetWordData(userWordDto, isForce, isAutocomplete);
-
-            await _unitOfWork.UserWords.UpdateAsync(word);
-            _logger.Info("PUT /{isForce}&{isAutocomplete} {0}", nameof(UserWord));
-            return LingoMqResponse.AcceptedResult(word);
+            await _unitOfWork.UserWords.AddRepeatsAsync(wordId, 1);
+            return LingoMqResponse.AcceptedResult();
         }
 
         [HttpDelete("{id}")]

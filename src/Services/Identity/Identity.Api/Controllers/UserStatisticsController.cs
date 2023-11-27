@@ -21,7 +21,7 @@ namespace Identity.Api.Controllers
         private Guid UserId => new Guid(User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier)
             .FirstOrDefault()?.Value!);
 
-        [HttpGet("{userId}")]
+        [HttpGet("id/{userId}")]
         [Authorize(Roles = AccessRoles.All)]
         public async Task<IActionResult> Get(Guid userId)
         {

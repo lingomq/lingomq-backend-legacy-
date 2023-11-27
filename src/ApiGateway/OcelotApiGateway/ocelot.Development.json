@@ -87,6 +87,55 @@
       "UpstreamHttpMethod": [ "Get", "Put" ]
     },
     {
+      "DownstreamPathTemplate": "/api/identity/user/statistics/id/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/id/{userId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/identity/user/statistics/hour/add",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/hour/add",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/identity/user/statistics/word/add",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/word/add",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/identity/user/statistics/visit",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/visit",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+
+    {
       "DownstreamPathTemplate": "/api/words/languages/all/{range}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
@@ -111,7 +160,7 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/api/words/user-words/user/famous",
+      "DownstreamPathTemplate": "/api/words/user-words/famous",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -119,11 +168,11 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api.lingomq/words/user-words/user/famous",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/famous",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/api/words/user-words/word/count/{userId}&{date}",
+      "DownstreamPathTemplate": "/api/words/user-words/word/count/{userId}/{date}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -131,7 +180,7 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api.lingomq/words/user-words/word/count/{userId}&{date}",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/word/count/{userId}/{date}",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
@@ -144,7 +193,19 @@
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/user-words/{isForce}/{isAutocomplete}",
-      "UpstreamHttpMethod": [ "Post", "Put" ]
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/words/user-words/add/repeats/{wordId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/add/repeats/{wordId}",
+      "UpstreamHttpMethod": [ "Put" ]
     },
     {
       "DownstreamPathTemplate": "/api/words/user-words/{id}",
