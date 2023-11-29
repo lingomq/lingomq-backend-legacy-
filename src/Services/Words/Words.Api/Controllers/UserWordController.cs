@@ -149,8 +149,6 @@ namespace Words.Api.Controllers
 
             if (userWordDto.Word is null)
                 throw new InvalidDataException<UserWordType>(parameters: new string[] { "word" });
-            if (await _unitOfWork.UserWords.GetByWordAsync(userWordDto.Word) is not null)
-                throw new ConflictException<UserWord>("The word is already exist");
         }
     }
 }

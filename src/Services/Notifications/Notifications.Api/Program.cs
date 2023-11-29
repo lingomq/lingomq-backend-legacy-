@@ -24,7 +24,6 @@ builder.Configuration
 // Add Logging (NLog)
 builder.Services.AddLogging(loggingBuilder =>
 {
-    loggingBuilder.ClearProviders();
     loggingBuilder.AddNLog();
 });
 
@@ -36,6 +35,7 @@ builder.Services.AddTransient<INotificationTypeRepository, NotificationTypeRepos
 builder.Services.AddTransient<IUserNotificationRepository, UserNotificationRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IDatabaseDataMigrator, DatabaseDataMigrator>();
 
 // Authentication (current: JWT)
 builder.Services.AddAuthentication(x =>
@@ -70,9 +70,9 @@ builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
     x.AddDelayedMessageScheduler();
-    x.AddConsumer<IdentityDeleteUserConsumer>();
-    x.AddConsumer<IdentityUpdateUserConsumer>();
-    x.AddConsumer<IdentityCreateUserConsumer>();
+    x.AddConsumer<NotificationsDeleteUserConsumer>();
+    x.AddConsumer<NotificationsUpdateUserConsumer>();
+    x.AddConsumer<NotificationsCreateUserConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host(builder.Configuration["RabbitMq:Uri"]!, "/", h =>
@@ -81,17 +81,17 @@ builder.Services.AddMassTransit(x =>
             h.Password(builder.Configuration["RabbitMq:Password"]);
         });
 
-        cfg.ReceiveEndpoint(typeof(IdentityDeleteUserConsumer).Name.ToLower(), endpoint =>
+        cfg.ReceiveEndpoint(typeof(NotificationsDeleteUserConsumer).Name.ToLower(), endpoint =>
         {
-            endpoint.ConfigureConsumer<IdentityDeleteUserConsumer>(context);
+            endpoint.ConfigureConsumer<NotificationsDeleteUserConsumer>(context);
         });
-        cfg.ReceiveEndpoint(typeof(IdentityUpdateUserConsumer).Name.ToLower(), endpoint =>
+        cfg.ReceiveEndpoint(typeof(NotificationsUpdateUserConsumer).Name.ToLower(), endpoint =>
         {
-            endpoint.ConfigureConsumer<IdentityUpdateUserConsumer>(context);
+            endpoint.ConfigureConsumer<NotificationsUpdateUserConsumer>(context);
         });
-        cfg.ReceiveEndpoint(typeof(IdentityCreateUserConsumer).Name.ToLower(), endpoint =>
+        cfg.ReceiveEndpoint(typeof(NotificationsCreateUserConsumer).Name.ToLower(), endpoint =>
         {
-            endpoint.ConfigureConsumer<IdentityCreateUserConsumer>(context);
+            endpoint.ConfigureConsumer<NotificationsCreateUserConsumer>(context);
         });
         cfg.ClearSerialization();
         cfg.UseRawJsonSerializer();
@@ -154,7 +154,9 @@ using (var serviceScope = app.Services.CreateScope())
     var services = serviceScope.ServiceProvider;
 
     var runner = services.GetRequiredService<IMigrationRunner>();
+    var databaseMigrator = services.GetRequiredService<IDatabaseDataMigrator>();
     runner.MigrateUp();
+    await databaseMigrator.Migrate();
 }
 
 app.UseMiddleware<ExceptionHandlerMiddleware>();

@@ -13,16 +13,16 @@ public class NotificationRepository :  GenericRepository<Notification>, INotific
                                          "notification_types.id, " +
                                          "notification_types.name as \"Name\" " +
                                          "FROM notifications " +
-                                         "JOIN notification_types ON notification_types.id = notifications.notification_id ";
+                                         "JOIN notification_types ON notification_types.id = notifications.notification_type_id ";
     private static readonly string GetById = Get + "WHERE notifications.id = @Id";
     private static readonly string GetRange = Get + "LIMIT @Count";
     private static readonly string Create = "INSERT INTO notifications " +
-                                            "(id, title, content, notification_id) " +
-                                            "VALUES (@Id, @Title, @Content, @NotificationId)";
+                                            "(id, title, content, notification_type_id) " +
+                                            "VALUES (@Id, @Title, @Content, @NotificationTypeId)";
     private static readonly string Update = "UPDATE notifications SET " +
                                             "title = @Title, " +
                                             "content = @Content, " +
-                                            "notification_id = @NotificationId";
+                                            "notification_type_id = @NotificationTypeId";
     private static readonly string Delete = "DELETE FROM notifications " +
                                             "WHERE id = @Id";
 

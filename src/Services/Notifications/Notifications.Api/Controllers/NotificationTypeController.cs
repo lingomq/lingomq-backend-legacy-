@@ -9,7 +9,7 @@ using Notifications.DomainLayer.Entities;
 
 namespace Notifications.Api.Controllers;
 
-[Route("api/v0/notifications/type")]
+[Route("api/notifications/type")]
 [ApiController]
 public class NotificationTypeController : ControllerBase
 {
@@ -28,7 +28,7 @@ public class NotificationTypeController : ControllerBase
         return LingoMqResponse.OkResult(types);
     }
 
-    [HttpGet("{id}")]
+    [HttpGet("id/{id}")]
     [AllowAnonymous]
     public async Task<IActionResult> Get(Guid id)
     {

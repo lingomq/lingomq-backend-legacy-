@@ -6,11 +6,11 @@ using Notifications.DomainLayer.Entities;
 
 namespace Notifications.BusinessLayer.MassTransit.Consumers;
 
-public class IdentityDeleteUserConsumer : IConsumer<IdentityModelDeleteUser>
+public class NotificationsDeleteUserConsumer : IConsumer<IdentityModelDeleteUser>
 {
-    private readonly ILogger<IdentityDeleteUserConsumer> _logger;
+    private readonly ILogger<NotificationsDeleteUserConsumer> _logger;
     private readonly IUnitOfWork _unitOfWork;
-    public IdentityDeleteUserConsumer(ILogger<IdentityDeleteUserConsumer> logger, IUnitOfWork unitOfWork)
+    public NotificationsDeleteUserConsumer(ILogger<NotificationsDeleteUserConsumer> logger, IUnitOfWork unitOfWork)
     {
         _logger = logger;
         _unitOfWork = unitOfWork;

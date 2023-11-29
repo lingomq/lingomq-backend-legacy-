@@ -10,7 +10,7 @@ using Notifications.DomainLayer.Entities;
 
 namespace Notifications.Api.Controllers;
 
-[Route("api/v0/notifications/user")]
+[Route("api/notifications/user")]
 [ApiController]
 public class UserNotificationController : ControllerBase
 {
@@ -31,7 +31,7 @@ public class UserNotificationController : ControllerBase
         return LingoMqResponse.OkResult(notifications);
     }
 
-    [HttpPut("{id}")]
+    [HttpPut("id/{id}")]
     [Authorize(Roles = AccessRoles.All)]
     public async Task<IActionResult> Update(Guid id)
     {

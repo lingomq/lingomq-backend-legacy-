@@ -5,23 +5,28 @@ namespace Notifications.Api.Services
 {
     public class DatabaseDataMigrator : IDatabaseDataMigrator
     {
-        private readonly IUserRoleRepository _roleRepository;
-        public DatabaseDataMigrator(IUserRoleRepository roleRepository) =>
-            _roleRepository = roleRepository;
+        private readonly IUnitOfWork _unitOfWork;
+        public DatabaseDataMigrator(IUnitOfWork unitOfWork) =>
+            _unitOfWork = unitOfWork;
 
-        public async Task AddRoles()
+        public async Task AddNotificationTypes()
         {
-            List<string> roleNames = new List<string>() { "user", "admin", "moderator" };
-            var rolesFromDatabase = await _roleRepository.GetAsync(10);
+            List<string> typeNames = new List<string>() { "important", "attention", "usual" };
+            var typesFromDatabase = await _unitOfWork.NotificationTypes.GetAsync(10);
 
-            foreach (var roleName in rolesFromDatabase.Select(x => x.Name))
+            foreach (var typeName in typesFromDatabase.Select(x => x.Name))
             {
-                if (roleNames.Contains(roleName!))
-                    roleNames.Remove(roleName!);
+                if (typeNames.Contains(typeName!))
+                    typeNames.Remove(typeName!);
             }
 
-            foreach (string roleName in roleNames)
-                await _roleRepository.CreateAsync(new UserRole() { Id = Guid.NewGuid(), Name = roleName });
+            foreach (string typeName in typeNames)
+                await _unitOfWork.NotificationTypes.CreateAsync(new NotificationType() { Id = Guid.NewGuid(), Name = typeName });
+        }
+
+        public async Task Migrate()
+        {
+            await AddNotificationTypes();
         }
     }
 }

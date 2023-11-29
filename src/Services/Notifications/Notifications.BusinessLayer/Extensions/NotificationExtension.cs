@@ -11,7 +11,7 @@ public static class NotificationExtension
             Id = notification.Id,
             Title = notification.Title,
             Content = notification.Content,
-            NotificationId = notification.NotificationId
+            NotificationId = notification.NotificationTypeId
         };
 
     public static Notification ToModel(this NotificationDto dto) =>
@@ -20,6 +20,6 @@ public static class NotificationExtension
             Id = dto.Id,
             Title = dto.Title,
             Content = dto.Content,
-            NotificationId = dto.NotificationId
+            NotificationTypeId = dto.NotificationId
         };
 }

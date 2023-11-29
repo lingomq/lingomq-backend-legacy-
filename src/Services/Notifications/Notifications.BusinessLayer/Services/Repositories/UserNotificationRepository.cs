@@ -12,16 +12,16 @@ public class UserNotificationRepository : GenericRepository<UserNotification>, I
                                          "is_readed as \"IsReaded\", " +
                                          "users.id, " +
                                          "users.email as \"Email\", " +
-                                         "users.phone as \"Phone\"," +
-                                         "notifications.id," +
-                                         "notifications.title as \"Title\"," +
-                                         "notifications.content as \"Content\"," +
+                                         "users.phone as \"Phone\", " +
+                                         "notifications.id, " +
+                                         "notifications.title as \"Title\", " +
+                                         "notifications.content as \"Content\", " +
                                          "notification_types.id, " +
                                          "notification_types.name as \"Name\" " +
                                          "FROM user_notifications " +
                                          "JOIN users ON users.id = user_notifications.user_id " +
                                          "JOIN notifications ON notifications.id = user_notifications.notification_id " +
-                                         "JOIN notification_types ON notifications_types.id = notifications.notification_type_id ";
+                                         "JOIN notification_types ON notification_types.id = notifications.notification_type_id ";
 
     private static readonly string GetById = Get + "WHERE user_notifications.id = @Id";
     private static readonly string GetRange = Get + "LIMIT @Count";
@@ -47,7 +47,7 @@ public class UserNotificationRepository : GenericRepository<UserNotification>, I
     private static readonly string Delete = "DELETE FROM user_notifications WHERE id = @Id";
     private readonly IDbConnection _connection;
 
-    protected UserNotificationRepository(IDbConnection connection) : base(connection) =>
+    public UserNotificationRepository(IDbConnection connection) : base(connection) =>
         _connection = connection;
 
     public async Task<UserNotification?> GetAsync(Guid id)

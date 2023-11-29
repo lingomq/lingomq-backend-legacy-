@@ -230,6 +230,54 @@
       ],
       "UpstreamPathTemplate": "/api.lingomq/words/word-types/all/{range}",
       "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/notifications/user",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/notifications/user",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/notifications/user/id/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/notifications/user/id/{id}",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/notifications/type/all/{range}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/notifications/type/all/{range}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/notifications/type/id/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api/notifications/type/id/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
     }
   ]
 }

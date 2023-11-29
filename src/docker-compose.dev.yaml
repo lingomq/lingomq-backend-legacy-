@@ -126,20 +126,20 @@ services:
       ports:
         - "7006:80"
 
-    # notifications-api:
-    #   hostname: notifications-api
-    #   restart: always
-    #   env_file:
-    #     - .env
-    #   image: notifications-api:dev
-    #   build:
-    #     context: .
-    #     dockerfile: Services/Notifications/Notifications.Api/Dockerfile
-    #   depends_on:
-    #     - psql
-    #     - rabbitmq
-    #   ports:
-    #     - "7007:80"
+    notifications-api:
+      hostname: notifications-api
+      restart: always
+      env_file:
+        - .env
+      image: notifications-api:dev
+      build:
+        context: .
+        dockerfile: Services/Notifications/Notifications.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7007:80"
 
     # topics-api:
     #   hostname: topics-api
