@@ -1,0 +1,209 @@
+version: "3"
+services:
+    mongo-db:
+      image: mongo
+      restart: always
+      hostname: mongodb
+      ports:
+        - "27017:27017"
+    
+    rabbitmq:
+      image: rabbitmq:3.10.7-management
+      hostname: rabbitmq
+      restart: always
+      container_name: rabbitmq
+      expose:
+        - "5672"
+        - "15672"
+      volumes:
+        - rabbitmq:/rabbitmq
+      ports:
+        - "15672:15672"
+
+    psql:
+      build:
+        context: .
+        dockerfile: Postgres.Dockerfile
+      hostname: psql
+      restart: always
+      container_name: postgres
+      env_file:
+        - postgres.env
+      ports:
+        - "5432:5432"
+      volumes:
+        - postgresdb:/var/lib/postgresql/data
+      stdin_open: true
+      tty: true
+      command: postgres -c 'max_connections=20'
+
+    # achievements-api:
+    #   hostname: achievements-api
+    #   restart: always
+    #   env_file:
+    #     - .env
+    #   image: achievements-api:dev
+    #   build:
+    #     context: .
+    #     dockerfile: Services/Achievements/Achievements.Api/Dockerfile
+    #   depends_on:
+    #     - psql
+    #     - rabbitmq
+    #   ports:
+    #     - "7001:80"
+
+    # app-statistics-api:
+    #   hostname: app-statistics-api
+    #   restart: always
+    #   env_file:
+    #     - .env
+    #   image: app-statistics-api:dev
+    #   build:
+    #     context: .
+    #     dockerfile: Services/AppStatistics/AppStatistics.Api/Dockerfile
+    #   depends_on:
+    #     - psql
+    #     - mongo-db
+    #   ports:
+    #     - "7002:80"
+
+    authentication-api:
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=http://0.0.0.0:80
+      restart: always
+      env_file:
+        - .env
+      image: authentication-api
+      build:
+        context: .
+        dockerfile: Services/Authentication/Authentication.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - 7003:80
+
+    email-api:
+      hostname: email-api
+      restart: always
+      env_file:
+        - .env
+      image: email-api:dev
+      build:
+        context: .
+        dockerfile: Services/Email/Email.Api/Dockerfile
+      ports:
+        - "7004:80"
+    
+    # finances-api:
+    #   hostname: finances-api
+    #   restart: always
+    #   env_file:
+    #     - .env
+    #   image: finances-api:dev
+    #   build:
+    #     context: .
+    #     dockerfile: Services/Finances/Finances.Api/Dockerfile
+    #   depends_on:
+    #     - psql
+    #     - rabbitmq
+    #   ports:
+    #     - "7005:80"
+
+    identity-api:
+      hostname: identity-api
+      restart: always
+      env_file:
+        - .env
+      image: identity-api:dev
+      build:
+        context: .
+        dockerfile: Services/Identity/Identity.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7006:80"
+
+    notifications-api:
+      hostname: notifications-api
+      restart: always
+      env_file:
+        - .env
+      image: notifications-api:dev
+      build:
+        context: .
+        dockerfile: Services/Notifications/Notifications.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7007:80"
+
+    # topics-api:
+    #   hostname: topics-api
+    #   restart: always
+    #   env_file:
+    #     - .env
+    #   image: topics-api:dev
+    #   build:
+    #     context: .
+    #     dockerfile: Services/Topics/Topics.Api/Dockerfile
+    #   depends_on:
+    #     - psql
+    #     - rabbitmq
+    #   ports:
+    #     - "7008:80"
+
+    words-api:
+      hostname: words-api
+      restart: always
+      env_file:
+        - .env
+      image: words-api:dev
+      build:
+        context: .
+        dockerfile: Services/Words/Words.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7009:80"
+
+    ocelot-gateway:
+      restart: always
+      env_file:
+        - .env
+      ports:
+        - 9998:80
+        - 9999:443
+      environment:
+        - ASPNETCORE_ENVIRONMENT=Development
+        - ASPNETCORE_URLS=https://+:443;http://+:80
+        - ASPNETCORE_Kestrel__Certificates__Default__Password=password
+        - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
+      image: ocelot-gateway:dev
+      build:
+        context: .
+        dockerfile: ApiGateway/OcelotApiGateway/Dockerfile
+      volumes: 
+        - ~/.aspnet/https:/https:ro
+      networks:
+        default: {}
+        front:
+          ipv4_address: 192.168.0.105
+
+volumes:
+  rabbitmq:
+  postgresdb:
+
+networks:
+  front:
+    driver: macvlan
+    driver_opts:
+      parent: eth0.10
+    ipam:
+      config:
+        - subnet: 192.168.0.0/24
+          gateway: 192.168.0.1
