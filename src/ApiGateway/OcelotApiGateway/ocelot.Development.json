@@ -1,6 +1,6 @@
 {
   "GlobalConfiguration": {
-    "BaseUrl":  "https://localhost:9999"
+    "BaseUrl": "https://localhost:9999"
   },
   "Routes": [
     {
@@ -264,7 +264,7 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/notifications/type/all/{range}",
+      "UpstreamPathTemplate": "/api.lingomq/notifications/type/all/{range}",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
@@ -276,7 +276,19 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api/notifications/type/id/{id}",
+      "UpstreamPathTemplate": "/api.lingomq/notifications/type/id/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/achievements/user",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "achievements-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/achievements/user",
       "UpstreamHttpMethod": [ "Get" ]
     }
   ]

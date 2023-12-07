@@ -9,8 +9,7 @@ namespace Achievements.BusinessLayer.Services.Repositories
     public class UserRepository : IUserRepository
     {
         private readonly static string Get =
-            "SELECT id as \"Id\", email as \"Email\", phone as \"Phone\", " +
-            "password_hash as \"PasswordHash\", password_salt as \"PasswordSalt\" " +
+            "SELECT id as \"Id\", email as \"Email\", phone as \"Phone\" " +
             "FROM users";
         private readonly static string GetRange = Get +
             " LIMIT @Count";
@@ -19,8 +18,8 @@ namespace Achievements.BusinessLayer.Services.Repositories
         private readonly static string GetByEmail = Get +
             " WHERE email = @Email";
         private readonly static string Create =
-            "INSERT INTO users (id, email, phone, password_hash, password_salt) " +
-            "VALUES (@Id, @Email, @Phone, @PasswordHash, @PasswordSalt)";
+            "INSERT INTO users (id, email, phone) " +
+            "VALUES (@Id, @Email, @Phone)";
         private readonly static string Delete =
             "DELETE FROM users " +
             "WHERE id = @Id";

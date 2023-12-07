@@ -6,11 +6,11 @@ using Microsoft.Extensions.Logging;
 
 namespace Achievements.BusinessLayer.MassTransit.Consumers
 {
-    public class IdentityDeleteUserConsumer : IConsumer<IdentityModelDeleteUser>
+    public class AchievementsDeleteUserConsumer : IConsumer<IdentityModelDeleteUser>
     {
-        private readonly ILogger<IdentityDeleteUserConsumer> _logger;
+        private readonly ILogger<AchievementsDeleteUserConsumer> _logger;
         private readonly IUnitOfWork _unitOfWork;
-        public IdentityDeleteUserConsumer(ILogger<IdentityDeleteUserConsumer> logger, IUnitOfWork unitOfWork)
+        public AchievementsDeleteUserConsumer(ILogger<AchievementsDeleteUserConsumer> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;

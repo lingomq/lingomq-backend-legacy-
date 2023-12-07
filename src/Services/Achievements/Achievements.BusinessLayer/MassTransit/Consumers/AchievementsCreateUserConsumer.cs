@@ -1,16 +1,17 @@
 using Achievements.BusinessLayer.Contracts;
 using Achievements.DomainLayer.Entities;
+using EventBus.Entities.Achievements;
 using EventBus.Entities.Identity.User;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
 namespace Achievements.BusinessLayer.MassTransit.Consumers;
 
-public class IdentityCreateUserConsumer : IConsumer<IdentityModelCreateUser>
+public class AchievementsCreateUserConsumer : IConsumer<IdentityModelCreateUser>
 {
-    private readonly ILogger<IdentityCreateUserConsumer> _logger;
+    private readonly ILogger<AchievementsCreateUserConsumer> _logger;
     private readonly IUnitOfWork _unitOfWork;
-    public IdentityCreateUserConsumer(ILogger<IdentityCreateUserConsumer> logger,
+    public AchievementsCreateUserConsumer(ILogger<AchievementsCreateUserConsumer> logger,
         IUnitOfWork unitOfWork)
     {
         _logger = logger;

@@ -2,6 +2,7 @@
 {
     public interface IDatabaseDataMigrator
     {
-        Task AddRoles();
+        Task AddAchievementsAsync();
+        Task MigrateAsync();
     }
 }

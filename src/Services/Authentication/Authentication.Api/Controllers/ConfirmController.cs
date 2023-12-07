@@ -13,6 +13,7 @@ using Authentication.BusinessLayer.MassTransit;
 using EventBus.Entities.Identity.User;
 using EventBus.Entities.AppStatistics;
 using NLog;
+using EventBus.Entities.Achievements;
 
 namespace Authentication.Api.Controllers
 {

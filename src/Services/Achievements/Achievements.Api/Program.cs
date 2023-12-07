@@ -18,21 +18,22 @@ using Achievements.Api.Services;
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", true, true);
+    .AddJsonFile("appsettings.json", true, true)
+    .AddEnvironmentVariables();
 
 // Add Logging (NLog)
  builder.Services.AddLogging(loggingBuilder =>
 {
-    loggingBuilder.ClearProviders();
     loggingBuilder.AddNLog();
 });
 
 // Data layer
-builder.Services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:dev:Achievements"]));
+builder.Services.AddTransient<IDbConnection>((sp) => new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev:Achievements"]));
 builder.Services.AddTransient<IAchievementRepository, AchievementRepository>();
 builder.Services.AddTransient<IUserAchievementRepository, UserAchievementRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IDatabaseDataMigrator, DatabaseDataMigrator>();
 
 // Authentication
 builder.Services.AddAuthentication(x =>
@@ -71,9 +72,10 @@ builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
     x.AddDelayedMessageScheduler();
-    x.AddConsumer<IdentityDeleteUserConsumer>();
-    x.AddConsumer<IdentityUpdateUserConsumer>();
-    x.AddConsumer<IdentityCreateUserConsumer>();
+    x.AddConsumer<AchievementsDeleteUserConsumer>();
+    x.AddConsumer<AchievementsUpdateUserConsumer>();
+    x.AddConsumer<AchievementsCreateUserConsumer>();
+    x.AddConsumer<AchievementCheckConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host(builder.Configuration["RabbitMq:Uri"]!, "/", h =>
@@ -82,19 +84,25 @@ builder.Services.AddMassTransit(x =>
             h.Password(builder.Configuration["RabbitMq:Password"]);
         });
 
-        cfg.ReceiveEndpoint(typeof(IdentityDeleteUserConsumer).Name.ToLower(), endpoint =>
+        cfg.ReceiveEndpoint(typeof(AchievementsDeleteUserConsumer).Name.ToLower(), endpoint =>
         {
-            endpoint.ConfigureConsumer<IdentityDeleteUserConsumer>(context);
+            endpoint.ConfigureConsumer<AchievementsDeleteUserConsumer>(context);
         });
-        cfg.ReceiveEndpoint(typeof(IdentityUpdateUserConsumer).Name.ToLower(), endpoint =>
+        cfg.ReceiveEndpoint(typeof(AchievementsUpdateUserConsumer).Name.ToLower(), endpoint =>
         {
-            endpoint.ConfigureConsumer<IdentityUpdateUserConsumer>(context);
+            endpoint.ConfigureConsumer<AchievementsUpdateUserConsumer>(context);
         });
         
-        cfg.ReceiveEndpoint(typeof(IdentityCreateUserConsumer).Name.ToLower(), endpoint =>
+        cfg.ReceiveEndpoint(typeof(AchievementsCreateUserConsumer).Name.ToLower(), endpoint =>
         {
-            endpoint.ConfigureConsumer<IdentityCreateUserConsumer>(context);
+            endpoint.ConfigureConsumer<AchievementsCreateUserConsumer>(context);
         });
+
+        cfg.ReceiveEndpoint(typeof(AchievementCheckConsumer).Name.ToLower(), endpoint =>
+        {
+            endpoint.ConfigureConsumer<AchievementCheckConsumer>(context);
+        });
+
         cfg.ClearSerialization();
         cfg.UseRawJsonSerializer();
         cfg.ConfigureEndpoints(context);
@@ -161,7 +169,10 @@ using (var serviceScope = app.Services.CreateScope())
     var services = serviceScope.ServiceProvider;
 
     var runner = services.GetRequiredService<IMigrationRunner>();
+    var dataMigrator = services.GetRequiredService<IDatabaseDataMigrator>();
     runner.MigrateUp();
+
+    await dataMigrator.MigrateAsync();
 }
 
 app.Run();

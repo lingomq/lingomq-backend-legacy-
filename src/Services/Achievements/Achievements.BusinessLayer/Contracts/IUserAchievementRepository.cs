@@ -8,5 +8,6 @@ namespace Achievements.BusinessLayer.Contracts
         Task<UserAchievement?> GetByIdAsync(Guid id);
         Task<List<UserAchievement>> GetByUserIdAsync(Guid id);
         Task<int> GetCountAchievementsByUserIdAsync(Guid id);
+        Task CreateAsync(UserAchievement userAchievement);
     }
 }

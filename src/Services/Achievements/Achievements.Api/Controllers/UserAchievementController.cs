@@ -10,7 +10,7 @@ using System.Security.Claims;
 
 namespace Achievements.Api.Controllers
 {
-    [Route("api/v0/achievements/user")]
+    [Route("api/achievements/user")]
     [ApiController]
     public class UserAchievementController : ControllerBase
     {

@@ -2,6 +2,7 @@
 using Achievements.DomainLayer.Entities;
 using Dapper;
 using System.Data;
+using System.Transactions;
 
 namespace Achievements.BusinessLayer.Services.Repositories
 {
@@ -19,7 +20,7 @@ namespace Achievements.BusinessLayer.Services.Repositories
             "achievements.image_uri as \"ImageUri\" " +
             "FROM user_achievements " +
             "JOIN users ON users.id = user_achievements.user_id " +
-            "JOIN achievements ON achievements.id = user_achievements.achivement_id ";
+            "JOIN achievements ON achievements.id = user_achievements.achievement_id ";
         private readonly static string GetRange = Get +
             "LIMIT @Count";
         private readonly static string GetById = Get +
@@ -28,10 +29,24 @@ namespace Achievements.BusinessLayer.Services.Repositories
             "WHERE users.id = @Id";
         private readonly static string GetCountAchievementsByUserId =
             "SELECT COUNT(*) FROM user_achievements WHERE user_id = @Id";
+        private readonly static string Create = 
+            "INSERT INTO user_achievements " +
+            "(id, date_of_receipt, user_id, achievement_id) " +
+            "VALUES " +
+            "(@Id, @DateOfReceipt, @UserId, @AchievementId)";
 
         private readonly IDbConnection _connection;
         public UserAchievementRepository(IDbConnection connection) =>
             _connection = connection;
+        public async Task CreateAsync(UserAchievement entity)
+        {
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
+
+            await _connection.ExecuteAsync(Create, entity);
+            transactionScope.Complete();
+            transactionScope.Dispose();
+        }
+
         public async Task<List<UserAchievement>> GetAsync(int range)
         {
             return await GetByTemplate(GetRange, new { Count = range });

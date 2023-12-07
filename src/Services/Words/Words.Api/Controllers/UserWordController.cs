@@ -1,4 +1,5 @@
-﻿using EventBus.Entities.AppStatistics;
+﻿using EventBus.Entities.Achievements;
+using EventBus.Entities.AppStatistics;
 using LingoMq.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -94,6 +95,12 @@ namespace Words.Api.Controllers
             {
                 TotalWords = 1,
                 Date = DateTime.Now
+            });
+            var words = await _unitOfWork.UserWords.GetByUserIdAsync(UserId);
+            await _publisher.Send(new CheckAchievements()
+            {
+                UserId = userWordDto.UserId,
+                WordsCount = words.Count + 1
             });
             await _unitOfWork.UserWords.AddAsync(word);
             _logger.Info("POST /{isForce}&{isAutocomplete} {0}", nameof(UserWord));
