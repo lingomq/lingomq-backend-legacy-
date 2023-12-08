@@ -34,7 +34,7 @@ namespace Words.BusinessLayer.Services.Repositories
             "SELECT COUNT(*) FROM user_words " +
             "WHERE user_id = @Id AND DATE(created_at) = @CreatedAt";
         private readonly static string GetMostRepeated = Get +
-            "WHERE repeats = (SELECT MAX(repeats) FROM user_words) ";
+            "WHERE repeats = (SELECT MAX(repeats) FROM user_words) AND user_id = @UserId";
         private readonly static string Create =
             "INSERT INTO user_words (id, word, translated, repeats, created_at, language_id, user_id) " +
             "VALUES (@Id, @Word, @Translated, @Repeats, @CreatedAt, @LanguageId, @UserId)";
@@ -107,7 +107,7 @@ namespace Words.BusinessLayer.Services.Repositories
             return result.First();
         }
 
-        public async Task<UserWord?> GetMostRepeatedWordAsync()
+        public async Task<UserWord?> GetMostRepeatedWordAsync(Guid userId)
         {
             List<UserWord> words = await TemplateGet(GetMostRepeated);
 

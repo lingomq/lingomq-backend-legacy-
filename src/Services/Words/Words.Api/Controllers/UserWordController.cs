@@ -55,7 +55,7 @@ namespace Words.Api.Controllers
         [Authorize(Roles = AccessRoles.All)]
         public async Task<IActionResult> GetMostRepeatedWord()
         {
-            UserWord? userWord = await _unitOfWork.UserWords.GetMostRepeatedWordAsync();
+            UserWord? userWord = await _unitOfWork.UserWords.GetMostRepeatedWordAsync(UserId);
             if (userWord is null)
                 throw new NotFoundException<UserWord>();
 

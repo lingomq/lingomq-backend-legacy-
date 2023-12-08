@@ -65,6 +65,7 @@ namespace Identity.Api.Controllers
                 throw new NotFoundException<UserStatistics>("The statistics was not found");
 
             int daysFromRegister = (DateTime.Now - userInfo!.CreationalDate).Days;
+            if (daysFromRegister == 0) daysFromRegister = 1;
 
             statistics.TotalWords += 1;
             statistics.AvgWords = statistics.TotalWords / daysFromRegister;

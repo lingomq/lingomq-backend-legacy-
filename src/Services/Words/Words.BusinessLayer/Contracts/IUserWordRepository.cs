@@ -7,7 +7,7 @@ namespace Words.BusinessLayer.Contracts
         Task<int> GetCountWordsPerDayAsync(Guid id, DateTime day);
         Task<UserWord?> GetByWordAsync(string word);
         Task<List<UserWord>> GetByUserIdAsync(Guid id);
-        Task<UserWord?> GetMostRepeatedWordAsync();
+        Task<UserWord?> GetMostRepeatedWordAsync(Guid userId);
         Task<bool> AddRepeatsAsync(Guid wordId, int count);
     }
 }
