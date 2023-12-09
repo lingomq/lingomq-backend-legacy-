@@ -5,7 +5,7 @@
 ```
 
 ## Как запустить?
-Для запуска бекенда с целью тестирования приложения, достаточно иметь [Docker](https://www.docker.com/products/docker-desktop/) и используя docker-compose файл 'docker-compose.dev.yaml',  все крутится в них. <br/>
+Для запуска бекенда с целью тестирования приложения, достаточно иметь [Docker](https://www.docker.com/products/docker-desktop/) и используя docker-compose файл 'docker-compose.dev.yaml' поднять стенд,  все крутится в них. <br/>
 <b>Команда для запуска</b>
 ```
 # ~/lingomq-backend/src
