@@ -39,13 +39,15 @@ namespace Words.BusinessLayer.Services.Repositories
             "WHERE repeats = (SELECT MAX(repeats) FROM user_words) AND user_id = @UserId";
         private readonly static string GetRecordsByRepeats =
             "SELECT user_id as \"UserId\", " +
-            "(SELECT SUM(b.repeats) FROM user_words b WHERE b.user_id = a.user_id) as \"Repeats\" " +
-            "FROM user_words a" +
+            "SUM(repeats) as \"Repeats\" " +
+            "FROM user_words " +
+            "GROUP BY rollup(user_id) " +
             "LIMIT @Count";
         private readonly static string GetRecordsByWordsCount =
             "SELECT user_id as \"UserId\", " +
-            "(SELECT COUNT(b.word) FROM user_words b WHERE b.user_id = a.user_id) AS \"WordsCount\" " +
-            "FROM user_words a " +
+            "COUNT(word) as \"WordsCount\" " +
+            "FROM user_words " +
+            "GROUP BY rollup(user_id) " +
             "LIMIT @Count";
         private readonly static string Create =
             "INSERT INTO user_words (id, word, translated, repeats, created_at, language_id, user_id) " +
