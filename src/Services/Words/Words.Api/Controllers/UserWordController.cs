@@ -10,6 +10,7 @@ using Words.BusinessLayer.Contracts;
 using Words.BusinessLayer.Dtos;
 using Words.BusinessLayer.Exceptions.ClientExceptions;
 using Words.BusinessLayer.MassTransit;
+using Words.BusinessLayer.Models;
 using Words.BusinessLayer.Services;
 using Words.DomainLayer.Entities;
 
@@ -61,6 +62,22 @@ namespace Words.Api.Controllers
 
             _logger.Info("GET /famous {0}", nameof(UserWord));
             return LingoMqResponse.OkResult(userWord);
+        }
+
+        [HttpGet("records/repeats/{count}")]
+        public async Task<IActionResult> GetRecordsByRepeats(int count = 4)
+        {
+            List<RecordsByRepeatsResponseModel> records = await _unitOfWork.UserWords.GetRecordsByRepeatsAsync(count);
+
+            return LingoMqResponse.OkResult(records);
+        }
+
+        [HttpGet("records/word-count/{count}")]
+        public async Task<IActionResult> GetRecordsByWordsCount(int count = 4)
+        {
+            List<RecordsByWordsCountResponseModel> records = await _unitOfWork.UserWords.GetRecordsByWordsCountsAsync(count);
+
+            return LingoMqResponse.OkResult(records);
         }
 
         [HttpGet("word/{wordId}")]
