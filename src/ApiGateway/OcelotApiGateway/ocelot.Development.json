@@ -290,6 +290,30 @@
       ],
       "UpstreamPathTemplate": "/api.lingomq/achievements/user",
       "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/words/user-words/records/repeats/{count}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/records/repeats/{count}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/words/user-words/records/word-count/{count}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/records/word-count/{count}",
+      "UpstreamHttpMethod": [ "Get" ]
     }
   ]
 }

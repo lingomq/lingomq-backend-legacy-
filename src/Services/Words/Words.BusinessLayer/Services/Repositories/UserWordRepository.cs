@@ -1,7 +1,9 @@
 ﻿using Dapper;
+using System;
 using System.Data;
 using System.Transactions;
 using Words.BusinessLayer.Contracts;
+using Words.BusinessLayer.Models;
 using Words.DomainLayer.Entities;
 
 namespace Words.BusinessLayer.Services.Repositories
@@ -35,6 +37,17 @@ namespace Words.BusinessLayer.Services.Repositories
             "WHERE user_id = @Id AND DATE(created_at) = @CreatedAt";
         private readonly static string GetMostRepeated = Get +
             "WHERE repeats = (SELECT MAX(repeats) FROM user_words) AND user_id = @UserId";
+        private readonly static string GetRecordsByRepeats =
+            "SELECT repeats as \"Repeats\", user_id as \"UserId\" " +
+            "FROM user_words " +
+            "ORDER BY repeats " +
+            "LIMIT @Count";
+        private readonly static string GetRecordsByWordsCount =
+            "SELECT COUNT(word) as \"WordsCount\", " +
+            "user_id as \"UserId\" " +
+            "FROM user_words " +
+            "ORDER BY \"WordsCount\" " +
+            "LIMIT @Count";
         private readonly static string Create =
             "INSERT INTO user_words (id, word, translated, repeats, created_at, language_id, user_id) " +
             "VALUES (@Id, @Word, @Translated, @Repeats, @CreatedAt, @LanguageId, @UserId)";
@@ -174,6 +187,22 @@ namespace Words.BusinessLayer.Services.Repositories
                 }, splitOn: "id");
 
             return words is null ? new List<UserWord>() : words.ToList();
+        }
+
+        public async Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(int count)
+        {
+            IEnumerable<RecordsByRepeatsResponseModel> records = await _connection
+                .QueryAsync<RecordsByRepeatsResponseModel>(GetRecordsByRepeats, new { Count = count });
+
+            return !records.Any() ? new List<RecordsByRepeatsResponseModel>() : records.ToList();
+        }
+
+        public async Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(int count)
+        {
+            IEnumerable<RecordsByWordsCountResponseModel> records = await _connection
+                .QueryAsync<RecordsByWordsCountResponseModel>(GetRecordsByWordsCount, new { Count = count });
+
+            return !records.Any() ? new List<RecordsByWordsCountResponseModel>() : records.ToList();
         }
     }
 }
