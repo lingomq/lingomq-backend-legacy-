@@ -38,8 +38,8 @@ namespace Words.BusinessLayer.Services.Repositories
         private readonly static string GetMostRepeated = Get +
             "WHERE repeats = (SELECT MAX(repeats) FROM user_words) AND user_id = @UserId";
         private readonly static string GetRecordsByRepeats =
-            "SELECT SUM(repeats) as \"Repeats\", user_id as \"UserId\" " +
-            "OVER (ORDER BY user_id) " +
+            "SELECT user_id as \"UserId\", SUM(count(repeats)) " +
+            "OVER (ORDER BY user_id) as \"Repeats\" " +
             "FROM user_words " +
             "GROUP BY user_id " +
             "LIMIT @Count";
