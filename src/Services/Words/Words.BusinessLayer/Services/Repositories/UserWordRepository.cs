@@ -48,7 +48,7 @@ namespace Words.BusinessLayer.Services.Repositories
             "user_id as \"UserId\" " +
             "FROM user_words " +
             "GROUP BY " +
-            "user_id " +
+            "user_id, word " +
             "LIMIT @Count";
         private readonly static string Create =
             "INSERT INTO user_words (id, word, translated, repeats, created_at, language_id, user_id) " +
