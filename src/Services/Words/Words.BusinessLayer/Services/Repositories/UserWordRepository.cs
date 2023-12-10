@@ -44,7 +44,7 @@ namespace Words.BusinessLayer.Services.Repositories
             "LIMIT @Count";
         private readonly static string GetRecordsByWordsCount =
             "SELECT user_id as \"UserId\", " +
-            "(SELECT COUNT(b.words) FROM user_words b WHERE b.user_id = a.user_id) AS \"WordsCount\" " +
+            "(SELECT COUNT(b.word) FROM user_words b WHERE b.user_id = a.user_id) AS \"WordsCount\" " +
             "FROM user_words a " +
             "LIMIT @Count";
         private readonly static string Create =
