@@ -64,6 +64,18 @@
       "UpstreamHttpMethod": [ "Put", "Get", "Delete" ]
     },
     {
+      "DownstreamPathTemplate": "/api/identity/user/user-id/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/user-id/{userId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/identity/user/credentials",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
