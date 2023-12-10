@@ -52,6 +52,20 @@ namespace Identity.Api.Controllers
             _logger.Info("GET /all/{range} {0}", nameof(List<UserInfo>));
             return LingoMq.Responses.LingoMqResponse.OkResult(infos);
         }
+
+        [HttpGet("user-id/{userId}")]
+        [Authorize(Roles = AccessRoles.All)]
+        public async Task<IActionResult> Get(Guid userId)
+        {
+            UserInfo? info = await _unitOfWork.UserInfos.GetByUserIdAsync(userId);
+
+            if (info is null)
+                throw new NotFoundException<UserInfo>("Данные не найдены");
+
+            _logger.Info("GET /{nickname} {0}", nameof(UserInfo));
+            return LingoMq.Responses.LingoMqResponse.OkResult(info);
+        }
+
         [HttpGet("nickname/{nickname}")]
         [Authorize(Roles = AccessRoles.All)]
         public async Task<IActionResult> Get(string nickname)
