@@ -109,7 +109,7 @@ namespace Words.BusinessLayer.Services.Repositories
 
         public async Task<UserWord?> GetMostRepeatedWordAsync(Guid userId)
         {
-            List<UserWord> words = await TemplateGet(GetMostRepeated);
+            List<UserWord> words = await TemplateGet(GetMostRepeated, new { UserId = userId });
 
             return words.First();
         }
