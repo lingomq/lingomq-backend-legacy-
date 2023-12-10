@@ -2,7 +2,7 @@
 {
     public class RecordsByRepeatsResponseModel
     {
-        public int Records { get; set; }
+        public int Repeats { get; set; }
         public Guid UserId { get; set; }
     }
 }
