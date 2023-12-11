@@ -63,6 +63,8 @@ namespace Identity.BusinessLayer.Services.Repositories
             using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             await _connection.ExecuteAsync(Delete, new { Id = id });
+            transactionScope.Complete();
+            transactionScope.Dispose();
 
             return true;
         }
@@ -71,6 +73,7 @@ namespace Identity.BusinessLayer.Services.Repositories
         {
             IEnumerable<UserStatistics> statistics;
 
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
             statistics = await _connection.QueryAsync<UserStatistics, User, UserStatistics>(GetRange,
                 (statistics, user) =>
                 {
@@ -79,6 +82,9 @@ namespace Identity.BusinessLayer.Services.Repositories
                     return statistics;
                 }, new { Count = count }, splitOn: "id");
 
+            transactionScope.Complete();
+            transactionScope.Dispose();
+
             return statistics.ToList() is null ? new List<UserStatistics>() : statistics.ToList();
         }
 
@@ -86,6 +92,7 @@ namespace Identity.BusinessLayer.Services.Repositories
         {
             IEnumerable<UserStatistics> statistics;
 
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
             statistics = await _connection.QueryAsync<UserStatistics, User, UserStatistics>(GetById,
                 (statistics, user) =>
                 {
@@ -93,6 +100,9 @@ namespace Identity.BusinessLayer.Services.Repositories
                     statistics.UserId = user.Id;
                     return statistics;
                 }, new { Id = id }, splitOn: "id");
+            transactionScope.Complete();
+            transactionScope.Dispose();
+
 
             return statistics.FirstOrDefault() is null ? null : statistics.First();
         }
@@ -101,6 +111,7 @@ namespace Identity.BusinessLayer.Services.Repositories
         {
             IEnumerable<UserStatistics> statistics;
 
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
             statistics = await _connection.QueryAsync<UserStatistics, User, UserStatistics>(GetByUserId,
                 (statistics, user) =>
                 {
@@ -108,6 +119,8 @@ namespace Identity.BusinessLayer.Services.Repositories
                     statistics.UserId = user.Id;
                     return statistics;
                 }, new { Id = id }, splitOn: "id");
+            transactionScope.Complete();
+            transactionScope.Dispose();
 
             return statistics.FirstOrDefault() is null ? null : statistics.First();
         }
