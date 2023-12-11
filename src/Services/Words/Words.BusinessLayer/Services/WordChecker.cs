@@ -7,8 +7,16 @@ namespace Words.BusinessLayer.Services
 {
     public class WordChecker : IWordChecker
     {
-        private readonly static string _language = "language=en-US";
-        private readonly static string _params = "whitelist=&dictionary_id=&ai=0&" + _language;
+        private readonly Dictionary<string, string> _languageCodes = new Dictionary<string, string>()
+        {
+            { "english", "en-US" },
+            { "russian", "ru-RU" },
+            { "deutsch", "de-DE" },
+            { "french", "fr-FR" },
+            { "japanese", "ja-JP" }
+        };
+        private readonly static string _language = "language=";
+        private readonly static string _params = "whitelist=&dictionary_id=&ai=0&";
         private readonly static string _uri = "https://api.textgears.com/spelling?" + _params;
         private readonly IConfiguration _configuration;
         public WordChecker(IConfiguration configuration) => _configuration = configuration;
@@ -17,7 +25,8 @@ namespace Words.BusinessLayer.Services
         {
             string correct = word;
             HttpClient client = new HttpClient();
-            string uri = _uri + "&key=" + _configuration["Keys:SpellCheckerApiKey"] + "&text=" + word;
+            string uri = _uri + _language + _languageCodes.GetValueOrDefault(language) + "&key=" 
+                + _configuration["Keys:SpellCheckerApiKey"] + "&text=" + word;
 
             using HttpResponseMessage response = await client.GetAsync(uri);
 

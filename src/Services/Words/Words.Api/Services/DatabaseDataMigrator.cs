@@ -10,7 +10,7 @@ namespace Words.Api.Services
 
         public async Task AddLanguages()
         {
-            List<string> languageNames = new List<string>() { "english", "russian" };
+            List<string> languageNames = new List<string>() { "english", "russian", "deutsch", "french", "japanese" };
             var languagesFromDatabase = await _unitOfWork.Languages.GetAsync(10);
 
             foreach (var languageName in languagesFromDatabase.Select(x => x.Name))

@@ -146,7 +146,11 @@ namespace Words.Api.Controllers
 
         private async Task<UserWord> GetWordData(UserWordDto userWordDto, bool isForce = false, bool isAutocomplete = false)
         {
-            string correctWord = await _wordChecker.SpellCorrector(userWordDto.Word!);
+            Language? language = await _unitOfWork.Languages.GetByIdAsync(userWordDto.LanguageId);
+            if (language is null)
+                throw new NotFoundException<Language>();
+
+            string correctWord = await _wordChecker.SpellCorrector(userWordDto.Word!, language.Name!);
 
             if (!correctWord.Equals(userWordDto.Word) && !isForce)
                 throw new InvalidDataException<RightWordModel>(new RightWordModel() { RightWord = correctWord }, "wrong word");
