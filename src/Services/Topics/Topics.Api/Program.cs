@@ -37,6 +37,7 @@ builder.Services.AddTransient<ITopicStatisticsRepository, TopicStatisticsReposit
 builder.Services.AddTransient<ITopicStatisticsTypeRepository, TopicStatisticsTypeRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IDatabaseDataMigrator, DatabaseDataMigrator>();
 
 // Authentication (current: JWT)
 builder.Services.AddAuthentication(x =>
@@ -161,7 +162,10 @@ using (var serviceScope = app.Services.CreateScope())
     var services = serviceScope.ServiceProvider;
 
     var runner = services.GetRequiredService<IMigrationRunner>();
+    var databaseMigrator = services.GetRequiredService<IDatabaseDataMigrator>();
+    
     runner.MigrateUp();
+    await databaseMigrator.MigrateAsync();
 }
 
 app.Run();

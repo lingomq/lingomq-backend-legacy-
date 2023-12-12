@@ -11,7 +11,7 @@ using Topics.DomainLayer.Entities;
 
 namespace Topics.Api.Controllers
 {
-    [Route("api/v0/topic/statistics")]
+    [Route("api/topic/statistics")]
     [ApiController]
     public class TopicStatisticsController : ControllerBase
     {

@@ -9,7 +9,7 @@ using Topics.DomainLayer.Entities;
 
 namespace Topics.Api.Controllers
 {
-    [Route("api/v0/topics/level")]
+    [Route("api/topics/level")]
     [ApiController]
     public class TopicLevelController : ControllerBase
     {
