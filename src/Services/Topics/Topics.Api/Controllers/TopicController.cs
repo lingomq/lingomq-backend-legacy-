@@ -47,7 +47,7 @@ namespace Topics.Api.Controllers
             return LingoMqResponse.OkResult(topics);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("topic-id/{id}")]
         [Authorize(Roles = AccessRoles.All)]
         public async Task<IActionResult> Get(Guid id)
         {
