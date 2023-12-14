@@ -37,6 +37,7 @@ builder.Services.AddTransient<ITopicStatisticsRepository, TopicStatisticsReposit
 builder.Services.AddTransient<ITopicStatisticsTypeRepository, TopicStatisticsTypeRepository>();
 builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+builder.Services.AddTransient<IDatabaseDataMigrator, DatabaseDataMigrator>();
 
 // Authentication (current: JWT)
 builder.Services.AddAuthentication(x =>
