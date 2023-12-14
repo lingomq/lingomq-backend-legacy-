@@ -64,10 +64,10 @@ namespace Words.Api.Controllers
             return LingoMqResponse.OkResult(userWord);
         }
 
-        [HttpGet("records/repeats/{count}")]
-        public async Task<IActionResult> GetRecordsByRepeats(int count = 4)
+        [HttpGet("records/repeats/order/{order}/count/{count}")]
+        public async Task<IActionResult> GetRecordsByRepeats(int count = 4, string order = "ASC")
         {
-            List<RecordsByRepeatsResponseModel> records = await _unitOfWork.UserWords.GetRecordsByRepeatsAsync(count);
+            List<RecordsByRepeatsResponseModel> records = await _unitOfWork.UserWords.GetRecordsByRepeatsAsync(count, order);
 
             return LingoMqResponse.OkResult(records);
         }

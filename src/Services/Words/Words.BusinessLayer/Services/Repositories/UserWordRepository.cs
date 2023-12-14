@@ -41,7 +41,7 @@ namespace Words.BusinessLayer.Services.Repositories
             "SELECT user_id as \"UserId\", " +
             "SUM(repeats) as \"Repeats\" " +
             "FROM user_words " +
-            "GROUP BY (user_id) " +
+            "GROUP BY (user_id) order by @OrderByValue " +
             "LIMIT @Count";
         private readonly static string GetRecordsByWordsCount =
             "SELECT user_id as \"UserId\", " +
@@ -190,10 +190,10 @@ namespace Words.BusinessLayer.Services.Repositories
             return words is null ? new List<UserWord>() : words.ToList();
         }
 
-        public async Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(int count)
+        public async Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(int count, string order = "ASC")
         {
             IEnumerable<RecordsByRepeatsResponseModel> records = await _connection
-                .QueryAsync<RecordsByRepeatsResponseModel>(GetRecordsByRepeats, new { Count = count });
+                .QueryAsync<RecordsByRepeatsResponseModel>(GetRecordsByRepeats, new { Count = count, OrderByValue = order });
 
             return !records.Any() ? new List<RecordsByRepeatsResponseModel>() : records.ToList();
         }
