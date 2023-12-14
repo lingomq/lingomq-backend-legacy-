@@ -202,6 +202,7 @@ namespace Words.BusinessLayer.Services.Repositories
 
         public async Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(string order, int count)
         {
+            Console.WriteLine(GetRecordsByWordsCount);
             IEnumerable<RecordsByWordsCountResponseModel> records = await _connection
                 .QueryAsync<RecordsByWordsCountResponseModel>(GetRecordsByWordsCount, new { Order = order, Count = count });
 
