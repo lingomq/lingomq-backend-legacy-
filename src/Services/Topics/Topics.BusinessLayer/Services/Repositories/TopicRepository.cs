@@ -23,7 +23,7 @@ namespace Topics.BusinessLayer.Services.Repositories
             "JOIN languages ON languages.id = topics.language_id " +
             "JOIN topic_levels ON topic_levels.id = topics.topic_level_id ";
         private static readonly string GetRange = Get;
-        private static readonly string PaginationAndOrderByDate = "ORDER BY creational_date OFFSET (@Skip) ROWS " +
+        private static readonly string PaginationAndOrderByDate = "ORDER BY creational_date DESC OFFSET (@Skip) ROWS " +
             "FETCH NEXT (@Take) ROWS ONLY ";
         private static readonly string GetById = Get + "WHERE topics.id = @Id";
         private static readonly string GetByDateRange = Get +
