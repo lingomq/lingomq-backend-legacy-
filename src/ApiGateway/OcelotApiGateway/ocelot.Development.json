@@ -304,7 +304,7 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/api/words/user-words/records/repeats/{count}",
+      "DownstreamPathTemplate": "/api/words/user-words/records/repeats/order/{order}/count/{count}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -312,7 +312,7 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api.lingomq/words/user-words/records/repeats/{count}",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/records/repeats/order/{order}/count/{count}",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
