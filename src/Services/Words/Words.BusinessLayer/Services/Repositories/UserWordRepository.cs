@@ -42,7 +42,7 @@ namespace Words.BusinessLayer.Services.Repositories
             "SUM(repeats) as \"Repeats\" " +
             "FROM user_words " +
             "GROUP BY (user_id) " +
-            "ORDER BY SUM(repeats) @Order " +
+            "ORDER BY SUM(repeats) @SortPath " +
             "LIMIT @Count";
         private readonly static string GetRecordsByWordsCount =
             "SELECT user_id as \"UserId\", " +
@@ -194,25 +194,8 @@ namespace Words.BusinessLayer.Services.Repositories
 
         public async Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(string order, int count)
         {
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            string s = "SELECT user_id as \"UserId\", " +
-            "COUNT(word) as \"WordsCount\" " +
-            "FROM user_words " +
-            "GROUP BY (user_id) " +
-            "ORDER BY COUNT(word) {0} " +
-            "LIMIT {1}";
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine(s, order, count);
             IEnumerable<RecordsByRepeatsResponseModel> records = await _connection
-                .QueryAsync<RecordsByRepeatsResponseModel>(GetRecordsByRepeats, new { Order = order, Count = count });
+                .QueryAsync<RecordsByRepeatsResponseModel>(GetRecordsByRepeats, new { SortPath = order, Count = count });
 
             return !records.Any() ? new List<RecordsByRepeatsResponseModel>() : records.ToList();
         }
@@ -220,7 +203,7 @@ namespace Words.BusinessLayer.Services.Repositories
         public async Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(string order, int count)
         {
             IEnumerable<RecordsByWordsCountResponseModel> records = await _connection
-                .QueryAsync<RecordsByWordsCountResponseModel>(GetRecordsByWordsCount, new { Order = order, Count = count });
+                .QueryAsync<RecordsByWordsCountResponseModel>(GetRecordsByWordsCount, new { SortPath = order, Count = count });
 
             return !records.Any() ? new List<RecordsByWordsCountResponseModel>() : records.ToList();
         }
