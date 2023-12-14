@@ -49,7 +49,7 @@ namespace Words.BusinessLayer.Services.Repositories
             "COUNT(word) as \"WordsCount\" " +
             "FROM user_words " +
             "GROUP BY (user_id) " +
-            "ORDER BY COUNT(word) @Order " +
+            "ORDER BY COUNT(word) ASC " +
             "LIMIT @Count";
         private readonly static string Create =
             "INSERT INTO user_words (id, word, translated, repeats, created_at, language_id, user_id) " +
@@ -202,17 +202,6 @@ namespace Words.BusinessLayer.Services.Repositories
 
         public async Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(string order, int count)
         {
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-
-            Console.WriteLine(order);
-            Console.WriteLine(count);
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
             IEnumerable<RecordsByWordsCountResponseModel> records = await _connection
                 .QueryAsync<RecordsByWordsCountResponseModel>(GetRecordsByWordsCount, new { Order = order, Count = count });
 
