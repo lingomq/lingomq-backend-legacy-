@@ -42,7 +42,7 @@ namespace Words.BusinessLayer.Services.Repositories
             "SUM(repeats) as \"Repeats\" " +
             "FROM user_words " +
             "GROUP BY (user_id) " +
-            "ORDER BY \"Repeats\" @Order" +
+            "ORDER BY \"Repeats\" @Order " +
             "LIMIT @Count";
         private readonly static string GetRecordsByWordsCount =
             "SELECT user_id as \"UserId\", " +
