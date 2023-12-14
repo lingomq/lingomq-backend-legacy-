@@ -41,13 +41,13 @@ namespace Words.BusinessLayer.Services.Repositories
             "SELECT user_id as \"UserId\", " +
             "SUM(repeats) as \"Repeats\" " +
             "FROM user_words " +
-            "GROUP BY (user_id) order by @OrderByValue " +
+            "GROUP BY (user_id) order by user_id @OrderByValue " +
             "LIMIT @Count";
         private readonly static string GetRecordsByWordsCount =
             "SELECT user_id as \"UserId\", " +
             "COUNT(word) as \"WordsCount\" " +
             "FROM user_words " +
-            "GROUP BY (user_id) order by @OrderByValue " +
+            "GROUP BY (user_id) order by user_id @OrderByValue " +
             "LIMIT @Count";
         private readonly static string Create =
             "INSERT INTO user_words (id, word, translated, repeats, created_at, language_id, user_id) " +
