@@ -194,6 +194,23 @@ namespace Words.BusinessLayer.Services.Repositories
 
         public async Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(string order, int count)
         {
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            string s = "SELECT user_id as \"UserId\", " +
+            "COUNT(word) as \"WordsCount\" " +
+            "FROM user_words " +
+            "GROUP BY (user_id) " +
+            "ORDER BY COUNT(word) {0} " +
+            "LIMIT {1}";
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine();
+
+            Console.WriteLine(s, order, count);
             IEnumerable<RecordsByRepeatsResponseModel> records = await _connection
                 .QueryAsync<RecordsByRepeatsResponseModel>(GetRecordsByRepeats, new { Order = order, Count = count });
 
