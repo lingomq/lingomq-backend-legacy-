@@ -21,11 +21,11 @@ namespace Topics.Api.Controllers
         public TopicController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
 
-        [HttpGet("all/skip/{skip}/take/{take}/range/{range}")]
+        [HttpGet("all/skip/{skip}/take/{take}")]
         [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Get(int range, int skip = 0, int take = int.MaxValue)
+        public async Task<IActionResult> Get(int skip = 0, int take = int.MaxValue)
         {
-            List<Topic> topics = await _unitOfWork.Topics.GetAsync(range, skip, take);
+            List<Topic> topics = await _unitOfWork.Topics.GetAsync(skip, take);
             _logger.Info("GET /all/{range} {0}", nameof(List<Topic>));
             return LingoMqResponse.OkResult(topics);
         }

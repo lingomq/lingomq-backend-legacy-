@@ -29,8 +29,8 @@ namespace Topics.BusinessLayer.Services.Repositories
         private static readonly string GetByDateRange = Get +
             "WHERE creational_date > @StartDate " +
             "AND creational_date < @FinishDate ";
-        private static readonly string GetByLanguageId = Get + "AND languages.id = @LanguageId ";
-        private static readonly string GetByTopicLevelId = Get + "AND topic_levels.id = @LevelId ";
+        private static readonly string GetByLanguageId = "AND languages.id = @LanguageId ";
+        private static readonly string GetByTopicLevelId = "AND topic_levels.id = @LevelId ";
         private static readonly string Create =
             "INSERT INTO topics " +
             "(id, title, content, icon, creational_date, language_id, topic_level_id) " +
@@ -67,9 +67,9 @@ namespace Topics.BusinessLayer.Services.Repositories
             return await GetByQueryAsync(GetRange, new { Count = range });
         }
 
-        public async Task<List<Topic>> GetAsync(int count, int start = 0, int stop = int.MaxValue)
+        public async Task<List<Topic>> GetAsync(int start = 0, int stop = int.MaxValue)
         {
-            return await GetByQueryAsync(GetRange + PaginationAndOrderByDate + Limit, new { Count = count, Skip = start, Take = stop });
+            return await GetByQueryAsync(GetRange + PaginationAndOrderByDate, new { Skip = start, Take = stop });
         }
 
         public async Task<List<Topic>> GetByDateRangeAsync(DateTime start, DateTime stop, int startPagination = 0, int stopPagination = int.MaxValue)
@@ -97,8 +97,7 @@ namespace Topics.BusinessLayer.Services.Repositories
             string sql = GetByDateRange +
                 filters.LanguageId != null ? GetByLanguageId : "" +
                 filters.LevelId != null ? GetByTopicLevelId : "" +
-                PaginationAndOrderByDate +
-                Limit;
+                PaginationAndOrderByDate;
 
             filters.Count = 20;
 
