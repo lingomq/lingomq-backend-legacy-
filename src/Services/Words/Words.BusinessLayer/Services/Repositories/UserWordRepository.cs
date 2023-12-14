@@ -169,7 +169,7 @@ namespace Words.BusinessLayer.Services.Repositories
                     return userWord;
                 }, entity, splitOn: "id");
 
-            return words is null ? new List<UserWord>() : words.ToList();
+            return !words.Any() ? new List<UserWord>() : words.ToList();
         }
 
         private async Task<List<UserWord>> TemplateGet(string sql)
@@ -189,7 +189,7 @@ namespace Words.BusinessLayer.Services.Repositories
                     return userWord;
                 }, splitOn: "id");
 
-            return words is null ? new List<UserWord>() : words.ToList();
+            return !words.Any() ? new List<UserWord>() : words.ToList();
         }
 
         public async Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(string order, int count)
@@ -197,7 +197,7 @@ namespace Words.BusinessLayer.Services.Repositories
             IEnumerable<RecordsByRepeatsResponseModel> records = await _connection
                 .QueryAsync<RecordsByRepeatsResponseModel>(GetRecordsByRepeats, new { Order = order, Count = count });
 
-            return records.Any() ? new List<RecordsByRepeatsResponseModel>() : records.ToList();
+            return !records.Any() ? new List<RecordsByRepeatsResponseModel>() : records.ToList();
         }
 
         public async Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(string order, int count)
@@ -205,7 +205,7 @@ namespace Words.BusinessLayer.Services.Repositories
             IEnumerable<RecordsByWordsCountResponseModel> records = await _connection
                 .QueryAsync<RecordsByWordsCountResponseModel>(GetRecordsByWordsCount, new { Order = order, Count = count });
 
-            return records.Any() ? new List<RecordsByWordsCountResponseModel>() : records.ToList();
+            return !records.Any() ? new List<RecordsByWordsCountResponseModel>() : records.ToList();
         }
     }
 }
