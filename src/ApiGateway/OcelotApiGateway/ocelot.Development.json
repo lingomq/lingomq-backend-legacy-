@@ -362,6 +362,18 @@
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/topic-id/{id}",
       "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/topics/level/all/{range}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/topics/level/all/{range}",
+      "UpstreamHttpMethod": [ "Get" ]
     }
   ]
 }
