@@ -195,7 +195,7 @@ namespace Words.BusinessLayer.Services.Repositories
         public async Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(string order, int count)
         {
             IEnumerable<RecordsByRepeatsResponseModel> records = await _connection
-                .QueryAsync<RecordsByRepeatsResponseModel>(GetRecordsByRepeats, new { SortPath = order, Count = count });
+                .QueryAsync<RecordsByRepeatsResponseModel>(GetRecordsByRepeats, new { SortPath = order, Count = count.ToString() });
 
             return !records.Any() ? new List<RecordsByRepeatsResponseModel>() : records.ToList();
         }
