@@ -213,7 +213,7 @@ namespace Words.BusinessLayer.Services.Repositories
 
         public async Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(int count, string order = "ASC")
         {
-            string sql = order == "ASC" ? GetRecordsByRepeatsAsc : GetRecordsByRepeatsDesc;
+            string sql = order == "ASC" ? GetRecordsByWordsCountAsc : GetRecordsByWordsCountDesc;
             IEnumerable<RecordsByWordsCountResponseModel> records = await _connection
                 .QueryAsync<RecordsByWordsCountResponseModel>(sql, new { Count = count });
 
