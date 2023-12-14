@@ -22,7 +22,7 @@ namespace Topics.BusinessLayer.Services.Repositories
             "FROM topics " +
             "JOIN languages ON languages.id = topics.language_id " +
             "JOIN topic_levels ON topic_levels.id = topics.topic_level_id ";
-        private static readonly string GetRange = Get + "LIMIT @Count ";
+        private static readonly string GetRange = Get;
         private static readonly string PaginationAndOrderByDate = "ORDER BY creational_date OFFSET (@Skip) ROWS " +
             "FETCH NEXT (@Take) ROWS ONLY";
         private static readonly string GetById = Get + "WHERE topics.id = @Id";
@@ -48,7 +48,7 @@ namespace Topics.BusinessLayer.Services.Repositories
         private static readonly string Delete =
             "DELETE FROM topics " +
             "WHERE id = @Id";
-        private static readonly string Limit = "LIMIT @Count";
+        private static readonly string Limit = "LIMIT @Count ";
         private readonly IDbConnection _connection;
         public TopicRepository(IDbConnection connection) : base(connection) =>
             _connection = connection;
