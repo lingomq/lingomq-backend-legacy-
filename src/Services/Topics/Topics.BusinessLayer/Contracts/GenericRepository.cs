@@ -19,7 +19,7 @@ namespace Topics.BusinessLayer.Contracts
         }
         protected virtual async Task ExecuteByTemplateAsync<TE>(string sql, TE entity) where TE : class
         {
-            using var transactionScope = new TransactionScope();
+            using var transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
 
             await _connection.ExecuteAsync(sql, entity);
             transactionScope.Complete();
