@@ -41,20 +41,6 @@ namespace Words.Api.Middlewares
 
                 _logger.Warn("Type: {0}; Message: {1};", ex.Source, ex.Message);
             }
-            catch (Exception ex)
-            {
-
-                ErrorModel model = new ErrorModel()
-                {
-                    Code = 0,
-                    Message = ex.Message
-                };
-
-
-                _logger.Error("Type: {0}; Message: {1};", ex.Source, ex.Message);
-                await HandleAsync(context, (int)HttpStatusCode.InternalServerError, model);
-                Console.WriteLine(ex.Message, ex.StackTrace);
-            }
         }
         private async Task HandleCustomExceptionAsync(HttpContext context, ExceptionBase exceptionBase)
         {
