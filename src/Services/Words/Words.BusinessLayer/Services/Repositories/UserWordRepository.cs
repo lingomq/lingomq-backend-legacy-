@@ -37,17 +37,29 @@ namespace Words.BusinessLayer.Services.Repositories
             "WHERE user_id = @Id AND DATE(created_at) = @CreatedAt";
         private readonly static string GetMostRepeated = Get +
             "WHERE repeats = (SELECT MAX(repeats) FROM user_words) AND user_id = @UserId";
-        private readonly static string GetRecordsByRepeats =
+        private readonly static string GetRecordsByRepeatsAsc =
             "SELECT user_id as \"UserId\", " +
             "SUM(repeats) as \"Repeats\" " +
             "FROM user_words " +
-            "GROUP BY (user_id) " +
+            "GROUP BY (user_id) order by SUM(repeats) ASC " +
             "LIMIT @Count";
-        private readonly static string GetRecordsByWordsCount =
+        private readonly static string GetRecordsByRepeatsDesc =
+            "SELECT user_id as \"UserId\", " +
+            "SUM(repeats) as \"Repeats\" " +
+            "FROM user_words " +
+            "GROUP BY (user_id) order by SUM(repeats) DESC " +
+            "LIMIT @Count";
+        private readonly static string GetRecordsByWordsCountAsc =
             "SELECT user_id as \"UserId\", " +
             "COUNT(word) as \"WordsCount\" " +
             "FROM user_words " +
-            "GROUP BY (user_id) " +
+            "GROUP BY (user_id) order by COUNT(word) ASC " +
+            "LIMIT @Count";
+        private readonly static string GetRecordsByWordsCountDesc =
+            "SELECT user_id as \"UserId\", " +
+            "COUNT(word) as \"WordsCount\" " +
+            "FROM user_words " +
+            "GROUP BY (user_id) order by COUNT(word) DESC " +
             "LIMIT @Count";
         private readonly static string Create =
             "INSERT INTO user_words (id, word, translated, repeats, created_at, language_id, user_id) " +
@@ -190,18 +202,20 @@ namespace Words.BusinessLayer.Services.Repositories
             return words is null ? new List<UserWord>() : words.ToList();
         }
 
-        public async Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(int count)
+        public async Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(int count, string order = "ASC")
         {
+            string sql = order.ToUpperInvariant() == "ASC" ? GetRecordsByRepeatsAsc : GetRecordsByRepeatsDesc;
             IEnumerable<RecordsByRepeatsResponseModel> records = await _connection
-                .QueryAsync<RecordsByRepeatsResponseModel>(GetRecordsByRepeats, new { Count = count });
+                .QueryAsync<RecordsByRepeatsResponseModel>(sql, new { Count = count });
 
             return !records.Any() ? new List<RecordsByRepeatsResponseModel>() : records.ToList();
         }
 
-        public async Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(int count)
+        public async Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(int count, string order = "ASC")
         {
+            string sql = order.ToUpperInvariant() == "ASC" ? GetRecordsByWordsCountAsc : GetRecordsByWordsCountDesc;
             IEnumerable<RecordsByWordsCountResponseModel> records = await _connection
-                .QueryAsync<RecordsByWordsCountResponseModel>(GetRecordsByWordsCount, new { Count = count });
+                .QueryAsync<RecordsByWordsCountResponseModel>(sql, new { Count = count });
 
             return !records.Any() ? new List<RecordsByWordsCountResponseModel>() : records.ToList();
         }
