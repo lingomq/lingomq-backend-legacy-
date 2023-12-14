@@ -204,7 +204,7 @@ namespace Words.BusinessLayer.Services.Repositories
 
         public async Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(int count, string order = "ASC")
         {
-            string sql = order == "ASC" ? GetRecordsByRepeatsAsc : GetRecordsByRepeatsDesc;
+            string sql = order.ToUpperInvariant() == "ASC" ? GetRecordsByRepeatsAsc : GetRecordsByRepeatsDesc;
             IEnumerable<RecordsByRepeatsResponseModel> records = await _connection
                 .QueryAsync<RecordsByRepeatsResponseModel>(sql, new { Count = count });
 
@@ -213,7 +213,7 @@ namespace Words.BusinessLayer.Services.Repositories
 
         public async Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(int count, string order = "ASC")
         {
-            string sql = order == "ASC" ? GetRecordsByWordsCountAsc : GetRecordsByWordsCountDesc;
+            string sql = order.ToUpperInvariant() == "ASC" ? GetRecordsByWordsCountAsc : GetRecordsByWordsCountDesc;
             IEnumerable<RecordsByWordsCountResponseModel> records = await _connection
                 .QueryAsync<RecordsByWordsCountResponseModel>(sql, new { Count = count });
 
