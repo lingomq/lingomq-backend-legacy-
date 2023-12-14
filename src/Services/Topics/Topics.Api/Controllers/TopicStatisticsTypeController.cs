@@ -9,7 +9,7 @@ using Topics.DomainLayer.Entities;
 
 namespace Topics.Api.Controllers
 {
-    [Route("api/v0/topics/statistics/types")]
+    [Route("api/topics/statistics/types")]
     [ApiController]
     public class TopicStatisticsTypeController : ControllerBase
     {

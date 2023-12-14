@@ -6,11 +6,11 @@ using Topics.DomainLayer.Entities;
 
 namespace Topics.BusinessLayer.MassTransit.Consumers.IdentityConsumers;
 
-public class IdentityCreateUserConsumer : IConsumer<IdentityModelCreateUser>
+public class TopicsCreateUserConsumer : IConsumer<IdentityModelCreateUser>
 {
-    private readonly ILogger<IdentityCreateUserConsumer> _logger;
+    private readonly ILogger<TopicsCreateUserConsumer> _logger;
     private readonly IUnitOfWork _unitOfWork;
-    public IdentityCreateUserConsumer(ILogger<IdentityCreateUserConsumer> logger,
+    public TopicsCreateUserConsumer(ILogger<TopicsCreateUserConsumer> logger,
         IUnitOfWork unitOfWork)
     {
         _logger = logger;

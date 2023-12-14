@@ -6,11 +6,11 @@ using Topics.DomainLayer.Entities;
 
 namespace Topics.BusinessLayer.MassTransit.Consumers.IdentityConsumers;
 
-public class IdentityDeleteUserConsumer : IConsumer<IdentityModelDeleteUser>
+public class TopicsDeleteUserConsumer : IConsumer<IdentityModelDeleteUser>
 {
-    private readonly ILogger<IdentityDeleteUserConsumer> _logger;
+    private readonly ILogger<TopicsDeleteUserConsumer> _logger;
     private readonly IUnitOfWork _unitOfWork;
-    public IdentityDeleteUserConsumer(ILogger<IdentityDeleteUserConsumer> logger, IUnitOfWork unitOfWork)
+    public TopicsDeleteUserConsumer(ILogger<TopicsDeleteUserConsumer> logger, IUnitOfWork unitOfWork)
     {
         _logger = logger;
         _unitOfWork = unitOfWork;

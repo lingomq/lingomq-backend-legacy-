@@ -2,6 +2,9 @@
 {
     public interface IDatabaseDataMigrator
     {
-        Task AddRoles();
+        Task AddLanguagesAsync();
+        Task AddTopicStatisticsTypeAsync();
+        Task AddTopicLevelAsync();
+        Task MigrateAsync();
     }
 }

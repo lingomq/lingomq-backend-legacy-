@@ -71,9 +71,9 @@ builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
     x.AddDelayedMessageScheduler();
-    x.AddConsumer<IdentityDeleteUserConsumer>();
-    x.AddConsumer<IdentityUpdateUserConsumer>();
-    x.AddConsumer<IdentityCreateUserConsumer>();
+    x.AddConsumer<TopicsDeleteUserConsumer>();
+    x.AddConsumer<TopicsUpdateUserConsumer>();
+    x.AddConsumer<TopicsCreateUserConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host(builder.Configuration["RabbitMq:Uri"]!, "/", h =>
@@ -82,17 +82,17 @@ builder.Services.AddMassTransit(x =>
             h.Password(builder.Configuration["RabbitMq:Password"]);
         });
 
-        cfg.ReceiveEndpoint(typeof(IdentityDeleteUserConsumer).Name.ToLower(), endpoint =>
+        cfg.ReceiveEndpoint(typeof(TopicsDeleteUserConsumer).Name.ToLower(), endpoint =>
         {
-            endpoint.ConfigureConsumer<IdentityDeleteUserConsumer>(context);
+            endpoint.ConfigureConsumer<TopicsDeleteUserConsumer>(context);
         });
-        cfg.ReceiveEndpoint(typeof(IdentityUpdateUserConsumer).Name.ToLower(), endpoint =>
+        cfg.ReceiveEndpoint(typeof(TopicsUpdateUserConsumer).Name.ToLower(), endpoint =>
         {
-            endpoint.ConfigureConsumer<IdentityUpdateUserConsumer>(context);
+            endpoint.ConfigureConsumer<TopicsUpdateUserConsumer>(context);
         });
-        cfg.ReceiveEndpoint(typeof(IdentityCreateUserConsumer).Name.ToLower(), endpoint =>
+        cfg.ReceiveEndpoint(typeof(TopicsCreateUserConsumer).Name.ToLower(), endpoint =>
         {
-            endpoint.ConfigureConsumer<IdentityCreateUserConsumer>(context);
+            endpoint.ConfigureConsumer<TopicsCreateUserConsumer>(context);
         });
         cfg.ClearSerialization();
         cfg.UseRawJsonSerializer();
@@ -159,9 +159,11 @@ app.UseMiddleware<ExceptionHandlerMiddleware>();
 using (var serviceScope = app.Services.CreateScope())
 {
     var services = serviceScope.ServiceProvider;
-
+    var databaseMigrator = services.GetRequiredService<IDatabaseDataMigrator>();
     var runner = services.GetRequiredService<IMigrationRunner>();
+
     runner.MigrateUp();
+    await databaseMigrator.MigrateAsync();
 }
 
 app.Run();

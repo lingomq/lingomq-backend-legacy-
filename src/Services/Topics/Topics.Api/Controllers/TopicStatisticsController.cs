@@ -11,7 +11,7 @@ using Topics.DomainLayer.Entities;
 
 namespace Topics.Api.Controllers
 {
-    [Route("api/v0/topic/statistics")]
+    [Route("api/topic/statistics")]
     [ApiController]
     public class TopicStatisticsController : ControllerBase
     {
@@ -38,7 +38,7 @@ namespace Topics.Api.Controllers
             return LingoMqResponse.OkResult(statistics);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("statistics-id/{id}")]
         [Authorize(Roles = AccessRoles.All)]
         public async Task<IActionResult> Get(Guid id)
         {
