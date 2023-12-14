@@ -7,8 +7,8 @@ using MassTransit;
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
     .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json", true, true)
-    .AddEnvironmentVariables();
+    .AddJsonFile("appsettings.json", true, true);
+    //.AddEnvironmentVariables();
 
 // Services
 builder.Services.AddTransient<IEmailSender, EmailSender>();
