@@ -328,7 +328,7 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/api/topics/all/{count}",
+      "DownstreamPathTemplate": "/api/topics/all/skip/{skip}/take/{take}/range/{range}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -336,7 +336,19 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api.lingomq/topics/all/{count}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/all/skip/{skip}/take/{take}/range/{range}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/topics/filters",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/topics/filters",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
