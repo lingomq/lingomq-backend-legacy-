@@ -7,6 +7,7 @@ using Topics.BusinessLayer.Contracts;
 using Topics.BusinessLayer.Dtos;
 using Topics.BusinessLayer.Exceptions.ClientExceptions;
 using Topics.BusinessLayer.Extensions;
+using Topics.BusinessLayer.Models;
 using Topics.DomainLayer.Entities;
 
 namespace Topics.Api.Controllers
@@ -20,30 +21,19 @@ namespace Topics.Api.Controllers
         public TopicController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
 
-        [HttpGet("all/{range}")]
+        [HttpGet("all/skip/{skip}/take/{take}/range/{range}")]
         [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Get(int range)
+        public async Task<IActionResult> Get(int range, int skip = 0, int take = int.MaxValue)
         {
-            List<Topic> topics = await _unitOfWork.Topics.GetAsync(range);
+            List<Topic> topics = await _unitOfWork.Topics.GetAsync(range, skip, take);
             _logger.Info("GET /all/{range} {0}", nameof(List<Topic>));
             return LingoMqResponse.OkResult(topics);
         }
 
-        [HttpGet("language/{id}")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> GetByLanguageId(Guid id)
+        [HttpGet("filters")]
+        public async Task<IActionResult> GetWithFilters([System.Web.Http.FromUri] TopicFilters filters)
         {
-            List<Topic> topics = await _unitOfWork.Topics.GetByLanguageIdAsync(id);
-            _logger.Info("GET /language/{id} {0}", nameof(List<Topic>));
-            return LingoMqResponse.OkResult(topics);
-        }
-
-        [HttpGet("level/{id}")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> GetByLevelId(Guid id)
-        {
-            List<Topic> topics = await _unitOfWork.Topics.GetByTopicLevelIdAsync(id);
-            _logger.Info("GET /level/{id} {0}", nameof(List<Topic>));
+            List<Topic> topics = await _unitOfWork.Topics.GetByTopicFiltersAsync(filters);
             return LingoMqResponse.OkResult(topics);
         }
 

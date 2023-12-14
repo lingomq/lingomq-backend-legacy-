@@ -1,6 +1,8 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using Dapper;
 using Topics.BusinessLayer.Contracts;
+using Topics.BusinessLayer.Models;
 using Topics.DomainLayer.Entities;
 
 namespace Topics.BusinessLayer.Services.Repositories
@@ -20,13 +22,15 @@ namespace Topics.BusinessLayer.Services.Repositories
             "FROM topics " +
             "JOIN languages ON languages.id = topics.language_id " +
             "JOIN topic_levels ON topic_levels.id = topics.topic_level_id ";
-        private static readonly string GetRange = Get + "LIMIT @Count";
-        private static readonly string GetById = Get + "WHERE topics.id = @Id";      
-        private static readonly string GetByDateRange = Get + 
-            "WHERE creational_date > @Start " +
-            "AND creational_date < @Finish";
-        private static readonly string GetByLanguageId = Get + "WHERE languages.id = @Id";
-        private static readonly string GetByTopicLevelId = Get + "WHERE topic_levels.id = @Id";
+        private static readonly string GetRange = Get + "LIMIT @Count ";
+        private static readonly string PaginationAndOrderByDate = "ORDER BY creational_date OFFSET (@Skip) ROWS " +
+            "FETCH NEXT (@Take) ROWS ONLY";
+        private static readonly string GetById = Get + "WHERE topics.id = @Id";
+        private static readonly string GetByDateRange = Get +
+            "WHERE creational_date > @StartDate " +
+            "AND creational_date < @FinishDate ";
+        private static readonly string GetByLanguageId = Get + "AND languages.id = @LanguageId ";
+        private static readonly string GetByTopicLevelId = Get + "AND topic_levels.id = @LevelId ";
         private static readonly string Create =
             "INSERT INTO topics " +
             "(id, title, content, icon, creational_date, language_id, topic_level_id) " +
@@ -44,6 +48,7 @@ namespace Topics.BusinessLayer.Services.Repositories
         private static readonly string Delete =
             "DELETE FROM topics " +
             "WHERE id = @Id";
+        private static readonly string Limit = "LIMIT @Count";
         private readonly IDbConnection _connection;
         public TopicRepository(IDbConnection connection) : base(connection) =>
             _connection = connection;
@@ -62,7 +67,12 @@ namespace Topics.BusinessLayer.Services.Repositories
             return await GetByQueryAsync(GetRange, new { Count = range });
         }
 
-        public async Task<List<Topic>> GetByDateRangeAsync(DateTime start, DateTime stop)
+        public async Task<List<Topic>> GetAsync(int count, int start = 0, int stop = int.MaxValue)
+        {
+            return await GetByQueryAsync(GetRange + PaginationAndOrderByDate + Limit, new { Count = count, Skip = start, Take = stop });
+        }
+
+        public async Task<List<Topic>> GetByDateRangeAsync(DateTime start, DateTime stop, int startPagination = 0, int stopPagination = int.MaxValue)
         {
             return await GetByQueryAsync(GetByDateRange, new 
             {
@@ -77,12 +87,26 @@ namespace Topics.BusinessLayer.Services.Repositories
             return topics.FirstOrDefault();
         }
 
-        public async Task<List<Topic>> GetByLanguageIdAsync(Guid id)
+        public async Task<List<Topic>> GetByLanguageIdAsync(Guid id, int start = 0, int stop = int.MaxValue)
         {
             return await GetByQueryAsync(GetByLanguageId, new { Id = id });
         }
 
-        public async Task<List<Topic>> GetByTopicLevelIdAsync(Guid id)
+        public async Task<List<Topic>> GetByTopicFiltersAsync(TopicFilters filters)
+        {
+            string sql = GetByDateRange +
+                filters.LanguageId != null ? GetByLanguageId : "" +
+                filters.LevelId != null ? GetByTopicLevelId : "" +
+                PaginationAndOrderByDate +
+                Limit;
+
+            filters.Count = 20;
+
+            return await GetByQueryAsync(sql, filters);
+                
+        }
+
+        public async Task<List<Topic>> GetByTopicLevelIdAsync(Guid id, int start = 0, int stop = int.MaxValue)
         {
             return await GetByQueryAsync(GetByTopicLevelId, new { Id = id });
         }
