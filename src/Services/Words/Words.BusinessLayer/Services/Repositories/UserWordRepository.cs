@@ -42,12 +42,14 @@ namespace Words.BusinessLayer.Services.Repositories
             "SUM(repeats) as \"Repeats\" " +
             "FROM user_words " +
             "GROUP BY (user_id) " +
+            "ORDER BY \"Repeats\" @Order" +
             "LIMIT @Count";
         private readonly static string GetRecordsByWordsCount =
             "SELECT user_id as \"UserId\", " +
             "COUNT(word) as \"WordsCount\" " +
             "FROM user_words " +
             "GROUP BY (user_id) " +
+            "ORDER BY \"WordsCount\" @Order " +
             "LIMIT @Count";
         private readonly static string Create =
             "INSERT INTO user_words (id, word, translated, repeats, created_at, language_id, user_id) " +
@@ -190,18 +192,18 @@ namespace Words.BusinessLayer.Services.Repositories
             return words is null ? new List<UserWord>() : words.ToList();
         }
 
-        public async Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(int count)
+        public async Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(string order, int count)
         {
             IEnumerable<RecordsByRepeatsResponseModel> records = await _connection
-                .QueryAsync<RecordsByRepeatsResponseModel>(GetRecordsByRepeats, new { Count = count });
+                .QueryAsync<RecordsByRepeatsResponseModel>(GetRecordsByRepeats, new { Order = order, Count = count });
 
             return !records.Any() ? new List<RecordsByRepeatsResponseModel>() : records.ToList();
         }
 
-        public async Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(int count)
+        public async Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(string order, int count)
         {
             IEnumerable<RecordsByWordsCountResponseModel> records = await _connection
-                .QueryAsync<RecordsByWordsCountResponseModel>(GetRecordsByWordsCount, new { Count = count });
+                .QueryAsync<RecordsByWordsCountResponseModel>(GetRecordsByWordsCount, new { Order = order, Count = count });
 
             return !records.Any() ? new List<RecordsByWordsCountResponseModel>() : records.ToList();
         }
