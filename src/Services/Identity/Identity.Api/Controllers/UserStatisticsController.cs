@@ -86,7 +86,7 @@ namespace Identity.Api.Controllers
             if (statistics is null)
                 throw new NotFoundException<UserStatistics>();
 
-            int hourSubstraction = (DateTime.Now - statistics.LastUpdateAt).Hours;
+            int hourSubstraction = (DateTime.Now.ToUniversalTime() - statistics.LastUpdateAt).Hours;
 
             if ((hourSubstraction > 24 && hourSubstraction <= 48) || statistics.VisitStreak == 0)
             {
