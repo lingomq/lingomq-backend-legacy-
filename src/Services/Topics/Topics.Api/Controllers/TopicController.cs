@@ -21,18 +21,30 @@ namespace Topics.Api.Controllers
         public TopicController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
 
-        [HttpGet("all/skip/{skip}/take/{take}/range/{range}")]
+        [HttpGet("all/skip/{skip}/take/{take}")]
         [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Get(int range, int skip = 0, int take = int.MaxValue)
+        public async Task<IActionResult> Get(int skip = 0, int take = int.MaxValue)
         {
-            List<Topic> topics = await _unitOfWork.Topics.GetAsync(range, skip, take);
+            List<Topic> topics = await _unitOfWork.Topics.GetAsync(skip, take);
             _logger.Info("GET /all/{range} {0}", nameof(List<Topic>));
             return LingoMqResponse.OkResult(topics);
         }
 
         [HttpGet("filters")]
-        public async Task<IActionResult> GetWithFilters([System.Web.Http.FromUri] TopicFilters filters)
+        public async Task<IActionResult> GetWithFilters(Guid? languageId, Guid? levelid, DateTime? startDate, DateTime? endDate, int skip = 0, int take = 100)
         {
+            if (startDate is null) startDate = DateTime.UnixEpoch;
+            if (endDate is null) endDate = DateTime.Now;
+            TopicFilters filters = new TopicFilters
+            {
+                LanguageId = languageId,
+                LevelId = levelid,
+                StartDate = startDate,
+                EndDate = endDate,
+                Skip = skip,
+                Take = take
+            };
+
             List<Topic> topics = await _unitOfWork.Topics.GetByTopicFiltersAsync(filters);
             return LingoMqResponse.OkResult(topics);
         }

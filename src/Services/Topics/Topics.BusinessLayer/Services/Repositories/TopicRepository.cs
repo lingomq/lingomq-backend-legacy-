@@ -22,15 +22,15 @@ namespace Topics.BusinessLayer.Services.Repositories
             "FROM topics " +
             "JOIN languages ON languages.id = topics.language_id " +
             "JOIN topic_levels ON topic_levels.id = topics.topic_level_id ";
-        private static readonly string GetRange = Get + "LIMIT @Count ";
-        private static readonly string PaginationAndOrderByDate = "ORDER BY creational_date OFFSET (@Skip) ROWS " +
-            "FETCH NEXT (@Take) ROWS ONLY";
+        private static readonly string GetRange = Get;
+        private static readonly string PaginationAndOrderByDate = "ORDER BY creational_date DESC OFFSET (@Skip) ROWS " +
+            "FETCH NEXT (@Take) ROWS ONLY ";
         private static readonly string GetById = Get + "WHERE topics.id = @Id";
         private static readonly string GetByDateRange = Get +
             "WHERE creational_date > @StartDate " +
-            "AND creational_date < @FinishDate ";
-        private static readonly string GetByLanguageId = Get + "AND languages.id = @LanguageId ";
-        private static readonly string GetByTopicLevelId = Get + "AND topic_levels.id = @LevelId ";
+            "AND creational_date < @EndDate ";
+        private static readonly string GetByLanguageId = "AND languages.id = @LanguageId ";
+        private static readonly string GetByTopicLevelId = "AND topic_levels.id = @LevelId ";
         private static readonly string Create =
             "INSERT INTO topics " +
             "(id, title, content, icon, creational_date, language_id, topic_level_id) " +
@@ -48,7 +48,7 @@ namespace Topics.BusinessLayer.Services.Repositories
         private static readonly string Delete =
             "DELETE FROM topics " +
             "WHERE id = @Id";
-        private static readonly string Limit = "LIMIT @Count";
+        private static readonly string Limit = "LIMIT @Count ";
         private readonly IDbConnection _connection;
         public TopicRepository(IDbConnection connection) : base(connection) =>
             _connection = connection;
@@ -67,9 +67,9 @@ namespace Topics.BusinessLayer.Services.Repositories
             return await GetByQueryAsync(GetRange, new { Count = range });
         }
 
-        public async Task<List<Topic>> GetAsync(int count, int start = 0, int stop = int.MaxValue)
+        public async Task<List<Topic>> GetAsync(int start = 0, int stop = int.MaxValue)
         {
-            return await GetByQueryAsync(GetRange + PaginationAndOrderByDate + Limit, new { Count = count, Skip = start, Take = stop });
+            return await GetByQueryAsync(GetRange + PaginationAndOrderByDate, new { Skip = start, Take = stop });
         }
 
         public async Task<List<Topic>> GetByDateRangeAsync(DateTime start, DateTime stop, int startPagination = 0, int stopPagination = int.MaxValue)
@@ -94,11 +94,10 @@ namespace Topics.BusinessLayer.Services.Repositories
 
         public async Task<List<Topic>> GetByTopicFiltersAsync(TopicFilters filters)
         {
-            string sql = GetByDateRange +
-                filters.LanguageId != null ? GetByLanguageId : "" +
-                filters.LevelId != null ? GetByTopicLevelId : "" +
-                PaginationAndOrderByDate +
-                Limit;
+            string sql = GetByDateRange;
+            sql += filters.LanguageId != null ? GetByLanguageId : "";
+            sql += filters.LevelId != null ? GetByTopicLevelId : "";
+            sql += PaginationAndOrderByDate;
 
             filters.Count = 20;
 
