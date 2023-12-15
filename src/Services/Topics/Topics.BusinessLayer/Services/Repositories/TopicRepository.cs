@@ -99,8 +99,6 @@ namespace Topics.BusinessLayer.Services.Repositories
             sql += filters.LevelId != null ? GetByTopicLevelId : "";
             sql += PaginationAndOrderByDate;
 
-            Console.WriteLine(sql);
-
             filters.Count = 20;
 
             return await GetByQueryAsync(sql, filters);
