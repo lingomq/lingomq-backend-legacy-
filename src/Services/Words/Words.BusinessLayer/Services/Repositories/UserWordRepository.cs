@@ -36,7 +36,7 @@ namespace Words.BusinessLayer.Services.Repositories
             "SELECT COUNT(*) FROM user_words " +
             "WHERE user_id = @Id AND DATE(created_at) = @CreatedAt";
         private readonly static string GetMostRepeated = Get +
-            "WHERE repeats = (SELECT MAX(repeats) FROM user_words) AND user_id = @UserId";
+            "WHERE repeats = (SELECT MAX(repeats) FROM user_words AND user_id = @UserId) AND user_id = @UserId";
         private readonly static string GetRecordsByRepeatsAsc =
             "SELECT user_id as \"UserId\", " +
             "SUM(repeats) as \"Repeats\" " +
@@ -130,14 +130,14 @@ namespace Words.BusinessLayer.Services.Repositories
         {
             var result = await _connection.QueryAsync<int>(GetCountPerDay, new { Id = id, CreatedAt = day });
 
-            return result.First();
+            return result.FirstOrDefault();
         }
 
         public async Task<UserWord?> GetMostRepeatedWordAsync(Guid userId)
         {
             List<UserWord> words = await TemplateGet(GetMostRepeated, new { UserId = userId });
 
-            return words.First();
+            return words.FirstOrDefault();
         }
 
         public async Task<UserWord> UpdateAsync(UserWord entity)
