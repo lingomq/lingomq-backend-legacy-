@@ -31,9 +31,21 @@ namespace Topics.Api.Controllers
         }
 
         [HttpGet("filters")]
-        public async Task<IActionResult> GetWithFilters(TopicFilters topicFilters)
+        public async Task<IActionResult> GetWithFilters(Guid? languageId, Guid? levelid, DateTime? startDate, DateTime? endDate, int skip = 0, int take = 100)
         {
-            List<Topic> topics = await _unitOfWork.Topics.GetByTopicFiltersAsync(topicFilters);
+            if (startDate is null) startDate = DateTime.UnixEpoch;
+            if (endDate is null) endDate = DateTime.Now;
+            TopicFilters filters = new TopicFilters
+            {
+                LanguageId = languageId,
+                LevelId = levelid,
+                StartDate = startDate,
+                EndDate = endDate,
+                Skip = skip,
+                Take = take
+            };
+
+            List<Topic> topics = await _unitOfWork.Topics.GetByTopicFiltersAsync(filters);
             return LingoMqResponse.OkResult(topics);
         }
 
