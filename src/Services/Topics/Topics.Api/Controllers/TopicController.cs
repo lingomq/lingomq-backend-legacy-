@@ -31,7 +31,7 @@ namespace Topics.Api.Controllers
         }
 
         [HttpGet("filters")]
-        public async Task<IActionResult> GetWithFilters(Guid? languageId, Guid? levelid, DateTime? startDate, DateTime? endDate, int skip = 0, int take = 100)
+        public async Task<IActionResult> GetWithFilters(Guid? languageId, Guid? levelid, DateTime? startDate, DateTime? endDate, int skip = 0, int take = 100, string search = "")
         {
             if (startDate is null) startDate = DateTime.UnixEpoch;
             if (endDate is null) endDate = DateTime.Now;
@@ -42,7 +42,8 @@ namespace Topics.Api.Controllers
                 StartDate = startDate,
                 EndDate = endDate,
                 Skip = skip,
-                Take = take
+                Take = take,
+                Search = search
             };
 
             List<Topic> topics = await _unitOfWork.Topics.GetByTopicFiltersAsync(filters);

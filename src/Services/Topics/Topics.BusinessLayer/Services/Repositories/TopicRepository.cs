@@ -31,6 +31,7 @@ namespace Topics.BusinessLayer.Services.Repositories
             "AND creational_date < @EndDate ";
         private static readonly string GetByLanguageId = "AND languages.id = @LanguageId ";
         private static readonly string GetByTopicLevelId = "AND topic_levels.id = @LevelId ";
+        private static readonly string GetBySearch = "AND title LIKE @Search AND content LIKE @Search ";
         private static readonly string Create =
             "INSERT INTO topics " +
             "(id, title, content, icon, creational_date, language_id, topic_level_id) " +
@@ -95,9 +96,12 @@ namespace Topics.BusinessLayer.Services.Repositories
         public async Task<List<Topic>> GetByTopicFiltersAsync(TopicFilters filters)
         {
             string sql = GetByDateRange;
+            filters.Search = "%" + filters.Search + "%";
+
             sql += filters.LanguageId != null ? GetByLanguageId : "";
             sql += filters.LevelId != null ? GetByTopicLevelId : "";
             sql += PaginationAndOrderByDate;
+            sql += GetBySearch;
 
             filters.Count = 20;
 
