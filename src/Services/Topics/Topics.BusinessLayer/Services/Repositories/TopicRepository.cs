@@ -100,8 +100,8 @@ namespace Topics.BusinessLayer.Services.Repositories
 
             sql += filters.LanguageId != null ? GetByLanguageId : "";
             sql += filters.LevelId != null ? GetByTopicLevelId : "";
-            sql += PaginationAndOrderByDate;
             sql += GetBySearch;
+            sql += PaginationAndOrderByDate;
 
             filters.Count = 20;
 
