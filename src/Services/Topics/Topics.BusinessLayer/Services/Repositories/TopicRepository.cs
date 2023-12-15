@@ -28,7 +28,7 @@ namespace Topics.BusinessLayer.Services.Repositories
         private static readonly string GetById = Get + "WHERE topics.id = @Id";
         private static readonly string GetByDateRange = Get +
             "WHERE creational_date > @StartDate " +
-            "AND creational_date < @FinishDate ";
+            "AND creational_date < @EndDate ";
         private static readonly string GetByLanguageId = "AND languages.id = @LanguageId ";
         private static readonly string GetByTopicLevelId = "AND topic_levels.id = @LevelId ";
         private static readonly string Create =
@@ -94,10 +94,12 @@ namespace Topics.BusinessLayer.Services.Repositories
 
         public async Task<List<Topic>> GetByTopicFiltersAsync(TopicFilters filters)
         {
-            string sql = GetByDateRange +
-                filters.LanguageId != null ? GetByLanguageId : "" +
-                filters.LevelId != null ? GetByTopicLevelId : "" +
-                PaginationAndOrderByDate;
+            string sql = GetByDateRange;
+            sql += filters.LanguageId != null ? GetByLanguageId : "";
+            sql += filters.LevelId != null ? GetByTopicLevelId : "";
+            sql += PaginationAndOrderByDate;
+
+            Console.WriteLine(sql);
 
             filters.Count = 20;
 

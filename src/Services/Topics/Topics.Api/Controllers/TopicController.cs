@@ -31,9 +31,9 @@ namespace Topics.Api.Controllers
         }
 
         [HttpGet("filters")]
-        public async Task<IActionResult> GetWithFilters([System.Web.Http.FromUri] TopicFilters filters)
+        public async Task<IActionResult> GetWithFilters(TopicFilters topicFilters)
         {
-            List<Topic> topics = await _unitOfWork.Topics.GetByTopicFiltersAsync(filters);
+            List<Topic> topics = await _unitOfWork.Topics.GetByTopicFiltersAsync(topicFilters);
             return LingoMqResponse.OkResult(topics);
         }
 
