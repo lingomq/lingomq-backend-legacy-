@@ -36,7 +36,7 @@ namespace Words.BusinessLayer.Services.Repositories
             "SELECT COUNT(*) FROM user_words " +
             "WHERE user_id = @Id AND DATE(created_at) = @CreatedAt";
         private readonly static string GetMostRepeated = Get +
-            "WHERE repeats = (SELECT MAX(repeats) FROM user_words AND user_id = @UserId) AND user_id = @UserId";
+            "WHERE repeats = (SELECT MAX(repeats) FROM user_words WHERE user_id = @UserId) AND user_id = @UserId";
         private readonly static string GetRecordsByRepeatsAsc =
             "SELECT user_id as \"UserId\", " +
             "SUM(repeats) as \"Repeats\" " +
