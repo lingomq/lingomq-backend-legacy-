@@ -1,5 +1,6 @@
 ﻿using Authentication.Application.Services.Authentication;
 using Authentication.Application.Services.Confirm;
+using Authentication.Application.Services.DataMigrator;
 using Authentication.Application.Services.Jwt;
 using Authentication.Domain.Contracts;
 
@@ -11,6 +12,7 @@ public static class DependencyInjection
         services.AddScoped<IJwtService, JwtService>();
         services.AddScoped<IAuthenticationService, AuthenticationService>();
         services.AddScoped<IConfirmationService, ConfirmationService>();
+        services.AddScoped<IDataMigrator, DataMigrator>();
 
         return services;
     }
