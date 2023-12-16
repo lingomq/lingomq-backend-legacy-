@@ -2,7 +2,6 @@
 using Authentication.DataAccess.Dapper.Contracts;
 using Authentication.DataAccess.Dapper.Postgres.Realizations;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Npgsql;
 using System.Data;
 
