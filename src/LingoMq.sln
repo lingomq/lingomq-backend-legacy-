@@ -83,11 +83,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EventBus", "Services\EventB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Finances", "Finances", "{34EF0DD9-694D-4244-B50B-F46E49FDF717}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finances.DomainLayer", "Services\Finances\Finances.DomainLayer\Finances.DomainLayer.csproj", "{E8067814-80D1-44C5-B762-0415F2E9D51A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finances.DomainLayer", "Services\Finances\Finances.DomainLayer\Finances.DomainLayer.csproj", "{E8067814-80D1-44C5-B762-0415F2E9D51A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finances.BusinessLayer", "Services\Finances\Finances.BusinessLayer\Finances.BusinessLayer.csproj", "{CD31FFA4-21B3-43F4-B212-28DF0D443456}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finances.BusinessLayer", "Services\Finances\Finances.BusinessLayer\Finances.BusinessLayer.csproj", "{CD31FFA4-21B3-43F4-B212-28DF0D443456}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Finances.Api", "Services\Finances\Finances.Api\Finances.Api.csproj", "{2F76C257-E2E9-44BA-A499-71E902F82ECE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finances.Api", "Services\Finances\Finances.Api\Finances.Api.csproj", "{2F76C257-E2E9-44BA-A499-71E902F82ECE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{6A81D247-4056-4830-81E0-C88A606C6EA8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Services\Authentication\Authentication.Domain\Domain.csproj", "{51A06FCF-1183-431A-9184-058B48CD21C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.DataAccess.Dapper", "Services\Authentication\DataAccess\Authentication.DataAccess.Dapper\Authentication.DataAccess.Dapper.csproj", "{21D4D900-796C-4C91-AA35-9E5B3EE94E17}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -219,6 +225,14 @@ Global
 		{2F76C257-E2E9-44BA-A499-71E902F82ECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F76C257-E2E9-44BA-A499-71E902F82ECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F76C257-E2E9-44BA-A499-71E902F82ECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51A06FCF-1183-431A-9184-058B48CD21C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51A06FCF-1183-431A-9184-058B48CD21C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51A06FCF-1183-431A-9184-058B48CD21C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51A06FCF-1183-431A-9184-058B48CD21C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21D4D900-796C-4C91-AA35-9E5B3EE94E17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21D4D900-796C-4C91-AA35-9E5B3EE94E17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21D4D900-796C-4C91-AA35-9E5B3EE94E17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21D4D900-796C-4C91-AA35-9E5B3EE94E17}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -264,6 +278,9 @@ Global
 		{E8067814-80D1-44C5-B762-0415F2E9D51A} = {34EF0DD9-694D-4244-B50B-F46E49FDF717}
 		{CD31FFA4-21B3-43F4-B212-28DF0D443456} = {34EF0DD9-694D-4244-B50B-F46E49FDF717}
 		{2F76C257-E2E9-44BA-A499-71E902F82ECE} = {34EF0DD9-694D-4244-B50B-F46E49FDF717}
+		{6A81D247-4056-4830-81E0-C88A606C6EA8} = {819C6141-C7DE-457A-AF00-1473AFE505E2}
+		{51A06FCF-1183-431A-9184-058B48CD21C0} = {819C6141-C7DE-457A-AF00-1473AFE505E2}
+		{21D4D900-796C-4C91-AA35-9E5B3EE94E17} = {6A81D247-4056-4830-81E0-C88A606C6EA8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2746943F-0DF5-4BB2-A360-520130DFE182}
