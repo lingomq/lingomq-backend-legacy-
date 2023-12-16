@@ -3,18 +3,25 @@ using Dapper;
 using System.Data;
 using System.Transactions;
 
-namespace Authentication.DataAccess.Dapper.Contracts;
+namespace Authentication.DataAccess.Dapper.Utils;
 public class GenericRepository<T> where T : EntityBase
 {
     private readonly IDbConnection _connection;
     protected GenericRepository(IDbConnection connection) =>
         _connection = connection;
-    protected virtual async Task<List<T>> GetByQueryAsync<E>(string sql, E entity) where E : class
+    protected virtual async Task<List<T>> QueryListAsync<E>(string sql, E entity) where E : class
     {
         IEnumerable<T> values;
         values = await _connection.QueryAsync<T>(sql, entity);
 
-        return values.Count() == 0 ? new List<T>() : values.ToList();
+        return !values.Any() ? new List<T>() : values.ToList();
+    }
+    protected virtual async Task<T?> QueryFirstAsync<E>(string sql, E entity) where E : class
+    {
+        IEnumerable<T> values;
+        values = await _connection.QueryAsync<T>(sql, entity);
+
+        return !values.Any() ? null : values.First();
     }
     protected virtual async Task ExecuteByTemplateAsync<TE>(string sql, TE entity) where TE : class
     {
