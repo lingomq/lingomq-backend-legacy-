@@ -41,7 +41,7 @@ public class UserRoleService : IUserRoleService
         }, cancellationToken);
     }
 
-    public async Task<UserRole> GetById(Guid id)
+    public async Task<UserRole> GetByIdAsync(Guid id)
     {
         UserRole? role = await _unitOfWork.UserRoles.GetByIdAsync(id);
 

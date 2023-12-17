@@ -3,8 +3,8 @@
 namespace Identity.Domain.Contracts;
 public interface IUserStatisticsService
 {
-    Task<UserStatistics> GetById(Guid id);
-    Task AddHourToStatistics(Guid id);
-    Task AddWordToStatistics(Guid id);
-    Task AddVisitationToStatistics(Guid id);
+    Task<UserStatistics> GetByIdAsync(Guid id);
+    Task AddHourToStatisticsAsync(Guid id);
+    Task AddWordToStatisticsAsync(Guid id);
+    Task AddVisitationToStatisticsAsync(Guid id);
 }

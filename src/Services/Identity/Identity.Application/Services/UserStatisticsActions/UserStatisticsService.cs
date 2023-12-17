@@ -9,7 +9,7 @@ public class UserStatisticsService : IUserStatisticsService
     private readonly IUnitOfWork _unitOfWork;
     public UserStatisticsService(IUnitOfWork unitOfWork) =>
         _unitOfWork = unitOfWork;
-    public async Task AddHourToStatistics(Guid id)
+    public async Task AddHourToStatisticsAsync(Guid id)
     {
         UserStatistics? statistics = await _unitOfWork.UserStatistics.GetByUserIdAsync(id);
 
@@ -21,7 +21,7 @@ public class UserStatisticsService : IUserStatisticsService
         await _unitOfWork.UserStatistics.UpdateAsync(statistics);
     }
 
-    public async Task AddVisitationToStatistics(Guid id)
+    public async Task AddVisitationToStatisticsAsync(Guid id)
     {
         if (await _unitOfWork.Users.GetByIdAsync(id) is null)
             throw new NotFoundException<User>();
@@ -44,7 +44,7 @@ public class UserStatisticsService : IUserStatisticsService
         await _unitOfWork.UserStatistics.UpdateAsync(statistics);
     }
 
-    public async Task AddWordToStatistics(Guid id)
+    public async Task AddWordToStatisticsAsync(Guid id)
     {
         UserStatistics? statistics = await _unitOfWork.UserStatistics.GetByUserIdAsync(id);
         UserInfo? userInfo = await _unitOfWork.UserInfos.GetByUserIdAsync(id);
@@ -61,7 +61,7 @@ public class UserStatisticsService : IUserStatisticsService
         await _unitOfWork.UserStatistics.UpdateAsync(statistics);
     }
 
-    public async Task<UserStatistics> GetById(Guid id)
+    public async Task<UserStatistics> GetByIdAsync(Guid id)
     {
         User? user = await _unitOfWork.Users.GetByIdAsync(id);
 

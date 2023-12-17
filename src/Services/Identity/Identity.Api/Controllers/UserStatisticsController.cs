@@ -1,106 +1,53 @@
-﻿using Identity.Api.Common;
-using Identity.BusinessLayer.Contracts;
-using Identity.BusinessLayer.Dtos;
-using Identity.BusinessLayer.Exceptions.ClientExceptions;
-using Identity.DomainLayer.Entities;
+﻿using Identity.Domain.Constants;
+using Identity.Domain.Contracts;
+using Identity.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NLog;
 using System.Security.Claims;
 
-namespace Identity.Api.Controllers
+namespace Identity.Api.Controllers;
+[Route("api/identity/user/statistics")]
+[ApiController]
+public class UserStatisticsController : ControllerBase
 {
-    [Route("api/identity/user/statistics")]
-    [ApiController]
-    public class UserStatisticsController : ControllerBase
+    private readonly IUserStatisticsService _userStatisticsService;
+    private Guid UserId => new Guid(User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier)
+        .FirstOrDefault()?.Value!);
+
+    public UserStatisticsController(IUserStatisticsService userStatisticsService)
     {
-        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly IUnitOfWork _unitOfWork;
-        public UserStatisticsController(IUnitOfWork unitOfWork) =>
-            _unitOfWork = unitOfWork;
-        private Guid UserId => new Guid(User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier)
-            .FirstOrDefault()?.Value!);
+        _userStatisticsService = userStatisticsService;
+    }
 
-        [HttpGet("id/{userId}")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Get(Guid userId)
-        {
-            UserDto? user = await _unitOfWork.Users.GetByIdAsync(userId);
+    [HttpGet("id/{userId}")]
+    [Authorize(Roles = AccessRoles.Everyone)]
+    public async Task<IActionResult> Get(Guid id)
+    {
+        UserStatistics statistics = await _userStatisticsService.GetByIdAsync(id);
+        return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
+    }
 
-            if (user is null)
-                throw new NotFoundException<User>("The user doesn't found");
+    [HttpPut("hour/add")]
+    [Authorize(Roles = AccessRoles.Everyone)]
+    public async Task<IActionResult> AddHour()
+    {
+        await _userStatisticsService.AddHourToStatisticsAsync(UserId);
+        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+    }
 
-            UserStatistics? statistics = await _unitOfWork.UserStatistics.GetByUserIdAsync(userId);
+    [HttpPut("word/add")]
+    [Authorize(Roles = AccessRoles.Everyone)]
+    public async Task<IActionResult> AddWord()
+    {
+        await _userStatisticsService.AddWordToStatisticsAsync(UserId);
+        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+    }
 
-            if (statistics is null)
-                throw new NotFoundException<UserStatistics>("The statistics was not found");
-
-            _logger.Info("GET /{userId} {0}", nameof(UserStatistics));
-            return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
-        }
-        [HttpPut("hour/add")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> AddHour()
-        {
-            UserStatistics? statistics = await _unitOfWork.UserStatistics.GetByUserIdAsync(UserId);
-
-            if (statistics is null)
-                throw new NotFoundException<UserStatistics>("The statistics was not found");
-
-            statistics.TotalHours += 1;
-
-            await _unitOfWork.UserStatistics.UpdateAsync(statistics);
-
-            _logger.Info("PUT /hour/add {0}", nameof(UserStatistics));
-            return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
-        }
-        [HttpPut("word/add")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> AddWord()
-        {
-            UserStatistics? statistics = await _unitOfWork.UserStatistics.GetByUserIdAsync(UserId);
-            UserInfo? userInfo = await _unitOfWork.UserInfos.GetByUserIdAsync(UserId);
-
-            if (statistics is null)
-                throw new NotFoundException<UserStatistics>("The statistics was not found");
-
-            int daysFromRegister = (DateTime.Now - userInfo!.CreationalDate).Days;
-            if (daysFromRegister == 0) daysFromRegister = 1;
-
-            statistics.TotalWords += 1;
-            statistics.AvgWords = statistics.TotalWords / daysFromRegister;
-
-            await _unitOfWork.UserStatistics.UpdateAsync(statistics);
-
-            _logger.Info("PUT /word/add {0}", nameof(UserStatistics));
-            return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
-        }
-        [HttpPut("visit")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> UpdateVisitStreak()
-        {
-            if (await _unitOfWork.Users.GetByIdAsync(UserId) is null)
-                throw new NotFoundException<User>();
-
-            UserStatistics? statistics = await _unitOfWork.UserStatistics.GetByUserIdAsync(UserId);
-            if (statistics is null)
-                throw new NotFoundException<UserStatistics>();
-
-            int hourSubstraction = (DateTime.Now.ToUniversalTime() - statistics.LastUpdateAt).Hours;
-
-            if ((hourSubstraction > 24 && hourSubstraction <= 48) || statistics.VisitStreak == 0)
-            {
-                statistics.VisitStreak += 1;
-                statistics.LastUpdateAt = DateTime.Now.ToUniversalTime();
-            }
-            else if (hourSubstraction > 48)
-                statistics.VisitStreak = 0;
-
-
-            await _unitOfWork.UserStatistics.UpdateAsync(statistics);
-
-            _logger.Info("PUT /visit {0}", nameof(UserStatistics));
-            return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
-        }
+    [HttpPut("visit")]
+    [Authorize(Roles = AccessRoles.Everyone)]
+    public async Task<IActionResult> UpdateVisitStreak()
+    {
+        await _userStatisticsService.AddVisitationToStatisticsAsync(UserId);
+        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
     }
 }

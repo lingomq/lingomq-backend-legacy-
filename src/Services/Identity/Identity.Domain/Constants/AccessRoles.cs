@@ -1,9 +1,9 @@
 ﻿namespace Identity.Domain.Constants;
-public class AccessRoles
+public static class AccessRoles
 {
-    public readonly static string User = "user";
-    public readonly static string Admin = "admin";
-    public readonly static string Moderator = "moderator";
-    public readonly static string Everyone = string.Join(",", new string[] { User, Admin, Moderator });
-    public readonly static string Staff = string.Join(",", new string[] { Admin, Moderator });
+    public const string User = "user";
+    public const string Admin = "admin";
+    public const string Moderator = "moderator";
+    public const string Everyone = "user, admin, moderator";
+    public const string Staff = "admin, moderator";
 }

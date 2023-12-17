@@ -3,9 +3,9 @@
 namespace Identity.Domain.Contracts;
 public interface IUserRoleService
 {
-    Task<UserRole> GetById(Guid id);
+    Task<UserRole> GetByIdAsync(Guid id);
     Task<List<UserRole>> GetRangeAsync(int count);
-    Task CreateAsync(UserRole userRole, CancellationToken cancellationToken);
-    Task UpdateAsync(UserRole userRole, CancellationToken cancellationToken);
-    Task DeleteAsync(Guid id, CancellationToken cancellationToken);
+    Task CreateAsync(UserRole userRole, CancellationToken cancellationToken = default);
+    Task UpdateAsync(UserRole userRole, CancellationToken cancellationToken = default);
+    Task DeleteAsync(Guid id, CancellationToken cancellationToken = default);
 }

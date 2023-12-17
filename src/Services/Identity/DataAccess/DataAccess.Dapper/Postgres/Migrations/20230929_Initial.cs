@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace DataAccess.Dapper.Migrations;
+namespace DataAccess.Dapper.Postgres.Migrations;
 
 [Profile("Development")]
 [Migration(20230924)]
