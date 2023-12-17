@@ -13,9 +13,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Authentication", "Authentic
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Email", "Email", "{8C83F393-EFE2-45B3-A55F-27F65FBA74D8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Email.Api", "Services\Email\Email.Api\Email.Api.csproj", "{91B1D767-D5AA-4313-AEDC-8D5FE4A9009F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Services\Email\Email.Api\Api.csproj", "{91B1D767-D5AA-4313-AEDC-8D5FE4A9009F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Email.BusinessLayer", "Services\Email\Email.BusinessLayer\Email.BusinessLayer.csproj", "{9EFF7B1E-EAE6-4388-A727-616C36809DDD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessLayer", "Services\Email\Email.BusinessLayer\BusinessLayer.csproj", "{9EFF7B1E-EAE6-4388-A727-616C36809DDD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Identity", "Identity", "{564C56C5-B4BC-4076-AB7D-03711EDF2A1D}"
 EndProject
@@ -83,13 +83,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Finances.Api", "Services\Fi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{6A81D247-4056-4830-81E0-C88A606C6EA8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Domain", "Services\Authentication\Domain\Domain.csproj", "{51A06FCF-1183-431A-9184-058B48CD21C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Services\Authentication\Domain\Domain.csproj", "{51A06FCF-1183-431A-9184-058B48CD21C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.DataAccess.Dapper", "Services\Authentication\DataAccess\DataAccess.Dapper\DataAccess.Dapper.csproj", "{21D4D900-796C-4C91-AA35-9E5B3EE94E17}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess.Dapper", "Services\Authentication\DataAccess\DataAccess.Dapper\DataAccess.Dapper.csproj", "{21D4D900-796C-4C91-AA35-9E5B3EE94E17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Application", "Services\Authentication\Application\Application.csproj", "{76AE3829-9462-4B7E-9A57-A09A2C97F7EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Services\Authentication\Application\Application.csproj", "{76AE3829-9462-4B7E-9A57-A09A2C97F7EC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication.Api", "Services\Authentication\Api\Api.csproj", "{DC964B8C-5656-4F49-B9E9-8C06EF59FEBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Services\Authentication\Api\Api.csproj", "{DC964B8C-5656-4F49-B9E9-8C06EF59FEBD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
