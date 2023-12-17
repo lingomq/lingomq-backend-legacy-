@@ -1,11 +1,12 @@
-﻿using Topics.DomainLayer.Entities;
+﻿using Topics.BusinessLayer.Models;
+using Topics.DomainLayer.Entities;
 
 namespace Topics.BusinessLayer.Contracts
 {
     public interface ITopicRepository : IGenericRepository<Topic>
     {
-        Task<List<Topic>> GetByLanguageIdAsync(Guid id);
-        Task<List<Topic>> GetByDateRangeAsync(DateTime start, DateTime stop);
-        Task<List<Topic>> GetByTopicLevelIdAsync(Guid id);
+        Task<List<Topic>> GetAsync(int start = 0, int stop = int.MaxValue);
+        Task<List<Topic>> GetByTopicFiltersAsync(TopicFilters filters);
+
     }
 }

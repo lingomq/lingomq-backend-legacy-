@@ -316,7 +316,7 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/api/words/user-words/records/word-count/{count}",
+      "DownstreamPathTemplate": "/api/words/user-words/records/word-count/order/{order}/count/{count}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -324,11 +324,11 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api.lingomq/words/user-words/records/word-count/{count}",
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/records/word-count/order/{order}/count/{count}",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
-      "DownstreamPathTemplate": "/api/topics/all/{count}",
+      "DownstreamPathTemplate": "/api/topics/all/skip/{skip}/take/{take}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
@@ -336,7 +336,19 @@
           "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/api.lingomq/topics/all/{count}",
+      "UpstreamPathTemplate": "/api.lingomq/topics/all/skip/{skip}/take/{take}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/topics/filters",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/topics/filters",
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
@@ -349,6 +361,18 @@
         }
       ],
       "UpstreamPathTemplate": "/api.lingomq/topics/topic-id/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/topics/level/all/{range}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/topics/level/all/{range}",
       "UpstreamHttpMethod": [ "Get" ]
     }
   ]

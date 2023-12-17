@@ -36,18 +36,30 @@ namespace Words.BusinessLayer.Services.Repositories
             "SELECT COUNT(*) FROM user_words " +
             "WHERE user_id = @Id AND DATE(created_at) = @CreatedAt";
         private readonly static string GetMostRepeated = Get +
-            "WHERE repeats = (SELECT MAX(repeats) FROM user_words) AND user_id = @UserId";
-        private readonly static string GetRecordsByRepeats =
+            "WHERE repeats = (SELECT MAX(repeats) FROM user_words WHERE user_id = @UserId) AND user_id = @UserId";
+        private readonly static string GetRecordsByRepeatsAsc =
             "SELECT user_id as \"UserId\", " +
             "SUM(repeats) as \"Repeats\" " +
             "FROM user_words " +
-            "GROUP BY (user_id) order by @OrderByValue " +
+            "GROUP BY (user_id) order by SUM(repeats) ASC " +
             "LIMIT @Count";
-        private readonly static string GetRecordsByWordsCount =
+        private readonly static string GetRecordsByRepeatsDesc =
+            "SELECT user_id as \"UserId\", " +
+            "SUM(repeats) as \"Repeats\" " +
+            "FROM user_words " +
+            "GROUP BY (user_id) order by SUM(repeats) DESC " +
+            "LIMIT @Count";
+        private readonly static string GetRecordsByWordsCountAsc =
             "SELECT user_id as \"UserId\", " +
             "COUNT(word) as \"WordsCount\" " +
             "FROM user_words " +
-            "GROUP BY (user_id) " +
+            "GROUP BY (user_id) order by COUNT(word) ASC " +
+            "LIMIT @Count";
+        private readonly static string GetRecordsByWordsCountDesc =
+            "SELECT user_id as \"UserId\", " +
+            "COUNT(word) as \"WordsCount\" " +
+            "FROM user_words " +
+            "GROUP BY (user_id) order by COUNT(word) DESC " +
             "LIMIT @Count";
         private readonly static string Create =
             "INSERT INTO user_words (id, word, translated, repeats, created_at, language_id, user_id) " +
@@ -118,14 +130,14 @@ namespace Words.BusinessLayer.Services.Repositories
         {
             var result = await _connection.QueryAsync<int>(GetCountPerDay, new { Id = id, CreatedAt = day });
 
-            return result.First();
+            return result.FirstOrDefault();
         }
 
         public async Task<UserWord?> GetMostRepeatedWordAsync(Guid userId)
         {
             List<UserWord> words = await TemplateGet(GetMostRepeated, new { UserId = userId });
 
-            return words.First();
+            return words.FirstOrDefault();
         }
 
         public async Task<UserWord> UpdateAsync(UserWord entity)
@@ -192,16 +204,18 @@ namespace Words.BusinessLayer.Services.Repositories
 
         public async Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(int count, string order = "ASC")
         {
+            string sql = order.ToUpperInvariant() == "ASC" ? GetRecordsByRepeatsAsc : GetRecordsByRepeatsDesc;
             IEnumerable<RecordsByRepeatsResponseModel> records = await _connection
-                .QueryAsync<RecordsByRepeatsResponseModel>(GetRecordsByRepeats, new { Count = count, OrderByValue = order });
+                .QueryAsync<RecordsByRepeatsResponseModel>(sql, new { Count = count });
 
             return !records.Any() ? new List<RecordsByRepeatsResponseModel>() : records.ToList();
         }
 
-        public async Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(int count)
+        public async Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(int count, string order = "ASC")
         {
+            string sql = order.ToUpperInvariant() == "ASC" ? GetRecordsByWordsCountAsc : GetRecordsByWordsCountDesc;
             IEnumerable<RecordsByWordsCountResponseModel> records = await _connection
-                .QueryAsync<RecordsByWordsCountResponseModel>(GetRecordsByWordsCount, new { Count = count });
+                .QueryAsync<RecordsByWordsCountResponseModel>(sql, new { Count = count });
 
             return !records.Any() ? new List<RecordsByWordsCountResponseModel>() : records.ToList();
         }

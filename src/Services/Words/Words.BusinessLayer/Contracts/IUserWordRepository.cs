@@ -11,6 +11,6 @@ namespace Words.BusinessLayer.Contracts
         Task<UserWord?> GetMostRepeatedWordAsync(Guid userId);
         Task<bool> AddRepeatsAsync(Guid wordId, int count);
         Task<List<RecordsByRepeatsResponseModel>> GetRecordsByRepeatsAsync(int count, string order);
-        Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(int count);
+        Task<List<RecordsByWordsCountResponseModel>> GetRecordsByWordsCountsAsync(int count, string order);
     }
 }

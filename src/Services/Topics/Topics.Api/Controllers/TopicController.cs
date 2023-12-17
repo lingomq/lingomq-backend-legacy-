@@ -7,6 +7,7 @@ using Topics.BusinessLayer.Contracts;
 using Topics.BusinessLayer.Dtos;
 using Topics.BusinessLayer.Exceptions.ClientExceptions;
 using Topics.BusinessLayer.Extensions;
+using Topics.BusinessLayer.Models;
 using Topics.DomainLayer.Entities;
 
 namespace Topics.Api.Controllers
@@ -20,30 +21,32 @@ namespace Topics.Api.Controllers
         public TopicController(IUnitOfWork unitOfWork) =>
             _unitOfWork = unitOfWork;
 
-        [HttpGet("all/{range}")]
+        [HttpGet("all/skip/{skip}/take/{take}")]
         [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Get(int range)
+        public async Task<IActionResult> Get(int skip = 0, int take = int.MaxValue)
         {
-            List<Topic> topics = await _unitOfWork.Topics.GetAsync(range);
+            List<Topic> topics = await _unitOfWork.Topics.GetAsync(skip, take);
             _logger.Info("GET /all/{range} {0}", nameof(List<Topic>));
             return LingoMqResponse.OkResult(topics);
         }
 
-        [HttpGet("language/{id}")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> GetByLanguageId(Guid id)
+        [HttpGet("filters")]
+        public async Task<IActionResult> GetWithFilters(Guid? languageId, Guid? levelid, DateTime? startDate, DateTime? endDate, int skip = 0, int take = 100, string search = "")
         {
-            List<Topic> topics = await _unitOfWork.Topics.GetByLanguageIdAsync(id);
-            _logger.Info("GET /language/{id} {0}", nameof(List<Topic>));
-            return LingoMqResponse.OkResult(topics);
-        }
+            if (startDate is null) startDate = DateTime.UnixEpoch;
+            if (endDate is null) endDate = DateTime.Now;
+            TopicFilters filters = new TopicFilters
+            {
+                LanguageId = languageId,
+                LevelId = levelid,
+                StartDate = startDate,
+                EndDate = endDate,
+                Skip = skip,
+                Take = take,
+                Search = search
+            };
 
-        [HttpGet("level/{id}")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> GetByLevelId(Guid id)
-        {
-            List<Topic> topics = await _unitOfWork.Topics.GetByTopicLevelIdAsync(id);
-            _logger.Info("GET /level/{id} {0}", nameof(List<Topic>));
+            List<Topic> topics = await _unitOfWork.Topics.GetByTopicFiltersAsync(filters);
             return LingoMqResponse.OkResult(topics);
         }
 
