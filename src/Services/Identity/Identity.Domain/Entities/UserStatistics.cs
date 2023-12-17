@@ -1,11 +1,11 @@
 ﻿namespace Identity.Domain.Entities;
 public class UserStatistics : EntityBase
 {
-    public int TotalWords { get; set; }
-    public float TotalHours { get; set; }
-    public int VisitStreak { get; set; }
-    public int AvgWords { get; set; }
-    public DateTime LastUpdateAt { get; set; }
+    public int TotalWords { get; set; } = 0;
+    public float TotalHours { get; set; } = 0;
+    public int VisitStreak { get; set; } = 0;
+    public int AvgWords { get; set; } = 0;
+    public DateTime LastUpdateAt { get; set; } = DateTime.UtcNow;
     public Guid UserId { get; set; }
     public User? User { get; set; }
 }

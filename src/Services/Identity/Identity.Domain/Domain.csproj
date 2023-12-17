@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Libs\Responses\Responses.csproj" />
+    <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
   </ItemGroup>
 
 </Project>

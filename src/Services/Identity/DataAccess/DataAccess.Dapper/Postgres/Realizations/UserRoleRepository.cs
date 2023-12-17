@@ -22,6 +22,9 @@ public class UserRoleRepository : GenericRepository<UserRole>, IUserRoleReposito
     public async Task<UserRole?> GetByIdAsync(Guid id) =>
         await QueryFirstAsync(UserRoleQueries.GetById, new { Id = id });
 
+    public async Task<UserRole?> GetByNameAsync(string name) =>
+        await QueryFirstAsync(UserRoleQueries.GetByName, new { Name = name });
+
     public async Task UpdateAsync(UserRole entity) =>
         await ExecuteByTemplateAsync(UserRoleQueries.Update, entity);
 }
