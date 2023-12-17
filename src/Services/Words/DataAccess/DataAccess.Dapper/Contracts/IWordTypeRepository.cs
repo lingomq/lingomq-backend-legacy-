@@ -3,4 +3,5 @@
 namespace DataAccess.Dapper.Contracts;
 public interface IWordTypeRepository : IGenericRepository<WordType>
 {
+
 }
