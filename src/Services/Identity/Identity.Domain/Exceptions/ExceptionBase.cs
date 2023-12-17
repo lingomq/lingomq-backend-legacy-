@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
-namespace Identity.BusinessLayer.Exceptions
+namespace Identity.Domain.Exceptions
 {
     /// <summary>
     /// This class (<c>ExceptionBase</c>) is a custom parent exceptions

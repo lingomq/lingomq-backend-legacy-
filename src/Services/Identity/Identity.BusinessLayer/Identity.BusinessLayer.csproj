@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -18,6 +18,10 @@
     <ProjectReference Include="..\..\..\Libs\Responses\Responses.csproj" />
     <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\Identity.DomainLayer\Identity.DomainLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
   </ItemGroup>
 
 </Project>

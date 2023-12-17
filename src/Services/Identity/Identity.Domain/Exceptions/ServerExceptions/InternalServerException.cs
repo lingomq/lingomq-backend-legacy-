@@ -1,6 +1,6 @@
 ﻿using LingoMq.Responses;
 
-namespace Identity.BusinessLayer.Exceptions.ServerExceptions
+namespace Identity.Domain.Exceptions.ServerExceptions
 {
     public class InternalServerException : ExceptionBase
     {

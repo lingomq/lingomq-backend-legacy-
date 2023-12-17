@@ -1,7 +1,7 @@
 ﻿using LingoMq.Responses;
 using Responses.StatusCodes;
 
-namespace Identity.BusinessLayer.Exceptions.ClientExceptions
+namespace Identity.Domain.Exceptions.ClientExceptions
 {
     public class InvalidTokenException<T> : ExceptionBase
     {
