@@ -6,8 +6,8 @@ using Words.Application.Services.WordChecker;
 using Words.Application.Services.WordTypeActions;
 using Words.Domain.Contracts;
 
-namespace Microsoft.Extensions.DependencyInjection.Applications;
-public static class DependencyInjection
+namespace Microsoft.Extensions.DependencyInjection;
+public static class ApplicationsDependencyInjection
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
@@ -16,7 +16,7 @@ public static class DependencyInjection
         services.AddScoped<IUserWordTypeService, UserWordTypeService>();
         services.AddScoped<IWordTypeService, WordTypeService>();
         services.AddScoped<IWordChecker, WordChecker>();
-        services.AddTransient<IDataMigrator, DataMigrator>();
+        services.AddScoped<IDataMigrator, DataMigrator>();
 
         return services;
     }

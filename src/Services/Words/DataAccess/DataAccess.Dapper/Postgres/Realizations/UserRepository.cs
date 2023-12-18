@@ -8,7 +8,7 @@ namespace DataAccess.Dapper.Postgres.Realizations;
 public class UserRepository : GenericRepository<User>, IUserRepository
 {
     private readonly IDbConnection _connection;
-    protected UserRepository(IDbConnection connection) : base(connection) =>
+    public UserRepository(IDbConnection connection) : base(connection) =>
         _connection = connection;
 
     public async Task AddAsync(User entity) =>

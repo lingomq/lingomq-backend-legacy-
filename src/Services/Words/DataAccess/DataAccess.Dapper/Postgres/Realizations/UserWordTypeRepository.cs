@@ -9,7 +9,7 @@ namespace DataAccess.Dapper.Postgres.Realizations;
 public class UserWordTypeRepository : GenericRepository<UserWordType>, IUserWordTypeRepository
 {
     private readonly IDbConnection _connection;
-    protected UserWordTypeRepository(IDbConnection connection) : base(connection) =>
+    public UserWordTypeRepository(IDbConnection connection) : base(connection) =>
         _connection = connection;
 
     public async Task AddAsync(UserWordType entity) =>

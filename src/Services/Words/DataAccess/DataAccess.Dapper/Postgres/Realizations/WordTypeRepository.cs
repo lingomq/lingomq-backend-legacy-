@@ -8,7 +8,7 @@ namespace DataAccess.Dapper.Postgres.Realizations;
 public class WordTypeRepository : GenericRepository<WordType>, IWordTypeRepository
 {
     private readonly IDbConnection _connection;
-    protected WordTypeRepository(IDbConnection connection) : base(connection) =>
+    public WordTypeRepository(IDbConnection connection) : base(connection) =>
         _connection = connection;
     public async Task AddAsync(WordType entity) =>
         await ExecuteByTemplateAsync(WordTypeQueries.Create, entity);

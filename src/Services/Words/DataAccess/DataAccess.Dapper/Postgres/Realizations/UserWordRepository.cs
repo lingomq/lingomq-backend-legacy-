@@ -11,7 +11,7 @@ namespace DataAccess.Dapper.Postgres.Realizations;
 public class UserWordRepository : GenericRepository<UserWord>, IUserWordRepository
 {
     private readonly IDbConnection _connection;
-    protected UserWordRepository(IDbConnection connection) : base(connection) =>
+    public UserWordRepository(IDbConnection connection) : base(connection) =>
         _connection = connection;
 
     public async Task AddAsync(UserWord entity) =>
@@ -82,35 +82,5 @@ public class UserWordRepository : GenericRepository<UserWord>, IUserWordReposito
     {
         List<UserWord> userWords = await QueryListAsync(sql, entity);
         return userWords.Any() ? userWords.FirstOrDefault() : null;
-    }
-
-    Task<List<UserWordType>> IUserWordRepository.GetByUserIdAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task<List<UserWordType>> GetByTypeIdAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task AddAsync(UserWordType entity)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<List<UserWordType>> IGenericRepository<UserWordType>.GetAsync(int range)
-    {
-        throw new NotImplementedException();
-    }
-
-    Task<UserWordType?> IGenericRepository<UserWordType>.GetByIdAsync(Guid id)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Task UpdateAsync(UserWordType entity)
-    {
-        throw new NotImplementedException();
     }
 }

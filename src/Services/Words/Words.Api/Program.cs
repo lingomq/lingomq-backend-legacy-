@@ -1,10 +1,9 @@
 using FluentMigrator.Runner;
-using Identity.Api.Middlewares;
-using Identity.Application.Services.DataMigrator;
-using Microsoft.Extensions.DependencyInjection.Applications;
 using System.Reflection;
+using Words.Api.Middlewares;
+using Words.Application.Services.DataMigrator;
 
-namespace Identity.Api;
+namespace Words.Api;
 
 public class Program
 {
@@ -13,21 +12,21 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
         builder.Configuration
             .SetBasePath(Directory.GetCurrentDirectory())
-            .AddJsonFile("appsettins.json", true, true)
+            .AddJsonFile("appsettings.json", true, true)
             .AddEnvironmentVariables();
 
         builder.Services.AddControllers();
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwagger();
-        builder.Services.AddPostgresDataAccess(builder.Configuration);
+        builder.Services.AddPostgresDataAccess(builder.Configuration); 
         builder.Services.AddApplicationMassTransit(builder.Configuration);
         builder.Services.AddApplicationServices();
         builder.Services.AddJwtAuth(builder.Configuration);
         builder.Services.AddFluentMigratorCore()
         .ConfigureRunner(cr => cr
         .AddPostgres()
-        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev:Identity"])
-        .ScanIn(Assembly.GetAssembly(typeof(DataAccess.Dapper.Postgres.Migrations.Initial))).For.Migrations());
+        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev:Words"])
+        .ScanIn(Assembly.GetAssembly(typeof(DataAccess.Dapper.Postgres.Migrations.InitialMigration))).For.Migrations());
 
         var app = builder.Build();
 
@@ -41,7 +40,6 @@ public class Program
         app.UseAuthorization();
 
         app.MapControllers();
-
         app.UseMiddleware<ExceptionCatchingMiddleware>();
 
         using (var serviceScope = app.Services.CreateScope())
