@@ -10,6 +10,9 @@ src/*.env
 appsettings.json
 **/appsettings.Development.json
 appsettings.Development.json
+*.local.yaml
+**/*.local.yaml
+./**/idea/*
 
 ### DotnetCore ###
 # .NET Core build folders
