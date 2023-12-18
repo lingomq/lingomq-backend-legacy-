@@ -33,7 +33,7 @@ public class UserWordController : ControllerBase
     [Authorize(Roles = AccessRoles.Everyone)]
     public async Task<IActionResult> Get(Guid userId)
     {
-        List<UserWord> words = await _userWordService.GetByUserIdAsync(id);
+        List<UserWord> words = await _userWordService.GetByUserIdAsync(userId);
         return LingoMq.Responses.LingoMqResponse.OkResult(words);
     }
 
