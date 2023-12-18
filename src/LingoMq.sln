@@ -97,7 +97,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess.Dapper", "Servic
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Services\Words\Words.Application\Application.csproj", "{506BCE8E-B5CD-4838-8051-6DD1BC9CB34A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Words.Api", "Services\Words\Words.Api\Words.Api.csproj", "{FD60E264-91D1-4261-9DB0-EBAB40D631DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Services\Words\Words.Api\Api.csproj", "{FD60E264-91D1-4261-9DB0-EBAB40D631DD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
