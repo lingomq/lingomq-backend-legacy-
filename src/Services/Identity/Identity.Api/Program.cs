@@ -22,7 +22,6 @@ public class Program
         builder.Services.AddPostgresDataAccess(builder.Configuration);
         builder.Services.AddApplicationMassTransit(builder.Configuration);
         builder.Services.AddApplicationServices();
-        builder.Services.AddSwaggerGen();
         builder.Services.AddJwtAuth(builder.Configuration);
         builder.Services.AddFluentMigratorCore()
         .ConfigureRunner(cr => cr

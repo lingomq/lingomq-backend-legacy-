@@ -2,7 +2,6 @@
 using Identity.Domain.Contracts;
 using Identity.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Identity.Api.Controllers;
