@@ -1,8 +1,7 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Notifications.DomainLayer.Entities;
-
-public class Notification : BaseEntity
+namespace Notifications.Domain.Entities;
+public class Notification : EntityBase
 {
     public string? Title { get; set; }
     public string? Content { get; set; }
