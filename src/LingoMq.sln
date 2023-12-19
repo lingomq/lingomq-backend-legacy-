@@ -97,7 +97,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Services\Wor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Services\Words\Words.Api\Api.csproj", "{FD60E264-91D1-4261-9DB0-EBAB40D631DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.Domain", "Services\Notifications\Notifications.Domain\Notifications.Domain.csproj", "{974CC94C-00CD-4AD3-BBCC-B6CFB14BC68D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications.Domain", "Services\Notifications\Notifications.Domain\Notifications.Domain.csproj", "{974CC94C-00CD-4AD3-BBCC-B6CFB14BC68D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{AECF0012-77E3-496F-9DC6-863E5296656E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.DataAccess.Dapper", "Services\Notifications\DataAccess\Notifications.DataAccess.Dapper\Notifications.DataAccess.Dapper.csproj", "{5DC24BB2-A9D8-41A9-8A78-38B2BABBDB30}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -237,6 +241,10 @@ Global
 		{974CC94C-00CD-4AD3-BBCC-B6CFB14BC68D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{974CC94C-00CD-4AD3-BBCC-B6CFB14BC68D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{974CC94C-00CD-4AD3-BBCC-B6CFB14BC68D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DC24BB2-A9D8-41A9-8A78-38B2BABBDB30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DC24BB2-A9D8-41A9-8A78-38B2BABBDB30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DC24BB2-A9D8-41A9-8A78-38B2BABBDB30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DC24BB2-A9D8-41A9-8A78-38B2BABBDB30}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -287,6 +295,8 @@ Global
 		{506BCE8E-B5CD-4838-8051-6DD1BC9CB34A} = {ACE3B5CB-701A-4330-917A-18D0CEE726A7}
 		{FD60E264-91D1-4261-9DB0-EBAB40D631DD} = {ACE3B5CB-701A-4330-917A-18D0CEE726A7}
 		{974CC94C-00CD-4AD3-BBCC-B6CFB14BC68D} = {AC5C0041-5671-4533-B6A7-74BB1127A3F2}
+		{AECF0012-77E3-496F-9DC6-863E5296656E} = {AC5C0041-5671-4533-B6A7-74BB1127A3F2}
+		{5DC24BB2-A9D8-41A9-8A78-38B2BABBDB30} = {AECF0012-77E3-496F-9DC6-863E5296656E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2746943F-0DF5-4BB2-A360-520130DFE182}

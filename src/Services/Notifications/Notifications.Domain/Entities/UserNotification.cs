@@ -10,5 +10,5 @@ public class UserNotification : EntityBase
     public User? User { get; set; }
     public Notification? Notification { get; set; }
     public DateTime DateOfReceipt { get; set; }
-    public bool Readed { get; set; }
+    public bool IsReaded { get; set; }
 }
