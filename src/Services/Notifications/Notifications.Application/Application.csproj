@@ -15,8 +15,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
-    <ProjectReference Include="..\DataAccess\Notifications.DataAccess.Dapper\Notifications.DataAccess.Dapper.csproj" />
-    <ProjectReference Include="..\Notifications.Domain\Notifications.Domain.csproj" />
+    <ProjectReference Include="..\DataAccess\Notifications.DataAccess.Dapper\DataAccess.Dapper.csproj" />
+    <ProjectReference Include="..\Notifications.Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>

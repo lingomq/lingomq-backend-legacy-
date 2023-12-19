@@ -1,24 +1,18 @@
-﻿using System.Net;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using NLog;
-using Notifications.BusinessLayer.Exceptions;
-using Notifications.BusinessLayer.Models;
+using System.Net;
+using Notifications.Domain.Exceptions;
 
-namespace Notifications.Api.Middlewares;
+namespace Notifications.Api;
 
-/// <summary>
-/// This class <c>ExceptionHandlerMiddleware</c> is a class which handle a lot of 
-/// program exceptions without sending this summary to user
-/// </summary>
-public class ExceptionHandlerMiddleware
+public class ExceptionCatchingMiddleware
 {
-    private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
     private readonly RequestDelegate _next;
-    public ExceptionHandlerMiddleware(RequestDelegate next)
+    public ExceptionCatchingMiddleware(RequestDelegate next)
     {
         _next = next;
     }
+
     public async Task InvokeAsync(HttpContext context)
     {
         try
@@ -38,8 +32,6 @@ public class ExceptionHandlerMiddleware
                 };
                 await HandleAsync(context, (int)ex.ExceptionStatusCode, model);
             }
-
-            _logger.Warn("Type: {0}; Message: {1};", ex.Source, ex.Message);
         }
         catch (Exception ex)
         {
@@ -47,14 +39,16 @@ public class ExceptionHandlerMiddleware
             ErrorModel model = new ErrorModel()
             {
                 Code = 0,
-                Message = ex.Message
             };
 
-            await HandleAsync(context, (int)HttpStatusCode.InternalServerError, model);
+            Console.WriteLine(ex.Source);
+            Console.WriteLine(ex.Message);
+            Console.WriteLine(ex.StackTrace);
 
-            _logger.Error("Type: {0}; Message: {1};", ex.Source, ex.Message);
+            await HandleAsync(context, (int)HttpStatusCode.InternalServerError, model);
         }
     }
+
     private async Task HandleCustomExceptionAsync(HttpContext context, ExceptionBase exceptionBase)
     {
         context.Response.ContentType = "application/json";
@@ -74,4 +68,17 @@ public class ExceptionHandlerMiddleware
 
         await context.Response.WriteAsync(result);
     }
+
+    private class ErrorModel
+    {
+        [JsonProperty("code")]
+        public int Code { get; set; }
+        [JsonProperty("message")]
+        public string? Message { get; set; }
+        public override string ToString()
+        {
+            return Code + " " + Message;
+        }
+    }
 }
+

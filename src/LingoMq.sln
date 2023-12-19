@@ -23,10 +23,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Words", "Words", "{ACE3B5CB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notifications", "{AC5C0041-5671-4533-B6A7-74BB1127A3F2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications.Api", "Services\Notifications\Notifications.Api\Notifications.Api.csproj", "{D42B92C3-FC80-42D5-ADAB-5625AEECEED4}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications.BusinessLayer", "Services\Notifications\Notifications.BusinessLayer\Notifications.BusinessLayer.csproj", "{7DCE0A77-877E-49A4-9A08-B0F9F551E532}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Achievements", "Achievements", "{F488E10A-94B3-4BA2-96A0-0BE98FDAC4A0}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Achievements.Api", "Services\Achievements\Achievements.Api\Achievements.Api.csproj", "{4B793165-D4F5-46BA-9EC3-6D58C45EF77A}"
@@ -97,13 +93,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Services\Wor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Services\Words\Words.Api\Api.csproj", "{FD60E264-91D1-4261-9DB0-EBAB40D631DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications.Domain", "Services\Notifications\Notifications.Domain\Notifications.Domain.csproj", "{974CC94C-00CD-4AD3-BBCC-B6CFB14BC68D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Services\Notifications\Notifications.Domain\Domain.csproj", "{974CC94C-00CD-4AD3-BBCC-B6CFB14BC68D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{AECF0012-77E3-496F-9DC6-863E5296656E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Notifications.DataAccess.Dapper", "Services\Notifications\DataAccess\Notifications.DataAccess.Dapper\Notifications.DataAccess.Dapper.csproj", "{5DC24BB2-A9D8-41A9-8A78-38B2BABBDB30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess.Dapper", "Services\Notifications\DataAccess\Notifications.DataAccess.Dapper\DataAccess.Dapper.csproj", "{5DC24BB2-A9D8-41A9-8A78-38B2BABBDB30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Notifications.Application", "Services\Notifications\Notifications.Application\Notifications.Application.csproj", "{EC85C8B7-044C-4822-9BE6-1A6A1DF1F48D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Services\Notifications\Notifications.Application\Application.csproj", "{EC85C8B7-044C-4822-9BE6-1A6A1DF1F48D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Services\Notifications\Notifications.Api\Notifications.Api\Api.csproj", "{FF0CC84C-2A8A-4258-9A3F-7370C5B6912B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,14 +121,6 @@ Global
 		{9EFF7B1E-EAE6-4388-A727-616C36809DDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EFF7B1E-EAE6-4388-A727-616C36809DDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EFF7B1E-EAE6-4388-A727-616C36809DDD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D42B92C3-FC80-42D5-ADAB-5625AEECEED4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D42B92C3-FC80-42D5-ADAB-5625AEECEED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D42B92C3-FC80-42D5-ADAB-5625AEECEED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D42B92C3-FC80-42D5-ADAB-5625AEECEED4}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7DCE0A77-877E-49A4-9A08-B0F9F551E532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7DCE0A77-877E-49A4-9A08-B0F9F551E532}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7DCE0A77-877E-49A4-9A08-B0F9F551E532}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7DCE0A77-877E-49A4-9A08-B0F9F551E532}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4B793165-D4F5-46BA-9EC3-6D58C45EF77A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{4B793165-D4F5-46BA-9EC3-6D58C45EF77A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B793165-D4F5-46BA-9EC3-6D58C45EF77A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -251,6 +241,10 @@ Global
 		{EC85C8B7-044C-4822-9BE6-1A6A1DF1F48D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC85C8B7-044C-4822-9BE6-1A6A1DF1F48D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC85C8B7-044C-4822-9BE6-1A6A1DF1F48D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF0CC84C-2A8A-4258-9A3F-7370C5B6912B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF0CC84C-2A8A-4258-9A3F-7370C5B6912B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF0CC84C-2A8A-4258-9A3F-7370C5B6912B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF0CC84C-2A8A-4258-9A3F-7370C5B6912B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -264,8 +258,6 @@ Global
 		{564C56C5-B4BC-4076-AB7D-03711EDF2A1D} = {EFBD5049-E4DF-420E-A693-5FDBA3D4E215}
 		{ACE3B5CB-701A-4330-917A-18D0CEE726A7} = {EFBD5049-E4DF-420E-A693-5FDBA3D4E215}
 		{AC5C0041-5671-4533-B6A7-74BB1127A3F2} = {EFBD5049-E4DF-420E-A693-5FDBA3D4E215}
-		{D42B92C3-FC80-42D5-ADAB-5625AEECEED4} = {AC5C0041-5671-4533-B6A7-74BB1127A3F2}
-		{7DCE0A77-877E-49A4-9A08-B0F9F551E532} = {AC5C0041-5671-4533-B6A7-74BB1127A3F2}
 		{F488E10A-94B3-4BA2-96A0-0BE98FDAC4A0} = {EFBD5049-E4DF-420E-A693-5FDBA3D4E215}
 		{4B793165-D4F5-46BA-9EC3-6D58C45EF77A} = {F488E10A-94B3-4BA2-96A0-0BE98FDAC4A0}
 		{C80BF937-D9E1-4153-8D64-4BBC58A45411} = {F488E10A-94B3-4BA2-96A0-0BE98FDAC4A0}
@@ -304,6 +296,7 @@ Global
 		{AECF0012-77E3-496F-9DC6-863E5296656E} = {AC5C0041-5671-4533-B6A7-74BB1127A3F2}
 		{5DC24BB2-A9D8-41A9-8A78-38B2BABBDB30} = {AECF0012-77E3-496F-9DC6-863E5296656E}
 		{EC85C8B7-044C-4822-9BE6-1A6A1DF1F48D} = {AC5C0041-5671-4533-B6A7-74BB1127A3F2}
+		{FF0CC84C-2A8A-4258-9A3F-7370C5B6912B} = {AC5C0041-5671-4533-B6A7-74BB1127A3F2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2746943F-0DF5-4BB2-A360-520130DFE182}
