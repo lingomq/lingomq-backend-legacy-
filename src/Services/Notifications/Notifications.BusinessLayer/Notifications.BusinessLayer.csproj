@@ -9,7 +9,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Libs\Responses\Responses.csproj" />
     <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
-    <ProjectReference Include="..\Notifications.DomainLayer\Notifications.DomainLayer.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,10 +1,8 @@
-using FluentMigrator.Runner;
-using Identity.Api.Middlewares;
-using Identity.Application.Services.DataMigrator;
-using Microsoft.Extensions.DependencyInjection.Applications;
 using System.Reflection;
+using FluentMigrator.Runner;
+using Notifications.Application.Services.DataMigrator;
 
-namespace Identity.Api;
+namespace Notifications.Api;
 
 public class Program
 {
@@ -16,21 +14,22 @@ public class Program
             .AddJsonFile("appsettings.json", true, true)
             .AddEnvironmentVariables();
 
+
         builder.Services.AddControllers();
-        builder.Services.AddEndpointsApiExplorer();
-        builder.Services.AddSwagger();
+        builder.Services.AddEndpointsApiExplorer(); builder.Services.AddSwagger();
         builder.Services.AddPostgresDataAccess(builder.Configuration);
         builder.Services.AddApplicationMassTransit(builder.Configuration);
         builder.Services.AddApplicationServices();
         builder.Services.AddJwtAuth(builder.Configuration);
         builder.Services.AddFluentMigratorCore()
-        .ConfigureRunner(cr => cr
-        .AddPostgres()
-        .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev:Identity"])
-        .ScanIn(Assembly.GetAssembly(typeof(DataAccess.Dapper.Postgres.Migrations.Initial))).For.Migrations());
+            .ConfigureRunner(cr => cr
+                .AddPostgres()
+                .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev:Notifications"])
+                .ScanIn(Assembly.GetAssembly(typeof(DataAccess.Dapper.Postgres.Migrations.InitialMigration))).For.Migrations());
 
         var app = builder.Build();
 
+        // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())
         {
             app.UseSwagger();
