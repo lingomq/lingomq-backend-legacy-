@@ -101,7 +101,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Services\Not
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Services\Notifications\Notifications.Api\Notifications.Api\Api.csproj", "{FF0CC84C-2A8A-4258-9A3F-7370C5B6912B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Achievements.Domain", "Services\Achievements\Achievements.Domain\Achievements.Domain.csproj", "{8747F323-0E8F-4E1A-9AB5-140D7E6FDFCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Achievements.Domain", "Services\Achievements\Achievements.Domain\Achievements.Domain.csproj", "{8747F323-0E8F-4E1A-9AB5-140D7E6FDFCB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{9293B915-18FA-4210-9A9F-0CD18288998D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Achievements.DataAccess.Dapper", "Services\Achievements\DataAccess\Achievements.DataAccess.Dapper\Achievements.DataAccess.Dapper.csproj", "{89ECCCA2-85B5-4778-89E8-10731DE7D584}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -245,6 +249,10 @@ Global
 		{8747F323-0E8F-4E1A-9AB5-140D7E6FDFCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8747F323-0E8F-4E1A-9AB5-140D7E6FDFCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8747F323-0E8F-4E1A-9AB5-140D7E6FDFCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{89ECCCA2-85B5-4778-89E8-10731DE7D584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89ECCCA2-85B5-4778-89E8-10731DE7D584}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89ECCCA2-85B5-4778-89E8-10731DE7D584}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89ECCCA2-85B5-4778-89E8-10731DE7D584}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -297,6 +305,8 @@ Global
 		{EC85C8B7-044C-4822-9BE6-1A6A1DF1F48D} = {AC5C0041-5671-4533-B6A7-74BB1127A3F2}
 		{FF0CC84C-2A8A-4258-9A3F-7370C5B6912B} = {AC5C0041-5671-4533-B6A7-74BB1127A3F2}
 		{8747F323-0E8F-4E1A-9AB5-140D7E6FDFCB} = {F488E10A-94B3-4BA2-96A0-0BE98FDAC4A0}
+		{9293B915-18FA-4210-9A9F-0CD18288998D} = {F488E10A-94B3-4BA2-96A0-0BE98FDAC4A0}
+		{89ECCCA2-85B5-4778-89E8-10731DE7D584} = {9293B915-18FA-4210-9A9F-0CD18288998D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2746943F-0DF5-4BB2-A360-520130DFE182}
