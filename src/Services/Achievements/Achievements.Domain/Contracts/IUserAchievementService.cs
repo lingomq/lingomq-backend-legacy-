@@ -1,6 +1,6 @@
 ﻿using Achievements.Domain.Entities;
 
-namespace Achievements.Domain.Constants;
+namespace Achievements.Domain.Contracts;
 public interface IUserAchievementService
 {
     Task<List<UserAchievement>> GetAsync(int count);

@@ -6,6 +6,7 @@ using LingoMq.Responses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLog;
+using Responses;
 
 namespace Finances.Api.Controllers
 {

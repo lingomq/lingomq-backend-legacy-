@@ -15,7 +15,6 @@ public class UpdateUserConsumer : IConsumer<IdentityModelUpdateUser>
         _unitOfWork = unitOfWork;
     }
 
-
     public async Task Consume(ConsumeContext<IdentityModelUpdateUser> context)
     {
         User user = new User()

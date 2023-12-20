@@ -1,6 +1,6 @@
 ﻿using FluentMigrator;
 
-namespace Achievements.Api.Migrations;
+namespace Achievements.DataAccess.Dapper.Postgres.Migrations;
 
 [Profile("Development")]
 [Migration(20231006)]

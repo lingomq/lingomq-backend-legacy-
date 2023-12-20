@@ -1,6 +1,6 @@
 ﻿using Achievements.Application.Services.AchievementsActions;
 using Achievements.Application.Services.DataMigrator;
-using Achievements.Domain.Constants;
+using Achievements.Domain.Contracts;
 
 namespace Microsoft.Extensions.DependencyInjection.Application;
 public static class DependencyInjection

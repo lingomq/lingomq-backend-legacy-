@@ -1,4 +1,5 @@
 ﻿using LingoMq.Responses;
+using Responses;
 
 namespace Finances.BusinessLayer.Exceptions.ServerExceptions
 {

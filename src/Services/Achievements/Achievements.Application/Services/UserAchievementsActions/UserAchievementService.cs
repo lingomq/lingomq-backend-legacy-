@@ -1,5 +1,5 @@
 ﻿using Achievements.DataAccess.Dapper.Contracts;
-using Achievements.Domain.Constants;
+using Achievements.Domain.Contracts;
 using Achievements.Domain.Entities;
 using Achievements.Domain.Exceptions.ClientExceptions;
 

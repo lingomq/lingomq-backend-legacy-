@@ -25,7 +25,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Notifications", "Notificati
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Achievements", "Achievements", "{F488E10A-94B3-4BA2-96A0-0BE98FDAC4A0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Achievements.Api", "Services\Achievements\Achievements.Api\Achievements.Api.csproj", "{4B793165-D4F5-46BA-9EC3-6D58C45EF77A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Services\Achievements\Achievements.Api\Api.csproj", "{4B793165-D4F5-46BA-9EC3-6D58C45EF77A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Topics", "Topics", "{8F1AFB24-2636-45D5-AED2-B40E7C6CC02E}"
 EndProject
@@ -99,13 +99,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Services\Not
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Services\Notifications\Notifications.Api\Notifications.Api\Api.csproj", "{FF0CC84C-2A8A-4258-9A3F-7370C5B6912B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Achievements.Domain", "Services\Achievements\Achievements.Domain\Achievements.Domain.csproj", "{8747F323-0E8F-4E1A-9AB5-140D7E6FDFCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Services\Achievements\Achievements.Domain\Domain.csproj", "{8747F323-0E8F-4E1A-9AB5-140D7E6FDFCB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DataAccess", "DataAccess", "{9293B915-18FA-4210-9A9F-0CD18288998D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Achievements.DataAccess.Dapper", "Services\Achievements\DataAccess\Achievements.DataAccess.Dapper\Achievements.DataAccess.Dapper.csproj", "{89ECCCA2-85B5-4778-89E8-10731DE7D584}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Achievements.Application", "Services\Achievements\Achievements.Application\Achievements.Application.csproj", "{2D466D9B-26F8-418E-B772-B46F96FEFF1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Services\Achievements\Achievements.Application\Application.csproj", "{2D466D9B-26F8-418E-B772-B46F96FEFF1E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
