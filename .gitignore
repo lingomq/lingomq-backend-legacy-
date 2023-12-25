@@ -2,6 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=dotnetcore,visualstudiocode,visualstudio
 
 logs/
+.config/
 .env
 src/.env
 *.env
