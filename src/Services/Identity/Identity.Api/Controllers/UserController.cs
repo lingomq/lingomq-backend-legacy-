@@ -1,158 +1,73 @@
-﻿using Cryptography;
-using Cryptography.Cryptors;
-using Cryptography.Entities;
-using EventBus.Entities.Identity.User;
-using Identity.Api.Common;
-using Identity.BusinessLayer.Contracts;
-using Identity.BusinessLayer.Dtos;
-using Identity.BusinessLayer.Exceptions.ClientExceptions;
-using Identity.BusinessLayer.Exceptions.ServerExceptions;
-using Identity.BusinessLayer.Extensions;
-using Identity.BusinessLayer.MassTransit;
-using Identity.BusinessLayer.Models;
-using Identity.DomainLayer.Entities;
-using Microsoft.AspNetCore.Authorization;
+﻿using Identity.Domain.Constants;
 using Microsoft.AspNetCore.Mvc;
-using NLog;
+using Identity.Domain.Contracts;
+using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
+using Identity.Domain.Entities;
+using Domain.Dtos;
+using Identity.Domain.Exceptions.ClientExceptions;
 
-namespace Identity.Api.Controllers
+namespace Identity.Api.Controllers;
+[Route("api/identity/user")]
+[ApiController]
+public class UserController : ControllerBase
 {
-    [Route("api/identity/user")]
-    [ApiController]
-    public class UserController : ControllerBase
-    {
-        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly PublisherBase _publisher;
-        private Guid UserId => new Guid(User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier)
+    private readonly IUserService _userService;
+    private Guid UserId => new Guid(User.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier)
             .FirstOrDefault()?.Value!);
-        public UserController(IUnitOfWork unitOfWork, PublisherBase publisher)
-        {
-            _unitOfWork = unitOfWork;
-            _publisher = publisher;
-        }
+    public UserController(IUserService userService)
+    {
+        _userService = userService;
+    }
 
-        [HttpGet]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Get()
-        {
-            if (UserId == Guid.Empty)
-                throw new UnauthorizedException<User>("Вы не авторизованы");
-            UserDto? user = await _unitOfWork.Users.GetByIdAsync(UserId);
-            if (user is null)
-                throw new NotFoundException<User>("Пользователь не найден");
+    [HttpGet]
+    [Authorize(Roles = AccessRoles.Everyone)]
+    public async Task<IActionResult> Get()
+    {
+        User user = await _userService.GetByIdAsync(UserId);
+        return LingoMq.Responses.LingoMqResponse.OkResult(user);
+    }
 
-            _logger.Info("GET / {0}", nameof(UserDto));
-            return LingoMq.Responses.LingoMqResponse.OkResult(user);
-        }
+    [HttpGet("{userId}")]
+    [Authorize(Roles = AccessRoles.Everyone)]
+    public async Task<IActionResult> Get(Guid userId)
+    {
+        User user = await _userService.GetByIdAsync(userId);
+        return LingoMq.Responses.LingoMqResponse.OkResult(user);
+    }
 
-        [HttpGet("{userId}")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Get(Guid userId)
-        {
-            UserDto? user = await _unitOfWork.Users.GetByIdAsync(userId);
-            if (user is null)
-                throw new NotFoundException<User>("Пользователь не найден");
+    [HttpPut]
+    [Authorize(Roles = AccessRoles.Everyone)]
+    public async Task<IActionResult> Update(User user, CancellationToken cancellationToken = default)
+    {
+        if (!user.Id.Equals(UserId))
+            throw new ForbiddenException<User>("Вы не являетесь владельцем аккаунта");
 
-            _logger.Info("GET /{userId} {0}", nameof(UserDto));
-            return LingoMq.Responses.LingoMqResponse.OkResult(user);
-        }
+        await _userService.UpdateAsync(user, cancellationToken);
+        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+    }
 
-        [HttpPut]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Update(UserDto userDto)
-        {
-            if (!userDto.Id.Equals(UserId))
-                throw new ForbiddenException<User>("Вы не являетесь владельцем аккаунта");
+    [HttpPut("credentials")]
+    [Authorize(Roles = AccessRoles.Everyone)]
+    public async Task<IActionResult> UpdateCredentials(UserCredentialsModel credentialsModel, CancellationToken cancellationToken = default)
+    {
+        await _userService.UpdateCredentialsAsync(credentialsModel, cancellationToken);
+        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+    }
 
-            User user = userDto.ToUserModel();
+    [HttpDelete]
+    [Authorize(Roles = AccessRoles.Everyone)]
+    public async Task<IActionResult> Delete(CancellationToken cancellationToken)
+    {
+        await _userService.DeleteByIdAsync(UserId, cancellationToken);
+        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+    }
 
-            await _unitOfWork.Users.UpdateAsync(user);
-
-            await _publisher.Send(new IdentityModelUpdateUser()
-            {
-                Id = user.Id,
-                Email = user.Email,
-                Phone = user.Phone
-            });
-
-            _logger.Info("PUT / {0}", nameof(UserDto));
-            return LingoMq.Responses.LingoMqResponse.OkResult(user, "succesfully update");
-        }
-
-        [HttpPut("credentials")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Update(UserCredentialsModel userCredentialsModel)
-        {
-            if (UserId == Guid.Empty)
-                throw new UnauthorizedException<User>("Вы не авторизованы");
-
-            Cryptor cryptor = new Cryptor(new Sha256Alghoritm());
-            BaseKeyPair keyPair = cryptor
-            .Crypt(userCredentialsModel.Password);
-
-            User user = new User()
-            {
-                Id = UserId,
-                PasswordHash = keyPair.Hash,
-                PasswordSalt = keyPair.Salt
-            };
-
-            await _unitOfWork.Users.UpdateCredentialsAsync(user); 
-            
-            await _publisher.Send(new IdentityModelUpdateUserCredentials()
-            {
-                Id = user.Id,
-                PasswordHash = user.PasswordHash,
-                PasswordSalt = user.PasswordSalt
-            });
-
-            _logger.Info("PUT /credentials {0}", nameof(UserDto));
-            return LingoMq.Responses.LingoMqResponse.OkResult(user, "password succesfully update");
-        }
-        [HttpDelete]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Delete()
-        {
-            if (UserId == Guid.Empty)
-                throw new UnauthorizedException<User>("Вы не авторизованы");
-
-            bool isRemove = await _unitOfWork.Users.DeleteAsync(UserId);
-
-            if (!isRemove)
-                throw new InternalServerException("Аккаунт не был удален");
-
-            await _publisher.Send(new IdentityModelDeleteUser()
-            {
-                Id = UserId,
-            });
-
-            _logger.Info("DELETE / {0}", nameof(UserDto));
-            return LingoMq.Responses.LingoMqResponse.OkResult("user has been successfully removed");
-        }
-
-        [HttpDelete("{userId}")]
-        [Authorize(Roles = AccessRoles.Admin)]
-        public async Task<IActionResult> Delete(Guid userId)
-        {
-            UserDto? user = await _unitOfWork.Users.GetByIdAsync(userId);
-
-            if (user is null)
-                throw new InvalidDataException<User>("Пользователя не существует"); 
-
-            bool isRemove = await _unitOfWork.Users.DeleteAsync(userId);
-
-            if (!isRemove)
-                throw new InternalServerException("Ошибка. Аккаунт не был удален.");
-
-            await _publisher.Send(new IdentityModelDeleteUser()
-            {
-                Id = userId,
-            });
-
-            _logger.Info("DELETE /{userId} {0}", nameof(UserDto));
-            return LingoMq.Responses.LingoMqResponse.OkResult("user has been successfully removed");
-        }
+    [HttpDelete("{userId}")]
+    [Authorize(Roles = AccessRoles.Admin)]
+    public async Task<IActionResult> Delete(Guid userId, CancellationToken cancellationToken)
+    {
+        await _userService.DeleteByIdAsync(userId, cancellationToken);
+        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
     }
 }

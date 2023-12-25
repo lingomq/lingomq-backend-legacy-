@@ -1,74 +1,57 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NLog;
-using Words.Api.Common;
-using Words.BusinessLayer.Contracts;
-using Words.BusinessLayer.Exceptions.ClientExceptions;
-using Words.DomainLayer.Entities;
+using Words.Domain.Constants;
+using Words.Domain.Contracts;
+using Words.Domain.Entities;
 
-namespace Words.Api.Controllers
+namespace Words.Api.Controllers;
+[Route("api/words/word-types")]
+[ApiController]
+public class WordTypeController : ControllerBase
 {
-    [Route("api/words/word-types")]
-    [ApiController]
-    public class WordTypeController : ControllerBase
+    private readonly IWordTypeService _wordTypeService;
+    public WordTypeController(IWordTypeService wordTypeService)
     {
-        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly IUnitOfWork _unitOfWork;
-        public WordTypeController(IUnitOfWork unitOfWork) =>
-            _unitOfWork = unitOfWork;
+        _wordTypeService = wordTypeService;
+    }
 
-        [HttpGet("all/{range}")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Get(int range = int.MaxValue)
-        {
-            List<WordType> wordTypes = await _unitOfWork.WordTypes.GetAsync(range);
-            _logger.Info("GET /all/{range} {0}", nameof(List<WordType>));
-            return LingoMq.Responses.LingoMqResponse.OkResult(wordTypes);
-        }
+    [HttpGet("all/{range}")]
+    [Authorize(Roles = AccessRoles.Everyone)]
+    public async Task<IActionResult> Get(int range = int.MaxValue)
+    {
+        List<WordType> wordTypes = await _wordTypeService.GetRangeAsync(range);
+        return LingoMq.Responses.LingoMqResponse.OkResult(wordTypes);
+    }
 
-        [HttpGet("{id}")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Get(Guid id)
-        {
-            WordType? wordType = await _unitOfWork.WordTypes.GetByIdAsync(id);
-            if (wordType is null)
-                throw new NotFoundException<WordType>();
+    [HttpGet("id/{id}")]
+    [Authorize(Roles = AccessRoles.Everyone)]
+    public async Task<IActionResult> Get(Guid id)
+    {
+        WordType wordType = await _wordTypeService.GetAsync(id);
+        return LingoMq.Responses.LingoMqResponse.OkResult(wordType);
+    }
 
-            _logger.Info("GET /{id} {0}", nameof(WordType));
-            return LingoMq.Responses.LingoMqResponse.OkResult(wordType);
-        }
+    [HttpPost]
+    [Authorize(Roles = AccessRoles.Staff)]
+    public async Task<IActionResult> Create(WordType wordType)
+    {
+        await _wordTypeService.CreateAsync(wordType);
+        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+    }
 
-        [HttpPost]
-        [Authorize(Roles = AccessRoles.Admin)]
-        public async Task<IActionResult> Create(WordType wordType)
-        {
-            await _unitOfWork.WordTypes.AddAsync(wordType);
-            _logger.Info("POST / {0}", nameof(WordType));
-            return LingoMq.Responses.LingoMqResponse.AcceptedResult(wordType);
-        }
+    [HttpPut]
+    [Authorize(Roles = AccessRoles.Staff)]
+    public async Task<IActionResult> Update(WordType wordType)
+    {
+        await _wordTypeService.UpdateAsync(wordType);
+        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+    }
 
-        [HttpPut]
-        [Authorize(Roles = AccessRoles.Admin)]
-        public async Task<IActionResult> Update(WordType wordType)
-        {
-            if (await _unitOfWork.WordTypes.GetByIdAsync(wordType.Id) is null)
-                throw new NotFoundException<WordType>();
-
-            await _unitOfWork.WordTypes.UpdateAsync(wordType);
-            _logger.Info("PUT / {0}", nameof(WordType));
-            return LingoMq.Responses.LingoMqResponse.AcceptedResult(wordType);
-        }
-
-        [HttpDelete("{id}")]
-        [Authorize(Roles = AccessRoles.Admin)]
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            if (await _unitOfWork.WordTypes.GetByIdAsync(id) is null)
-                throw new InvalidDataException<WordType>(parameters: new string[] { "id" });
-
-            await _unitOfWork.WordTypes.DeleteAsync(id);
-            _logger.Info("DELETE /{id} {0}", nameof(WordType));
-            return LingoMq.Responses.LingoMqResponse.AcceptedResult("WordType is succesfully remove");
-        }
+    [HttpDelete("{id}")]
+    [Authorize(Roles = AccessRoles.Staff)]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        await _wordTypeService.DeleteAsync(id);
+        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
     }
 }
