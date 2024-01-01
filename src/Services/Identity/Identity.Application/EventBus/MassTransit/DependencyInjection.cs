@@ -21,7 +21,7 @@ public static class DependencyInjection
                     h.Password(configuration["RabbitMq:Password"]);
                 });
 
-                cfg.ReceiveEndpoint(typeof(CreateUserConsumer).Name.ToLower(), endpoint =>
+                cfg.ReceiveEndpoint("identity_" + typeof(CreateUserConsumer).Name.ToLower(), endpoint =>
                 {
                     endpoint.ConfigureConsumer<CreateUserConsumer>(context);
                 });
