@@ -1,17 +1,16 @@
-using Achievements.BusinessLayer.Contracts;
-using Achievements.DomainLayer.Entities;
-using EventBus.Entities.Achievements;
+using Achievements.DataAccess.Dapper.Contracts;
+using Achievements.Domain.Entities;
 using EventBus.Entities.Identity.User;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
 namespace Achievements.BusinessLayer.MassTransit.Consumers;
 
-public class AchievementsCreateUserConsumer : IConsumer<IdentityModelCreateUser>
+public class CreateUserConsumer : IConsumer<IdentityModelCreateUser>
 {
-    private readonly ILogger<AchievementsCreateUserConsumer> _logger;
+    private readonly ILogger<CreateUserConsumer> _logger;
     private readonly IUnitOfWork _unitOfWork;
-    public AchievementsCreateUserConsumer(ILogger<AchievementsCreateUserConsumer> logger,
+    public CreateUserConsumer(ILogger<CreateUserConsumer> logger,
         IUnitOfWork unitOfWork)
     {
         _logger = logger;
@@ -26,7 +25,7 @@ public class AchievementsCreateUserConsumer : IConsumer<IdentityModelCreateUser>
             Phone = context.Message.Phone
         };
 
-        await _unitOfWork.Users.CreateAsync(user);
+        await _unitOfWork.Users.AddAsync(user);
 
         _logger.LogInformation("[+] [Achievements Create Consumer] Succesfully get message." +
                                "{0}:{1} has been added", user.Id, user.Email);

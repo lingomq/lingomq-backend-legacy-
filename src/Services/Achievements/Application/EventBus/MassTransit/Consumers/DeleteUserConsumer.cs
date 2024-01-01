@@ -1,16 +1,16 @@
-﻿using Achievements.BusinessLayer.Contracts;
-using Achievements.DomainLayer.Entities;
+﻿using Achievements.DataAccess.Dapper.Contracts;
+using Achievements.Domain.Entities;
 using EventBus.Entities.Identity.User;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
 namespace Achievements.BusinessLayer.MassTransit.Consumers
 {
-    public class AchievementsDeleteUserConsumer : IConsumer<IdentityModelDeleteUser>
+    public class DeleteUserConsumer : IConsumer<IdentityModelDeleteUser>
     {
-        private readonly ILogger<AchievementsDeleteUserConsumer> _logger;
+        private readonly ILogger<DeleteUserConsumer> _logger;
         private readonly IUnitOfWork _unitOfWork;
-        public AchievementsDeleteUserConsumer(ILogger<AchievementsDeleteUserConsumer> logger, IUnitOfWork unitOfWork)
+        public DeleteUserConsumer(ILogger<DeleteUserConsumer> logger, IUnitOfWork unitOfWork)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;

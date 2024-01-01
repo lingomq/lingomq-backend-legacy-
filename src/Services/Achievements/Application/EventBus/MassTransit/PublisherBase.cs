@@ -1,7 +1,7 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Logging;
 
-namespace Achievements.BusinessLayer.MassTransit
+namespace Achievements.Application.MassTransit
 {
     public class PublisherBase
     {

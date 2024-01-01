@@ -1,14 +1,15 @@
-﻿using Achievements.BusinessLayer.Contracts;
-using Achievements.DomainLayer.Entities;
+﻿using Achievements.Application.Services.AchievementActions.Checker;
+using Achievements.DataAccess.Dapper.Contracts;
+using Achievements.Domain.Entities;
 using EventBus.Entities.Achievements;
 using MassTransit;
 
 namespace Achievements.BusinessLayer.MassTransit.Consumers
 {
-    public class AchievementCheckConsumer : IConsumer<CheckAchievements>
+    public class CheckConsumer : IConsumer<CheckAchievements>
     {
         private readonly IUnitOfWork _unitOfWork;
-        public AchievementCheckConsumer(IUnitOfWork unitOfWork)
+        public CheckConsumer(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
         }
@@ -19,8 +20,13 @@ namespace Achievements.BusinessLayer.MassTransit.Consumers
 
         public async Task CheckAndAddUserAchievements(CheckAchievements checkAchievements)
         {
+            AchievementChecker achievementChecker = new AchievementChecker();
             List<Achievement> achievements = new List<Achievement>();
-            achievements.AddRange(await CheckWords(checkAchievements.WordsCount));
+            achievements.AddRange(achievementChecker
+                .CheckAndGetNewAchievements(
+                await _unitOfWork.Achievements.GetAsync(),
+                checkAchievements));
+
             if (achievements.Any())
             {
                 foreach (var achievement in achievements)
@@ -36,18 +42,6 @@ namespace Achievements.BusinessLayer.MassTransit.Consumers
                     await _unitOfWork.UserAchievements.CreateAsync(userAchievement);
                 }
             }
-        }
-
-        public async Task<List<Achievement>> CheckWords(int count)
-        {
-            List<Achievement> achievements = await _unitOfWork.Achievements.GetAsync(10);
-            List<Achievement> gottenAchievements = new List<Achievement>();
-            if (count == 1)
-            {
-                gottenAchievements.Add(achievements.FirstOrDefault(x => x.Name == "Начало начал")!);
-            }
-
-            return gottenAchievements;
         }
     }
 }

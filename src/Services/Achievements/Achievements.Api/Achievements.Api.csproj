@@ -30,10 +30,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Achievements.BusinessLayer\Achievements.BusinessLayer.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="logs\" />
   </ItemGroup>
 
