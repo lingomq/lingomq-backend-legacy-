@@ -1,6 +1,6 @@
 ﻿namespace Achievements.Domain.Entities
 {
-    public class BaseEntity
+    public class EntityBase
     {
         public Guid Id { get; set; }
     }

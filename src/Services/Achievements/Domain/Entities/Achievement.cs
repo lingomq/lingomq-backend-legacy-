@@ -1,6 +1,6 @@
 ﻿namespace Achievements.Domain.Entities
 {
-    public class Achievement : BaseEntity
+    public class Achievement : EntityBase
     {
         public string? Name { get; set; }
         public string? Content { get; set; }

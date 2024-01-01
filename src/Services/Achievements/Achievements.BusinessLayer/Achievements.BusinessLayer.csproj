@@ -15,7 +15,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\..\Libs\Responses\Responses.csproj" />
     <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
-    <ProjectReference Include="..\Achievements.DomainLayer\Achievements.DomainLayer.csproj" />
   </ItemGroup>
 
 </Project>
