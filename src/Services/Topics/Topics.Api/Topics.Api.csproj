@@ -45,7 +45,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Topics.BusinessLayer\Topics.BusinessLayer.csproj" />
-    <ProjectReference Include="..\Topics.DomainLayer\Topics.DomainLayer.csproj" />
   </ItemGroup>
 
 </Project>
