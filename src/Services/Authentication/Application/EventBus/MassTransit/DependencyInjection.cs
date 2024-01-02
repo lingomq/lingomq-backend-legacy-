@@ -25,29 +25,17 @@ public static class DependencyInjection
                     h.Password(configuration["RabbitMq:Password"]);
                 });
 
-<<<<<<< HEAD
-                cfg.ReceiveEndpoint(typeof(IdentityModelDeleteUser).Name.ToLower(), endpoint =>
-=======
                 cfg.ReceiveEndpoint("authentication_" + typeof(DeleteUserConsumer).Name.ToLower(), endpoint =>
->>>>>>> 999e945 (Update receive endpoints on authentication api)
                 {
                     endpoint.ConfigureConsumer<DeleteUserConsumer>(context);
                 });
 
-<<<<<<< HEAD
-                cfg.ReceiveEndpoint(typeof(IdentityModelUpdateUserCredentials).Name.ToLower(), endpoint =>
-=======
                 cfg.ReceiveEndpoint("authentication_" + typeof(UpdateUserCredentialsConsumer).Name.ToLower(), endpoint =>
->>>>>>> 999e945 (Update receive endpoints on authentication api)
                 {
                     endpoint.ConfigureConsumer<UpdateUserCredentialsConsumer>(context);
                 });
 
-<<<<<<< HEAD
-                cfg.ReceiveEndpoint(typeof(IdentityModelUpdateUser).Name.ToLower(), endpoint =>
-=======
                 cfg.ReceiveEndpoint("authentication_" + typeof(UpdateUserConsumer).Name.ToLower(), endpoint =>
->>>>>>> 999e945 (Update receive endpoints on authentication api)
                 {
                     endpoint.ConfigureConsumer<UpdateUserConsumer>(context);
                 });
