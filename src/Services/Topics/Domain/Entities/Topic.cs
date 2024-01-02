@@ -1,6 +1,6 @@
-﻿namespace Topics.DomainLayer.Entities
+﻿namespace Topics.Domain.Entities
 {
-    public class Topic : BaseEntity
+    public class Topic : EntityBase
     {
         public string? Title { get; set; }
         public string? Content { get; set; }

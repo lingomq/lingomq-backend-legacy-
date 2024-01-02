@@ -1,6 +1,6 @@
-﻿namespace Topics.DomainLayer.Entities
+﻿namespace Topics.Domain.Entities
 {
-    public class TopicStatistics : BaseEntity
+    public class TopicStatistics : EntityBase
     {
         public Guid TopicId { get; set; }
         public Guid UserId { get; set; }
