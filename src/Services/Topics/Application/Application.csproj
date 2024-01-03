@@ -18,6 +18,7 @@
 
 
 	<ItemGroup>
+	  <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
 	  <ProjectReference Include="..\DataAccess\DataAccess.Dapper\DataAccess.Dapper.csproj" />
 	  <ProjectReference Include="..\Domain\Domain.csproj" />
 	</ItemGroup>

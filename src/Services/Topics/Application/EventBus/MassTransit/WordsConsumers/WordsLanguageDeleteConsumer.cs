@@ -1,10 +1,10 @@
 using EventBus.Entities.Words;
 using MassTransit;
 using Microsoft.Extensions.Logging;
-using Topics.BusinessLayer.Contracts;
-using Topics.DomainLayer.Entities;
+using Topics.DataAccess.Dapper.Contracts;
+using Topics.Domain.Entities;
 
-namespace Topics.BusinessLayer.MassTransit.Consumers.WordsConsumers;
+namespace Topics.Application.EventBus.MassTransit.Consumers.WordsConsumers;
 
 public class WordsLanguageDeleteConsumer : IConsumer<WordsLanguageDelete>
 {

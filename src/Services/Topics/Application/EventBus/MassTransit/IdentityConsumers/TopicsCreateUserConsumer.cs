@@ -1,10 +1,10 @@
 using EventBus.Entities.Identity.User;
 using MassTransit;
 using Microsoft.Extensions.Logging;
-using Topics.BusinessLayer.Contracts;
-using Topics.DomainLayer.Entities;
+using Topics.DataAccess.Dapper.Contracts;
+using Topics.Domain.Entities;
 
-namespace Topics.BusinessLayer.MassTransit.Consumers.IdentityConsumers;
+namespace Topics.Application.EventBus.MassTransit.Consumers.IdentityConsumers;
 
 public class TopicsCreateUserConsumer : IConsumer<IdentityModelCreateUser>
 {

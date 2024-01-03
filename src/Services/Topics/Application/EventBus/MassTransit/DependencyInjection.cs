@@ -1,6 +1,6 @@
 ﻿using MassTransit;
 using Microsoft.Extensions.Configuration;
-using Topics.BusinessLayer.MassTransit.Consumers.IdentityConsumers;
+using Topics.Application.EventBus.MassTransit.Consumers.IdentityConsumers;
 
 namespace Microsoft.Extensions.DependencyInjection;
 
