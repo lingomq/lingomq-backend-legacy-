@@ -6,4 +6,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="MassTransit" Version="8.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
+    <PackageReference Include="MongoDB.Driver" Version="2.21.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Libs\Responses\Responses.csproj" />
+    <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
+    <ProjectReference Include="..\AppStatistics.DomainLayer\AppStatistics.DomainLayer.csproj" />
+  </ItemGroup>
+
 </Project>
