@@ -6,17 +6,25 @@ EXPOSE 80
 EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
+ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Services/Identity/Identity.Api/Identity.Api.csproj", "Services/Identity/Identity.Api/"]
-RUN dotnet restore "Services/Identity/Identity.Api/Identity.Api.csproj"
+COPY ["Services/Identity/Identity.Api/Api.csproj", "Services/Identity/Identity.Api/"]
+COPY ["Services/Identity/Identity.Application/Application.csproj", "Services/Identity/Identity.Application/"]
+COPY ["Libs/Cryptography/Cryptography.csproj", "Libs/Cryptography/"]
+COPY ["Services/EventBus/EventBus.csproj", "Services/EventBus/"]
+COPY ["Services/Identity/DataAccess/DataAccess.Dapper/DataAccess.Dapper.csproj", "Services/Identity/DataAccess/DataAccess.Dapper/"]
+COPY ["Services/Identity/Identity.Domain/Domain.csproj", "Services/Identity/Identity.Domain/"]
+COPY ["Libs/Responses/Responses.csproj", "Libs/Responses/"]
+RUN dotnet restore "./Services/Identity/Identity.Api/./Api.csproj"
 COPY . .
 WORKDIR "/src/Services/Identity/Identity.Api"
-RUN dotnet build "Identity.Api.csproj" -c Release -o /app/build
+RUN dotnet build "./Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Identity.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
+ARG BUILD_CONFIGURATION=Release
+RUN dotnet publish "./Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Identity.Api.dll"]
+ENTRYPOINT ["dotnet", "Api.dll"]
