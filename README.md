@@ -13,6 +13,75 @@
 docker-compose -f docker-compose.dev.yaml --verbose up --build
 ```
 Но этого недостаточно, также вам нужно иметь .env файлы.<br/>
+<b>Формат appsettings.json файла</b>
+``` 
+// Email
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "JWT": {
+    "Issuer": "",
+    "Audience": "",
+    "Key": "",
+    "ExpiredMinutesAccessToken": "",
+    "ExpiredMinutesRefreshToken": ""
+  },
+  "RabbitMq": {
+    "Uri": "",
+    "UserName": "",
+    "Password": ""
+  },
+  "Mail": {
+    "Corp": "",
+    "From": "",
+    "Smtp": {
+      "Client": "",
+      "Port": ""
+    },
+    "Credentials": {
+      "Client": "",
+      "Password": ""
+    }
+  }
+}
+
+// any
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "JWT": {
+    "Issuer": "",
+    "Audience": "",
+    "Key": "",
+    "ExpiredMinutesAccessToken": "",
+    "ExpiredMinutesRefreshToken": ""
+  },
+  "RabbitMq": {
+    "Uri": "",
+    "UserName": "",
+    "Password": ""
+  },
+  "ConnectionStrings": {
+    "Dev": {
+      "Words": ""
+    }
+  },
+  "Keys": {
+    "SpellCheckerApiKey": ""
+  }
+}
+
+```
 <b>Список полей .env файла</b>
 ```
 JWT__Issuer="JWT Credentials"
