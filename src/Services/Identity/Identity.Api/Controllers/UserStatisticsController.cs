@@ -21,9 +21,9 @@ public class UserStatisticsController : ControllerBase
 
     [HttpGet("id/{userId}")]
     [Authorize(Roles = AccessRoles.Everyone)]
-    public async Task<IActionResult> Get(Guid id)
+    public async Task<IActionResult> Get(Guid userId)
     {
-        UserStatistics statistics = await _userStatisticsService.GetByIdAsync(id);
+        UserStatistics statistics = await _userStatisticsService.GetByIdAsync(userId);
         return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
     }
 
