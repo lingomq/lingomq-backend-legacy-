@@ -1,0 +1,391 @@
+{
+  "GlobalConfiguration": {
+    "BaseUrl": "https://localhost:9999"
+  },
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/auth/sign-in",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/auth/sign-in",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/sign-up",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/auth/sign-up",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/refresh-token/{token}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/auth/refresh-token/{token}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/auth/confirm/{token}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "authentication-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/confirm/{token}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/identity/user",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user",
+      "UpstreamHttpMethod": [ "Put", "Get", "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/identity/user/info/user-id/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/info/user-id/{userId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/identity/user/credentials",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/credentials"
+    },
+    {
+      "DownstreamPathTemplate": "/api/identity/user/info",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/info",
+      "UpstreamHttpMethod": [ "Get", "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/identity/user/statistics/id/{userId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/id/{userId}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/identity/user/statistics/hour/add",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/hour/add",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/identity/user/statistics/word/add",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/word/add",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/identity/user/statistics/visit",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "identity-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/identity/user/statistics/visit",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+
+    {
+      "DownstreamPathTemplate": "/api/words/languages/all/{range}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/languages/all/{range}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/words/user-words/user",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/user",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/words/user-words/famous",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/famous",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/words/user-words/word/count/{userId}/{date}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/word/count/{userId}/{date}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/words/user-words/{isForce}/{isAutocomplete}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/{isForce}/{isAutocomplete}",
+      "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/words/user-words/add/repeats/{wordId}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/add/repeats/{wordId}",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/words/user-words/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/{id}",
+      "UpstreamHttpMethod": [ "Delete" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/words/word-types/all/{range}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/word-types/all/{range}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/notifications/user",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/notifications/user",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/notifications/user/id/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/notifications/user/id/{id}",
+      "UpstreamHttpMethod": [ "Put" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/notifications/type/all/{range}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/notifications/type/all/{range}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/notifications/type/id/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "notifications-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/notifications/type/id/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/achievements/user",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "achievements-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/achievements/user",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/words/user-words/records/repeats/order/{order}/count/{count}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/records/repeats/order/{order}/count/{count}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/words/user-words/records/type/{type}/order/{order}/count/{count}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/records/type/{type}/order/{order}/count/{count}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/words/user-words/records/word-count/order/{order}/count/{count}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/records/word-count/order/{order}/count/{count}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/topics/all/skip/{skip}/take/{take}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/topics/all/skip/{skip}/take/{take}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/topics/filters",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/topics/filters",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/topics/topic-id/{id}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/topics/topic-id/{id}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/topics/level/all/{range}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "topics-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/topics/level/all/{range}",
+      "UpstreamHttpMethod": [ "Get" ]
+    }
+  ]
+}
