@@ -1,104 +1,57 @@
-﻿using EventBus.Entities.Words;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NLog;
-using Words.Api.Common;
-using Words.BusinessLayer.Contracts;
-using Words.BusinessLayer.Exceptions.ClientExceptions;
-using Words.BusinessLayer.MassTransit;
-using Words.DomainLayer.Entities;
+using Words.Domain.Constants;
+using Words.Domain.Contracts;
+using Words.Domain.Entities;
 
-namespace Words.Api.Controllers
+namespace Words.Api.Controllers;
+[Route("api/words/languages")]
+[ApiController]
+public class LanguageController : ControllerBase
 {
-    [Route("api/words/languages")]
-    [ApiController]
-    public class LanguageController : ControllerBase
+    private readonly ILanguageService _languageService;
+    public LanguageController(ILanguageService languageService)
     {
-        private static readonly Logger _logger = LogManager.GetCurrentClassLogger();
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly PublisherBase _publisher;
-        public LanguageController(IUnitOfWork unitOfWork, PublisherBase publisher)
-        {
-            _unitOfWork = unitOfWork;
-            _publisher = publisher;
-        }
+        _languageService = languageService;
+    }
 
-        [HttpGet("all/{range}")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Get(int range = int.MaxValue)
-        {
-            List<Language> languages = await _unitOfWork.Languages.GetAsync(range);
-            _logger.Info("GET /all/{range} {0}", nameof(List<Language>));
-            return LingoMq.Responses.LingoMqResponse.OkResult(languages);
-        }
-        [HttpGet("name/{name}")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Get(string name)
-        {
-            Language? language = await _unitOfWork.Languages.GetByNameAsync(name);
-            if (language is null)
-                throw new NotFoundException<Language>();
+    [HttpGet("all/{range}")]
+    [Authorize(Roles = AccessRoles.Everyone)]
+    public async Task<IActionResult> Get(int range = int.MaxValue)
+    {
+        List<Language> languages = await _languageService.GetAsync(range);
+        return LingoMq.Responses.LingoMqResponse.OkResult(languages);
+    }
 
-            _logger.Info("GET /name/{name} {0}", nameof(Language));
-            return LingoMq.Responses.LingoMqResponse.OkResult(language);
-        }
-        [HttpGet("{id}")]
-        [Authorize(Roles = AccessRoles.All)]
-        public async Task<IActionResult> Get(Guid id)
-        {
-            Language? language = await _unitOfWork.Languages.GetByIdAsync(id);
-            if (language is null)
-                throw new NotFoundException<Language>();
+    [HttpGet("id/{id}")]
+    [Authorize(Roles = AccessRoles.Everyone)]
+    public async Task<IActionResult> Get(Guid id)
+    {
+        Language language = await _languageService.GetAsync(id);
+        return LingoMq.Responses.LingoMqResponse.OkResult(language);
+    }
 
-            _logger.Info("GET /{id} {0}", nameof(Language));
-            return LingoMq.Responses.LingoMqResponse.OkResult(language);
-        }
-        [HttpPost]
-        [Authorize(Roles = AccessRoles.Admin)]
-        public async Task<IActionResult> Create(Language language)
-        {
-            await _unitOfWork.Languages.AddAsync(language);
+    [HttpPost]
+    [Authorize(Roles = AccessRoles.Admin)]
+    public async Task<IActionResult> Create(Language language)
+    {
+        await _languageService.CreateAsync(language);
+        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+    }
 
-            await _publisher.Send(new WordsLanguageCreate()
-            {
-                Id = language.Id,
-                Name = language.Name
-            });
+    [HttpPut]
+    [Authorize(Roles = AccessRoles.Admin)]
+    public async Task<IActionResult> Update(Language language)
+    {
+        await _languageService.UpdateAsync(language);
+        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+    }
 
-            _logger.Info("POST / {0}", nameof(Language));
-            return LingoMq.Responses.LingoMqResponse.AcceptedResult(language);
-        }
-        [HttpPut]
-        [Authorize(Roles = AccessRoles.Admin)]
-        public async Task<IActionResult> Update(Language language)
-        {
-            if (await _unitOfWork.Languages.GetByIdAsync(language.Id) is null)
-                throw new NotFoundException<Language>();
-
-            await _unitOfWork.Languages.UpdateAsync(language);
-            await _publisher.Send(new WordsLanguageUpdate()
-            {
-                Id = language.Id,
-                Name = language.Name
-            });
-
-            _logger.Info("PUT / {0}", nameof(Language));
-            return LingoMq.Responses.LingoMqResponse.AcceptedResult(language);
-        }
-        [HttpDelete("{id}")]
-        [Authorize(Roles = AccessRoles.Admin)]
-        public async Task<IActionResult> Delete(Guid id)
-        {
-            if (await _unitOfWork.Languages.GetByIdAsync(id) is null)
-                throw new NotFoundException<Language>();
-
-            await _publisher.Send(new WordsLanguageDelete()
-            {
-                Id = id,
-            });
-            await _unitOfWork.Languages.DeleteAsync(id);
-            _logger.Info("DELETE /{id} {0}", nameof(Language));
-            return LingoMq.Responses.LingoMqResponse.AcceptedResult("Language has been removed");
-        }
+    [HttpDelete("{id}")]
+    [Authorize(Roles = AccessRoles.Admin)]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        await _languageService.DeleteAsync(id);
+        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
     }
 }

@@ -2,6 +2,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=dotnetcore,visualstudiocode,visualstudio
 
 logs/
+.config/
 .env
 src/.env
 *.env
@@ -10,6 +11,9 @@ src/*.env
 appsettings.json
 **/appsettings.Development.json
 appsettings.Development.json
+*.local.yaml
+**/*.local.yaml
+./**/idea/*
 
 ### DotnetCore ###
 # .NET Core build folders

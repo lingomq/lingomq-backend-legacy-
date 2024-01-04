@@ -189,21 +189,7 @@ services:
         dockerfile: ApiGateway/OcelotApiGateway/Dockerfile
       volumes: 
         - ~/.aspnet/https:/https:ro
-      networks:
-        default: {}
-        front:
-          ipv4_address: 192.168.0.105
 
 volumes:
   rabbitmq:
   postgresdb:
-
-networks:
-  front:
-    driver: macvlan
-    driver_opts:
-      parent: eth0.10
-    ipam:
-      config:
-        - subnet: 192.168.0.0/24
-          gateway: 192.168.0.1
