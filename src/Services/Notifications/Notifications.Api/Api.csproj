@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>f40bedd1-20f3-457e-b2a4-caf4396ba39f</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..\..\..</DockerfileContext>
+    <DockerfileContext>..\..\..</DockerfileContext>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,9 +19,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\DataAccess\Notifications.DataAccess.Dapper\DataAccess.Dapper.csproj" />
-    <ProjectReference Include="..\..\Notifications.Application\Application.csproj" />
-    <ProjectReference Include="..\..\Notifications.Domain\Domain.csproj" />
+    <ProjectReference Include="..\DataAccess\Notifications.DataAccess.Dapper\DataAccess.Dapper.csproj" />
+    <ProjectReference Include="..\Notifications.Application\Application.csproj" />
+    <ProjectReference Include="..\Notifications.Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="appsettings.Development.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="appsettings.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>

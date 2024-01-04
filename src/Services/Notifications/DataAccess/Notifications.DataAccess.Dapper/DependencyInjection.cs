@@ -12,7 +12,7 @@ public static class DependencyInjection
     {
         services.AddScoped<IDbConnection>
         (
-            (serviceProvider) => new NpgsqlConnection(configuration["ConnectionStrings:Dev:Notifications"])
+            (serviceProvider) => new NpgsqlConnection(configuration["ConnectionStrings:Dev:Notification"])
         );
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUserNotificationRepository, UserNotificationRepository>();

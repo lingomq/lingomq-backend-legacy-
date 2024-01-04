@@ -316,6 +316,18 @@
       "UpstreamHttpMethod": [ "Get" ]
     },
     {
+      "DownstreamPathTemplate": "/api/words/user-words/records/type/{type}/order/{order}/count/{count}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "words-api",
+          "Port": 80
+        }
+      ],
+      "UpstreamPathTemplate": "/api.lingomq/words/user-words/records/type/{type}/order/{order}/count/{count}",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
       "DownstreamPathTemplate": "/api/words/user-words/records/word-count/order/{order}/count/{count}",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [

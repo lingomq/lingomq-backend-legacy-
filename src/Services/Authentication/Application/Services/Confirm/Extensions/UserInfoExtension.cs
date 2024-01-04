@@ -22,6 +22,6 @@ public static class UserInfoExtension
         userInfo.User.PasswordHash = info.User.PasswordHash;
         userInfo.User.PasswordSalt = info.User.PasswordSalt;
 
-        return userInfo;
+        return info;
     }
 }

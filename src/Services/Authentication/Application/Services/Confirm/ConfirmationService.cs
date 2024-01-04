@@ -53,7 +53,7 @@ public class ConfirmationService : IConfirmationService
         await _publisher.Send(new AppStatisticsCreateOrUpdate()
         {
             TotalUsers = 1,
-            Date = DateTime.Now
+            Date = DateTime.UtcNow
         }, cancellationToken);
 
         return tokenModel;

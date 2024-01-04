@@ -24,7 +24,7 @@ public class UserStatisticsRepository : GenericRepository<UserStatistics>, IUser
         await QueryFirstAsync(UserStatisticsQueries.GetById, new { Id = id });
 
     public async Task<UserStatistics?> GetByUserIdAsync(Guid id) =>
-        await QueryFirstAsync(UserStatisticsQueries.GetByUserId, new { UserId = id });
+        await QueryFirstAsync(UserStatisticsQueries.GetByUserId, new { Id = id });
 
     public async Task<int> GetCountOfDaysByUserIdAsync(Guid id) =>
         await _connection.QueryFirstAsync<int>(UserStatisticsQueries.GetCountByUserId, new { Id = id });

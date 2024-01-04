@@ -1,7 +1,6 @@
-﻿namespace Topics.Domain.Entities
+﻿namespace Topics.Domain.Entities;
+
+public class TopicLevel : EntityBase
 {
-    public class TopicLevel : EntityBase
-    {
-        public string? LevelName { get; set; }
-    }
+    public string? LevelName { get; set; }
 }

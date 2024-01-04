@@ -1,7 +1,6 @@
-﻿namespace Topics.Domain.Entities
+﻿namespace Topics.Domain.Entities;
+
+public class Language : EntityBase
 {
-    public class Language : EntityBase
-    {
-        public string? Name { get; set; }
-    }
+    public string? Name { get; set; }
 }

@@ -1,7 +1,6 @@
-﻿namespace Topics.Domain.Entities
+﻿namespace Topics.Domain.Entities;
+
+public class TopicStatisticsType : EntityBase
 {
-    public class TopicStatisticsType : EntityBase
-    {
-        public string? TypeName { get; set; }
-    }
+    public string? TypeName { get; set; }
 }

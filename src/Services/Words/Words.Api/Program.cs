@@ -1,4 +1,5 @@
 using FluentMigrator.Runner;
+using Newtonsoft.Json;
 using System.Reflection;
 using Words.Api.Middlewares;
 using Words.Application.Services.DataMigrator;
@@ -15,7 +16,10 @@ public class Program
             .AddJsonFile("appsettings.json", true, true)
             .AddEnvironmentVariables();
 
-        builder.Services.AddControllers();
+        builder.Services.AddControllers().AddNewtonsoftJson(options =>
+        {   
+            options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+        });
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwagger();
         builder.Services.AddPostgresDataAccess(builder.Configuration); 

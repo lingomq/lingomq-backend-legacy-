@@ -36,7 +36,7 @@ public class UserWordRepository : GenericRepository<UserWord>, IUserWordReposito
         await QueryFirstAsync(UserWordQueries.GetByWord, new { Word = word });
 
     public async Task<int> GetCountWordsPerDayAsync(Guid id, DateTime day) =>
-        await _connection.QueryFirstAsync(UserWordQueries.GetCountPerDay, new { Id = id, CreatedAt = day });
+        await _connection.QueryFirstAsync<int>(UserWordQueries.GetCountPerDay, new { Id = id, CreatedAt = day });
 
     public async Task<UserWord?> GetMostRepeatedWordAsync(Guid userId) =>
         await QueryFirstAsync(UserWordQueries.GetMostRepeated, new { UserId = userId });

@@ -45,7 +45,7 @@ services:
       image: achievements-api:dev
       build:
         context: .
-        dockerfile: Services/Achievements/Achievements.Api/Dockerfile
+        dockerfile: Services/Achievements/WebApi/Dockerfile
       depends_on:
         - psql
         - rabbitmq
@@ -77,7 +77,7 @@ services:
       image: authentication-api
       build:
         context: .
-        dockerfile: Services/Authentication/Authentication.Api/Dockerfile
+        dockerfile: Services/Authentication/Api/Dockerfile
       depends_on:
         - psql
         - rabbitmq
@@ -141,20 +141,20 @@ services:
       ports:
         - "7007:80"
 
-    # topics-api:
-    #   hostname: topics-api
-    #   restart: always
-    #   env_file:
-    #     - .env
-    #   image: topics-api:dev
-    #   build:
-    #     context: .
-    #     dockerfile: Services/Topics/Topics.Api/Dockerfile
-    #   depends_on:
-    #     - psql
-    #     - rabbitmq
-    #   ports:
-    #     - "7008:80"
+    topics-api:
+      hostname: topics-api
+      restart: always
+      env_file:
+        - .env
+      image: topics-api:dev
+      build:
+        context: .
+        dockerfile: Services/Topics/WebApi/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7008:80"
 
     words-api:
       hostname: words-api

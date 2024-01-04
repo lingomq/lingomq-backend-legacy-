@@ -7,15 +7,14 @@ public static class UserInfoExtension
 {
     public static UserInfo ToConsume(this UserInfo userInfo, User user, UserRole role, ConsumeContext<IdentityModelCreateUser> context)
     {
-        return new UserInfo()
-        {
-            Id = context.Message.InfoId,
-            Nickname = context.Message.Nickname,
-            RoleId = role!.Id,
-            Additional = "",
-            IsRemoved = false,
-            CreationalDate = DateTime.UtcNow,
-            UserId = user.Id
-        };
+        userInfo.Id = context.Message.InfoId;
+        userInfo.Nickname = context.Message.Nickname;
+        userInfo.RoleId = role!.Id;
+        userInfo.Additional = "";
+        userInfo.IsRemoved = false;
+        userInfo.CreationalDate = DateTime.UtcNow;
+        userInfo.UserId = user.Id;
+
+        return userInfo;
     }
 }

@@ -17,6 +17,6 @@ public class ConfirmationController : ControllerBase
     public async Task<IActionResult> ConfirmEmail(string token, CancellationToken cancellationToken)
     {
         TokenModel tokenModel = await _confirmationService.ConfirmEmailAsync(token, cancellationToken);
-        return LingoMq.Responses.LingoMqResponse.OkResult(token);
+        return LingoMq.Responses.LingoMqResponse.OkResult(tokenModel);
     }
 }

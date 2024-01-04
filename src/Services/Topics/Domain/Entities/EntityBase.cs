@@ -1,7 +1,7 @@
-﻿namespace Topics.Domain.Entities
+﻿namespace Topics.Domain.Entities;
+
+public class EntityBase
 {
-    public class EntityBase
-    {
-        public Guid Id { get; set; }
-    }
+    public Guid Id { get; set; }
 }
+

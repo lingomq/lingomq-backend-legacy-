@@ -25,5 +25,22 @@ public class UserAchievementRepository : GenericRepository<UserAchievement>, IUs
     
     public async Task<int> GetCountAchievementsByUserIdAsync(Guid id) =>
         await _connection.QueryFirstAsync(UserAchievementQueries.GetCountAchievementsByUserId, new { Id = id });
-    
+
+    protected override async Task<List<UserAchievement>> QueryListAsync<T>(string sql, T entity) where T : class
+    {
+        IEnumerable<UserAchievement>? usersAchievements;
+        usersAchievements = await _connection.QueryAsync<UserAchievement, User, Achievement, UserAchievement>
+            (sql, (userAchievement, user, achievement) =>
+            {
+                userAchievement.User = user;
+                userAchievement.UserId = user.Id;
+
+                userAchievement.Achievement = achievement;
+                userAchievement.AchievementId = achievement.Id;
+
+                return userAchievement;
+            }, entity, splitOn: "id");
+
+        return usersAchievements.Count() == 0 ? new List<UserAchievement>() : usersAchievements.ToList();
+    }
 }

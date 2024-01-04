@@ -24,7 +24,7 @@ public class Program
         builder.Services.AddFluentMigratorCore()
             .ConfigureRunner(cr => cr
                 .AddPostgres()
-                .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev:Notifications"])
+                .WithGlobalConnectionString(builder.Configuration["ConnectionStrings:Dev:Notification"])
                 .ScanIn(Assembly.GetAssembly(typeof(DataAccess.Dapper.Postgres.Migrations.InitialMigration))).For.Migrations());
 
         var app = builder.Build();
