@@ -1,4 +1,5 @@
-﻿using Identity.Domain.Entities;
+﻿using Dapper;
+using Identity.Domain.Entities;
 using System.Data;
 using System.Transactions;
 

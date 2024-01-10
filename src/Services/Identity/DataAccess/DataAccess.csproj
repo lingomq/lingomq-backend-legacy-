@@ -9,11 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Providers\Dapper\Realizations\" />
-    <Folder Include="Providers\Dapper\RawQueries\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj" />
 	<PackageReference Include="Dapper" Version="2.1.24" />
     <PackageReference Include="FluentMigrator" Version="5.0.0" />
