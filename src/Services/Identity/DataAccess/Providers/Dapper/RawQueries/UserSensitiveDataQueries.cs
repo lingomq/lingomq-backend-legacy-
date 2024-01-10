@@ -15,6 +15,8 @@ public static class UserSensitiveDataQueries
         LEFT JOIN roles ON users.role_id = roles.id";
     public static readonly string SelectByUserId =
         Select + " WHERE user_id = @UserId";
+    public static readonly string SelectByNickname =
+        Select + " WHERE users.nickname = @Nickname";
     public static readonly string Insert = 
         "INSERT INTO user_sensitive_datas " +
         "(id, password_hash, password_salt, user_id) " +
