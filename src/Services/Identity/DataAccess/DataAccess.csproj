@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <Folder Include="Providers\Dapper\Realizations\" />
-    <Folder Include="Providers\Dapper\RawQueries\" />
   </ItemGroup>
 
   <ItemGroup>
