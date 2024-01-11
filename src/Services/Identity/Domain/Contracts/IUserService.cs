@@ -1,7 +1,7 @@
 ﻿using Identity.Domain.Constants;
 using Identity.Domain.Entities;
 
-namespace Domain.Contracts;
+namespace Identity.Domain.Contracts;
 public interface IUserService
 {
     Task<List<User>> GetUsersAsync(int take, int skip = 20, CancellationToken cancellationToken = default);

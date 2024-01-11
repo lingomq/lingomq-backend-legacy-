@@ -2,7 +2,7 @@
 using Identity.Domain.Entities;
 using Identity.Domain.Models;
 
-namespace Domain.Contracts;
+namespace Identity.Domain.Contracts;
 public interface IAuthenticationService
 {
     Task<bool> ValidateSensitiveDataAsync(ref UserSensitiveData data, CancellationToken cancellationToken = default);
