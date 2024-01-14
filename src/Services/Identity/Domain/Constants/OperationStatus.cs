@@ -2,6 +2,7 @@
 public enum OperationStatus
 {
     Success = 0,
-    Warning = 1,
-    Error = 2
+    Conflict = 1,
+    Warning = 2,
+    Error = 3
 }
