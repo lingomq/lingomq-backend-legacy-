@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Identity.$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>Identity.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="FluentMigrator" Version="5.0.0" />
+	  <PackageReference Include="FluentMigrator.Runner.Postgres" Version="5.0.0" />
+	  <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.13" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\libs\LingoMqResponseLib\LingoMqResponseLib.csproj" />
+    <ProjectReference Include="..\Services\Identity\Application\Application.csproj" />
+    <ProjectReference Include="..\Services\Identity\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\Services\Identity\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+</Project>
