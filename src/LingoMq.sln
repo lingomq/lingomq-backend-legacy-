@@ -15,9 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Services\Identity
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccess", "Services\Identity\DataAccess\DataAccess.csproj", "{761ECBA8-8240-4CDF-9B1B-8F9099F84EB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Services\Identity\Application\Application.csproj", "{969AF02B-ACBF-4C91-A024-F4F05413E23C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Services\Identity\Application\Application.csproj", "{969AF02B-ACBF-4C91-A024-F4F05413E23C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{14ABFC3D-3DB1-4134-A0F6-251BACD722C7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LingoMqResponseLib", "..\libs\LingoMqResponseLib\LingoMqResponseLib.csproj", "{8A527E1E-B4FD-4791-892B-F7F8613EFDE9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LingoMqCryptographyLib", "..\libs\LingoMqCryptographyLib\LingoMqCryptographyLib.csproj", "{A5D09C6C-97BD-43BF-963C-937597C4DCBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,14 @@ Global
 		{969AF02B-ACBF-4C91-A024-F4F05413E23C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{969AF02B-ACBF-4C91-A024-F4F05413E23C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{969AF02B-ACBF-4C91-A024-F4F05413E23C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8A527E1E-B4FD-4791-892B-F7F8613EFDE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A527E1E-B4FD-4791-892B-F7F8613EFDE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A527E1E-B4FD-4791-892B-F7F8613EFDE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A527E1E-B4FD-4791-892B-F7F8613EFDE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5D09C6C-97BD-43BF-963C-937597C4DCBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5D09C6C-97BD-43BF-963C-937597C4DCBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5D09C6C-97BD-43BF-963C-937597C4DCBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5D09C6C-97BD-43BF-963C-937597C4DCBB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -51,6 +63,8 @@ Global
 		{D17EF639-101F-410E-83B6-144D6451F3B0} = {CE7B9106-B7FF-4036-9F81-AA651FD6242E}
 		{761ECBA8-8240-4CDF-9B1B-8F9099F84EB1} = {CE7B9106-B7FF-4036-9F81-AA651FD6242E}
 		{969AF02B-ACBF-4C91-A024-F4F05413E23C} = {CE7B9106-B7FF-4036-9F81-AA651FD6242E}
+		{8A527E1E-B4FD-4791-892B-F7F8613EFDE9} = {14ABFC3D-3DB1-4134-A0F6-251BACD722C7}
+		{A5D09C6C-97BD-43BF-963C-937597C4DCBB} = {14ABFC3D-3DB1-4134-A0F6-251BACD722C7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F4555F6E-0AD1-45F8-B165-DFDB4EE97427}
