@@ -17,14 +17,14 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\..\libs\LingoMqResponseLib\LingoMqResponseLib.csproj" />
     <ProjectReference Include="..\Services\Identity\Application\Application.csproj" />
     <ProjectReference Include="..\Services\Identity\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\Services\Identity\Domain\Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
   </ItemGroup>
 
 </Project>
