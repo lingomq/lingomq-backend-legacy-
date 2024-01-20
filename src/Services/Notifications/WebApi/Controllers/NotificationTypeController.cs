@@ -4,7 +4,7 @@ using Notifications.Domain.Constants;
 using Notifications.Domain.Contracts;
 using Notifications.Domain.Entities;
 
-namespace Notifications.Api.Controllers;
+namespace Notifications.WebApi.Controllers;
 [Route("api/notifications/type")]
 [ApiController]
 public class NotificationTypeController : ControllerBase
