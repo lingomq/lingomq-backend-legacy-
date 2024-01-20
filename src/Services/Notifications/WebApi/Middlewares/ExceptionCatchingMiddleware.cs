@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.Net;
 using Notifications.Domain.Exceptions;
 
-namespace Notifications.Api;
+namespace Notifications.WebApi;
 
 public class ExceptionCatchingMiddleware
 {

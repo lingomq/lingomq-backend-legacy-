@@ -2,7 +2,7 @@ using System.Reflection;
 using FluentMigrator.Runner;
 using Notifications.Application.Services.DataMigrator;
 
-namespace Notifications.Api;
+namespace Notifications.WebApi;
 
 public class Program
 {
