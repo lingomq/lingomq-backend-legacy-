@@ -8,7 +8,7 @@ public static class RecordTypesCollection
         {
             { "word-count", (int)RecordTypesEnum.Words },
             { "repeats", (int)RecordTypesEnum.Repeats },
-            { null, (int)RecordTypesEnum.Words }
+            { null!, (int)RecordTypesEnum.Words }
         };
 
 }

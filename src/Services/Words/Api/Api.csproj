@@ -7,6 +7,8 @@
     <UserSecretsId>8b003f47-c924-4991-8201-09d220acb82c</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <DockerfileContext>..\..\..</DockerfileContext>
+    <AssemblyName>Words.$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>Words.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,6 +22,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\DataAccess\DataAccess.Dapper\DataAccess.Dapper.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Words.Application\Application.csproj" />
     <ProjectReference Include="..\Words.Domain\Domain.csproj" />
   </ItemGroup>
