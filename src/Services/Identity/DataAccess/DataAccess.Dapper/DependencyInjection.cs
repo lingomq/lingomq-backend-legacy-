@@ -1,6 +1,6 @@
-﻿using DataAccess.Dapper;
-using DataAccess.Dapper.Contracts;
-using DataAccess.Dapper.Postgres.Realizations;
+﻿using Identity.DataAccess.Dapper;
+using Identity.DataAccess.Dapper.Contracts;
+using Identity.DataAccess.Dapper.Postgres.Realizations;
 using Microsoft.Extensions.Configuration;
 using Npgsql;
 using System.Data;

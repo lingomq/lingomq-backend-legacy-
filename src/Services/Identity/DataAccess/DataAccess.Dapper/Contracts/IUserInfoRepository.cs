@@ -1,6 +1,6 @@
 ﻿using Identity.Domain.Entities;
 
-namespace DataAccess.Dapper.Contracts;
+namespace Identity.DataAccess.Dapper.Contracts;
 
 public interface IUserInfoRepository : IGenericRepository<UserInfo>
 {

@@ -1,10 +1,10 @@
 using FluentMigrator.Runner;
-using Identity.Api.Middlewares;
+using Identity.WebApi.Middlewares;
 using Identity.Application.Services.DataMigrator;
 using Microsoft.Extensions.DependencyInjection.Applications;
 using System.Reflection;
 
-namespace Identity.Api;
+namespace Identity.WebApi;
 
 public class Program
 {
