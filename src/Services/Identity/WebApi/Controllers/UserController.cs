@@ -4,10 +4,9 @@ using Identity.Domain.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Identity.Domain.Entities;
-using Domain.Dtos;
 using Identity.Domain.Exceptions.ClientExceptions;
 
-namespace Identity.Api.Controllers;
+namespace Identity.WebApi.Controllers;
 [Route("api/identity/user")]
 [ApiController]
 public class UserController : ControllerBase

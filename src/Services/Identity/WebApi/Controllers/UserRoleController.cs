@@ -4,7 +4,7 @@ using Identity.Domain.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Identity.Api.Controllers;
+namespace Identity.WebApi.Controllers;
 [Route("api/[controller]")]
 [ApiController]
 public class UserRoleController : ControllerBase

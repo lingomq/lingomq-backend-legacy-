@@ -1,6 +1,6 @@
-﻿using DataAccess.Dapper.Contracts;
+﻿using Identity.DataAccess.Dapper.Contracts;
 
-namespace DataAccess.Dapper;
+namespace Identity.DataAccess.Dapper;
 public class UnitOfWork : IUnitOfWork, IDisposable
 {
     public IUserInfoRepository UserInfos { get; }

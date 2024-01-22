@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
-namespace Identity.Api.Controllers;
+namespace Identity.WebApi.Controllers;
 [Route("api/identity/user/info")]
 [ApiController]
 public class UserInfoController : ControllerBase

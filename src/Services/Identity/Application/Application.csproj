@@ -4,6 +4,8 @@
     <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AssemblyName>Identity.$(MSBuildProjectName)</AssemblyName>
+    <RootNamespace>Identity.$(MSBuildProjectName.Replace(" ", "_"))</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,6 +24,7 @@
     <ProjectReference Include="..\..\..\Libs\Cryptography\Cryptography.csproj" />
     <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\DataAccess\DataAccess.Dapper\DataAccess.Dapper.csproj" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
     <ProjectReference Include="..\Identity.Domain\Domain.csproj" />
   </ItemGroup>
 

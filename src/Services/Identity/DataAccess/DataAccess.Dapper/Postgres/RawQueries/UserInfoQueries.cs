@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Dapper.Postgres.RawQueries;
+﻿namespace Identity.DataAccess.Dapper.Postgres.RawQueries;
 public static class UserInfoQueries
 {
     public readonly static string Get =

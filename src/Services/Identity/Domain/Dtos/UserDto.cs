@@ -1,7 +1,7 @@
 ﻿using Identity.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Dtos;
+namespace Identity.Domain.Dtos;
 public class UserDto : EntityBase
 {
     [Required(ErrorMessage = "Поле email является обязательным для заполнения")]
