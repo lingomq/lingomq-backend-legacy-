@@ -1,10 +1,10 @@
 using FluentMigrator.Runner;
 using Newtonsoft.Json;
 using System.Reflection;
-using Words.Api.Middlewares;
+using Words.WebApi.Middlewares;
 using Words.Application.Services.DataMigrator;
 
-namespace Words.Api;
+namespace Words.WebApi;
 
 public class Program
 {

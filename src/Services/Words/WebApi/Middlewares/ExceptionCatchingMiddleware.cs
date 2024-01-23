@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using System.Net;
 using Words.Domain.Exceptions;
 
-namespace Words.Api.Middlewares;
+namespace Words.WebApi.Middlewares;
 
 public class ExceptionCatchingMiddleware
 {

@@ -8,15 +8,15 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Services/Words/Words.Api/Api.csproj", "Services/Words/Words.Api/"]
+COPY ["Services/Words/Words.WebApi/Api.csproj", "Services/Words/Words.WebApi/"]
 COPY ["Services/Words/Words.Application/Application.csproj", "Services/Words/Words.Application/"]
 COPY ["Services/EventBus/EventBus.csproj", "Services/EventBus/"]
 COPY ["Services/Words/DataAccess/DataAccess.Dapper/DataAccess.Dapper.csproj", "Services/Words/DataAccess/DataAccess.Dapper/"]
 COPY ["Services/Words/Words.Domain/Domain.csproj", "Services/Words/Words.Domain/"]
 COPY ["Libs/Responses/Responses.csproj", "Libs/Responses/"]
-RUN dotnet restore "./Services/Words/Words.Api/./Api.csproj"
+RUN dotnet restore "./Services/Words/Words.WebApi/./Api.csproj"
 COPY . .
-WORKDIR "/src/Services/Words/Words.Api"
+WORKDIR "/src/Services/Words/Words.WebApi"
 RUN dotnet build "./Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish

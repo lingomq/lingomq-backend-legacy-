@@ -25,8 +25,6 @@
     <ProjectReference Include="..\Application\Application.csproj" />
     <ProjectReference Include="..\DataAccess\DataAccess.Dapper\DataAccess.Dapper.csproj" />
     <ProjectReference Include="..\Domain\Domain.csproj" />
-    <ProjectReference Include="..\Words.Application\Application.csproj" />
-    <ProjectReference Include="..\Words.Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>

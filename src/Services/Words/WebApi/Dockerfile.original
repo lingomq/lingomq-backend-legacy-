@@ -7,16 +7,16 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 WORKDIR /src
-COPY ["Services/Words/Words.Api/Words.Api.csproj", "Services/Words/Words.Api/"]
-RUN dotnet restore "Services/Words/Words.Api/Words.Api.csproj"
+COPY ["Services/Words/Words.WebApi/Words.WebApi.csproj", "Services/Words/Words.WebApi/"]
+RUN dotnet restore "Services/Words/Words.WebApi/Words.WebApi.csproj"
 COPY . .
-WORKDIR "/src/Services/Words/Words.Api"
-RUN dotnet build "Words.Api.csproj" -c Release -o /app/build
+WORKDIR "/src/Services/Words/Words.WebApi"
+RUN dotnet build "Words.WebApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Words.Api.csproj" -c Release -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "Words.WebApi.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Words.Api.dll"]
+ENTRYPOINT ["dotnet", "Words.WebApi.dll"]
