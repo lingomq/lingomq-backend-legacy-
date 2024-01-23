@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net;
 
-namespace Api.Middlewares;
+namespace Authentication.WebApi.Middlewares;
 
 public class ExceptionCatchingMiddleware
 {

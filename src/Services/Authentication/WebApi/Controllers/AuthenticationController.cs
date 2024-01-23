@@ -3,7 +3,7 @@ using Authentication.Domain.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers;
+namespace Authentication.WebApi.Controllers;
 [Route("api/auth")]
 [ApiController]
 public class AuthenticationController : ControllerBase

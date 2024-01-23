@@ -2,9 +2,9 @@ using Authentication.Application.Services.DataMigrator;
 using FluentMigrator.Runner;
 using System.Reflection;
 using Microsoft.Extensions.DependencyInjection.Application;
-using Api.Middlewares;
+using Authentication.WebApi.Middlewares;
 
-namespace Authentication.Api;
+namespace Authentication.WebApi;
 
 public class Program
 {

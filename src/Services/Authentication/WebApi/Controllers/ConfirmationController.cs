@@ -2,7 +2,7 @@
 using Authentication.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Api.Controllers;
+namespace Authentication.WebApi.Controllers;
 [Route("api/auth/confirm")]
 [ApiController]
 public class ConfirmationController : ControllerBase
