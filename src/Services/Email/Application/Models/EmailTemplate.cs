@@ -1,4 +1,4 @@
-﻿namespace Email.BusinessLayer.Models
+﻿namespace Email.Application.Models
 {
     public class EmailTemplate
     {

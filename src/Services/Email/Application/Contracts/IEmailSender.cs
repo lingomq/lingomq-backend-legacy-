@@ -1,6 +1,6 @@
 ﻿using EventBus.Entities.Email;
 
-namespace Email.BusinessLayer.Contracts
+namespace Email.Application.Contracts
 {
     public interface IEmailSender
     {

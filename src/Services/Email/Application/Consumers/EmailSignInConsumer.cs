@@ -1,10 +1,10 @@
-﻿using Email.BusinessLayer.Contracts;
-using Email.BusinessLayer.Services;
+﻿using Email.Application.Contracts;
+using Email.Application.Services;
 using EventBus.Entities.Email;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 
-namespace Email.BusinessLayer.Consumers
+namespace Email.Application.Consumers
 {
     public class EmailSignInConsumer : IConsumer<EmailModelSignIn>
     {

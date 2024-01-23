@@ -1,6 +1,6 @@
-﻿using Email.BusinessLayer.Contracts;
+﻿using Email.Application.Contracts;
 
-namespace Email.BusinessLayer.Services
+namespace Email.Application.Services
 {
     public class SignInEmailBuilder : EmailBuilder
     {

@@ -1,6 +1,6 @@
-﻿using Email.BusinessLayer.Models;
+﻿using Email.Application.Models;
 
-namespace Email.BusinessLayer.Contracts
+namespace Email.Application.Contracts
 {
     public abstract class EmailBuilder
     {

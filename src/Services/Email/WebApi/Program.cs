@@ -1,6 +1,6 @@
-using Email.BusinessLayer.Consumers;
-using Email.BusinessLayer.Contracts;
-using Email.BusinessLayer.Services;
+using Email.Application.Consumers;
+using Email.Application.Contracts;
+using Email.Application.Services;
 using EventBus.Entities.Email;
 using MassTransit;
 

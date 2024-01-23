@@ -1,7 +1,7 @@
-﻿using Email.BusinessLayer.Contracts;
-using Email.BusinessLayer.Models;
+﻿using Email.Application.Contracts;
+using Email.Application.Models;
 
-namespace Email.BusinessLayer.Services
+namespace Email.Application.Services
 {
     public class EmailCreator
     {

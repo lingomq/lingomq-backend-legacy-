@@ -1,11 +1,11 @@
-﻿using Email.BusinessLayer.Contracts;
+﻿using Email.Application.Contracts;
 using EventBus.Entities.Email;
 using Microsoft.Extensions.Configuration;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
 
-namespace Email.BusinessLayer.Services
+namespace Email.Application.Services
 {
     public class EmailSender : IEmailSender
     {

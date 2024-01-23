@@ -8,19 +8,19 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Services/Email/Email.Api/Api.csproj", "Services/Email/Email.Api/"]
-COPY ["Services/Email/Email.BusinessLayer/BusinessLayer.csproj", "Services/Email/Email.BusinessLayer/"]
+COPY ["Services/Email/WebApi/WebApi.csproj", "Services/Email/WebApi/"]
+COPY ["Services/Email/Application/Application.csproj", "Services/Email/Application/"]
 COPY ["Services/EventBus/EventBus.csproj", "Services/EventBus/"]
-RUN dotnet restore "./Services/Email/Email.Api/./Api.csproj"
+RUN dotnet restore "./Services/Email/WebApi/./WebApi.csproj"
 COPY . .
-WORKDIR "/src/Services/Email/Email.Api"
-RUN dotnet build "./Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/Services/Email/WebApi"
+RUN dotnet build "./WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./Api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Api.dll"]
+ENTRYPOINT ["dotnet", "Email.WebApi.dll"]
