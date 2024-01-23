@@ -1,4 +1,4 @@
-﻿using DataAccess.Dapper.Contracts;
+﻿using Identity.DataAccess.Dapper.Contracts;
 using Domain.Contracts.Extensions;
 using EventBus.Entities.Identity.UserInfo;
 using Identity.Application.EventBus.MassTransit;

@@ -1,4 +1,4 @@
-﻿using DataAccess.Dapper.Contracts;
+﻿using Identity.DataAccess.Dapper.Contracts;
 using Identity.Domain.Entities;
 
 namespace Identity.Application.Services.DataMigrator;

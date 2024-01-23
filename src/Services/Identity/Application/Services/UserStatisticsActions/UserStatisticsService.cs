@@ -1,4 +1,4 @@
-﻿using DataAccess.Dapper.Contracts;
+﻿using Identity.DataAccess.Dapper.Contracts;
 using Identity.Domain.Contracts;
 using Identity.Domain.Entities;
 using Identity.Domain.Exceptions.ClientExceptions;
