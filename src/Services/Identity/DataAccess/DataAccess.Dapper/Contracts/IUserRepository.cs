@@ -1,7 +1,6 @@
-﻿using Domain.Dtos;
-using Identity.Domain.Entities;
+﻿using Identity.Domain.Entities;
 
-namespace DataAccess.Dapper.Contracts;
+namespace Identity.DataAccess.Dapper.Contracts;
 public interface IUserRepository : IGenericRepository<User>
 {
     Task<User?> GetByEmailAsync(string email);

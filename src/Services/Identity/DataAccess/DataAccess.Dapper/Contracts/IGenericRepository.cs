@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Dapper.Contracts;
+﻿namespace Identity.DataAccess.Dapper.Contracts;
 public interface IGenericRepository<T>
 {
     Task<T?> GetByIdAsync(Guid id);

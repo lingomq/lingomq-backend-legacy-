@@ -1,10 +1,10 @@
-﻿using DataAccess.Dapper.Contracts;
-using DataAccess.Dapper.Postgres.RawQueries;
-using DataAccess.Dapper.Utils;
+﻿using Identity.DataAccess.Dapper.Contracts;
+using Identity.DataAccess.Dapper.Postgres.RawQueries;
+using Identity.DataAccess.Dapper.Utils;
 using Identity.Domain.Entities;
 using System.Data;
 
-namespace DataAccess.Dapper.Postgres.Realizations;
+namespace Identity.DataAccess.Dapper.Postgres.Realizations;
 public class UserRoleRepository : GenericRepository<UserRole>, IUserRoleRepository
 {
     private readonly IDbConnection _connection;

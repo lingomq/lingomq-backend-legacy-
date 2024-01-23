@@ -3,7 +3,7 @@ using Identity.Domain.Entities;
 using System.Data;
 using System.Transactions;
 
-namespace DataAccess.Dapper.Utils;
+namespace Identity.DataAccess.Dapper.Utils;
 public class GenericRepository<T> where T: EntityBase
 {
     private readonly IDbConnection _connection;
