@@ -4,6 +4,5 @@
     {
         IFinanceRepository Finances { get; }
         IUserFinanceRepository UserFinances { get; }
-        IUserRepository Users { get; }
     }
 }

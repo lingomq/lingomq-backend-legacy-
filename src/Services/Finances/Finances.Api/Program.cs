@@ -3,7 +3,6 @@ using System.Reflection;
 using System.Text;
 using Finances.Api.Middlewares;
 using Finances.BusinessLayer.Contracts;
-using Finances.BusinessLayer.MassTransit.Consumers;
 using Finances.BusinessLayer.Services;
 using Finances.BusinessLayer.Services.Repositories;
 using FluentMigrator.Runner;
@@ -33,7 +32,6 @@ builder.Services.AddTransient<IDbConnection>((sp) =>
     new NpgsqlConnection(builder.Configuration["ConnectionStrings:Dev:Finances"]));
 builder.Services.AddTransient<IFinanceRepository, FinanceRepository>();
 builder.Services.AddTransient<IUserFinanceRepository, UserFinanceRepository>();
-builder.Services.AddTransient<IUserRepository, UserRepository>();
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 // Add other services
@@ -72,9 +70,6 @@ builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
     x.AddDelayedMessageScheduler();
-    x.AddConsumer<IdentityDeleteUserConsumer>();
-    x.AddConsumer<IdentityUpdateUserConsumer>();
-    x.AddConsumer<IdentityCreateUserConsumer>();
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.Host(builder.Configuration["RabbitMq:Uri"]!, "/", h =>
@@ -83,18 +78,6 @@ builder.Services.AddMassTransit(x =>
             h.Password(builder.Configuration["RabbitMq:Password"]);
         });
 
-        cfg.ReceiveEndpoint(typeof(IdentityDeleteUserConsumer).Name.ToLower(), endpoint =>
-        {
-            endpoint.ConfigureConsumer<IdentityDeleteUserConsumer>(context);
-        });
-        cfg.ReceiveEndpoint(typeof(IdentityUpdateUserConsumer).Name.ToLower(), endpoint =>
-        {
-            endpoint.ConfigureConsumer<IdentityUpdateUserConsumer>(context);
-        });
-        cfg.ReceiveEndpoint(typeof(IdentityCreateUserConsumer).Name.ToLower(), endpoint =>
-        {
-            endpoint.ConfigureConsumer<IdentityCreateUserConsumer>(context);
-        });
         cfg.ClearSerialization();
         cfg.UseRawJsonSerializer();
         cfg.ConfigureEndpoints(context);

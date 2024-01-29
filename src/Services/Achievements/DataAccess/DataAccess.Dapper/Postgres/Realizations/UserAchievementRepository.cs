@@ -29,11 +29,9 @@ public class UserAchievementRepository : GenericRepository<UserAchievement>, IUs
     protected override async Task<List<UserAchievement>> QueryListAsync<T>(string sql, T entity) where T : class
     {
         IEnumerable<UserAchievement>? usersAchievements;
-        usersAchievements = await _connection.QueryAsync<UserAchievement, User, Achievement, UserAchievement>
-            (sql, (userAchievement, user, achievement) =>
+        usersAchievements = await _connection.QueryAsync<UserAchievement, Achievement, UserAchievement>
+            (sql, (userAchievement, achievement) =>
             {
-                userAchievement.User = user;
-                userAchievement.UserId = user.Id;
 
                 userAchievement.Achievement = achievement;
                 userAchievement.AchievementId = achievement.Id;
