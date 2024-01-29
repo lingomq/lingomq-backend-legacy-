@@ -8,7 +8,6 @@ namespace Finances.DomainLayer.Entities
         public Guid UserId { get; set; }
         [JsonIgnore]
         public Guid FinanceId { get; set; }
-        public User? User { get; set; }
         public Finance? Finance { get; set; }
         public DateTime CreationDate { get; set; }
         public DateTime EndSubscriptionDate { get; set; }

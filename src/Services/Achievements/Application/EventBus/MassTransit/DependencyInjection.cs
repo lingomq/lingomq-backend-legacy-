@@ -13,9 +13,6 @@ public static partial class DependencyInjection
         {
             x.SetKebabCaseEndpointNameFormatter();
             x.AddDelayedMessageScheduler();
-            x.AddConsumer<DeleteUserConsumer>();
-            x.AddConsumer<UpdateUserConsumer>();
-            x.AddConsumer<CreateUserConsumer>();
             x.AddConsumer<CheckConsumer>();
             x.UsingRabbitMq((context, cfg) =>
             {
@@ -23,20 +20,6 @@ public static partial class DependencyInjection
                 {
                     h.Username(configuration["RabbitMq:UserName"]);
                     h.Password(configuration["RabbitMq:Password"]);
-                });
-
-                cfg.ReceiveEndpoint("achievements_" + typeof(DeleteUserConsumer).Name.ToLower(), endpoint =>
-                {
-                    endpoint.ConfigureConsumer<DeleteUserConsumer>(context);
-                });
-                cfg.ReceiveEndpoint("achievements_" + typeof(UpdateUserConsumer).Name.ToLower(), endpoint =>
-                {
-                    endpoint.ConfigureConsumer<UpdateUserConsumer>(context);
-                });
-
-                cfg.ReceiveEndpoint("achievements_" + typeof(CreateUserConsumer).Name.ToLower(), endpoint =>
-                {
-                    endpoint.ConfigureConsumer<CreateUserConsumer>(context);
                 });
 
                 cfg.ReceiveEndpoint("achievements_" + typeof(CheckConsumer).Name.ToLower(), endpoint =>

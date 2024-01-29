@@ -8,11 +8,6 @@ namespace Achievements.DataAccess.Dapper.Postgres.Migrations
     {
         public override void Up()
         {
-            Create.Table("users")
-                .WithColumn("id").AsGuid().PrimaryKey().Unique().NotNullable()
-                .WithColumn("email").AsCustom("varchar(256)").Unique().NotNullable()
-                .WithColumn("phone").AsCustom("varchar(15)");
-
             Create.Table("achievements")
                 .WithColumn("id").AsGuid().PrimaryKey().Unique().NotNullable()
                 .WithColumn("name").AsCustom("varchar(50)").Unique().NotNullable()
@@ -30,15 +25,9 @@ namespace Achievements.DataAccess.Dapper.Postgres.Migrations
                 .ToTable("achievements").PrimaryColumn("id")
                 .OnDeleteOrUpdate(System.Data.Rule.Cascade);
 
-            Create.ForeignKey("FK_Achievements_UserAchievements_UserId")
-                .FromTable("user_achievements").ForeignColumn("user_id")
-                .ToTable("users").PrimaryColumn("id")
-                .OnDeleteOrUpdate(System.Data.Rule.Cascade);
-
         }
         public override void Down()
         {
-            Delete.Table("users");
             Delete.Table("achievements");
             Delete.Table("user_achievements");
         }

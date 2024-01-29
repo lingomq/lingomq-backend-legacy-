@@ -18,4 +18,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MassTransit\Consumers\" />
+  </ItemGroup>
+
 </Project>

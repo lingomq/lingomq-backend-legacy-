@@ -70,13 +70,11 @@ public class UserFinanceRepository : GenericRepository<UserFinance>, IUserFinanc
     protected override async Task<List<UserFinance>> QueryAsync<TE>(string sql, TE entity)
     {
         IEnumerable<UserFinance> values = await _connection
-            .QueryAsync<UserFinance, User, Finance, UserFinance>(sql,
-                (userFinance, user, finance) =>
+            .QueryAsync<UserFinance, Finance, UserFinance>(sql,
+                (userFinance, finance) =>
                 {
                     userFinance.Finance = finance;
-                    userFinance.User = user;
                     userFinance.FinanceId = finance.Id;
-                    userFinance.UserId = user.Id;
 
                     return userFinance;
                 }, entity, splitOn: "id");

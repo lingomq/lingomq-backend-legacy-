@@ -17,7 +17,6 @@ public static partial class DependencyInjection
 
         services.AddScoped<IAchievementRepository, AchievementRepository>();
         services.AddScoped<IUserAchievementRepository, UserAchievementRepository>();
-        services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
         return services;
