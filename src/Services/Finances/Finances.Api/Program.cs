@@ -12,7 +12,6 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Extensions.Logging;
 using Npgsql;
-using Finances.Api.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration
