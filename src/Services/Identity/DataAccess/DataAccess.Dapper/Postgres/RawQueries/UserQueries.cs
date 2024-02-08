@@ -3,7 +3,7 @@ public static class UserQueries
 {
     public readonly static string Get =
         "SELECT id as \"Id\", email as \"Email\", phone as \"Phone\", " +
-        "password_hash as \"PasswordHash\", password_salt as \"PasswordSalt\"" +
+        "password_hash as \"PasswordHash\", password_salt as \"PasswordSalt\" " +
         "FROM users";
     public readonly static string GetWithoutCredentials =
         "SELECT id as \"Id\", email as \"Email\", phone as \"Phone\" " +
