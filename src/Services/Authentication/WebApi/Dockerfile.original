@@ -8,15 +8,16 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:7.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["Services/Words/WebApi/WebApi.csproj", "Services/Words/WebApi/"]
-COPY ["Services/Words/Application/Application.csproj", "Services/Words/Application/"]
+COPY ["Services/Authentication/WebApi/WebApi.csproj", "Services/Authentication/WebApi/"]
+COPY ["Services/Authentication/Application/Application.csproj", "Services/Authentication/Application/"]
+COPY ["Libs/Cryptography/Cryptography.csproj", "Libs/Cryptography/"]
 COPY ["Services/EventBus/EventBus.csproj", "Services/EventBus/"]
-COPY ["Services/Words/DataAccess/DataAccess.Dapper/DataAccess.Dapper.csproj", "Services/Words/DataAccess/DataAccess.Dapper/"]
-COPY ["Services/Words/Domain/Domain.csproj", "Services/Words/Domain/"]
+COPY ["Services/Authentication/DataAccess/DataAccess.Dapper/DataAccess.Dapper.csproj", "Services/Authentication/DataAccess/DataAccess.Dapper/"]
+COPY ["Services/Authentication/Domain/Domain.csproj", "Services/Authentication/Domain/"]
 COPY ["Libs/Responses/Responses.csproj", "Libs/Responses/"]
-RUN dotnet restore "./Services/Words/WebApi/./WebApi.csproj"
+RUN dotnet restore "./Services/Authentication/WebApi/./WebApi.csproj"
 COPY . .
-WORKDIR "/src/Services/Words/WebApi"
+WORKDIR "/src/Services/Authentication/WebApi"
 RUN dotnet build "./WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 FROM build AS publish
@@ -26,4 +27,4 @@ RUN dotnet publish "./WebApi.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Words.WebApi.dll"]
+ENTRYPOINT ["dotnet", "WebApi.dll"]
