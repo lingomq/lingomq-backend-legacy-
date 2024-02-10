@@ -20,7 +20,7 @@ public class LanguageController : ControllerBase
     public async Task<IActionResult> Get(int range = int.MaxValue)
     {
         List<Language> languages = await _languageService.GetAsync(range);
-        return LingoMq.Responses.LingoMqResponse.OkResult(languages);
+        return LingoMqResponses.LingoMqResponse.OkResult(languages);
     }
 
     [HttpGet("id/{id}")]
@@ -28,7 +28,7 @@ public class LanguageController : ControllerBase
     public async Task<IActionResult> Get(Guid id)
     {
         Language language = await _languageService.GetAsync(id);
-        return LingoMq.Responses.LingoMqResponse.OkResult(language);
+        return LingoMqResponses.LingoMqResponse.OkResult(language);
     }
 
     [HttpPost]
@@ -36,7 +36,7 @@ public class LanguageController : ControllerBase
     public async Task<IActionResult> Create(Language language)
     {
         await _languageService.CreateAsync(language);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpPut]
@@ -44,7 +44,7 @@ public class LanguageController : ControllerBase
     public async Task<IActionResult> Update(Language language)
     {
         await _languageService.UpdateAsync(language);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpDelete("{id}")]
@@ -52,6 +52,6 @@ public class LanguageController : ControllerBase
     public async Task<IActionResult> Delete(Guid id)
     {
         await _languageService.DeleteAsync(id);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 }

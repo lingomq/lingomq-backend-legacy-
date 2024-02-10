@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Libs\Responses\Responses.csproj" />
+    <ProjectReference Include="..\..\..\..\libs\LingoMqResponses\LingoMqResponses.csproj" />
   </ItemGroup>
 
 </Project>

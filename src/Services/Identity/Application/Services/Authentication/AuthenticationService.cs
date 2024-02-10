@@ -1,13 +1,13 @@
-﻿using Identity.Application.EventBus.MassTransit;
-using Identity.Domain.Exceptions.ClientExceptions;
-using Identity.DataAccess.Dapper.Contracts;
+﻿using EventBus.Entities.Email;
+using Identity.Application.EventBus.MassTransit;
 using Identity.Application.Services.Jwt;
+using Identity.DataAccess.Dapper.Contracts;
 using Identity.Domain.Contracts;
 using Identity.Domain.Entities;
+using Identity.Domain.Exceptions.ClientExceptions;
 using Identity.Domain.Models;
-using System.Security.Claims;
-using EventBus.Entities.Email;
 using Identity.Domain.Validations;
+using System.Security.Claims;
 
 namespace Identity.Application.Services.Authentication;
 public class AuthenticationService : IAuthenticationService

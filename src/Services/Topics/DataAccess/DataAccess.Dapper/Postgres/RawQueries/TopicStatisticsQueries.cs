@@ -1,5 +1,5 @@
 ﻿namespace Topics.DataAccess.Dapper.Postgres.RawQueries;
-public static class TopicStatisticsQueries 
+public static class TopicStatisticsQueries
 {
     public static readonly string Get =
         "SELECT topic_statistics.id, " +

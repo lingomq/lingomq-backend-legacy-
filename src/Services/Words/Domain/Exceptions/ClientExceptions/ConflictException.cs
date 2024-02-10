@@ -1,5 +1,5 @@
-﻿using LingoMq.Responses;
-using Responses.StatusCodes;
+﻿using LingoMqResponses;
+using LingoMqResponses.StatusCodes;
 
 namespace Words.Domain.Exceptions.ClientExceptions;
 

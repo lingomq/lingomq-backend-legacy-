@@ -1,6 +1,6 @@
-﻿using Identity.Domain.Models;
+﻿using Identity.Domain.Entities;
 using Identity.Domain.Exceptions.ClientExceptions;
-using Identity.Domain.Entities;
+using Identity.Domain.Models;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 

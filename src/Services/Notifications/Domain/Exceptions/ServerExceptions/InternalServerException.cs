@@ -1,4 +1,4 @@
-﻿using LingoMq.Responses;
+﻿using LingoMqResponses;
 
 namespace Notifications.Domain.Exceptions.ServerExceptions
 {

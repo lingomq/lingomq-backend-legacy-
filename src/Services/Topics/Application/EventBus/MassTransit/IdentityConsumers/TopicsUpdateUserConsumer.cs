@@ -6,7 +6,7 @@ using Topics.Domain.Entities;
 
 namespace Topics.Application.EventBus.MassTransit.Consumers.IdentityConsumers;
 
-public class TopicsUpdateUserConsumer: IConsumer<IdentityModelUpdateUser>
+public class TopicsUpdateUserConsumer : IConsumer<IdentityModelUpdateUser>
 {
     private readonly ILogger<TopicsUpdateUserConsumer> _logger;
     private readonly IUnitOfWork _unitOfWork;

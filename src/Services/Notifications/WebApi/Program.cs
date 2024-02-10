@@ -1,6 +1,6 @@
-using System.Reflection;
 using FluentMigrator.Runner;
 using Notifications.Application.Services.DataMigrator;
+using System.Reflection;
 
 namespace Notifications.WebApi;
 

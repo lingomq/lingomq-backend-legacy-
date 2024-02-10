@@ -1,5 +1,5 @@
-﻿using EventBus.Entities.Identity.User;
-using Authentication.Domain.Entities;
+﻿using Authentication.Domain.Entities;
+using EventBus.Entities.Identity.User;
 
 namespace Authentication.Application.Services.Confirm.Extensions;
 public static class IdentityModelCreateUserExtension

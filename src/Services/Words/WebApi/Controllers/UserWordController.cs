@@ -1,5 +1,4 @@
-﻿using Application.Services.UserWordActions;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Words.Domain.Constants;
@@ -26,7 +25,7 @@ public class UserWordController : ControllerBase
     public async Task<IActionResult> Get()
     {
         List<UserWord> words = await _userWordService.GetByUserIdAsync(UserId);
-        return LingoMq.Responses.LingoMqResponse.OkResult(words);
+        return LingoMqResponses.LingoMqResponse.OkResult(words);
     }
 
     [HttpGet("user/{userId}")]
@@ -34,7 +33,7 @@ public class UserWordController : ControllerBase
     public async Task<IActionResult> Get(Guid userId)
     {
         List<UserWord> words = await _userWordService.GetByUserIdAsync(userId);
-        return LingoMq.Responses.LingoMqResponse.OkResult(words);
+        return LingoMqResponses.LingoMqResponse.OkResult(words);
     }
 
     [HttpGet("famous")]
@@ -42,7 +41,7 @@ public class UserWordController : ControllerBase
     public async Task<IActionResult> GetMostRepeatedWord()
     {
         UserWord userWord = await _userWordService.GetMostRepeatedAsync(UserId);
-        return LingoMq.Responses.LingoMqResponse.OkResult(userWord);
+        return LingoMqResponses.LingoMqResponse.OkResult(userWord);
     }
 
     [HttpGet("records/type/{type}/order/{order}/count/{count}")]
@@ -57,7 +56,7 @@ public class UserWordController : ControllerBase
         else recordType = RecordTypesEnum.Repeats;
 
         List<RecordsModel> records = await _userWordService.GetRecordsAsync(recordType, ordering, count);
-        return LingoMq.Responses.LingoMqResponse.OkResult(records);
+        return LingoMqResponses.LingoMqResponse.OkResult(records);
     }
 
     [HttpGet("word/count/{userId}/{date}")]
@@ -65,7 +64,7 @@ public class UserWordController : ControllerBase
     public async Task<IActionResult> GetAverageUserWordCounts(Guid userId, DateTime dateTime)
     {
         int count = await _userWordService.GetAverageUserWordCountsAsync(userId, dateTime);
-        return LingoMq.Responses.LingoMqResponse.OkResult(new { Count = count });
+        return LingoMqResponses.LingoMqResponse.OkResult(new { Count = count });
     }
 
     [HttpPost("{isForce}/{isAutocomplete}")]
@@ -73,7 +72,7 @@ public class UserWordController : ControllerBase
     public async Task<IActionResult> Create([FromBody] UserWord word, bool isForce = false, bool isAutocomplete = false)
     {
         await _userWordService.CreateAsync(word, isForce, isAutocomplete, UserId);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpPut("add/repeats/{wordId}")]
@@ -81,7 +80,7 @@ public class UserWordController : ControllerBase
     public async Task<IActionResult> AddRepeats(Guid wordId)
     {
         await _userWordService.AddRepeatsAsync(wordId);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpDelete("{id}")]
@@ -89,7 +88,7 @@ public class UserWordController : ControllerBase
     public async Task<IActionResult> Delete(Guid id)
     {
         await _userWordService.DeleteAsync(id);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 }
 

@@ -1,9 +1,9 @@
-﻿using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Notifications.Domain.Constants;
 using Notifications.Domain.Contracts;
 using Notifications.Domain.Entities;
+using System.Security.Claims;
 
 namespace Notifications.WebApi.Controllers;
 [Route("api/notifications/user")]
@@ -22,7 +22,7 @@ public class UserNotificationController : ControllerBase
     public async Task<IActionResult> Get()
     {
         List<UserNotification> notifications = await _userNotificationService.GetAsync(UserId);
-        return LingoMq.Responses.LingoMqResponse.OkResult(notifications);
+        return LingoMqResponses.LingoMqResponse.OkResult(notifications);
     }
 
     [HttpPut("id/{id}")]
@@ -30,6 +30,6 @@ public class UserNotificationController : ControllerBase
     public async Task<IActionResult> Update(Guid id)
     {
         await _userNotificationService.UpdateAsync(id);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 }

@@ -1,8 +1,8 @@
 using FluentMigrator.Runner;
 using Newtonsoft.Json;
 using System.Reflection;
-using Words.WebApi.Middlewares;
 using Words.Application.Services.DataMigrator;
+using Words.WebApi.Middlewares;
 
 namespace Words.WebApi;
 
@@ -17,12 +17,12 @@ public class Program
             .AddEnvironmentVariables();
 
         builder.Services.AddControllers().AddNewtonsoftJson(options =>
-        {   
+        {
             options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
         });
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwagger();
-        builder.Services.AddPostgresDataAccess(builder.Configuration); 
+        builder.Services.AddPostgresDataAccess(builder.Configuration);
         builder.Services.AddApplicationMassTransit(builder.Configuration);
         builder.Services.AddApplicationServices();
         builder.Services.AddJwtAuth(builder.Configuration);

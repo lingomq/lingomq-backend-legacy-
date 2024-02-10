@@ -1,6 +1,6 @@
 using FluentMigrator.Runner;
-using Identity.WebApi.Middlewares;
 using Identity.Application.Services.DataMigrator;
+using Identity.WebApi.Middlewares;
 using Microsoft.Extensions.DependencyInjection.Applications;
 using System.Reflection;
 

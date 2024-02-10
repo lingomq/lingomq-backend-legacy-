@@ -1,6 +1,4 @@
-﻿using Finances.BusinessLayer.Models.YooKassa;
-
-namespace Finances.BusinessLayer.Contracts
+﻿namespace Finances.BusinessLayer.Contracts
 {
     public interface IPaymentService
     {

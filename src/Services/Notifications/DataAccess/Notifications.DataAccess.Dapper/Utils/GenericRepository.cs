@@ -1,7 +1,7 @@
-﻿using System.Data;
-using System.Transactions;
-using Dapper;
+﻿using Dapper;
 using Notifications.Domain.Entities;
+using System.Data;
+using System.Transactions;
 
 namespace Notifications.DataAccess.Dapper.Utils;
 public class GenericRepository<T> where T : EntityBase

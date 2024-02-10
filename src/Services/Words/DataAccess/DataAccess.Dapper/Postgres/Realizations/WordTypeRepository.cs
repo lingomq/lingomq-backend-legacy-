@@ -18,8 +18,8 @@ public class WordTypeRepository : GenericRepository<WordType>, IWordTypeReposito
 
     public async Task<List<WordType>> GetAsync(int range = int.MaxValue) =>
         await QueryListAsync(WordTypeQueries.GetRange, new { Count = range });
-   
-    public async Task<WordType?> GetByIdAsync(Guid id) => 
+
+    public async Task<WordType?> GetByIdAsync(Guid id) =>
         await QueryFirstAsync(WordTypeQueries.GetById, new { Id = id });
 
     public async Task UpdateAsync(WordType entity) =>

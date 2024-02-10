@@ -107,7 +107,7 @@ public class UserWordService : IUserWordService
         string[] correctWords = await _wordChecker.SpellCorrector(userWordDto.Word!, language.Name!);
 
         if (!correctWords.Contains(userWordDto.Word) && !isForce)
-            throw new InvalidDataException<WrongWordResponseModel>(new WrongWordResponseModel() 
+            throw new InvalidDataException<WrongWordResponseModel>(new WrongWordResponseModel()
             {
                 RightWords = correctWords,
             }, "wrong word");

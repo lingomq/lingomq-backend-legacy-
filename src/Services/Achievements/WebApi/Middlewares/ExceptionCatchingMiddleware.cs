@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Achievements.Domain.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System.Net;
-using Achievements.Domain.Exceptions;
 
 namespace Achievements.WebApi.Middlewares;
 

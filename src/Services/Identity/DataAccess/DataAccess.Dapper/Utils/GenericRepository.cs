@@ -4,7 +4,7 @@ using System.Data;
 using System.Transactions;
 
 namespace Identity.DataAccess.Dapper.Utils;
-public class GenericRepository<T> where T: EntityBase
+public class GenericRepository<T> where T : EntityBase
 {
     private readonly IDbConnection _connection;
     protected GenericRepository(IDbConnection connection) =>

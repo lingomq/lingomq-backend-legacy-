@@ -1,6 +1,6 @@
-﻿using Achievements.Domain.Contracts;
+﻿using Achievements.DataAccess.Dapper.Contracts;
+using Achievements.Domain.Contracts;
 using Achievements.Domain.Entities;
-using Achievements.DataAccess.Dapper.Contracts;
 using Achievements.Domain.Exceptions.ClientExceptions;
 
 namespace Achievements.Application.Services.AchievementActions;

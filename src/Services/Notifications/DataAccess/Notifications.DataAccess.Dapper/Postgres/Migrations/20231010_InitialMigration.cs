@@ -1,10 +1,11 @@
-﻿using System.Data;
-using FluentMigrator;
+﻿using FluentMigrator;
+using System.Data;
 
 namespace Notifications.DataAccess.Dapper.Postgres.Migrations;
 [Profile("Development")]
-[Migration( 20231010)]
-public class InitialMigration : Migration {
+[Migration(20231010)]
+public class InitialMigration : Migration
+{
     public override void Up()
     {
         Create.Table("users")
@@ -28,17 +29,17 @@ public class InitialMigration : Migration {
             .WithColumn("notification_id").AsGuid().NotNullable()
             .WithColumn("date_of_receipt").AsDateTime().NotNullable()
             .WithColumn("is_readed").AsBoolean().Nullable();
-        
+
         Create.ForeignKey("FK_Notifications_Notifications_NotificationsId")
             .FromTable("user_notifications").ForeignColumn("notification_id")
             .ToTable("notifications").PrimaryColumn("id")
             .OnDeleteOrUpdate(Rule.Cascade);
-        
+
         Create.ForeignKey("FK_Notifications_UserNotifications_UserId")
             .FromTable("user_notifications").ForeignColumn("user_id")
             .ToTable("users").PrimaryColumn("id")
             .OnDeleteOrUpdate(Rule.Cascade);
-        
+
         Create.ForeignKey("FK_Notifications_NotificationTypes_NotificationTypeId ")
             .FromTable("notifications").ForeignColumn("notification_type_id")
             .ToTable("notification_types").PrimaryColumn("id")

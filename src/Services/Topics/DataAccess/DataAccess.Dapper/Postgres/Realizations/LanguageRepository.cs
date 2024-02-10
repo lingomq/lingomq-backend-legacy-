@@ -1,8 +1,8 @@
-﻿using Topics.DataAccess.Dapper.Contracts;
-using Topics.Domain.Entities;
-using Topics.DataAccess.Dapper.Utils;
-using System.Data;
+﻿using System.Data;
+using Topics.DataAccess.Dapper.Contracts;
 using Topics.DataAccess.Dapper.Postgres.RawQueries;
+using Topics.DataAccess.Dapper.Utils;
+using Topics.Domain.Entities;
 
 namespace Topics.DataAccess.Dapper.Postgres.Realizations;
 public class LanguageRepository : GenericRepository<Language>, ILanguageRepository

@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Libs\Cryptography\Cryptography.csproj" />
     <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\DataAccess\DataAccess.Dapper\DataAccess.Dapper.csproj" />
   </ItemGroup>

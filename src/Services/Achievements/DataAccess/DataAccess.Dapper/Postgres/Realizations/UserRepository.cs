@@ -19,11 +19,11 @@ public class UserRepository : GenericRepository<User>, IUserRepository
 
     public async Task<List<User>> GetAsync(int range = int.MaxValue) =>
         await QueryListAsync(UserQueries.GetRange, new { Count = range });
-    
+
     public async Task<User?> GetByIdAsync(Guid id) =>
         await QueryFirstAsync(UserQueries.GetById, new { Id = id });
 
     public async Task UpdateAsync(User entity) =>
         await ExecuteByTemplateAsync(UserQueries.Delete, entity);
-    
+
 }

@@ -20,7 +20,7 @@ public class UserRoleController : ControllerBase
     public async Task<IActionResult> Get(int range = int.MaxValue)
     {
         List<UserRole> roles = await _userRoleService.GetRangeAsync(range);
-        return LingoMq.Responses.LingoMqResponse.OkResult(roles);
+        return LingoMqResponses.LingoMqResponse.OkResult(roles);
     }
 
     [HttpGet("id/{id}")]
@@ -28,7 +28,7 @@ public class UserRoleController : ControllerBase
     public async Task<IActionResult> Get(Guid id)
     {
         UserRole role = await _userRoleService.GetByIdAsync(id);
-        return LingoMq.Responses.LingoMqResponse.OkResult(role);
+        return LingoMqResponses.LingoMqResponse.OkResult(role);
     }
 
     [HttpPost]
@@ -36,7 +36,7 @@ public class UserRoleController : ControllerBase
     public async Task<IActionResult> Create(UserRole role, CancellationToken cancellationToken)
     {
         await _userRoleService.CreateAsync(role, cancellationToken);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpPut]
@@ -44,7 +44,7 @@ public class UserRoleController : ControllerBase
     public async Task<IActionResult> Update(UserRole role, CancellationToken cancellationToken)
     {
         await _userRoleService.UpdateAsync(role, cancellationToken);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpDelete("{id}")]
@@ -52,6 +52,6 @@ public class UserRoleController : ControllerBase
     public async Task<IActionResult> Delete(Guid id, CancellationToken cancellationToken)
     {
         await _userRoleService.DeleteAsync(id, cancellationToken);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 }

@@ -1,10 +1,10 @@
+using Dapper;
 using System.Data;
 using System.Transactions;
-using Dapper;
 
 namespace Finances.BusinessLayer.Services.Repositories;
 
-public abstract class GenericRepository<T> where T: class
+public abstract class GenericRepository<T> where T : class
 {
     private readonly IDbConnection _connection;
 

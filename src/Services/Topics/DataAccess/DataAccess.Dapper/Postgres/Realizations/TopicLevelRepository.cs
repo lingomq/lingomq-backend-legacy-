@@ -15,10 +15,10 @@ public class TopicLevelRepository : GenericRepository<TopicLevel>, ITopicLevelRe
         await ExecuteByTemplateAsync(TopicLevelQueries.Create, entity);
     public async Task DeleteAsync(Guid id) =>
         await ExecuteByTemplateAsync(TopicLevelQueries.Delete, new { Id = id });
-    
+
     public async Task<List<TopicLevel>> GetAsync(int range = int.MaxValue) =>
         await QueryListAsync(TopicLevelQueries.GetRange, new { Count = range });
-    
+
     public async Task<TopicLevel?> GetByIdAsync(Guid id) =>
         await QueryFirstAsync(TopicLevelQueries.GetById, new { Id = id });
 

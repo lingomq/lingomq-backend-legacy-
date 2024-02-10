@@ -1,8 +1,8 @@
-﻿using Topics.Domain.Contracts;
+﻿using Topics.DataAccess.Dapper.Contracts;
+using Topics.Domain.Contracts;
 using Topics.Domain.Entities;
-using Topics.Domain.Models;
-using Topics.DataAccess.Dapper.Contracts;
 using Topics.Domain.Exceptions.ClientExceptions;
+using Topics.Domain.Models;
 
 namespace Topics.Application.Services.TopicActions;
 public class TopicService : ITopicService

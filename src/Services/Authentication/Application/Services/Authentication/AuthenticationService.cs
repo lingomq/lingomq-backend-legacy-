@@ -1,10 +1,10 @@
 ﻿using Authentication.Application.EventBus.MassTransit;
 using Authentication.Application.Services.Jwt;
+using Authentication.DataAccess.Dapper.Contracts;
 using Authentication.Domain.Contracts;
+using Authentication.Domain.Entities;
 using Authentication.Domain.Exceptions;
 using Authentication.Domain.Models;
-using Authentication.DataAccess.Dapper.Contracts;
-using Authentication.Domain.Entities;
 using Domain.Validations;
 using EventBus.Entities.Email;
 using System.Security.Claims;

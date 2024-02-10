@@ -1,5 +1,5 @@
-﻿using LingoMq.Responses;
-using Responses.StatusCodes;
+﻿using LingoMqResponses;
+using LingoMqResponses.StatusCodes;
 
 namespace Authentication.Domain.Exceptions
 {
@@ -9,6 +9,7 @@ namespace Authentication.Domain.Exceptions
         public InvalidDataException(string message)
             : base((int)ClientErrorCodes.BadRequest, message) { }
         public InvalidDataException(T data, string message = "Invalid data") :
-            base(LingoMqResponse.BadRequestResult(data, message)) { }
+            base(LingoMqResponse.BadRequestResult(data, message))
+        { }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Dapper;
 using System.Data;
-using System.Data.Common;
 using Topics.DataAccess.Dapper.Contracts;
 using Topics.DataAccess.Dapper.Postgres.RawQueries;
 using Topics.DataAccess.Dapper.Utils;

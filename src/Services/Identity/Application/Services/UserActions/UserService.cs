@@ -1,11 +1,11 @@
-﻿using Cryptography;
-using Cryptography.Cryptors;
-using Cryptography.Entities;
-using Identity.DataAccess.Dapper.Contracts;
-using EventBus.Entities.Identity.User;
+﻿using EventBus.Entities.Identity.User;
 using Identity.Application.EventBus.MassTransit;
+using Identity.DataAccess.Dapper.Contracts;
 using Identity.Domain.Contracts;
 using Identity.Domain.Exceptions.ClientExceptions;
+using LingoMqCryptography;
+using LingoMqCryptography.Cryptors;
+using LingoMqCryptography.Entities;
 
 namespace Identity.Application.Services.UserActions;
 public class UserService : IUserService

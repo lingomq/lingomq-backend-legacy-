@@ -18,7 +18,7 @@ public class TopicRepository : GenericRepository<Topic>, ITopicRepository
 
     public async Task DeleteAsync(Guid id) =>
         await ExecuteByTemplateAsync(TopicQueries.Delete, new { Id = id });
-    
+
     public async Task<List<Topic>> GetAsync(int start = 0, int stop = int.MaxValue) =>
         await QueryListAsync(TopicQueries.GetRange + TopicQueries.PaginationAndOrderByDate, new { Skip = start, Take = stop });
 

@@ -20,7 +20,7 @@ public class WordTypeController : ControllerBase
     public async Task<IActionResult> Get(int range = int.MaxValue)
     {
         List<WordType> wordTypes = await _wordTypeService.GetRangeAsync(range);
-        return LingoMq.Responses.LingoMqResponse.OkResult(wordTypes);
+        return LingoMqResponses.LingoMqResponse.OkResult(wordTypes);
     }
 
     [HttpGet("id/{id}")]
@@ -28,7 +28,7 @@ public class WordTypeController : ControllerBase
     public async Task<IActionResult> Get(Guid id)
     {
         WordType wordType = await _wordTypeService.GetAsync(id);
-        return LingoMq.Responses.LingoMqResponse.OkResult(wordType);
+        return LingoMqResponses.LingoMqResponse.OkResult(wordType);
     }
 
     [HttpPost]
@@ -36,7 +36,7 @@ public class WordTypeController : ControllerBase
     public async Task<IActionResult> Create(WordType wordType)
     {
         await _wordTypeService.CreateAsync(wordType);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpPut]
@@ -44,7 +44,7 @@ public class WordTypeController : ControllerBase
     public async Task<IActionResult> Update(WordType wordType)
     {
         await _wordTypeService.UpdateAsync(wordType);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpDelete("{id}")]
@@ -52,6 +52,6 @@ public class WordTypeController : ControllerBase
     public async Task<IActionResult> Delete(Guid id)
     {
         await _wordTypeService.DeleteAsync(id);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 }

@@ -19,7 +19,7 @@ public class AuthenticationController : ControllerBase
     public async Task<IActionResult> SignIn(SignModel signModel, CancellationToken cancellationToken)
     {
         TokenModel tokenModel = await _authenticationService.SignInAsync(signModel, cancellationToken);
-        return LingoMq.Responses.LingoMqResponse.OkResult(tokenModel);
+        return LingoMqResponses.LingoMqResponse.OkResult(tokenModel);
     }
 
     [HttpPost("sign-up")]
@@ -27,7 +27,7 @@ public class AuthenticationController : ControllerBase
     public async Task<IActionResult> SignUp(SignModel signModel, CancellationToken cancellationToken)
     {
         int signUpStatus = await _authenticationService.SignUpAsync(signModel, cancellationToken);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpGet("refresh-token/{token}")]
@@ -35,6 +35,6 @@ public class AuthenticationController : ControllerBase
     public async Task<IActionResult> RefreshToken(string token, CancellationToken cancellationToken)
     {
         TokenModel tokenModel = await _authenticationService.RefreshTokenAsync(token, cancellationToken);
-        return LingoMq.Responses.LingoMqResponse.OkResult(tokenModel);
+        return LingoMqResponses.LingoMqResponse.OkResult(tokenModel);
     }
 }

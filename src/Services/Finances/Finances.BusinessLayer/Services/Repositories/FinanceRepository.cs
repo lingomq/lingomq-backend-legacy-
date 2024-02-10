@@ -1,6 +1,6 @@
-using System.Data;
 using Finances.BusinessLayer.Contracts;
 using Finances.DomainLayer.Entities;
+using System.Data;
 
 namespace Finances.BusinessLayer.Services.Repositories;
 
@@ -12,7 +12,7 @@ public class FinanceRepository : GenericRepository<Finance>, IFinanceRepository
                                         "FROM finances ";
 
     private static readonly string GetRange = Get + "LIMIT @Count";
-    
+
     private static readonly string GetById = Get + "WHERE id = @Id";
 
     private static readonly string Create = "INSERT INTO finances " +
@@ -25,7 +25,7 @@ public class FinanceRepository : GenericRepository<Finance>, IFinanceRepository
                                             "WHERE id = @Id";
 
     private static readonly string Delete = "DELETE from finances WHERE id = @Id";
-    
+
     public FinanceRepository(IDbConnection connection) : base(connection) { }
 
     public async Task<Finance?> GetAsync(Guid id) =>

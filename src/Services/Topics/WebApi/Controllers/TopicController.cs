@@ -1,4 +1,4 @@
-﻿using LingoMq.Responses;
+﻿using LingoMqResponses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Topics.Domain.Constants;
@@ -74,7 +74,7 @@ public class TopicController : ControllerBase
     [Authorize(Roles = AccessRoles.Staff)]
     public async Task<IActionResult> Delete(Guid id)
     {
-        await _topicService.DeleteAsync(id); 
+        await _topicService.DeleteAsync(id);
         return LingoMqResponse.AcceptedResult();
     }
 }

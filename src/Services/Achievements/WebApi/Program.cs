@@ -16,7 +16,7 @@ public class Program
             .AddEnvironmentVariables();
 
         builder.Services.AddControllers();
-        builder.Services.AddEndpointsApiExplorer(); 
+        builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwagger();
         builder.Services.AddPostgresDataAccess(builder.Configuration);
         builder.Services.AddApplicationMassTransit(builder.Configuration);

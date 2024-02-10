@@ -7,7 +7,7 @@ public static class JwtExtensions
 {
     public static string GenerateEmailToken(this IJwtService jwtService, SignModel model)
     {
-        List<Claim> claims =  new List<Claim>()
+        List<Claim> claims = new List<Claim>()
         {
             new Claim(ClaimTypes.Email, model.Email!),
             new Claim(ClaimTypes.Name, model.Nickname!),

@@ -1,8 +1,8 @@
 using Authentication.Application.Services.DataMigrator;
-using FluentMigrator.Runner;
-using System.Reflection;
-using Microsoft.Extensions.DependencyInjection.Application;
 using Authentication.WebApi.Middlewares;
+using FluentMigrator.Runner;
+using Microsoft.Extensions.DependencyInjection.Application;
+using System.Reflection;
 
 namespace Authentication.WebApi;
 

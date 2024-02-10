@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Libs\Responses\Responses.csproj" />
     <ProjectReference Include="..\..\EventBus\EventBus.csproj" />
     <ProjectReference Include="..\Finances.DomainLayer\Finances.DomainLayer.csproj" />
   </ItemGroup>

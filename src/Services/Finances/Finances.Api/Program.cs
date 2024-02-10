@@ -1,6 +1,3 @@
-using System.Data;
-using System.Reflection;
-using System.Text;
 using Finances.Api.Middlewares;
 using Finances.BusinessLayer.Contracts;
 using Finances.BusinessLayer.MassTransit.Consumers;
@@ -13,7 +10,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using NLog.Extensions.Logging;
 using Npgsql;
-using Finances.Api.Services;
+using System.Data;
+using System.Reflection;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Configuration

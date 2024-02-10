@@ -1,4 +1,4 @@
-﻿using LingoMq.Responses;
+﻿using LingoMqResponses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Topics.Domain.Constants;
@@ -14,7 +14,7 @@ public class TopicStatisticsTypeController : ControllerBase
     private readonly ITopicStatisticsTypeService _topicStatisticsTypeService;
     public TopicStatisticsTypeController(ITopicStatisticsTypeService topicStatisticsTypeService)
     {
-        _topicStatisticsTypeService = topicStatisticsTypeService;   
+        _topicStatisticsTypeService = topicStatisticsTypeService;
     }
 
     [HttpGet("all/{range}")]

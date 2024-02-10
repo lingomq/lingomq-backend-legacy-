@@ -1,8 +1,8 @@
-﻿using Authentication.DataAccess.Dapper.Utils;
-using Authentication.DataAccess.Dapper.Contracts;
+﻿using Authentication.DataAccess.Dapper.Contracts;
+using Authentication.DataAccess.Dapper.Postgres.RawQueries;
+using Authentication.DataAccess.Dapper.Utils;
 using Authentication.Domain.Entities;
 using System.Data;
-using Authentication.DataAccess.Dapper.Postgres.RawQueries;
 
 namespace Authentication.DataAccess.Dapper.Postgres.Realizations;
 public class UserRepository : GenericRepository<User>, IUserRepository
@@ -28,7 +28,7 @@ public class UserRepository : GenericRepository<User>, IUserRepository
     public async Task UpdateAsync(User entity) =>
         await ExecuteByTemplateAsync(UserQueries.Update, entity);
 
-    public async Task<User?> UpdateCredentialsAsync(User user) 
+    public async Task<User?> UpdateCredentialsAsync(User user)
     {
         await ExecuteByTemplateAsync(UserQueries.UpdateCredential, user);
         return user;

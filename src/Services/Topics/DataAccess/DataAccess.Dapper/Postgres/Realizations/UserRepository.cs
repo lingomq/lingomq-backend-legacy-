@@ -1,8 +1,8 @@
 ﻿using System.Data;
 using Topics.DataAccess.Dapper.Contracts;
+using Topics.DataAccess.Dapper.Postgres.RawQueries;
 using Topics.DataAccess.Dapper.Utils;
 using Topics.Domain.Entities;
-using Topics.DataAccess.Dapper.Postgres.RawQueries;
 
 namespace Topics.DataAccess.Dapper.Postgres.Realizations;
 public class UserRepository : GenericRepository<User>, IUserRepository

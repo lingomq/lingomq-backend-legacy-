@@ -18,7 +18,7 @@ public class NotificationTypeController : ControllerBase
     public async Task<IActionResult> Get(int range = int.MaxValue)
     {
         List<NotificationType> types = await _notificationService.GetAsync(range);
-        return LingoMq.Responses.LingoMqResponse.OkResult(types);
+        return LingoMqResponses.LingoMqResponse.OkResult(types);
     }
 
     [HttpGet("id/{id}")]
@@ -26,7 +26,7 @@ public class NotificationTypeController : ControllerBase
     public async Task<IActionResult> Get(Guid id)
     {
         NotificationType? type = await _notificationService.GetAsync(id);
-        return LingoMq.Responses.LingoMqResponse.OkResult(type);
+        return LingoMqResponses.LingoMqResponse.OkResult(type);
     }
 
     [HttpPost]
@@ -34,7 +34,7 @@ public class NotificationTypeController : ControllerBase
     public async Task<IActionResult> Create(NotificationType type)
     {
         await _notificationService.CreateAsync(type);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult(type);
+        return LingoMqResponses.LingoMqResponse.AcceptedResult(type);
     }
 
     [HttpPut]
@@ -42,7 +42,7 @@ public class NotificationTypeController : ControllerBase
     public async Task<IActionResult> Update(NotificationType type)
     {
         await _notificationService.UpdateAsync(type);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult(type);
+        return LingoMqResponses.LingoMqResponse.AcceptedResult(type);
     }
 
     [HttpDelete("{id}")]
@@ -50,6 +50,6 @@ public class NotificationTypeController : ControllerBase
     public async Task<IActionResult> Delete(Guid id)
     {
         await _notificationService.DeleteAsync(id);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 }

@@ -1,8 +1,8 @@
-﻿using Microsoft.Extensions.Logging;
-using Authentication.DataAccess.Dapper.Contracts;
+﻿using Authentication.DataAccess.Dapper.Contracts;
 using Authentication.Domain.Entities;
 using EventBus.Entities.Identity.User;
 using MassTransit;
+using Microsoft.Extensions.Logging;
 
 namespace Authentication.Application.EventBus.MassTransit.Consumers;
 public class UpdateUserCredentialsConsumer : IConsumer<IdentityModelUpdateUserCredentials>

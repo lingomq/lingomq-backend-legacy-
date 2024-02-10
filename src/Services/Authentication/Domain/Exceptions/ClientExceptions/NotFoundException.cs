@@ -1,5 +1,5 @@
-﻿using LingoMq.Responses;
-using Responses.StatusCodes;
+﻿using LingoMqResponses;
+using LingoMqResponses.StatusCodes;
 
 namespace Authentication.Domain.Exceptions
 {
@@ -9,6 +9,7 @@ namespace Authentication.Domain.Exceptions
         public NotFoundException(string message)
             : base((int)ClientErrorCodes.NotFound, message) { }
         public NotFoundException(T data, string message = "Not found") :
-            base(LingoMqResponse.NotFoundResult(data, message)) { }
+            base(LingoMqResponse.NotFoundResult(data, message))
+        { }
     }
 }

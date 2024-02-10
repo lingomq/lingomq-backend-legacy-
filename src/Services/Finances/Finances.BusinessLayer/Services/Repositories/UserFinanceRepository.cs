@@ -1,7 +1,7 @@
-using System.Data;
 using Dapper;
 using Finances.BusinessLayer.Contracts;
 using Finances.DomainLayer.Entities;
+using System.Data;
 
 namespace Finances.BusinessLayer.Services.Repositories;
 
@@ -48,7 +48,7 @@ public class UserFinanceRepository : GenericRepository<UserFinance>, IUserFinanc
 
     public async Task<UserFinance?> GetAsync(Guid id)
     {
-        List<UserFinance> userFinances = await QueryAsync(GetById, new { Id = id});
+        List<UserFinance> userFinances = await QueryAsync(GetById, new { Id = id });
         return userFinances.FirstOrDefault();
     }
 
@@ -66,7 +66,7 @@ public class UserFinanceRepository : GenericRepository<UserFinance>, IUserFinanc
 
     public async Task<List<UserFinance>> GetByUserIdAsync(Guid userId) =>
         await QueryAsync(GetByUserId, new { Id = userId });
-    
+
     protected override async Task<List<UserFinance>> QueryAsync<TE>(string sql, TE entity)
     {
         IEnumerable<UserFinance> values = await _connection
@@ -80,7 +80,7 @@ public class UserFinanceRepository : GenericRepository<UserFinance>, IUserFinanc
 
                     return userFinance;
                 }, entity, splitOn: "id");
-        
+
         return values.ToList();
     }
 }

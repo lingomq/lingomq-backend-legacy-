@@ -1,6 +1,6 @@
-using System.Data;
 using Finances.BusinessLayer.Contracts;
 using Finances.DomainLayer.Entities;
+using System.Data;
 
 namespace Finances.BusinessLayer.Services.Repositories;
 

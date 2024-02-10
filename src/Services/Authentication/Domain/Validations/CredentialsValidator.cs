@@ -1,7 +1,7 @@
-﻿using Cryptography;
-using Cryptography.Cryptors;
-using Cryptography.Entities;
-using Authentication.Domain.Entities;
+﻿using Authentication.Domain.Entities;
+using LingoMqCryptography;
+using LingoMqCryptography.Cryptors;
+using LingoMqCryptography.Entities;
 
 namespace Domain.Validations;
 public class CredentialsValidator

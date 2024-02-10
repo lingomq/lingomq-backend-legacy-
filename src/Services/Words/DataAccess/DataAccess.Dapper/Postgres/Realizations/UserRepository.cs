@@ -25,5 +25,5 @@ public class UserRepository : GenericRepository<User>, IUserRepository
 
     public async Task UpdateAsync(User entity) =>
         await ExecuteByTemplateAsync(UserQueries.Update, entity);
-    
+
 }

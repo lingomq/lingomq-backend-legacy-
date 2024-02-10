@@ -1,8 +1,8 @@
-﻿using System.Data;
-using Notifications.DataAccess.Dapper.Contracts;
+﻿using Notifications.DataAccess.Dapper.Contracts;
 using Notifications.DataAccess.Dapper.Postgres.RawQueries;
 using Notifications.DataAccess.Dapper.Utils;
 using Notifications.Domain.Entities;
+using System.Data;
 
 namespace Notifications.DataAccess.Dapper.Postgres.Realizations;
 public class UserRepository : GenericRepository<User>, IUserRepository

@@ -3,7 +3,7 @@
 namespace Authentication.DataAccess.Dapper;
 public class UnitOfWork : IUnitOfWork
 {
-    public UnitOfWork(IUserRepository userRepository, IUserInfoRepository userInfoRepository, IUserRoleRepository userRoleRepository) 
+    public UnitOfWork(IUserRepository userRepository, IUserInfoRepository userInfoRepository, IUserRoleRepository userRoleRepository)
     {
         Users = userRepository;
         UserInfos = userInfoRepository;

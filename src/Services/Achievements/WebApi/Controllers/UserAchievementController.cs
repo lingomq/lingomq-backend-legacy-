@@ -1,10 +1,10 @@
-﻿using Achievements.Domain.Contracts;
+﻿using Achievements.Domain.Constants;
+using Achievements.Domain.Contracts;
+using Achievements.Domain.Entities;
+using LingoMqResponses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Achievements.Domain.Constants;
-using Achievements.Domain.Entities;
 using System.Security.Claims;
-using LingoMq.Responses;
 
 namespace Achievements.WebApi.Controllers;
 [Route("api/achievements/user")]

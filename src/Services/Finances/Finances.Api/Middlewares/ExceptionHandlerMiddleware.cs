@@ -1,9 +1,9 @@
-using System.Net;
 using Finances.BusinessLayer.Exceptions;
 using Finances.BusinessLayer.Models;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using NLog;
+using System.Net;
 
 namespace Finances.Api.Middlewares;
 

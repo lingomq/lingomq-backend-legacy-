@@ -23,7 +23,7 @@ public class UserInfoController : ControllerBase
     public async Task<IActionResult> Get()
     {
         UserInfo info = await _userInfoService.GetByIdAsync(UserId);
-        return LingoMq.Responses.LingoMqResponse.OkResult(info);
+        return LingoMqResponses.LingoMqResponse.OkResult(info);
     }
 
     [HttpGet("all/{range}")]
@@ -31,7 +31,7 @@ public class UserInfoController : ControllerBase
     public async Task<IActionResult> GetRange(int range = int.MaxValue)
     {
         List<UserInfo> infos = await _userInfoService.GetRangeAsync(range);
-        return LingoMq.Responses.LingoMqResponse.OkResult(infos);
+        return LingoMqResponses.LingoMqResponse.OkResult(infos);
     }
 
     [HttpGet("user-id/{userId}")]
@@ -39,7 +39,7 @@ public class UserInfoController : ControllerBase
     public async Task<IActionResult> Get(Guid userId)
     {
         UserInfo info = await _userInfoService.GetByIdAsync(userId);
-        return LingoMq.Responses.LingoMqResponse.OkResult(info);
+        return LingoMqResponses.LingoMqResponse.OkResult(info);
     }
 
     [HttpPut]
@@ -47,6 +47,6 @@ public class UserInfoController : ControllerBase
     public async Task<IActionResult> Update(UserInfo userInfo, CancellationToken cancellationToken)
     {
         await _userInfoService.UpdateAsync(userInfo, cancellationToken);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 }

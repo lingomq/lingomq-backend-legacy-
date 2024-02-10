@@ -2,7 +2,6 @@
 using Topics.DataAccess.Dapper.Contracts;
 using Topics.DataAccess.Dapper.Postgres.RawQueries;
 using Topics.DataAccess.Dapper.Utils;
-using Topics.Domain.Contracts;
 using Topics.Domain.Entities;
 
 namespace Topics.DataAccess.Dapper.Postgres.Realizations;
@@ -12,7 +11,7 @@ public class TopicStatisticsTypeRepository : GenericRepository<TopicStatisticsTy
     {
     }
 
-    public async Task AddAsync(TopicStatisticsType entity)=>
+    public async Task AddAsync(TopicStatisticsType entity) =>
         await ExecuteByTemplateAsync(TopicStatisticsTypeQueries.Create, entity);
 
     public async Task DeleteAsync(Guid id) =>

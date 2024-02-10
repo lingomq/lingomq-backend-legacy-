@@ -1,8 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
-using MassTransit;
+﻿using Authentication.Application.EventBus.MassTransit;
 using Authentication.Application.EventBus.MassTransit.Consumers;
-using EventBus.Entities.Identity.User;
-using Authentication.Application.EventBus.MassTransit;
+using MassTransit;
+using Microsoft.Extensions.Configuration;
 
 namespace Microsoft.Extensions.DependencyInjection;
 public static class DependencyInjection

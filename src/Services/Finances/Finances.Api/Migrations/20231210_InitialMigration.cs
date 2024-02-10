@@ -1,5 +1,5 @@
-﻿using System.Data;
-using FluentMigrator;
+﻿using FluentMigrator;
+using System.Data;
 
 namespace Finances.Api.Migrations;
 
@@ -26,12 +26,12 @@ public class InitialMigration : Migration
             .WithColumn("finance_id").AsGuid().NotNullable()
             .WithColumn("creation_date").AsDateTime().Nullable()
             .WithColumn("end_subsscription_date").AsDateTime().Nullable();
-        
+
         Create.ForeignKey("FK_Finances_UserFinances_FinanceId")
             .FromTable("user_finances").ForeignColumn("finance_id")
             .ToTable("finances").PrimaryColumn("id")
             .OnDeleteOrUpdate(Rule.Cascade);
-        
+
         Create.ForeignKey("FK_Finances_UserFinances_UserId")
             .FromTable("user_finances").ForeignColumn("user_id")
             .ToTable("users").PrimaryColumn("id")

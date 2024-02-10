@@ -1,7 +1,7 @@
-﻿using Authentication.Domain.Models;
-using System.ComponentModel.DataAnnotations;
-using Authentication.Domain.Entities;
+﻿using Authentication.Domain.Entities;
 using Authentication.Domain.Exceptions;
+using Authentication.Domain.Models;
+using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
 namespace Domain.Validations;

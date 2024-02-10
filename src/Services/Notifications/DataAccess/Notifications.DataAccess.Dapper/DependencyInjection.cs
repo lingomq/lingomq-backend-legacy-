@@ -1,9 +1,9 @@
-﻿using System.Data;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Notifications.DataAccess.Dapper;
 using Notifications.DataAccess.Dapper.Contracts;
 using Notifications.DataAccess.Dapper.Postgres.Realizations;
 using Npgsql;
+using System.Data;
 
 namespace Microsoft.Extensions.DependencyInjection;
 public static class DependencyInjection

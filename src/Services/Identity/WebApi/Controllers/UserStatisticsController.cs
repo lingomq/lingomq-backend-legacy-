@@ -24,7 +24,7 @@ public class UserStatisticsController : ControllerBase
     public async Task<IActionResult> Get(Guid userId)
     {
         UserStatistics statistics = await _userStatisticsService.GetByIdAsync(userId);
-        return LingoMq.Responses.LingoMqResponse.OkResult(statistics);
+        return LingoMqResponses.LingoMqResponse.OkResult(statistics);
     }
 
     [HttpPut("hour/add")]
@@ -32,7 +32,7 @@ public class UserStatisticsController : ControllerBase
     public async Task<IActionResult> AddHour()
     {
         await _userStatisticsService.AddHourToStatisticsAsync(UserId);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpPut("word/add")]
@@ -40,7 +40,7 @@ public class UserStatisticsController : ControllerBase
     public async Task<IActionResult> AddWord()
     {
         await _userStatisticsService.AddWordToStatisticsAsync(UserId);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpPut("visit")]
@@ -48,6 +48,6 @@ public class UserStatisticsController : ControllerBase
     public async Task<IActionResult> UpdateVisitStreak()
     {
         await _userStatisticsService.AddVisitationToStatisticsAsync(UserId);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 }

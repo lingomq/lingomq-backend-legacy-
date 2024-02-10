@@ -51,7 +51,7 @@ namespace AppStatistics.BusinessLayer.MassTransit.Consumers
                 await _service.UpdateAsync(todayStatistics);
             }
 
-            _logger.LogInformation("[+] [AppStatistics Consumer] UpdateStatisticsData. TotalUsers: {0}, TotalWords: {1}" ,
+            _logger.LogInformation("[+] [AppStatistics Consumer] UpdateStatisticsData. TotalUsers: {0}, TotalWords: {1}",
                 todayStatistics.TotalUsers, todayStatistics.TotalWords);
         }
     }

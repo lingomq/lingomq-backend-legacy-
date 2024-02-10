@@ -13,7 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\Libs\Responses\Responses.csproj" />
+    <ProjectReference Include="..\..\..\..\libs\LingoMqCryptography\LingoMqCryptography.csproj" />
+    <ProjectReference Include="..\..\..\..\libs\LingoMqResponses\LingoMqResponses.csproj" />
   </ItemGroup>
 
 </Project>

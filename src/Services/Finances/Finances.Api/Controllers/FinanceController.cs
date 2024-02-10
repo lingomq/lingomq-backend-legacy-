@@ -2,7 +2,7 @@
 using Finances.BusinessLayer.Contracts;
 using Finances.BusinessLayer.Exceptions.ClientExceptions;
 using Finances.DomainLayer.Entities;
-using LingoMq.Responses;
+using LingoMqResponses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLog;

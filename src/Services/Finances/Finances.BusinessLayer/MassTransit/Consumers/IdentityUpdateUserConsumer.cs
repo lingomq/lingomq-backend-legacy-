@@ -1,6 +1,6 @@
-﻿using Finances.BusinessLayer.Contracts;
+﻿using EventBus.Entities.Identity.User;
+using Finances.BusinessLayer.Contracts;
 using Finances.DomainLayer.Entities;
-using EventBus.Entities.Identity.User;
 using MassTransit;
 using Microsoft.Extensions.Logging;
 

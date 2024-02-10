@@ -8,7 +8,7 @@ namespace DataAccess.Dapper.Postgres.Realizations;
 public class LanguageRepository : GenericRepository<Language>, ILanguageRepository
 {
     private readonly IDbConnection _connection;
-    public LanguageRepository(IDbConnection connection) : base(connection) => 
+    public LanguageRepository(IDbConnection connection) : base(connection) =>
         _connection = connection;
 
     public async Task AddAsync(Language entity) =>

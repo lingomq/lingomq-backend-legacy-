@@ -1,6 +1,6 @@
-﻿using Cryptography.Entities;
+﻿using Identity.Domain.Entities;
+using LingoMqCryptography.Entities;
 using System.Security.Claims;
-using Identity.Domain.Entities;
 
 namespace Identity.Application.Services.Confirm.Extensions;
 public static class UserExtension

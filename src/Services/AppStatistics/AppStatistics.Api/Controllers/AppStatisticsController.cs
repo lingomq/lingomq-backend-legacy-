@@ -1,7 +1,7 @@
 ﻿using AppStatistics.BusinessLayer.Contracts.Service;
 using AppStatistics.BusinessLayer.Exceptions.ClientExceptions;
 using AppStatistics.DomainLayer.Entities;
-using LingoMq.Responses;
+using LingoMqResponses;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NLog;

@@ -1,17 +1,17 @@
-﻿using Identity.Application.EventBus.MassTransit;
-using Identity.Domain.Exceptions.ClientExceptions;
-using Identity.DataAccess.Dapper.Contracts;
-using Identity.Application.Services.Jwt;
-using Identity.Domain.Entities;
-using Identity.Domain.Contracts;
-using Identity.Domain.Models;
-using System.Security.Claims;
-using Cryptography;
-using Cryptography.Entities;
-using Cryptography.Cryptors;
-using Identity.Application.Services.Confirm.Extensions;
+﻿using EventBus.Entities.AppStatistics;
 using EventBus.Entities.Identity.User;
-using EventBus.Entities.AppStatistics;
+using Identity.Application.EventBus.MassTransit;
+using Identity.Application.Services.Confirm.Extensions;
+using Identity.Application.Services.Jwt;
+using Identity.DataAccess.Dapper.Contracts;
+using Identity.Domain.Contracts;
+using Identity.Domain.Entities;
+using Identity.Domain.Exceptions.ClientExceptions;
+using Identity.Domain.Models;
+using LingoMqCryptography;
+using LingoMqCryptography.Cryptors;
+using LingoMqCryptography.Entities;
+using System.Security.Claims;
 
 namespace Identity.Application.Services.Confirm;
 public class ConfirmationService : IConfirmationService

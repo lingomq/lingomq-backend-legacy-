@@ -66,7 +66,7 @@ namespace Finances.BusinessLayer.Services.Repositories
 
             roles = await _connection.QueryAsync<UserRole>(GetById, new { Id = id });
 
-            return roles.FirstOrDefault() is not null? roles.FirstOrDefault() : null;
+            return roles.FirstOrDefault() is not null ? roles.FirstOrDefault() : null;
         }
 
         public async Task<UserRole?> GetByNameAsync(string name)

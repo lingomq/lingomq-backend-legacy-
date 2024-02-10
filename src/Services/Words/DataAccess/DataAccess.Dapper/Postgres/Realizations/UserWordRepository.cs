@@ -28,7 +28,7 @@ public class UserWordRepository : GenericRepository<UserWord>, IUserWordReposito
 
     public async Task<UserWord?> GetByIdAsync(Guid id) =>
         await QueryFirstAsync(UserWordQueries.GetById, new { Id = id });
-    
+
     public async Task<List<UserWord>> GetByUserIdAsync(Guid id) =>
         await QueryListAsync(UserWordQueries.GetByUserId, new { Id = id });
 
@@ -40,7 +40,7 @@ public class UserWordRepository : GenericRepository<UserWord>, IUserWordReposito
 
     public async Task<UserWord?> GetMostRepeatedWordAsync(Guid userId) =>
         await QueryFirstAsync(UserWordQueries.GetMostRepeated, new { UserId = userId });
-    
+
     public async Task<List<RecordsModel>> GetRecordsAsync(RecordTypesEnum recordType, OrderingEnum ordering, int count)
     {
         string sql;

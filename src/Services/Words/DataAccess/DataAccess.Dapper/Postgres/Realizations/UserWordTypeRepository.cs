@@ -29,7 +29,7 @@ public class UserWordTypeRepository : GenericRepository<UserWordType>, IUserWord
 
     public async Task<List<UserWordType>> GetByUserIdAsync(Guid id) =>
         await QueryListAsync(UserWordTypeQueries.GetByUserId, new { Id = id });
-    
+
     public async Task UpdateAsync(UserWordType entity) =>
         await ExecuteByTemplateAsync(UserWordTypeQueries.Update, entity);
 

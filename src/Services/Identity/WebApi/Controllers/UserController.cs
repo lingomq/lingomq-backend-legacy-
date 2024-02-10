@@ -1,10 +1,10 @@
 ﻿using Identity.Domain.Constants;
-using Microsoft.AspNetCore.Mvc;
 using Identity.Domain.Contracts;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
 using Identity.Domain.Entities;
 using Identity.Domain.Exceptions.ClientExceptions;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Identity.WebApi.Controllers;
 [Route("api/identity/user")]
@@ -24,7 +24,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Get()
     {
         User user = await _userService.GetByIdAsync(UserId);
-        return LingoMq.Responses.LingoMqResponse.OkResult(user);
+        return LingoMqResponses.LingoMqResponse.OkResult(user);
     }
 
     [HttpGet("{userId}")]
@@ -32,7 +32,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Get(Guid userId)
     {
         User user = await _userService.GetByIdAsync(userId);
-        return LingoMq.Responses.LingoMqResponse.OkResult(user);
+        return LingoMqResponses.LingoMqResponse.OkResult(user);
     }
 
     [HttpPut]
@@ -43,7 +43,7 @@ public class UserController : ControllerBase
             throw new ForbiddenException<User>("Вы не являетесь владельцем аккаунта");
 
         await _userService.UpdateAsync(user, cancellationToken);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpPut("credentials")]
@@ -51,7 +51,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> UpdateCredentials(UserCredentialsModel credentialsModel, CancellationToken cancellationToken = default)
     {
         await _userService.UpdateCredentialsAsync(credentialsModel, cancellationToken);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpDelete]
@@ -59,7 +59,7 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Delete(CancellationToken cancellationToken)
     {
         await _userService.DeleteByIdAsync(UserId, cancellationToken);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 
     [HttpDelete("{userId}")]
@@ -67,6 +67,6 @@ public class UserController : ControllerBase
     public async Task<IActionResult> Delete(Guid userId, CancellationToken cancellationToken)
     {
         await _userService.DeleteByIdAsync(userId, cancellationToken);
-        return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        return LingoMqResponses.LingoMqResponse.AcceptedResult();
     }
 }
