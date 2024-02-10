@@ -1,7 +1,7 @@
-using Cryptography.Entities;
-using Cryptography.Cryptors;
+using LingoMqCryptography.Entities;
+using LingoMqCryptography.Cryptors;
 
-namespace Cryptography;
+namespace LingoMqCryptography;
 
 public class Cryptor
 {

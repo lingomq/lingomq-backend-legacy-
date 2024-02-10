@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Responses.StatusCodes;
+using LingoMqResponses.StatusCodes;
 
-namespace LingoMq.Responses;
+namespace LingoMqResponses;
 
 /// <summary>
 /// The class is a wrapper on the <c>ResponseResult</c> class

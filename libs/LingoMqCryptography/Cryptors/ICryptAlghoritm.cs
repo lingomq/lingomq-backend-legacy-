@@ -1,6 +1,6 @@
-using Cryptography.Entities;
+using LingoMqCryptography.Entities;
 
-namespace Cryptography.Cryptors;
+namespace LingoMqCryptography.Cryptors;
 /// <summary>
 /// The class is a contract on crypto alghoritms
 /// </summary>

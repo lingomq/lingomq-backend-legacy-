@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 
-namespace LingoMq.Responses;
+namespace LingoMqResponses;
 /// <summary>
 /// This class contains a generic responses for easy use them into 
 /// the project that always returns some <c>IActionResult</c>

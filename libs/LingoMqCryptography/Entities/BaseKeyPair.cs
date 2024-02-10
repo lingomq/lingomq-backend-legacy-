@@ -1,4 +1,4 @@
-namespace Cryptography.Entities;
+namespace LingoMqCryptography.Entities;
 
 public class BaseKeyPair 
 {

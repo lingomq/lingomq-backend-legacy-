@@ -1,3 +1,3 @@
-namespace Cryptography.Entities;
+namespace LingoMqCryptography.Entities;
 
 public class Sha256KeyPair : BaseKeyPair { } 

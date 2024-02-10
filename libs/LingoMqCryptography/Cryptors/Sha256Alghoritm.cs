@@ -1,8 +1,8 @@
-using Cryptography.Entities;
+using LingoMqCryptography.Entities;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
 
-namespace Cryptography.Cryptors;
+namespace LingoMqCryptography.Cryptors;
 
 public class Sha256Alghoritm : ICryptAlghoritm
 {

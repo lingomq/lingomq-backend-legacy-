@@ -1,4 +1,4 @@
-﻿namespace Responses.StatusCodes
+﻿namespace LingoMqResponses.StatusCodes
 {
     public enum SuccessCodes
     {
