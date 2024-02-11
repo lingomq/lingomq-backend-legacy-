@@ -10,9 +10,8 @@ public interface IUserWordService
     Task<List<RecordsModel>> GetRecordsAsync(RecordTypesEnum type, OrderingEnum ordering, int count);
     Task<UserWord> GetByIdAsync(Guid id);
     Task<int> GetAverageUserWordCountsAsync(Guid id, DateTime date);
-    Task CreateAsync(UserWord userWord, bool isForce, bool isAutocomplete, Guid userId);
-    Task AddRepeatsAsync(Guid id);
+    Task CreateAsync(Guid wordId, Guid userId);
+    Task AddRepeatsAsync(Guid userId, Guid wordId);
     Task DeleteAsync(Guid id);
-
 }
 

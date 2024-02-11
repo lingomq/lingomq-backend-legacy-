@@ -1,4 +1,5 @@
-﻿using DataAccess.Dapper.Contracts;
+﻿using DataAccess.EntityFramework.Contracts;
+using DataAccess.EntityFramework.Extensions;
 using EventBus.Entities.Words;
 using Words.Application.EventBus.MassTransit;
 using Words.Domain.Contracts;
@@ -19,6 +20,8 @@ public class LanguageService : ILanguageService
     {
         await _unitOfWork.Languages.AddAsync(language);
 
+        await _unitOfWork.SaveChangesAsync();
+
         await _publisher.Send(new WordsLanguageCreate()
         {
             Id = language.Id,
@@ -36,6 +39,8 @@ public class LanguageService : ILanguageService
             Id = id,
         });
         await _unitOfWork.Languages.DeleteAsync(id);
+
+        await _unitOfWork.SaveChangesAsync();
     }
 
     public async Task<List<Language>> GetAsync(int count)
@@ -59,6 +64,9 @@ public class LanguageService : ILanguageService
             throw new NotFoundException<Language>();
 
         await _unitOfWork.Languages.UpdateAsync(language);
+
+        await _unitOfWork.SaveChangesAsync();
+
         await _publisher.Send(new WordsLanguageUpdate()
         {
             Id = language.Id,

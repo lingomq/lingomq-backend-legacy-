@@ -1,4 +1,4 @@
-﻿using DataAccess.Dapper.Contracts;
+﻿using DataAccess.EntityFramework.Contracts;
 using EventBus.Entities.Identity.User;
 using MassTransit;
 using Microsoft.Extensions.Logging;
@@ -25,6 +25,7 @@ public class CreateUserConsumer : IConsumer<IdentityModelCreateUser>
         };
 
         await _unitOfWork.Users.AddAsync(user);
+        await _unitOfWork.SaveChangesAsync();
         _logger.LogInformation("[+] [Words Create Consumer] Succesfully get message." +
                                "{0}:{1} has been added", user.Id, user.Email);
     }

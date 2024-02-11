@@ -67,20 +67,28 @@ public class UserWordController : ControllerBase
         int count = await _userWordService.GetAverageUserWordCountsAsync(userId, dateTime);
         return LingoMq.Responses.LingoMqResponse.OkResult(new { Count = count });
     }
+    /*
+        [HttpPost("{isForce}/{isAutocomplete}")]
+        [Authorize(Roles = AccessRoles.Everyone)]
+        public async Task<IActionResult> Create([FromBody] UserWord word, bool isForce = false, bool isAutocomplete = false)
+        {
+            await _userWordService.CreateAsync(word, isForce, isAutocomplete, UserId);
+            return LingoMq.Responses.LingoMqResponse.AcceptedResult();
+        }*/
 
-    [HttpPost("{isForce}/{isAutocomplete}")]
+    [HttpPost("append/word/{wordId}/user/{userId}")]
     [Authorize(Roles = AccessRoles.Everyone)]
-    public async Task<IActionResult> Create([FromBody] UserWord word, bool isForce = false, bool isAutocomplete = false)
+    public async Task<IActionResult> Create(Guid wordId, Guid userId)
     {
-        await _userWordService.CreateAsync(word, isForce, isAutocomplete, UserId);
+        await _userWordService.CreateAsync(wordId, userId);
         return LingoMq.Responses.LingoMqResponse.AcceptedResult();
     }
 
-    [HttpPut("add/repeats/{wordId}")]
+    [HttpPut("add/repeats/{wordId}/user/{userId}")]
     [Authorize(Roles = AccessRoles.Everyone)]
-    public async Task<IActionResult> AddRepeats(Guid wordId)
+    public async Task<IActionResult> AddRepeats(Guid wordId, Guid userId)
     {
-        await _userWordService.AddRepeatsAsync(wordId);
+        await _userWordService.AddRepeatsAsync(userId, wordId);
         return LingoMq.Responses.LingoMqResponse.AcceptedResult();
     }
 

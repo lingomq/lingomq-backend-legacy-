@@ -1,6 +1,5 @@
-﻿using DataAccess.Dapper.Contracts;
-using EventBus.Entities.Achievements;
-using EventBus.Entities.AppStatistics;
+﻿using DataAccess.EntityFramework.Contracts;
+using DataAccess.EntityFramework.Extensions;
 using Words.Application.EventBus.MassTransit;
 using Words.Application.Services.WordChecker;
 using Words.Domain.Contracts;
@@ -21,28 +20,27 @@ public class UserWordService : IUserWordService
         _wordChecker = wordChecker;
         _publisher = publisher;
     }
-    public async Task AddRepeatsAsync(Guid id)
+    public async Task AddRepeatsAsync(Guid userId, Guid wordId)
     {
-        await _unitOfWork.UserWords.AddRepeatsAsync(id, 1);
+        await _unitOfWork.UserWords.AddRepeatsAsync(userId, wordId);
+        await _unitOfWork.SaveChangesAsync();
     }
 
-    public async Task CreateAsync(UserWord userWord, bool isForce, bool isAutocomplete, Guid userId)
+    public async Task CreateAsync(Guid wordId, Guid userId)
     {
-        await ValidateBeforeExecute(userWord);
-        UserWord word = await GetWordData(userWord, isForce, isAutocomplete);
+        Word? word = await _unitOfWork.Words.GetByIdAsync(wordId);
+        User? user = await _unitOfWork.Users.GetByIdAsync(userId);
 
-        await _publisher.Send(new AppStatisticsCreateOrUpdate()
+        UserWord userWord = new UserWord()
         {
-            TotalWords = 1,
-            Date = DateTime.Now
-        });
-        var words = await _unitOfWork.UserWords.GetByUserIdAsync(userId);
-        await _publisher.Send(new CheckAchievements()
-        {
-            UserId = userWord.UserId,
-            WordsCount = words.Count + 1
-        });
-        await _unitOfWork.UserWords.AddAsync(word);
+            User = user,
+            Word = word,
+            AddedAt = DateTime.UtcNow,
+            Repeats = 0
+        };
+
+        await _unitOfWork.UserWords.AddAsync(userWord);
+        await _unitOfWork.SaveChangesAsync();
     }
 
     public async Task DeleteAsync(Guid id)
@@ -51,6 +49,7 @@ public class UserWordService : IUserWordService
             throw new InvalidDataException<UserWord>(new string[] { "id" });
 
         await _unitOfWork.UserWords.DeleteAsync(id);
+        await _unitOfWork.SaveChangesAsync();
     }
 
     public async Task<int> GetAverageUserWordCountsAsync(Guid id, DateTime date)
@@ -61,9 +60,9 @@ public class UserWordService : IUserWordService
 
     public async Task<UserWord> GetByIdAsync(Guid id)
     {
-        UserWord? userWord = await _unitOfWork.UserWords.GetMostRepeatedWordAsync(id);
+        UserWord? userWord = await _unitOfWork.UserWords.GetByIdAsync(id);
         if (userWord is null)
-            throw new NotFoundException<UserWord>();
+            throw new InvalidDataException<UserWord>(new string[] { "id" });
 
         return userWord;
     }
@@ -88,17 +87,10 @@ public class UserWordService : IUserWordService
         List<RecordsModel> records = await _unitOfWork.UserWords.GetRecordsAsync(type, ordering, count);
         return records;
     }
-    private async Task ValidateBeforeExecute(UserWord userWordDto)
-    {
-        if (await _unitOfWork.Users.GetByIdAsync(userWordDto.UserId) is null)
-            throw new NotFoundException<User>("User doesn't exist");
-        if (await _unitOfWork.Languages.GetByIdAsync(userWordDto.LanguageId) is null)
-            throw new NotFoundException<Language>("Language doesn't exist");
 
-        if (userWordDto.Word is null)
-            throw new InvalidDataException<UserWordType>(parameters: new string[] { "word" });
-    }
-    private async Task<UserWord> GetWordData(UserWord userWordDto, bool isForce = false, bool isAutocomplete = false)
+    // Old logic
+
+    /*private async Task<UserWord> GetWordData(UserWord userWordDto, bool isForce = false, bool isAutocomplete = false)
     {
         Language? language = await _unitOfWork.Languages.GetByIdAsync(userWordDto.LanguageId);
         if (language is null)
@@ -124,5 +116,37 @@ public class UserWordService : IUserWordService
         };
 
         return word;
-    }
+    }*/
+
+/*
+    private async Task ValidateBeforeExecute(UserWord userWordDto)
+    {
+        if (await _unitOfWork.Users.GetByIdAsync(userWordDto.User.Id) is null)
+            throw new NotFoundException<User>("User doesn't exist");
+        if (await _unitOfWork.Languages.GetByIdAsync(userWordDto.LanguageId) is null)
+            throw new NotFoundException<Language>("Language doesn't exist");
+
+        if (userWordDto.Word is null)
+            throw new InvalidDataException<UserWordType>(parameters: new string[] { "word" });
+    }*/
+
+
+    /* public async Task CreateAsync(UserWord userWord, bool isForce, bool isAutocomplete, Guid userId)
+     {
+         await ValidateBeforeExecute(userWord);
+         UserWord word = await GetWordData(userWord, isForce, isAutocomplete);
+
+         await _publisher.Send(new AppStatisticsCreateOrUpdate()
+         {
+             TotalWords = 1,
+             Date = DateTime.Now
+         });
+         var words = await _unitOfWork.UserWords.GetByUserIdAsync(userId);
+         await _publisher.Send(new CheckAchievements()
+         {
+             UserId = userWord.UserId,
+             WordsCount = words.Count + 1
+         });
+         await _unitOfWork.UserWords.AddAsync(word);
+     }*/
 }
