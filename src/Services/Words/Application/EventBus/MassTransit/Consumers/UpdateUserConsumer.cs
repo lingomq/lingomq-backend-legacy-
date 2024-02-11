@@ -1,4 +1,5 @@
-﻿using DataAccess.Dapper.Contracts;
+﻿using DataAccess.EntityFramework.Contracts;
+using DataAccess.EntityFramework.Extensions;
 using EventBus.Entities.Identity.User;
 using MassTransit;
 using Microsoft.Extensions.Logging;

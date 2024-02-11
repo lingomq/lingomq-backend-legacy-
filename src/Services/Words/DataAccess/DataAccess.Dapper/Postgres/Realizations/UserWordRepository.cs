@@ -66,10 +66,6 @@ public class UserWordRepository : GenericRepository<UserWord>, IUserWordReposito
             sql,
             (userWord, language, user) =>
             {
-                userWord.LanguageId = language.Id;
-                userWord.Language = language;
-
-                userWord.UserId = user.Id;
                 userWord.User = user;
 
                 return userWord;

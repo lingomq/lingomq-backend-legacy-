@@ -1,4 +1,5 @@
-﻿using DataAccess.Dapper.Contracts;
+﻿using DataAccess.EntityFramework.Contracts;
+using DataAccess.EntityFramework.Extensions;
 using Words.Domain.Entities;
 
 namespace Words.Application.Services.DataMigrator;
@@ -27,14 +28,14 @@ public class DataMigrator : IDataMigrator
         List<string> wordTypeNames = new List<string>() { "important", "usual" };
         var wordTypeFromDatabase = await _unitOfWork.WordTypes.GetAsync(10);
 
-        foreach (var wordTypeName in wordTypeFromDatabase.Select(x => x.TypeName))
+        foreach (var wordTypeName in wordTypeFromDatabase.Select(x => x.Name))
         {
             if (wordTypeNames.Contains(wordTypeName!))
                 wordTypeNames.Remove(wordTypeName!);
         }
 
         foreach (string wordTypeName in wordTypeNames)
-            await _unitOfWork.WordTypes.AddAsync(new WordType() { Id = Guid.NewGuid(), TypeName = wordTypeName });
+            await _unitOfWork.WordTypes.AddAsync(new WordType() { Id = Guid.NewGuid(), Name = wordTypeName });
     }
 
     public async Task MigrateAsync()

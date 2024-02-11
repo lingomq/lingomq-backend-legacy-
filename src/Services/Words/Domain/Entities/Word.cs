@@ -1,4 +1,5 @@
 ﻿namespace Words.Domain.Entities;
+
 public class Word : EntityBase
 {
     public string? Value { get; set; }

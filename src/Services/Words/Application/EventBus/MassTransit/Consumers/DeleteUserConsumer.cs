@@ -1,4 +1,5 @@
-﻿using DataAccess.Dapper.Contracts;
+﻿using DataAccess.EntityFramework.Contracts;
+using DataAccess.EntityFramework.Extensions;
 using EventBus.Entities.Identity.User;
 using MassTransit;
 using Microsoft.Extensions.Logging;
@@ -24,6 +25,7 @@ public class DeleteUserConsumer : IConsumer<IdentityModelDeleteUser>
                              "Failed: User not found");
 
         await _unitOfWork.Users.DeleteAsync(id);
+        await _unitOfWork.SaveChangesAsync();
 
         _logger.LogInformation("[+] [Words UserDelete Consumer] " +
                                "Success: User has been deleted");
