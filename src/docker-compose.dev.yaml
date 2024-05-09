@@ -141,20 +141,20 @@ services:
       ports:
         - "7007:80"
 
-    # topics-api:
-    #   hostname: topics-api
-    #   restart: always
-    #   env_file:
-    #     - .env
-    #   image: topics-api:dev
-    #   build:
-    #     context: .
-    #     dockerfile: Services/Topics/Topics.Api/Dockerfile
-    #   depends_on:
-    #     - psql
-    #     - rabbitmq
-    #   ports:
-    #     - "7008:80"
+    topics-api:
+      hostname: topics-api
+      restart: always
+      env_file:
+        - .env
+      image: topics-api:dev
+      build:
+        context: .
+        dockerfile: Services/Topics/Topics.Api/Dockerfile
+      depends_on:
+        - psql
+        - rabbitmq
+      ports:
+        - "7008:80"
 
     words-api:
       hostname: words-api
@@ -179,30 +179,13 @@ services:
         - 9998:80
       environment:
         - ASPNETCORE_ENVIRONMENT=Development
-        - ASPNETCORE_URLS=https://+:443;http://+:80
-        - ASPNETCORE_Kestrel__Certificates__Default__Password=password
-        - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/aspnetapp.pfx
       image: ocelot-gateway:dev
       build:
         context: .
         dockerfile: ApiGateway/OcelotApiGateway/Dockerfile
       volumes: 
         - ~/.aspnet/https:/https:ro
-      networks:
-        default: {}
-        front:
-          ipv4_address: 192.168.0.105
 
 volumes:
   rabbitmq:
   postgresdb:
-
-networks:
-  front:
-    driver: macvlan
-    driver_opts:
-      parent: eth0.10
-    ipam:
-      config:
-        - subnet: 192.168.0.0/24
-          gateway: 192.168.0.1
